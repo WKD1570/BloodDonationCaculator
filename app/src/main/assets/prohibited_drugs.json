@@ -1,0 +1,100 @@
+[
+  {
+    "category": "기타 약물",
+    "ingredientName": "아스피린",
+    "representativeBrands": "아스피린",
+    "restrictionDays": 3,
+    "restrictionText": "복용 후 3일간 헌혈 금지 (감기 치료 목적 경구 복용 포함)"
+  },
+  {
+    "category": "기타 약물 및 주사제",
+    "ingredientName": "항생제/스테로이드/보톡스/클로피도그렐",
+    "representativeBrands": "항생제(주사), 스테로이드제(주사), 보톡스(주사), 클로피도그렐 등",
+    "restrictionDays": 7,
+    "restrictionText": "투여 후 1주간 헌혈 금지"
+  },
+  {
+    "category": "기타 약물",
+    "ingredientName": "티클로피딘",
+    "representativeBrands": "티클로피딘",
+    "restrictionDays": 14,
+    "restrictionText": "복용 후 2주간 헌혈 금지"
+  },
+  {
+    "category": "전립선비대증 치료제",
+    "ingredientName": "피나스테라이드",
+    "representativeBrands": "프로스카 등",
+    "restrictionDays": 28,
+    "restrictionText": "복용 후 4주간 헌혈 금지"
+  },
+  {
+    "category": "탈모증 치료제",
+    "ingredientName": "피나스테라이드",
+    "representativeBrands": "프로페시아, 프로스카, 그로모정, 나우스카정, 대웅바이오피나스테리드정, 마이피나정, 보령피나스테리드정, 비피케어정, 스카렉스정, 스카테론정, 씨엠피나정, 엔피스카정, 유레이드정, 유로리드정, 유로스칸정, 유로피나정, 이니스트피나스테리드정, 일양피나스테리드정, 트로피나정, 파나드정, 파나리드정, 파나스카정, 푸로스타정, 푸로케어정, 프로나드정, 프로리드정, 프로스몰정, 프로스타트정, 프로스테리드정, 프로스틸정, 프로엠정, 프로피나정, 프리스타정, 프리피나정, 피나그렌정, 피나드론정, 피나드정, 피나론정, 피나린정, 피나베린정, 피나세틴정, 피나스로정, 피나스타정, 피나스테아정, 피나스테이트아이정, 피나스텔정, 피나스토정, 피나스티드정, 피나스틴정, 피나시아정, 피나이스정, 피나정, 피나젠정, 피나즈정, 피나진정, 피나텐정, 피나트라정, 피로이드정, 피스테리정, 피테스정, 핀스타정, 핀카정, 필라스트정, 하이피나정, 한림피나스테리드정, 한올피나스테리드정, 화이자피나스테리드정",
+    "restrictionDays": 28,
+    "restrictionText": "복용 후 4주간 헌혈 금지"
+  },
+  {
+    "category": "여드름 치료제",
+    "ingredientName": "이소트레티노인",
+    "representativeBrands": "뉴티논, 니메겐, 레씨범, 로아큐탄, 로이탄, 아큐네탄, 아크날, 아키놀, 이소트렌, 이소티나, 이소티논, 제로큐탄, 클레어, 트레논, 트레틴, 핀플",
+    "restrictionDays": 28,
+    "restrictionText": "복용 후 4주간 헌혈 금지"
+  },
+  {
+    "category": "손 습진치료제",
+    "ingredientName": "알리트레티노인",
+    "representativeBrands": "알리톡",
+    "restrictionDays": 30,
+    "restrictionText": "복용 후 1개월간 헌혈 금지"
+  },
+  {
+    "category": "항악성종양/나성결절홍반 치료제",
+    "ingredientName": "탈리도마이드",
+    "representativeBrands": "세엘진탈리도마이드, 알보젠탈리도마이드, 탈라이드, 탈로마, 탈리그로브",
+    "restrictionDays": 30,
+    "restrictionText": "복용 후 1개월간 헌혈 금지"
+  },
+  {
+    "category": "전립선비대증 치료제",
+    "ingredientName": "두타스테라이드",
+    "representativeBrands": "네오다트, 두바럽, 두스타, 두테론, 두테드, 두테스몰, 아나딘, 아보다트, 아보스타, 아보테리드, 아보피나",
+    "restrictionDays": 180,
+    "restrictionText": "복용 후 6개월간 헌혈 금지"
+  },
+  {
+    "category": "기타 주사제",
+    "ingredientName": "태반주사제/혈액응고인자",
+    "representativeBrands": "태반주사제, 혈액응고인자",
+    "restrictionDays": 365,
+    "restrictionText": "투여 후 1년간 헌혈 금지"
+  },
+  {
+    "category": "항악성종양 치료제",
+    "ingredientName": "비스모데깁",
+    "representativeBrands": "에리벳지",
+    "restrictionDays": 730,
+    "restrictionText": "복용 후 24개월간 헌혈 금지"
+  },
+  {
+    "category": "건선 치료제",
+    "ingredientName": "아시트레틴",
+    "representativeBrands": "네오티가손, 소리아탄",
+    "restrictionDays": 1095,
+    "restrictionText": "복용 후 3년간 헌혈 금지"
+  },
+  {
+    "category": "건선 치료제",
+    "ingredientName": "에트레티네이트",
+    "representativeBrands": "티가손, 타가손, 테지손",
+    "restrictionDays": -1,
+    "restrictionText": "복용 시 영구적으로 헌혈 금지"
+  },
+  {
+    "category": "기타 약물 및 주사제",
+    "ingredientName": "사람뇌하수체 유래 성장호르몬 등",
+    "representativeBrands": "사람뇌하수체 유래 성장호르몬, 소에서 추출한 인슐린, 면역억제제 등",
+    "restrictionDays": -1,
+    "restrictionText": "투여 시 영구적으로 헌혈 금지"
+  }
+]
