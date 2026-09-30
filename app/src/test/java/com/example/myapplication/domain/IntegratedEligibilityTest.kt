@@ -174,4 +174,15 @@ class IntegratedEligibilityTest {
 
         assertTrue(result.reasons.none { it.text.contains("아스피린") })
     }
+
+    @Test
+    fun `a stem cell donation pushes each planned type back 6 months, and only the regular types are planned`() {
+        val stemCell = DonationRecord(id = 1, type = DonationType.STEM_CELL, date = LocalDate.of(2026, 3, 15))
+        val next = nextEligibleByType(listOf(stemCell), emptyList(), LocalDate.of(2026, 4, 1))
+
+        assertEquals(setOf(DonationType.WHOLE_BLOOD, DonationType.PLASMA, DonationType.PLATELET), next.keys)
+        next.values.forEach { result ->
+            assertEquals(LocalDate.of(2026, 9, 15), (result as IntegratedNextResult.Eligible).nextDate)
+        }
+    }
 }

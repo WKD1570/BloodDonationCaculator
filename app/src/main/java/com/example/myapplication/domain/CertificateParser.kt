@@ -16,9 +16,6 @@ private val DONATION_TYPE_REGEX = Regex("""헌혈종류\s*[:：]?\s*([^\n]+)""")
 private val CENTER_NAME_REGEX = Regex("""[가-힣]+혈액원\s*\([\d\s-]+\)""")
 private val STATED_VOLUME_REGEX = Regex("""(\d+)\s*mL""")
 
-/** 대한적십자사 기준: whole blood donations draw an extra 30mL beyond the stated amount for diagnostic testing. */
-private const val WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML = 30
-
 private fun MatchResult.toLocalDateOrNull(): LocalDate? {
     val (year, month, day) = destructured
     return runCatching { LocalDate.of(year.toInt(), month.toInt(), day.toInt()) }.getOrNull()

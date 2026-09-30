@@ -12,10 +12,12 @@ data class PhysicalEligibility(val isEligible: Boolean, val reasons: List<String
 /** 대한적십자사 기준: multi-type (component) donation requires an estimated blood volume above this. */
 private const val MIN_BLOOD_VOLUME_FOR_APHERESIS_ML = 4000.0
 
-private fun ageRange(type: DonationType): IntRange = when (type) {
+/** Null for the 기타 types, which have no age criteria here (and aren't screened on 마이페이지). */
+private fun ageRange(type: DonationType): IntRange? = when (type) {
     DonationType.WHOLE_BLOOD -> 16..69
     DonationType.PLASMA -> 17..69
     DonationType.PLATELET -> 17..59
+    DonationType.WHITE_BLOOD_CELL, DonationType.STEM_CELL -> null
 }
 
 private fun minWeightKg(sex: Sex): Double = when (sex) {
@@ -50,11 +52,12 @@ fun checkPhysicalEligibility(profile: DonorProfile, type: DonationType): Physica
 
     val reasons = mutableListOf<String>()
 
-    val range = ageRange(type)
-    if (age !in range) {
-        reasons.add("나이 기준 미충족 (${range.first}~${range.last}세, 입력 ${age}세)")
-    } else if (age >= 65 && !profile.donatedAge60To64) {
-        reasons.add("65세 이상은 60~64세 사이 헌혈 경험이 있어야 헌혈 가능합니다")
+    ageRange(type)?.let { range ->
+        if (age !in range) {
+            reasons.add("나이 기준 미충족 (${range.first}~${range.last}세, 입력 ${age}세)")
+        } else if (age >= 65 && !profile.donatedAge60To64) {
+            reasons.add("65세 이상은 60~64세 사이 헌혈 경험이 있어야 헌혈 가능합니다")
+        }
     }
 
     val minWeight = minWeightKg(sex)

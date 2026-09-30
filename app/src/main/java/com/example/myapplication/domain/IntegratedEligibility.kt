@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.MedicationRecord
+import com.example.myapplication.model.REGULAR_DONATION_TYPES
 import com.example.myapplication.model.eligibleFrom
 import com.example.myapplication.model.isPermanentlyRestricted
 import java.time.LocalDate
@@ -62,6 +63,18 @@ sealed interface IntegratedNextResult {
 
 private val MedicationReasonColor = Color(0xFF7C3AED)
 private val PermanentReasonColor = Color(0xFFE11D48)
+
+/**
+ * [integratedNextEligible] for each of the [REGULAR_DONATION_TYPES] - the donations 현황 plans. The
+ * 기타 types aren't planned, but their records still restrict these (e.g. 조혈모세포 기증 for 6 months).
+ */
+fun nextEligibleByType(
+    records: List<DonationRecord>,
+    medications: List<MedicationRecord>,
+    today: LocalDate,
+    donorAge: Int? = null
+): Map<DonationType, IntegratedNextResult> =
+    REGULAR_DONATION_TYPES.associateWith { integratedNextEligible(it, records, medications, today, donorAge) }
 
 /**
  * Combines the donation-history constraint ("Date A", from [calcNext]) with the medication-history

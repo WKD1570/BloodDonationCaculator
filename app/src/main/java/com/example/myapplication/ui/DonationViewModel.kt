@@ -9,7 +9,7 @@ import com.example.myapplication.data.loadDonorProfile
 import com.example.myapplication.data.saveDonationRecords
 import com.example.myapplication.data.saveDonorProfile
 import com.example.myapplication.domain.IntegratedNextResult
-import com.example.myapplication.domain.integratedNextEligible
+import com.example.myapplication.domain.nextEligibleByType
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
@@ -74,15 +74,7 @@ class DonationViewModel(
             records = records,
             medications = medications,
             today = today,
-            nextByType = DonationType.entries.associateWith { type ->
-                integratedNextEligible(
-                    type = type,
-                    records = records,
-                    medications = medications,
-                    today = today,
-                    donorAge = profile.currentAge(today)
-                )
-            }
+            nextByType = nextEligibleByType(records, medications, today, profile.currentAge(today))
         )
     }.stateIn(
         scope = viewModelScope,

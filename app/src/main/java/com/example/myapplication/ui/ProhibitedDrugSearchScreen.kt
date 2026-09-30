@@ -23,16 +23,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DisplayMode
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,9 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.domain.fmt
 import com.example.myapplication.model.RestrictedDrug
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneOffset
 
 /**
  * Offline search over the bundled 헌혈 금지 약물 list. Picking a drug asks when it was taken and
@@ -137,7 +131,7 @@ fun ProhibitedDrugSearchScreen(
     }
 
     if (showDatePicker && state.selectedDrug != null) {
-        MedicationDatePickerDialog(
+        MedicationDateDialog(
             initialDate = state.medicationDate,
             onDismiss = {
                 showDatePicker = false
@@ -305,53 +299,22 @@ private fun SelectedDrugSection(
 }
 
 @Composable
-private fun MedicationDatePickerDialog(
+internal fun MedicationDateDialog(
     initialDate: LocalDate?,
     onDismiss: () -> Unit,
     onConfirm: (LocalDate) -> Unit
 ) {
-    // A drug cannot have been taken in the future, so future dates are not selectable.
-    val selectableDates = remember {
-        object : SelectableDates {
-            override fun isSelectableDate(utcTimeMillis: Long): Boolean =
-                !Instant.ofEpochMilli(utcTimeMillis)
-                    .atZone(ZoneOffset.UTC)
-                    .toLocalDate()
-                    .isAfter(LocalDate.now())
-        }
-    }
-    val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = (initialDate ?: LocalDate.now())
-            .atStartOfDay(ZoneOffset.UTC)
-            .toInstant()
-            .toEpochMilli(),
-        selectableDates = selectableDates,
-        initialDisplayMode = DisplayMode.Input
-    )
-
-    DatePickerDialog(
+    // Starts on today, which is usually the answer; the field rejects future dates.
+    var date by remember { mutableStateOf<LocalDate?>(initialDate ?: LocalDate.now()) }
+    AlertDialog(
         onDismissRequest = onDismiss,
+        title = {
+            Text("이 약을 언제 복용하셨나요?", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = TextSecondary)
+        },
+        text = { DateInputField(date = date, onDateChange = { date = it }) },
         confirmButton = {
-            TextButton(
-                enabled = datePickerState.selectedDateMillis != null,
-                onClick = {
-                    datePickerState.selectedDateMillis?.let { millis ->
-                        onConfirm(
-                            Instant.ofEpochMilli(millis).atZone(ZoneOffset.UTC).toLocalDate()
-                        )
-                    }
-                }
-            ) { Text("확인") }
+            TextButton(enabled = date != null, onClick = { date?.let(onConfirm) }) { Text("확인") }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("취소") } }
-    ) {
-        Text(
-            "이 약을 언제 복용하셨나요?",
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 16.dp),
-            fontSize = 13.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextSecondary
-        )
-        DatePicker(state = datePickerState, title = null)
-    }
+    )
 }
