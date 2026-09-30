@@ -122,6 +122,7 @@ import com.example.myapplication.domain.fmt
 import com.example.myapplication.domain.statusStyle
 import com.example.myapplication.domain.typeSubtitle
 import com.example.myapplication.domain.volumeMl
+import com.example.myapplication.domain.withinAnnualWindow
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
@@ -1422,7 +1423,7 @@ private fun StatusScreen(
     today: LocalDate,
     nextByType: Map<DonationType, IntegratedNextResult>
 ) {
-    CumulativeVolumeGauge(records)
+    CumulativeVolumeGauge(records, today)
 
     Spacer(Modifier.height(20.dp))
 
@@ -1434,8 +1435,11 @@ private fun StatusScreen(
 }
 
 @Composable
-private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
-    val totalVol = records.sumOf { it.volumeMl() }
+private fun CumulativeVolumeGauge(records: List<DonationRecord>, today: LocalDate) {
+    // The 2,160mL cap is an annual one, so only donations from the past year consume it - older
+    // donations have expired and are excluded from both the total and the per-type bar.
+    val recentRecords = records.withinAnnualWindow(today)
+    val totalVol = recentRecords.sumOf { it.volumeMl() }
     val pct = (totalVol.toDouble() / ANNUAL_LIMIT_ML * 100).coerceAtMost(100.0)
     val style = statusStyle(pct)
 
@@ -1452,7 +1456,7 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
             ) {
                 Column {
                     Text(
-                        "누적 채혈량",
+                        "최근 1년 누적 채혈량",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextSecondary
@@ -1487,7 +1491,7 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
 
             Spacer(Modifier.height(14.dp))
 
-            VolumeProgressBar(records)
+            VolumeProgressBar(recentRecords)
 
             Spacer(Modifier.height(4.dp))
             Text(
@@ -1768,7 +1772,7 @@ private fun CalendarNavButton(symbol: String, onClick: () -> Unit) {
 }
 
 @Composable
-private fun VolumeProgressBar(records: List<DonationRecord>) {
+private fun VolumeProgressBar(recentRecords: List<DonationRecord>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1777,7 +1781,7 @@ private fun VolumeProgressBar(records: List<DonationRecord>) {
             .background(ProgressTrack)
     ) {
         DonationType.entries.forEach { type ->
-            val vol = records.filter { it.type == type }.sumOf { it.volumeMl() }
+            val vol = recentRecords.filter { it.type == type }.sumOf { it.volumeMl() }
             val frac = (vol.toFloat() / ANNUAL_LIMIT_ML).coerceIn(0f, 1f)
             Box(
                 Modifier
@@ -1786,7 +1790,7 @@ private fun VolumeProgressBar(records: List<DonationRecord>) {
                     .background(TYPE_INFO.getValue(type).color)
             )
         }
-        val used = records.sumOf { it.volumeMl() }
+        val used = recentRecords.sumOf { it.volumeMl() }
         val usedFrac = (used.toFloat() / ANNUAL_LIMIT_ML).coerceIn(0f, 1f)
         val remaining = (1f - usedFrac).coerceAtLeast(0.0001f)
         Box(Modifier.weight(remaining).fillMaxHeight())

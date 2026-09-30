@@ -11,6 +11,13 @@ const val WHOLE_BLOOD_ANNUAL_LIMIT = 5
 const val PLATELET_ANNUAL_LIMIT = 24
 const val ANNUAL_LIMIT_ML = 2160
 
+/**
+ * How long a donation keeps counting toward the annual count/volume limits, matching the +366일
+ * expiry [calcNext] uses: a donation is still counted on the 365th day after it, and no longer
+ * counted once 366 days have passed.
+ */
+const val ANNUAL_WINDOW_DAYS = 366L
+
 data class TypeInfo(
     val type: DonationType,
     val label: String,
@@ -49,6 +56,14 @@ private fun DonationRecord.ageAtDonation(): Int? = birthDate?.let { Period.betwe
 
 /** Uses the certificate-stated [DonationRecord.donatedVolumeMl] when known, otherwise the age-based default. */
 fun DonationRecord.volumeMl(): Int = donatedVolumeMl ?: actualVolumeMl(type, ageAtDonation())
+
+/**
+ * The records that still count toward the annual limits as of [today] — i.e. the donations from
+ * the past year ([ANNUAL_WINDOW_DAYS]). Donations older than that have expired and no longer
+ * consume any of the annual 2,160mL allowance.
+ */
+fun List<DonationRecord>.withinAnnualWindow(today: LocalDate): List<DonationRecord> =
+    filter { it.date.plusDays(ANNUAL_WINDOW_DAYS).isAfter(today) }
 
 data class DDay(val text: String, val color: Color)
 

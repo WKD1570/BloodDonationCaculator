@@ -91,4 +91,36 @@ class DonationCalculatorEngineTest {
         val result = calcNext(DonationType.PLASMA, listOf(record), today)
         assertEquals(LocalDate.of(2026, 2, 26), result.nextDate)
     }
+
+    @Test
+    fun `withinAnnualWindow keeps a donation on the last day it still counts`() {
+        val today = LocalDate.of(2026, 9, 30)
+        val record = DonationRecord(
+            id = 1,
+            type = DonationType.WHOLE_BLOOD,
+            date = today.minusDays(365)
+        )
+        assertEquals(listOf(record), listOf(record).withinAnnualWindow(today))
+    }
+
+    @Test
+    fun `withinAnnualWindow drops a donation once 366 days have passed`() {
+        val today = LocalDate.of(2026, 9, 30)
+        val record = DonationRecord(
+            id = 1,
+            type = DonationType.WHOLE_BLOOD,
+            date = today.minusDays(366)
+        )
+        assertEquals(emptyList<DonationRecord>(), listOf(record).withinAnnualWindow(today))
+    }
+
+    @Test
+    fun `withinAnnualWindow keeps only the past year of donations`() {
+        val today = LocalDate.of(2026, 9, 30)
+        val expired = DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2024, 5, 1))
+        val recent = DonationRecord(id = 2, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 5, 1))
+        val kept = listOf(expired, recent).withinAnnualWindow(today)
+        assertEquals(listOf(recent), kept)
+        assertEquals(430, kept.sumOf { it.volumeMl() })
+    }
 }
