@@ -4,13 +4,15 @@ import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
 import com.example.myapplication.model.Sex
 import com.example.myapplication.model.currentAge
-import kotlin.math.pow
 import kotlin.math.roundToInt
 
 data class PhysicalEligibility(val isEligible: Boolean, val reasons: List<String>)
 
-/** 대한적십자사 기준: multi-type (component) donation requires an estimated blood volume above this. */
-private const val MIN_BLOOD_VOLUME_FOR_APHERESIS_ML = 4000.0
+/**
+ * 대한적십자사 기준: multi-type (component) donation requires a predicted blood volume - from the
+ * 성인예측 혈량표, [predictedBloodVolume] - of at least this.
+ */
+private const val MIN_BLOOD_VOLUME_FOR_APHERESIS_ML = 4000
 
 /** Null for the 기타 types, which have no age criteria here (and aren't screened on 마이페이지). */
 private fun ageRange(type: DonationType): IntRange? = when (type) {
@@ -23,16 +25,6 @@ private fun ageRange(type: DonationType): IntRange? = when (type) {
 private fun minWeightKg(sex: Sex): Double = when (sex) {
     Sex.MALE -> 50.0
     Sex.FEMALE -> 45.0
-}
-
-/** Nadler's formula: estimated total blood volume (mL) from height(cm)/weight(kg)/sex. */
-private fun estimatedBloodVolumeMl(heightCm: Double, weightKg: Double, sex: Sex): Double {
-    val heightM = heightCm / 100.0
-    val liters = when (sex) {
-        Sex.MALE -> 0.3669 * heightM.pow(3) + 0.03219 * weightKg + 0.6041
-        Sex.FEMALE -> 0.3561 * heightM.pow(3) + 0.03308 * weightKg + 0.1833
-    }
-    return liters * 1000.0
 }
 
 /**
@@ -66,11 +58,11 @@ fun checkPhysicalEligibility(profile: DonorProfile, type: DonationType): Physica
     }
 
     if (type != DonationType.WHOLE_BLOOD) {
-        val estimatedVolume = estimatedBloodVolumeMl(height, weight, sex)
-        if (estimatedVolume < MIN_BLOOD_VOLUME_FOR_APHERESIS_ML) {
+        val predicted = predictedBloodVolume(height, weight, sex)
+        if (predicted != null && predicted.volumeMl < MIN_BLOOD_VOLUME_FOR_APHERESIS_ML) {
             reasons.add(
-                "예측 혈액량 부족으로 성분헌혈 제한 (예측 ${estimatedVolume.roundToInt()}mL, " +
-                    "${MIN_BLOOD_VOLUME_FOR_APHERESIS_ML.roundToInt()}mL 이상 필요)"
+                "예측 혈량 부족으로 성분헌혈 제한 (예측 ${"%,d".format(predicted.volumeMl)}mL, " +
+                    "${"%,d".format(MIN_BLOOD_VOLUME_FOR_APHERESIS_ML)}mL 이상 필요)"
             )
         }
     }

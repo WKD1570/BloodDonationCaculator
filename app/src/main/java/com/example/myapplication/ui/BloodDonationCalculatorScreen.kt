@@ -105,7 +105,10 @@ import com.example.myapplication.domain.ANNUAL_LIMIT_ML
 import com.example.myapplication.domain.BloodDonationInfo
 import com.example.myapplication.domain.IntegratedNextResult
 import com.example.myapplication.domain.Reason
+import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_HEIGHT_CM
+import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_WEIGHT_KG
 import com.example.myapplication.domain.TYPE_INFO
+import com.example.myapplication.domain.predictedBloodVolume
 import com.example.myapplication.domain.WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML
 import com.example.myapplication.domain.WHOLE_BLOOD_STATED_VOLUMES_ML
 import com.example.myapplication.domain.donationTypeEnum
@@ -132,6 +135,7 @@ import com.example.myapplication.ui.theme.LocalDarkTheme
 import com.example.myapplication.model.currentAge
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import kotlin.math.roundToInt
 import java.time.YearMonth
 
 private enum class Screen(val label: String, val icon: String) {
@@ -395,6 +399,9 @@ internal fun PhysicalProfileCard(
                 }
             }
 
+            Spacer(Modifier.height(10.dp))
+            PredictedBloodVolumeRow(profile)
+
             Spacer(Modifier.height(14.dp))
             HorizontalDivider(color = DividerColor)
             Spacer(Modifier.height(14.dp))
@@ -446,6 +453,53 @@ internal fun PhysicalProfileCard(
                 lineHeight = 15.sp
             )
         }
+    }
+}
+
+/** The 성인예측 혈량표 volume for the entered height, weight and sex - what 성분헌혈's 4,000mL rule checks. */
+@Composable
+private fun PredictedBloodVolumeRow(profile: DonorProfile) {
+    val height = profile.heightCm
+    val weight = profile.weightKg
+    val sex = profile.sex
+    val predicted = if (height != null && weight != null && sex != null) predictedBloodVolume(height, weight, sex) else null
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(InputBg)
+            .padding(horizontal = 14.dp, vertical = 12.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text("🩸 예측 혈량", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+            if (predicted != null) {
+                Text(
+                    "${if (predicted.withinTable) "" else "약 "}${"%,d".format(predicted.volumeMl)} mL",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Accent
+                )
+            }
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            when {
+                predicted == null -> "체중·신장·성별을 입력하면 예측 혈량을 보여드려요."
+                predicted.withinTable -> "성인예측 혈량표(수혈의학 2014) 기준"
+                else -> "표 범위(신장 ${BLOOD_VOLUME_TABLE_HEIGHT_CM.start.roundToInt()}~" +
+                    "${BLOOD_VOLUME_TABLE_HEIGHT_CM.endInclusive.roundToInt()}cm, 체중 " +
+                    "${BLOOD_VOLUME_TABLE_WEIGHT_KG.start}~${BLOOD_VOLUME_TABLE_WEIGHT_KG.endInclusive}kg)를 " +
+                    "벗어나 표 끝 값으로 추정했어요."
+            },
+            fontSize = 10.sp,
+            color = TextTertiary,
+            lineHeight = 15.sp
+        )
     }
 }
 
