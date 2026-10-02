@@ -145,7 +145,7 @@ class IntegratedEligibilityTest {
         val result = integratedNextEligible(DonationType.WHOLE_BLOOD, records, listOf(etretinate), today)
 
         assertTrue(result is IntegratedNextResult.PermanentlyProhibited)
-        assertEquals(etretinate, (result as IntegratedNextResult.PermanentlyProhibited).blocker)
+        assertEquals("에트레티네이트", (result as IntegratedNextResult.PermanentlyProhibited).cause)
     }
 
     @Test
@@ -184,5 +184,58 @@ class IntegratedEligibilityTest {
         next.values.forEach { result ->
             assertEquals(LocalDate.of(2026, 9, 15), (result as IntegratedNextResult.Eligible).nextDate)
         }
+    }
+
+    // ---- 감염병·체류 restrictions ----
+
+    private fun healthRestriction(eligibleFrom: LocalDate?, allowed: Set<DonationType> = emptySet()) = HealthRestriction(
+        title = "태국 체류",
+        periodLabel = "체류 종료 후 1년",
+        detail = "",
+        countedFrom = eligibleFrom?.minusYears(1),
+        eligibleFrom = eligibleFrom,
+        allowedTypes = allowed,
+        sources = setOf(HistorySource.Stay(1))
+    )
+
+    @Test
+    fun `a malaria stay pushes whole blood and platelets back but leaves plasma alone`() {
+        val trip = healthRestriction(LocalDate.of(2027, 3, 7), allowed = setOf(DonationType.PLASMA))
+
+        val next = nextEligibleByType(emptyList(), emptyList(), today, listOf(trip))
+
+        assertEquals(LocalDate.of(2027, 3, 7), (next.getValue(DonationType.WHOLE_BLOOD) as IntegratedNextResult.Eligible).nextDate)
+        assertEquals(LocalDate.of(2027, 3, 7), (next.getValue(DonationType.PLATELET) as IntegratedNextResult.Eligible).nextDate)
+        val plasma = next.getValue(DonationType.PLASMA) as IntegratedNextResult.Eligible
+        assertEquals(today, plasma.nextDate)
+        assertTrue(plasma.reasons.isEmpty())
+    }
+
+    @Test
+    fun `the later of donation history and a health restriction wins`() {
+        val records = listOf(wholeBlood(LocalDate.of(2026, 9, 1)))
+        val shortRestriction = healthRestriction(LocalDate.of(2026, 9, 25))
+
+        val result = integratedNextEligible(DonationType.WHOLE_BLOOD, records, emptyList(), today, listOf(shortRestriction))
+
+        assertEquals(LocalDate.of(2026, 10, 27), (result as IntegratedNextResult.Eligible).nextDate)
+        assertTrue(result.reasons.any { it.text.contains("태국 체류") })
+    }
+
+    @Test
+    fun `an elapsed health restriction is not listed as a reason`() {
+        val result = integratedNextEligible(DonationType.WHOLE_BLOOD, emptyList(), emptyList(), today, listOf(healthRestriction(LocalDate.of(2026, 1, 1))))
+
+        assertEquals(today, (result as IntegratedNextResult.Eligible).nextDate)
+        assertTrue(result.reasons.isEmpty())
+    }
+
+    @Test
+    fun `a permanent health restriction prohibits the types it blocks`() {
+        val vcjd = healthRestriction(null).copy(title = "영국 체류(vCJD)")
+
+        val result = integratedNextEligible(DonationType.PLASMA, emptyList(), emptyList(), today, listOf(vcjd))
+
+        assertEquals("영국 체류(vCJD)", (result as IntegratedNextResult.PermanentlyProhibited).cause)
     }
 }

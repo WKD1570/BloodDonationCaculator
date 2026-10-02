@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BloodDonationRules>
+    <!-- 1. 일반 감염병 헌혈 보류 기준 (치료 종료 후 기준) -->
+    <InfectiousDiseases>
+        <Deferral period="영구배제">
+            <Disease>리슈만편모충증</Disease>
+            <Disease>바베스열원충증</Disease>
+            <Disease>샤가스병</Disease>
+            <Disease>큐열(Q열)</Disease>
+            <Disease>크로이츠펠트야콥병(CJD) 및 변종크로이츠펠트야콥병(vCJD)</Disease>
+            <Disease>한센병</Disease>
+            <Disease>후천성면역결핍증(AIDS)</Disease>
+            <Disease>C형간염</Disease>
+            <Disease>만성B형간염</Disease>
+            <Disease>톡소포자충증</Disease>
+        </Deferral>
+        <Deferral period="3년">
+            <Disease>말라리아</Disease>
+        </Deferral>
+        <Deferral period="2년">
+            <Disease>브루셀라증</Disease>
+        </Deferral>
+        <Deferral period="1년">
+            <Disease>성병(매독, 성기 단순포진, 연성하감, 임질, 첨규콘딜롬, 클라미디아)</Disease>
+            <Disease>급성B형간염</Disease>
+            <Disease>A형간염</Disease>
+        </Deferral>
+        <Deferral period="6개월">
+            <Disease>뎅기열</Disease>
+            <Disease>웨스트나일열</Disease>
+            <Disease>지카바이러스 감염증</Disease>
+            <Disease>치쿤구니야열</Disease>
+        </Deferral>
+        <Deferral period="5개월">
+            <Disease>포충증</Disease>
+        </Deferral>
+        <Deferral period="4개월">
+            <Disease>사상충증</Disease>
+        </Deferral>
+        <Deferral period="3개월">
+            <Disease>악구충증</Disease>
+            <Disease>중증급성호흡기증후군(SARS)</Disease>
+        </Deferral>
+        <Deferral period="2개월">
+            <Disease>광동주혈선충증</Disease>
+        </Deferral>
+        <Deferral period="1개월">
+            <Disease>결핵</Disease>
+            <Disease>공수병</Disease>
+            <Disease>두창</Disease>
+            <Disease>디프테리아</Disease>
+            <Disease>라싸열</Disease>
+            <Disease>라임병</Disease>
+            <Disease>레지오넬라증</Disease>
+            <Disease>렙토스피라증</Disease>
+            <Disease>마버그열</Disease>
+            <Disease>바이러스성 출혈열</Disease>
+            <Disease>발진열</Disease>
+            <Disease>발진티푸스</Disease>
+            <Disease>백일해</Disease>
+            <Disease>보툴리눔독소증</Disease>
+            <Disease>비브리오패혈증</Disease>
+            <Disease>성홍열</Disease>
+            <Disease>세균성이질</Disease>
+            <Disease>수두</Disease>
+            <Disease>수막구균성수막염</Disease>
+            <Disease>수족구병</Disease>
+            <Disease>신종인플루엔자</Disease>
+            <Disease>신증후군출혈열(유행성출혈열)</Disease>
+            <Disease>아프리카수면병</Disease>
+            <Disease>에볼라열</Disease>
+            <Disease>엔테로바이러스 감염증</Disease>
+            <Disease>야토병(툴라레미아)</Disease>
+            <Disease>유비저</Disease>
+            <Disease>유행성이하선염(볼거리)</Disease>
+            <Disease>일본뇌염</Disease>
+            <Disease>장출혈성 대장균감염증</Disease>
+            <Disease>장티푸스</Disease>
+            <Disease>조류인플루엔자 인체감염증</Disease>
+            <Disease>주혈흡충증</Disease>
+            <Disease>진드기매개뇌염</Disease>
+            <Disease>쯔쯔가무시병</Disease>
+            <Disease>콜레라</Disease>
+            <Disease>탄저</Disease>
+            <Disease>파라티푸스</Disease>
+            <Disease>파상풍</Disease>
+            <Disease>페스트</Disease>
+            <Disease>폴리오</Disease>
+            <Disease>풍진</Disease>
+            <Disease>홍역</Disease>
+            <Disease>황열</Disease>
+        </Deferral>
+        <Deferral period="치료종료 시까지">
+            <Disease>간흡충증</Disease>
+            <Disease>급성호흡기감염증</Disease>
+            <Disease>다제내성녹농균(MRPA)감염증</Disease>
+            <Disease>다제내성아시네토박터바우마니균(MRAB)감염증</Disease>
+            <Disease>메디나 선충증</Disease>
+            <Disease>메티실린내성황색포도알균(MRSA)감염증</Disease>
+            <Disease>반코마이신내성장알균(VRE) 감염증</Disease>
+            <Disease>반코마이신내성황색포도알균(VRSA) 감염증</Disease>
+            <Disease>인플루엔자</Disease>
+            <Disease>요충증</Disease>
+            <Disease>장관감염증</Disease>
+            <Disease>장흡충증</Disease>
+            <Disease>카바페넴내성장내세균속균종(CRE) 감염증</Disease>
+            <Disease>편충증</Disease>
+            <Disease>폐흡충증</Disease>
+            <Disease>회충증</Disease>
+        </Deferral>
+    </InfectiousDiseases>
+
+    <!-- 2. 변종 크로이츠펠트-야콥병(vCJD) 헌혈금지지역 -->
+    <vCJD_Regions>
+        <Rule deferralType="영구배제">
+            <Region country="영국" targetPeriod="1980년~1996년" minStay="3개월 이상">
+                <IncludedArea>맨 섬</IncludedArea>
+                <IncludedArea>북아일랜드</IncludedArea>
+                <IncludedArea>스코틀랜드</IncludedArea>
+                <IncludedArea>웨일즈</IncludedArea>
+                <IncludedArea>잉글랜드</IncludedArea>
+                <IncludedArea>지브롤터</IncludedArea>
+                <IncludedArea>채널 제도</IncludedArea>
+                <IncludedArea>포클랜드 섬</IncludedArea>
+            </Region>
+            <Region country="프랑스·아일랜드" targetPeriod="1980년~2001년까지" minStay="5년 이상">
+                <IncludedArea>전지역 (별도 기재 없음)</IncludedArea>
+            </Region>
+        </Rule>
+    </vCJD_Regions>
+
+    <!-- 3. 국내 말라리아 관련 헌혈 제한 구역 -->
+    <MalariaDomestic activeYear="2025년~현재">
+        <Condition type="숙박" minDuration="1박 이상" includeResidence="true" includeMilitary="true">
+            <Restriction wholeBlood="불가" platelet="불가" plasma="가능" deferralPeriod="1년" />
+        </Condition>
+        <Condition type="해상숙박" exceptionCondition="지상으로부터 30km 이상 떨어진 해상">
+            <Restriction wholeBlood="가능" platelet="가능" plasma="가능" deferralPeriod="0일" />
+        </Condition>
+
+        <Regions>
+            <Province name="경기">
+                <City>파주시</City>
+                <City>연천군</City>
+                <City>김포시</City>
+            </Province>
+            <Province name="인천">
+                <City>강화군</City>
+            </Province>
+            <Province name="강원">
+                <City>철원군</City>
+            </Province>
+            <Province name="북한" note="국외헌혈기준에 준하여 적용">
+                <City>백두산 제외 전지역</City>
+            </Province>
+        </Regions>
+    </MalariaDomestic>
+
+    <!-- 4. 국외 말라리아 관련 헌혈 제한 구역 (대륙별) -->
+    <MalariaInternational>
+        <!-- 제한 조건 -->
+        <Conditions>
+            <Condition type="거주_또는_복무" duration="연중 6개월 이상">
+                <Restriction wholeBlood="불가" platelet="불가" plasma="가능" deferralPeriod="3년" />
+            </Condition>
+            <Condition type="여행" duration="연중 1일 이상~6개월 미만 숙박">
+                <Restriction wholeBlood="불가" platelet="불가" plasma="가능" deferralPeriod="1년" />
+            </Condition>
+        </Conditions>
+
+        <!-- 대륙별 대상 국가 -->
+        <Continents>
+            <Continent name="아메리카">
+                <EntireRegion>
+                    <Country>가이아나</Country>
+                    <Country>아이티(라바디항구 포함)</Country>
+                </EntireRegion>
+                <PartialRegion>
+                    <Country>과테말라</Country>
+                    <Country>니카라과</Country>
+                    <Country>도미니카공화국</Country>
+                    <Country>멕시코</Country>
+                    <Country>베네수엘라</Country>
+                    <Country>볼리비아</Country>
+                    <Country>브라질</Country>
+                    <Country>수리남</Country>
+                    <Country>에콰도르(갈라파고스 제도 포함)</Country>
+                    <Country>온두라스</Country>
+                    <Country>코스타리카</Country>
+                    <Country>콜롬비아</Country>
+                    <Country>파나마</Country>
+                    <Country>페루</Country>
+                    <Country>프랑스령 기아나</Country>
+                </PartialRegion>
+            </Continent>
+
+            <Continent name="아프리카">
+                <EntireRegion>
+                    <Country>가나</Country>
+                    <Country>가봉</Country>
+                    <Country>감비아</Country>
+                    <Country>기니</Country>
+                    <Country>기니비사우</Country>
+                    <Country>나이지리아</Country>
+                    <Country>남수단</Country>
+                    <Country>니제르</Country>
+                    <Country>라이베리아</Country>
+                    <Country>르완다</Country>
+                    <Country>마요트(프랑스령)</Country>
+                    <Country>말라위</Country>
+                    <Country>말리</Country>
+                    <Country>모리타니아</Country>
+                    <Country>모잠비크</Country>
+                    <Country>베냉</Country>
+                    <Country>부룬디</Country>
+                    <Country>부르키나파소</Country>
+                    <Country>상투메프린시페</Country>
+                    <Country>세네갈</Country>
+                    <Country>소말리아</Country>
+                    <Country>수단</Country>
+                    <Country>시에라리온</Country>
+                    <Country>앙골라</Country>
+                    <Country>우간다</Country>
+                    <Country>잠비아</Country>
+                    <Country>적도기니</Country>
+                    <Country>중앙아프리카공화국</Country>
+                    <Country>지부티</Country>
+                    <Country>짐바브웨</Country>
+                    <Country>차드</Country>
+                    <Country>카메룬</Country>
+                    <Country>코모로</Country>
+                    <Country>코트디부아르</Country>
+                    <Country>콩고공화국(브라자빌)</Country>
+                    <Country>콩고민주공화국(킨샤샤)</Country>
+                    <Country>토고</Country>
+                </EntireRegion>
+                <PartialRegion>
+                    <Country>나미비아</Country>
+                    <Country>남아프리카공화국</Country>
+                    <Country>마다가스카르</Country>
+                    <Country>보츠와나</Country>
+                    <Country>에스와티니(스와질란드)</Country>
+                    <Country>에리트레아</Country>
+                    <Country>에티오피아</Country>
+                    <Country>케냐</Country>
+                    <Country>탄자니아</Country>
+                </PartialRegion>
+            </Continent>
+
+            <Continent name="아시아/오세아니아">
+                <EntireRegion>
+                    <Country>바누아투</Country>
+                    <Country>버마(미얀마)</Country>
+                    <Country>솔로몬제도</Country>
+                    <Country>오만</Country>
+                    <Country>인도</Country>
+                </EntireRegion>
+                <PartialRegion>
+                    <Country>네팔</Country>
+                    <Country>라오스</Country>
+                    <Country>말레이시아</Country>
+                    <Country>방글라데시</Country>
+                    <Country>베트남</Country>
+                    <Country>부탄</Country>
+                    <Country>브루나이</Country>
+                    <Country>사우디아라비아</Country>
+                    <Country>아프가니스탄</Country>
+                    <Country>예멘</Country>
+                    <Country>이란</Country>
+                    <Country>인도네시아</Country>
+                    <Country>캄보디아</Country>
+                    <Country>태국</Country>
+                    <Country>티모르레스테(동티모르)</Country>
+                    <Country>파키스탄</Country>
+                    <Country>파푸아뉴기니</Country>
+                    <Country>필리핀</Country>
+                </PartialRegion>
+            </Continent>
+        </Continents>
+    </MalariaInternational>
+</BloodDonationRules>

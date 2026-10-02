@@ -119,12 +119,14 @@ import com.example.myapplication.domain.typeSubtitle
 import com.example.myapplication.domain.volumeMl
 import com.example.myapplication.domain.wholeBloodStatedVolumeMl
 import com.example.myapplication.domain.withinAnnualWindow
+import com.example.myapplication.model.DiseaseRecord
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
 import com.example.myapplication.model.OTHER_DONATION_TYPES
 import com.example.myapplication.model.REGULAR_DONATION_TYPES
 import com.example.myapplication.model.MedicationRecord
+import com.example.myapplication.model.StayRecord
 import com.example.myapplication.model.Sex
 import com.example.myapplication.ui.theme.LocalDarkTheme
 import com.example.myapplication.model.currentAge
@@ -135,6 +137,7 @@ import java.time.YearMonth
 private enum class Screen(val label: String, val icon: String) {
     STATUS("현황", "🩸"),
     INPUT("헌혈 입력", "📝"),
+    MEDICAL("의료 정보", "🩺"),
     MYPAGE("마이페이지", "🧍")
 }
 
@@ -246,6 +249,7 @@ fun BloodDonationCalculatorScreen(
                         Screen.STATUS -> StatusScreen(
                             records = records,
                             medications = state.medications,
+                            health = state.health,
                             today = today,
                             nextByType = state.nextByType
                         )
@@ -254,12 +258,17 @@ fun BloodDonationCalculatorScreen(
                             onAddClick = { types -> formMode = RecordFormMode.Add(types) },
                             onRecordClick = { record -> formMode = RecordFormMode.Edit(record) }
                         )
-                        Screen.MYPAGE -> MyPageScreen(
-                            profile = profile,
+                        Screen.MEDICAL -> MedicalInfoScreen(
                             medications = state.medications,
-                            onProfileChange = viewModel::updateProfile,
-                            onDeleteMedication = viewModel::deleteMedication
+                            health = state.health,
+                            today = today,
+                            onDeleteMedication = viewModel::deleteMedication,
+                            onSaveDisease = viewModel::saveDisease,
+                            onDeleteDisease = viewModel::deleteDisease,
+                            onSaveStay = viewModel::saveStay,
+                            onDeleteStay = viewModel::deleteStay
                         )
+                        Screen.MYPAGE -> PhysicalProfileCard(profile, onProfileChange = viewModel::updateProfile)
                     }
                 }
             }
@@ -1141,18 +1150,33 @@ private fun CertificateCameraScreen(onCaptured: (Uri) -> Unit, onDismiss: () -> 
     }
 }
 
+/**
+ * 의료 정보: the medication and 감염병·체류 history that restrict donating, alongside the drug
+ * search that adds to the former. Both feed the next-eligible dates on 현황.
+ */
 @Composable
-private fun MyPageScreen(
-    profile: DonorProfile,
+private fun MedicalInfoScreen(
     medications: List<MedicationRecord>,
-    onProfileChange: (DonorProfile) -> Unit,
-    onDeleteMedication: (MedicationRecord) -> Unit
+    health: HealthHistoryState,
+    today: LocalDate,
+    onDeleteMedication: (MedicationRecord) -> Unit,
+    onSaveDisease: (DiseaseRecord) -> Unit,
+    onDeleteDisease: (DiseaseRecord) -> Unit,
+    onSaveStay: (StayRecord) -> Unit,
+    onDeleteStay: (StayRecord) -> Unit
 ) {
-    PhysicalProfileCard(profile, onProfileChange = onProfileChange)
-    Spacer(Modifier.height(14.dp))
     ProhibitedDrugSearchScreen()
     Spacer(Modifier.height(14.dp))
     MedicationHistoryCard(medications = medications, onDelete = onDeleteMedication)
+    Spacer(Modifier.height(14.dp))
+    HealthHistoryCard(
+        health = health,
+        today = today,
+        onSaveDisease = onSaveDisease,
+        onDeleteDisease = onDeleteDisease,
+        onSaveStay = onSaveStay,
+        onDeleteStay = onDeleteStay
+    )
 }
 
 /**
@@ -1406,6 +1430,7 @@ private fun RecordRow(record: DonationRecord, onClick: () -> Unit) {
 private fun StatusScreen(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
+    health: HealthHistoryState,
     today: LocalDate,
     nextByType: Map<DonationType, IntegratedNextResult>
 ) {
@@ -1413,9 +1438,14 @@ private fun StatusScreen(
 
     Spacer(Modifier.height(20.dp))
 
-    NextDatesCard(records, medications, nextByType)
+    NextDatesCard(records, medications, nextByType, hasHealthHistory = health.restrictions.isNotEmpty())
 
     Spacer(Modifier.height(20.dp))
+
+    if (health.restrictions.any { it.isActive(today) }) {
+        HealthRestrictionsCard(health.restrictions, today)
+        Spacer(Modifier.height(20.dp))
+    }
 
     DonationCalendarCard(records, today, nextByType)
 }
@@ -1495,12 +1525,13 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>, today: LocalDat
 internal fun NextDatesCard(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    nextByType: Map<DonationType, IntegratedNextResult>
+    nextByType: Map<DonationType, IntegratedNextResult>,
+    hasHealthHistory: Boolean = false
 ) {
     Text("📅 다음 헌혈 가능일", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
     Spacer(Modifier.height(10.dp))
 
-    if (records.isEmpty() && medications.isEmpty()) {
+    if (records.isEmpty() && medications.isEmpty() && !hasHealthHistory) {
         Card(
             shape = CardShape,
             colors = CardDefaults.cardColors(containerColor = CardBg),

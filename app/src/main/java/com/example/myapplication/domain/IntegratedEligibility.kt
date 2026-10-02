@@ -55,14 +55,16 @@ sealed interface IntegratedNextResult {
         override val reasons: List<Reason>
     ) : IntegratedNextResult
 
+    /** [cause] names what carries the lifetime ban - a drug, a 감염병 or a vCJD 체류. */
     data class PermanentlyProhibited(
-        val blocker: MedicationRecord,
+        val cause: String,
         override val reasons: List<Reason>
     ) : IntegratedNextResult
 }
 
 private val MedicationReasonColor = Color(0xFF7C3AED)
 private val PermanentReasonColor = Color(0xFFE11D48)
+private val HealthReasonColor = Color(0xFFD97706)
 
 /**
  * [integratedNextEligible] for each of the [REGULAR_DONATION_TYPES] - the donations 현황 plans. The
@@ -71,57 +73,69 @@ private val PermanentReasonColor = Color(0xFFE11D48)
 fun nextEligibleByType(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    today: LocalDate
+    today: LocalDate,
+    healthRestrictions: List<HealthRestriction> = emptyList()
 ): Map<DonationType, IntegratedNextResult> =
-    REGULAR_DONATION_TYPES.associateWith { integratedNextEligible(it, records, medications, today) }
+    REGULAR_DONATION_TYPES.associateWith { integratedNextEligible(it, records, medications, today, healthRestrictions) }
 
 /**
- * Combines the donation-history constraint ("Date A", from [calcNext]) with the medication-history
- * constraint ("Date B", from [medicationConstraint]) and returns the later of the two.
+ * Combines the donation-history constraint ("Date A", from [calcNext]), the medication-history
+ * constraint ("Date B", from [medicationConstraint]) and every [healthRestrictions] entry that
+ * blocks [type] (감염병·체류 이력, from [com.example.myapplication.domain.healthRestrictions]), and
+ * returns the latest of them. A health restriction that leaves [type] open - 혈장 after a 말라리아
+ * 위험지역 stay - doesn't move [type]'s date at all.
  *
- * A lifetime medication ban overrides everything: it is returned as
- * [IntegratedNextResult.PermanentlyProhibited] no matter what the donation history says, because
- * no amount of waiting makes the donor eligible again.
+ * A lifetime ban overrides everything: it is returned as [IntegratedNextResult.PermanentlyProhibited]
+ * no matter what the donation history says, because no amount of waiting makes the donor eligible
+ * again.
  */
 fun integratedNextEligible(
     type: DonationType,
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    today: LocalDate
+    today: LocalDate,
+    healthRestrictions: List<HealthRestriction> = emptyList()
 ): IntegratedNextResult {
     val fromDonations = calcNext(type, records, today)
+    val blocking = healthRestrictions.filter { it.blocks(type) }
 
-    return when (val constraint = medicationConstraint(medications)) {
-        is MedicationConstraint.Permanent -> IntegratedNextResult.PermanentlyProhibited(
-            blocker = constraint.source,
+    val medication = medicationConstraint(medications)
+    if (medication is MedicationConstraint.Permanent) {
+        return IntegratedNextResult.PermanentlyProhibited(
+            cause = medication.source.ingredientName,
             reasons = fromDonations.reasons + Reason(
-                "${constraint.source.ingredientName} 복용 이력 → 영구 헌혈 금지",
+                "${medication.source.ingredientName} 복용 이력 → 영구 헌혈 금지",
                 PermanentReasonColor
             )
         )
-
-        MedicationConstraint.None -> IntegratedNextResult.Eligible(
-            nextDate = fromDonations.nextDate,
-            dd = fromDonations.dd,
-            reasons = fromDonations.reasons
+    }
+    blocking.firstOrNull { it.isPermanent }?.let { ban ->
+        return IntegratedNextResult.PermanentlyProhibited(
+            cause = ban.title,
+            reasons = fromDonations.reasons + Reason(ban.reasonText, PermanentReasonColor)
         )
+    }
 
-        is MedicationConstraint.EligibleFrom -> {
-            // calcNext already floors its answer at today, so maxOf also discards a medication
-            // window that has already elapsed.
-            val nextDate = maxOf(fromDonations.nextDate, constraint.date)
-            // Match calcNext's convention: only surface a reason for a constraint that is still
-            // in force, rather than listing every drug ever recorded.
-            val reasons = if (constraint.date.isAfter(today)) {
-                fromDonations.reasons + Reason(
-                    "${constraint.source.ingredientName} 복용 후 ${constraint.source.restrictionDays}일 제한 " +
-                        "(${fmtShort(constraint.source.intakeDate)})",
-                    MedicationReasonColor
-                )
-            } else {
-                fromDonations.reasons
-            }
-            IntegratedNextResult.Eligible(nextDate, dday(nextDate, today), reasons)
+    // calcNext already floors its answer at today, so maxOf also discards a medication or health
+    // window that has already elapsed. Like calcNext, only constraints still in force on today
+    // are surfaced as reasons, rather than every drug or trip ever recorded.
+    var nextDate = fromDonations.nextDate
+    val reasons = fromDonations.reasons.toMutableList()
+    if (medication is MedicationConstraint.EligibleFrom) {
+        nextDate = maxOf(nextDate, medication.date)
+        if (medication.date.isAfter(today)) {
+            reasons += Reason(
+                "${medication.source.ingredientName} 복용 후 ${medication.source.restrictionDays}일 제한 " +
+                    "(${fmtShort(medication.source.intakeDate)})",
+                MedicationReasonColor
+            )
         }
     }
+    blocking.forEach { restriction ->
+        val eligibleFrom = restriction.eligibleFrom ?: return@forEach
+        nextDate = maxOf(nextDate, eligibleFrom)
+        if (restriction.isActive(today)) reasons += Reason(restriction.reasonText, HealthReasonColor)
+    }
+
+    return IntegratedNextResult.Eligible(nextDate, dday(nextDate, today), reasons)
 }

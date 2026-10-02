@@ -25,7 +25,7 @@ import com.example.myapplication.model.eligibleFrom
 import com.example.myapplication.model.isPermanentlyRestricted
 
 /**
- * The saved 약물 복용 이력 on 마이페이지. Entries are written by
+ * The saved 약물 복용 이력 on 의료 정보. Entries are written by
  * [ProhibitedDrugSearchScreen] when the user supplies an intake date, and feed the integrated
  * next-eligible-date on the status screen - so deleting one here changes that date.
  */
