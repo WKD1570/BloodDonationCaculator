@@ -18,7 +18,8 @@ data class DiseaseRecord(
 )
 
 /**
- * One stay in a 말라리아 or vCJD restricted region - a trip, or residence/military service.
+ * One stay in a 말라리아 or vCJD restricted region, or any other country abroad - a trip, or
+ * residence/military service.
  * [regionName] is a [StayRegion.name]; like [DiseaseRecord], the rule is looked up on read.
  */
 @Entity(tableName = "stay_history")
@@ -37,7 +38,14 @@ data class StayRecord(
     val visitedRiskArea: Boolean = true
 )
 
-enum class StayRegionKind { DOMESTIC_MALARIA, INTERNATIONAL_MALARIA, VCJD }
+enum class StayRegionKind {
+    DOMESTIC_MALARIA,
+    INTERNATIONAL_MALARIA,
+    VCJD,
+
+    /** A country no 말라리아·vCJD rule lists, entered by name: only the 해외 방문 rule applies. */
+    OVERSEAS
+}
 
 /** A place a stay can be recorded in, built from [InfectionRules] by `stayRegions`. */
 data class StayRegion(

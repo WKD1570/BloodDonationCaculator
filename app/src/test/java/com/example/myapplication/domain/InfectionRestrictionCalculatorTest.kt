@@ -127,6 +127,49 @@ class InfectionRestrictionCalculatorTest {
         assertEquals(LocalDate.of(2027, 3, 7), malariaRestriction(trip, rules)!!.eligibleFrom)
     }
 
+    // ---- 해외 방문 ----
+
+    @Test
+    fun `any country abroad blocks every type for 1 month after coming back`() {
+        val r = overseasTravelRestriction(stay("일본", LocalDate.of(2026, 9, 1), LocalDate.of(2026, 9, 5)), rules)!!
+        assertEquals(LocalDate.of(2026, 9, 5), r.countedFrom)
+        assertEquals(LocalDate.of(2026, 10, 5), r.eligibleFrom)
+        DonationType.entries.forEach { assertTrue(r.blocks(it)) }
+    }
+
+    @Test
+    fun `a malaria country also blocks plasma for the first month`() {
+        val trip = stay("태국", LocalDate.of(2026, 3, 1), LocalDate.of(2026, 3, 7))
+        val all = healthRestrictions(emptyList(), listOf(trip), rules)
+        val plasmaBlockedUntil = all.filter { it.blocks(DonationType.PLASMA) }.mapNotNull { it.eligibleFrom }.maxOrNull()
+        assertEquals(LocalDate.of(2026, 4, 7), plasmaBlockedUntil)
+        assertEquals(LocalDate.of(2027, 3, 7), all.filter { it.blocks(DonationType.WHOLE_BLOOD) }.mapNotNull { it.eligibleFrom }.max())
+    }
+
+    @Test
+    fun `a stay in Korea is not 해외 방문`() {
+        assertNull(overseasTravelRestriction(stay("경기 파주시", LocalDate.of(2026, 3, 1), LocalDate.of(2026, 3, 7)), rules))
+        assertNull(overseasTravelRestriction(stay("대한민국", LocalDate.of(2026, 3, 1), LocalDate.of(2026, 3, 7)), rules))
+        assertNull(overseasStayRegion(" 한국 ", rules))
+        assertNull(overseasStayRegion("", rules))
+    }
+
+    @Test
+    fun `북한 counts as abroad`() {
+        assertEquals(
+            LocalDate.of(2026, 4, 7),
+            overseasTravelRestriction(stay("북한", LocalDate.of(2026, 3, 1), LocalDate.of(2026, 3, 7)), rules)!!.eligibleFrom
+        )
+    }
+
+    @Test
+    fun `a typed-in country is an overseas region`() {
+        val region = overseasStayRegion(" 일본 ", rules)!!
+        assertEquals("일본", region.name)
+        assertEquals(StayRegionKind.OVERSEAS, region.kind)
+        assertFalse(region.isDomestic)
+    }
+
     // ---- vCJD ----
 
     @Test
