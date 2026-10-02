@@ -30,6 +30,13 @@ class InfectionRuleParserTest {
     }
 
     @Test
+    fun `parses the overseas travel rule`() {
+        assertEquals("대한민국", rules.overseasTravel.excludedCountry)
+        assertEquals(Period.ofMonths(1), rules.overseasTravel.restriction.deferral)
+        assertTrue(rules.overseasTravel.restriction.allowedTypes.isEmpty())
+    }
+
+    @Test
     fun `parses the vCJD rules, splitting a shared rule into its countries`() {
         val (uk, franceIreland) = rules.vcjdRules
         assertEquals(listOf("영국"), uk.countries)

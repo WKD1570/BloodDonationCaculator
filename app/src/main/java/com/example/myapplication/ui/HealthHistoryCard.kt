@@ -51,6 +51,9 @@ import com.example.myapplication.domain.HistorySource
 import com.example.myapplication.domain.diseaseRestriction
 import com.example.myapplication.domain.fmt
 import com.example.myapplication.domain.healthRestrictions
+import com.example.myapplication.domain.isDomesticStay
+import com.example.myapplication.domain.label
+import com.example.myapplication.domain.overseasStayRegion
 import com.example.myapplication.domain.searchStayRegions
 import com.example.myapplication.domain.stayRegions
 import com.example.myapplication.model.DeferralPeriod
@@ -105,7 +108,7 @@ internal fun HealthHistoryCard(
             Text("🦠 감염병·체류 이력", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             Spacer(Modifier.height(4.dp))
             Text(
-                "앓았던 감염병이나 말라리아·vCJD 위험지역 체류를 입력하면 헌혈 제한기간과 가능한 헌혈 종류를 " +
+                "앓았던 감염병이나 해외 방문·말라리아·vCJD 위험지역 체류를 입력하면 헌혈 제한기간과 가능한 헌혈 종류를 " +
                     "계산해 다음 헌혈 가능일에 반영해요.",
                 fontSize = 11.sp,
                 color = TextTertiary,
@@ -150,7 +153,7 @@ internal fun HealthHistoryCard(
                 HistoryRow(
                     title = record.regionName,
                     subtitle = stayPeriodText(record),
-                    known = regions.any { it.name == record.regionName },
+                    known = regions.any { it.name == record.regionName } || !isDomesticStay(record.regionName, rules),
                     restrictions = health.restrictions.filter { HistorySource.Stay(record.id) in it.sources },
                     today = today,
                     onDelete = { onDeleteStay(record) }
@@ -595,13 +598,21 @@ internal fun StayHistoryDialog(
                             )
                         }
                     )
-                    val matches = searchStayRegions(query, regions.filter { it.isDomestic == domestic })
+                    val listed = searchStayRegions(query, regions.filter { it.isDomestic == domestic })
+                    // A country no rule lists can still be entered by name: 해외 방문 itself restricts.
+                    val typed = if (domestic || regions.any { it.name.equals(query.trim(), ignoreCase = true) }) {
+                        null
+                    } else {
+                        overseasStayRegion(query, rules)
+                    }
+                    val matches = listed + listOfNotNull(typed)
                     PickList(matches, key = { it.name }) { candidate ->
                         SelectableRow(candidate.name, "${candidate.group} · ${candidate.detail}", onClick = { selected = candidate })
                     }
                     if (!domestic) {
                         Text(
-                            "목록에 없는 국가는 말라리아·vCJD 기준상 헌혈 제한이 없어요.",
+                            "목록에 없는 국가도 이름을 입력해 추가할 수 있어요. 대한민국 외 모든 국가는 " +
+                                "귀국 후 ${rules.overseasTravel.restriction.deferral.label()}간 헌혈이 제한돼요.",
                             fontSize = 10.sp,
                             color = TextTertiary,
                             modifier = Modifier.padding(top = 6.dp)

@@ -110,6 +110,34 @@ fun stayRegions(rules: InfectionRules): List<StayRegion> {
     return (domesticRegions + malariaCountries + vcjdCountries).distinctBy { it.name }
 }
 
+/** Names that mean 대한민국 itself, so typing one in as a country abroad doesn't restrict. */
+private fun koreaNames(rules: InfectionRules): Set<String> =
+    setOf(rules.overseasTravel.excludedCountry, "대한민국", "한국", "South Korea", "Korea")
+
+/**
+ * Whether a stay in [regionName] was inside 대한민국: a 국내 말라리아 region other than 북한 (which
+ * follows the 국외 기준), or 대한민국 itself.
+ */
+fun isDomesticStay(regionName: String, rules: InfectionRules): Boolean =
+    rules.domesticMalaria.regions.any { !it.followsInternationalRules && it.regionName == regionName } ||
+        koreaNames(rules).any { it.equals(regionName.trim(), ignoreCase = true) }
+
+/**
+ * A country abroad that no rule lists, entered by name, or null when [name] is blank or means
+ * 대한민국. Only the 해외 방문 rule applies to it.
+ */
+fun overseasStayRegion(name: String, rules: InfectionRules): StayRegion? {
+    val trimmed = name.trim()
+    if (trimmed.isEmpty() || isDomesticStay(trimmed, rules)) return null
+    return StayRegion(
+        name = trimmed,
+        kind = StayRegionKind.OVERSEAS,
+        isDomestic = false,
+        group = "기타 국가",
+        detail = "해외 방문 · 귀국 후 ${rules.overseasTravel.restriction.deferral.label()} 제한"
+    )
+}
+
 /** Case-insensitive match on the name, its aliases, or the group it's listed under. */
 fun searchStayRegions(query: String, regions: List<StayRegion>): List<StayRegion> {
     val trimmed = query.trim()
@@ -189,6 +217,26 @@ fun malariaRestriction(stay: StayRecord, rules: InfectionRules): HealthRestricti
 }
 
 /**
+ * The 해외 방문 restriction a stay places on donation, or null for a stay inside 대한민국. It applies
+ * to every country abroad - 말라리아·vCJD countries too, alongside their own restrictions - and
+ * counts from the stay's last day, the day the donor came back.
+ */
+fun overseasTravelRestriction(stay: StayRecord, rules: InfectionRules): HealthRestriction? {
+    if (isDomesticStay(stay.regionName, rules)) return null
+    val restriction = rules.overseasTravel.restriction
+    if (restriction.deferral.isZero) return null
+    return HealthRestriction(
+        title = "${stay.regionName} 방문",
+        periodLabel = "귀국 후 ${restriction.deferral.label()}",
+        detail = "해외 방문 · ${rules.overseasTravel.excludedCountry} 외 모든 국가",
+        countedFrom = stay.endDate,
+        eligibleFrom = stay.endDate.plus(restriction.deferral),
+        allowedTypes = restriction.allowedTypes,
+        sources = setOf(HistorySource.Stay(stay.id))
+    )
+}
+
+/**
  * [minStay] in days, counting a month as 30 days and a year as 12 months, so that stays in
  * separate trips can be added up against it. Errs short of the calendar length (5년 → 1,800 days),
  * which errs toward restricting.
@@ -258,4 +306,5 @@ fun healthRestrictions(
 ): List<HealthRestriction> =
     diseases.mapNotNull { diseaseRestriction(it, rules) } +
         stays.mapNotNull { malariaRestriction(it, rules) } +
+        stays.mapNotNull { overseasTravelRestriction(it, rules) } +
         vcjdRestrictions(stays, rules)
