@@ -41,6 +41,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -49,16 +51,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -67,14 +65,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.OffsetMapping
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.Composable
@@ -92,6 +83,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -113,36 +105,49 @@ import com.example.myapplication.domain.ANNUAL_LIMIT_ML
 import com.example.myapplication.domain.BloodDonationInfo
 import com.example.myapplication.domain.IntegratedNextResult
 import com.example.myapplication.domain.Reason
+import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_HEIGHT_CM
+import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_WEIGHT_KG
 import com.example.myapplication.domain.TYPE_INFO
+import com.example.myapplication.domain.predictedBloodVolume
+import com.example.myapplication.domain.WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML
+import com.example.myapplication.domain.WHOLE_BLOOD_STATED_VOLUMES_ML
 import com.example.myapplication.domain.donationTypeEnum
 import com.example.myapplication.domain.drawnVolumeMl
 import com.example.myapplication.domain.earliestEligibleDate
 import com.example.myapplication.domain.checkPhysicalEligibility
 import com.example.myapplication.domain.fmt
+import com.example.myapplication.domain.fmtShort
 import com.example.myapplication.domain.statusStyle
 import com.example.myapplication.domain.typeSubtitle
 import com.example.myapplication.domain.volumeMl
+import com.example.myapplication.domain.wholeBloodStatedVolumeMl
+import com.example.myapplication.domain.withinAnnualWindow
+import com.example.myapplication.model.DiseaseRecord
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
+import com.example.myapplication.model.OTHER_DONATION_TYPES
+import com.example.myapplication.model.REGULAR_DONATION_TYPES
 import com.example.myapplication.model.MedicationRecord
+import com.example.myapplication.model.StayRecord
 import com.example.myapplication.model.Sex
 import com.example.myapplication.ui.theme.LocalDarkTheme
 import com.example.myapplication.model.currentAge
 import kotlinx.coroutines.launch
-import java.time.Instant
 import java.time.LocalDate
+import kotlin.math.roundToInt
 import java.time.YearMonth
-import java.time.ZoneOffset
 
 private enum class Screen(val label: String, val icon: String) {
     STATUS("현황", "🩸"),
     INPUT("헌혈 입력", "📝"),
+    MEDICAL("의료 정보", "🩺"),
     MYPAGE("마이페이지", "🧍")
 }
 
 private sealed interface RecordFormMode {
-    data object Add : RecordFormMode
+    /** [types] are the ones the form offers: the regular three from 헌혈 기록, or the 기타 two. */
+    data class Add(val types: List<DonationType>) : RecordFormMode
     data class Edit(val record: DonationRecord) : RecordFormMode
 }
 
@@ -248,20 +253,28 @@ fun BloodDonationCalculatorScreen(
                         Screen.STATUS -> StatusScreen(
                             records = records,
                             medications = state.medications,
+                            health = state.health,
                             today = today,
                             nextByType = state.nextByType
                         )
                         Screen.INPUT -> InputScreen(
                             records = records,
-                            onAddClick = { formMode = RecordFormMode.Add },
+                            onAddClick = { types -> formMode = RecordFormMode.Add(types) },
                             onRecordClick = { record -> formMode = RecordFormMode.Edit(record) }
                         )
-                        Screen.MYPAGE -> MyPageScreen(
-                            profile = profile,
+                        Screen.MEDICAL -> MedicalInfoScreen(
+                            records = records,
                             medications = state.medications,
-                            onProfileChange = viewModel::updateProfile,
-                            onDeleteMedication = viewModel::deleteMedication
+                            health = state.health,
+                            today = today,
+                            onDeleteMedication = viewModel::deleteMedication,
+                            onSaveDisease = viewModel::saveDisease,
+                            onDeleteDisease = viewModel::deleteDisease,
+                            onSaveStay = viewModel::saveStay,
+                            onDeleteStay = viewModel::deleteStay,
+                            onSaveStays = viewModel::saveStays
                         )
+                        Screen.MYPAGE -> PhysicalProfileCard(profile, onProfileChange = viewModel::updateProfile)
                     }
                 }
             }
@@ -273,6 +286,10 @@ fun BloodDonationCalculatorScreen(
         RecordFormDialog(
             initial = editing,
             records = records,
+            types = when (mode) {
+                is RecordFormMode.Add -> mode.types
+                is RecordFormMode.Edit -> if (mode.record.type.isOther) OTHER_DONATION_TYPES else REGULAR_DONATION_TYPES
+            },
             onDismiss = { formMode = null },
             onSave = { record ->
                 if (editing == null) viewModel.addRecord(record) else viewModel.updateRecord(record)
@@ -292,7 +309,7 @@ private fun formatNumber(value: Double): String =
     if (value == value.toLong().toDouble()) value.toLong().toString() else value.toString()
 
 @Composable
-private fun PhysicalProfileCard(
+internal fun PhysicalProfileCard(
     profile: DonorProfile,
     onProfileChange: (DonorProfile) -> Unit
 ) {
@@ -382,12 +399,15 @@ private fun PhysicalProfileCard(
                 }
             }
 
+            Spacer(Modifier.height(10.dp))
+            PredictedBloodVolumeRow(profile)
+
             Spacer(Modifier.height(14.dp))
             HorizontalDivider(color = DividerColor)
             Spacer(Modifier.height(14.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                DonationType.entries.forEach { type ->
+                REGULAR_DONATION_TYPES.forEach { type ->
                     val info = TYPE_INFO.getValue(type)
                     val result = checkPhysicalEligibility(profile, type)
                     Column {
@@ -433,6 +453,53 @@ private fun PhysicalProfileCard(
                 lineHeight = 15.sp
             )
         }
+    }
+}
+
+/** The 성인예측 혈량표 volume for the entered height, weight and sex - what 성분헌혈's 4,000mL rule checks. */
+@Composable
+private fun PredictedBloodVolumeRow(profile: DonorProfile) {
+    val height = profile.heightCm
+    val weight = profile.weightKg
+    val sex = profile.sex
+    val predicted = if (height != null && weight != null && sex != null) predictedBloodVolume(height, weight, sex) else null
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(InputBg)
+            .padding(horizontal = 14.dp, vertical = 12.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text("🩸 예측 혈량", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+            if (predicted != null) {
+                Text(
+                    "${if (predicted.withinTable) "" else "약 "}${"%,d".format(predicted.volumeMl)} mL",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Accent
+                )
+            }
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            when {
+                predicted == null -> "체중·신장·성별을 입력하면 예측 혈량을 보여드려요."
+                predicted.withinTable -> "성인예측 혈량표(수혈의학 2014) 기준"
+                else -> "표 범위(신장 ${BLOOD_VOLUME_TABLE_HEIGHT_CM.start.roundToInt()}~" +
+                    "${BLOOD_VOLUME_TABLE_HEIGHT_CM.endInclusive.roundToInt()}cm, 체중 " +
+                    "${BLOOD_VOLUME_TABLE_WEIGHT_KG.start}~${BLOOD_VOLUME_TABLE_WEIGHT_KG.endInclusive}kg)를 " +
+                    "벗어나 표 끝 값으로 추정했어요."
+            },
+            fontSize = 10.sp,
+            color = TextTertiary,
+            lineHeight = 15.sp
+        )
     }
 }
 
@@ -500,105 +567,8 @@ private fun FieldLabel(text: String, required: Boolean) {
 }
 
 @Composable
-private fun ErrorHint(text: String) {
+internal fun ErrorHint(text: String) {
     Text(text, fontSize = 10.sp, color = ErrorText, modifier = Modifier.padding(top = 3.dp))
-}
-
-@Composable
-private fun DateField(
-    label: String,
-    required: Boolean,
-    date: LocalDate?,
-    onDateChange: (LocalDate) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var showPicker by remember { mutableStateOf(false) }
-    val interactionSource = remember { MutableInteractionSource() }
-    val bg by rememberHoverColor(interactionSource, InputBg, InputBgHover)
-    Column(modifier) {
-        FieldLabel(label, required)
-        Spacer(Modifier.height(4.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(10.dp))
-                .background(bg)
-                .border(1.dp, InputBorder, RoundedCornerShape(10.dp))
-                .hoverable(interactionSource)
-                .clickable { showPicker = true }
-                .padding(horizontal = 12.dp, vertical = 16.dp)
-        ) {
-            Text(
-                date?.let { fmt(it) } ?: "날짜 선택",
-                fontSize = 14.sp,
-                color = if (date != null) TextPrimary else TextTertiary
-            )
-        }
-    }
-
-    if (showPicker) {
-        val selectableDates = remember {
-            object : SelectableDates {
-                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                    val d = Instant.ofEpochMilli(utcTimeMillis).atZone(ZoneOffset.UTC).toLocalDate()
-                    return !d.isAfter(LocalDate.now())
-                }
-            }
-        }
-        val datePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = (date ?: LocalDate.now())
-                .atStartOfDay(ZoneOffset.UTC)
-                .toInstant()
-                .toEpochMilli(),
-            selectableDates = selectableDates,
-            initialDisplayMode = DisplayMode.Input
-        )
-        DatePickerDialog(
-            onDismissRequest = { showPicker = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    datePickerState.selectedDateMillis?.let { millis ->
-                        onDateChange(Instant.ofEpochMilli(millis).atZone(ZoneOffset.UTC).toLocalDate())
-                    }
-                    showPicker = false
-                }) { Text("확인") }
-            },
-            dismissButton = {
-                TextButton(onClick = { showPicker = false }) { Text("취소") }
-            }
-        ) {
-            DatePicker(state = datePickerState)
-        }
-    }
-}
-
-private fun birthDateDigits(date: LocalDate?): String =
-    date?.let { "%04d%02d%02d".format(it.year, it.monthValue, it.dayOfMonth) } ?: ""
-
-private fun formatBirthDateDigits(digits: String): String = buildString {
-    append(digits.take(4))
-    if (digits.length > 4) append("-").append(digits.drop(4).take(2))
-    if (digits.length > 6) append("-").append(digits.drop(6).take(2))
-}
-
-// Keeps the field's actual text as plain digits and only formats it for display,
-// so typed keystrokes never get reordered by dashes being inserted mid-string.
-private val BirthDateVisualTransformation = VisualTransformation { text ->
-    val digits = text.text
-    val formatted = formatBirthDateDigits(digits)
-    val offsetMapping = object : OffsetMapping {
-        override fun originalToTransformed(offset: Int): Int = when {
-            offset <= 4 -> offset
-            offset <= 6 -> offset + 1
-            else -> offset + 2
-        }
-        override fun transformedToOriginal(offset: Int): Int = when {
-            offset <= 4 -> offset
-            offset <= 7 -> offset - 1
-            else -> offset - 2
-        }
-    }
-    TransformedText(AnnotatedString(formatted), offsetMapping)
 }
 
 @Composable
@@ -608,42 +578,11 @@ private fun BirthDateField(
     onDateChange: (LocalDate) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var invalid by remember(date) { mutableStateOf(false) }
-    var fieldValue by remember(date) {
-        val digits = birthDateDigits(date)
-        mutableStateOf(TextFieldValue(digits, TextRange(digits.length)))
-    }
-
     Column(modifier) {
         FieldLabel(label, required = false)
         Spacer(Modifier.height(4.dp))
-        OutlinedTextField(
-            value = fieldValue,
-            onValueChange = { new ->
-                val raw = new.text.filter { it.isDigit() }.take(8)
-                fieldValue = new.copy(text = raw, selection = TextRange(raw.length))
-                if (raw.length < 8) {
-                    invalid = false
-                } else {
-                    val year = raw.take(4).toInt()
-                    val month = raw.drop(4).take(2).toInt()
-                    val day = raw.drop(6).take(2).toInt()
-                    val parsed = runCatching { LocalDate.of(year, month, day) }.getOrNull()
-                    if (parsed != null && !parsed.isAfter(LocalDate.now())) {
-                        invalid = false
-                        onDateChange(parsed)
-                    } else {
-                        invalid = true
-                    }
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true,
-            placeholder = { Text("YYYY-MM-DD", fontSize = 12.sp, color = TextTertiary) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            visualTransformation = BirthDateVisualTransformation
-        )
-        if (invalid) ErrorHint("유효한 날짜가 아니에요")
+        // The profile keeps its last complete birth date while a new one is being typed.
+        DateInputField(date = date, onDateChange = { it?.let(onDateChange) }, showCalendar = false)
     }
 }
 
@@ -667,35 +606,76 @@ private fun SexToggleButton(label: String, selected: Boolean, modifier: Modifier
     }
 }
 
+/** One option in a row of mutually exclusive choices, outlined and tinted with [color]/[selectedBg] while selected. */
 @Composable
-private fun TypeToggleRow(selected: DonationType?, onSelect: (DonationType) -> Unit) {
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-        DonationType.entries.forEach { type ->
+private fun ColoredToggleButton(
+    label: String,
+    selected: Boolean,
+    color: Color,
+    selectedBg: Color,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val bg by rememberHoverColor(interactionSource, if (selected) selectedBg else InputBg, if (selected) selectedBg else InputBgHover)
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(10.dp))
+            .background(bg)
+            .border(1.5.dp, if (selected) color else InputBorder, RoundedCornerShape(10.dp))
+            .hoverable(interactionSource)
+            .selectable(selected = selected, role = Role.RadioButton, onClick = onClick)
+            .padding(vertical = 10.dp, horizontal = 2.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            label,
+            color = if (selected) color else TextSecondary,
+            fontSize = 11.sp,
+            fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            softWrap = false
+        )
+    }
+}
+
+@Composable
+private fun TypeToggleRow(types: List<DonationType>, selected: DonationType?, onSelect: (DonationType) -> Unit) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth().selectableGroup()) {
+        types.forEach { type ->
             val info = TYPE_INFO.getValue(type)
-            val isSelected = selected == type
-            val interactionSource = remember { MutableInteractionSource() }
-            val bg by rememberHoverColor(interactionSource, if (isSelected) info.bg else InputBg, if (isSelected) info.bg else InputBgHover)
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(bg)
-                    .border(1.5.dp, if (isSelected) info.color else InputBorder, RoundedCornerShape(10.dp))
-                    .hoverable(interactionSource)
-                    .clickable { onSelect(type) }
-                    .padding(vertical = 10.dp, horizontal = 2.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    info.label,
-                    color = if (isSelected) info.color else TextSecondary,
-                    fontSize = 11.sp,
-                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                    textAlign = TextAlign.Center,
-                    maxLines = 1,
-                    softWrap = false
-                )
-            }
+            ColoredToggleButton(
+                label = info.label,
+                selected = selected == type,
+                color = info.color,
+                selectedBg = info.bg,
+                modifier = Modifier.weight(1f),
+                onClick = { onSelect(type) }
+            )
+        }
+    }
+}
+
+/**
+ * The 320mL/400mL picker shown under [TypeToggleRow] while whole blood is selected. Buttons are
+ * labeled with the amount stated on the certificate, but [selectedDrawnMl] and [onSelect] use the
+ * drawn volume stored in [DonationRecord.donatedVolumeMl], which adds the diagnostic draw.
+ */
+@Composable
+private fun WholeBloodVolumeToggleRow(selectedDrawnMl: Int?, onSelect: (Int) -> Unit) {
+    val info = TYPE_INFO.getValue(DonationType.WHOLE_BLOOD)
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth().selectableGroup()) {
+        WHOLE_BLOOD_STATED_VOLUMES_ML.forEach { statedMl ->
+            val drawnMl = statedMl + WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML
+            ColoredToggleButton(
+                label = "${statedMl}mL",
+                selected = selectedDrawnMl == drawnMl,
+                color = info.color,
+                selectedBg = info.bg,
+                modifier = Modifier.weight(1f),
+                onClick = { onSelect(drawnMl) }
+            )
         }
     }
 }
@@ -832,9 +812,10 @@ private fun CenterField(value: String, onValueChange: (String) -> Unit, modifier
 }
 
 @Composable
-private fun RecordFormDialog(
+internal fun RecordFormDialog(
     initial: DonationRecord?,
     records: List<DonationRecord>,
+    types: List<DonationType>,
     onDismiss: () -> Unit,
     onSave: (DonationRecord) -> Unit,
     onDelete: (() -> Unit)?
@@ -843,7 +824,12 @@ private fun RecordFormDialog(
     var donationDate by remember { mutableStateOf(initial?.date) }
     var certNumber by remember { mutableStateOf(initial?.certNumber ?: "") }
     var centerName by remember { mutableStateOf(initial?.centerName ?: "") }
-    var donatedVolumeMl by remember { mutableStateOf(initial?.donatedVolumeMl) }
+    // A whole blood record opens on the amount it was saved with - or the standard 400mL for one
+    // saved before the amount could be picked, which has no donatedVolumeMl - so the volume picker
+    // always shows one selected.
+    var donatedVolumeMl by remember {
+        mutableStateOf(initial?.let { it.donatedVolumeMl ?: if (it.type == DonationType.WHOLE_BLOOD) it.type.defaultVolumeMl else null })
+    }
     var showErrors by remember { mutableStateOf(false) }
     var restrictionError by remember { mutableStateOf<String?>(null) }
     var showDeleteConfirm by remember { mutableStateOf(false) }
@@ -857,13 +843,24 @@ private fun RecordFormDialog(
     var showScanSourceMenu by remember { mutableStateOf(false) }
     var showCameraCapture by remember { mutableStateOf(false) }
 
+    // Every type change - tapped or scanned - goes through here, so a volume picked or scanned for
+    // the previous type (e.g. the +30mL whole-blood draw) is never saved on another type. Whole
+    // blood starts on the standard 400mL, which the volume picker can change to 320mL.
+    fun selectType(newType: DonationType) {
+        if (newType != type) {
+            donatedVolumeMl = if (newType == DonationType.WHOLE_BLOOD) DonationType.WHOLE_BLOOD.defaultVolumeMl else null
+        }
+        type = newType
+        restrictionError = null
+    }
+
     // Only 헌혈종류/헌혈일/증서번호/헌혈장소 are auto-filled from a scan - name and birth date
     // are always left for manual entry, per BloodDonationInfo no longer carrying those fields.
     fun applyParsedCertificate(parsed: BloodDonationInfo) {
         var appliedAny = false
         val missingFields = mutableListOf<String>()
 
-        parsed.donationTypeEnum()?.let { type = it; restrictionError = null; appliedAny = true }
+        parsed.donationTypeEnum()?.let { selectType(it); appliedAny = true }
             ?: missingFields.add("헌혈 종류")
         parsed.donationDate?.let { donationDate = it; restrictionError = null; appliedAny = true }
             ?: missingFields.add("헌혈일")
@@ -915,6 +912,11 @@ private fun RecordFormDialog(
         }
     }
 
+    // The 기타 card's form: only its two types, and no photo scan - the scanner only reads
+    // 전혈/혈장/혈소판 certificates.
+    val isOtherForm = types.any { it.isOther }
+    val recordNoun = if (isOtherForm) "기타 기록" else "헌혈 기록"
+
     Dialog(onDismissRequest = onDismiss) {
         Surface(shape = CardShape, color = CardBg, modifier = Modifier.fillMaxWidth()) {
             Column(
@@ -923,92 +925,92 @@ private fun RecordFormDialog(
                     .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    if (initial == null) "헌혈 기록 추가" else "헌혈 기록 수정",
+                    if (initial == null) "$recordNoun 추가" else "$recordNoun 수정",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary
                 )
                 Spacer(Modifier.height(4.dp))
-                Text("헌혈증서에 적힌 정보를 입력해주세요.", fontSize = 12.sp, color = TextTertiary)
+                Text(if (isOtherForm) "헌혈·기증 정보를 입력해주세요." else "헌혈증서에 적힌 정보를 입력해주세요.", fontSize = 12.sp, color = TextTertiary)
                 Spacer(Modifier.height(14.dp))
 
-                Box {
-                    ScanCertificateButton(
-                        isScanning = isScanning,
-                        onClick = { showScanSourceMenu = true }
-                    )
-                    DropdownMenu(expanded = showScanSourceMenu, onDismissRequest = { showScanSourceMenu = false }) {
-                        DropdownMenuItem(
-                            text = { Text("촬영") },
-                            onClick = {
-                                showScanSourceMenu = false
-                                launchCertificateCamera()
-                            }
+                if (!isOtherForm) {
+                    Box {
+                        ScanCertificateButton(
+                            isScanning = isScanning,
+                            onClick = { showScanSourceMenu = true }
                         )
-                        DropdownMenuItem(
-                            text = { Text("갤러리에서 선택") },
-                            onClick = {
-                                showScanSourceMenu = false
-                                galleryLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                            }
-                        )
-                    }
-                }
-                scanMessage?.let { message ->
-                    Spacer(Modifier.height(6.dp))
-                    Text(message, fontSize = 11.sp, color = TextTertiary)
-                }
-                lastRawOcrText?.let { rawText ->
-                    Spacer(Modifier.height(6.dp))
-                    Text(
-                        if (showRawOcrText) "인식된 원문 숨기기 ▲" else "인식된 원문 보기 ▼",
-                        fontSize = 11.sp,
-                        color = Accent,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.clickable { showRawOcrText = !showRawOcrText }
-                    )
-                    if (showRawOcrText) {
-                        Spacer(Modifier.height(6.dp))
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(RoundedCornerShape(10.dp))
-                                .background(InputBg)
-                                .border(1.dp, InputBorder, RoundedCornerShape(10.dp))
-                                .padding(10.dp)
-                        ) {
-                            // Field values sometimes land in the wrong spot because this raw text
-                            // isn't in the order the certificate prints it - this view exists so
-                            // that mismatch is visible and reportable instead of silently guessed at.
-                            Text(rawText, fontSize = 11.sp, color = TextSecondary, lineHeight = 16.sp)
+                        DropdownMenu(expanded = showScanSourceMenu, onDismissRequest = { showScanSourceMenu = false }) {
+                            DropdownMenuItem(
+                                text = { Text("촬영") },
+                                onClick = {
+                                    showScanSourceMenu = false
+                                    launchCertificateCamera()
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("갤러리에서 선택") },
+                                onClick = {
+                                    showScanSourceMenu = false
+                                    galleryLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                                }
+                            )
                         }
                     }
+                    scanMessage?.let { message ->
+                        Spacer(Modifier.height(6.dp))
+                        Text(message, fontSize = 11.sp, color = TextTertiary)
+                    }
+                    lastRawOcrText?.let { rawText ->
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            if (showRawOcrText) "인식된 원문 숨기기 ▲" else "인식된 원문 보기 ▼",
+                            fontSize = 11.sp,
+                            color = Accent,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.clickable { showRawOcrText = !showRawOcrText }
+                        )
+                        if (showRawOcrText) {
+                            Spacer(Modifier.height(6.dp))
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(InputBg)
+                                    .border(1.dp, InputBorder, RoundedCornerShape(10.dp))
+                                    .padding(10.dp)
+                            ) {
+                                // Field values sometimes land in the wrong spot because this raw text
+                                // isn't in the order the certificate prints it - this view exists so
+                                // that mismatch is visible and reportable instead of silently guessed at.
+                                Text(rawText, fontSize = 11.sp, color = TextSecondary, lineHeight = 16.sp)
+                            }
+                        }
+                    }
+
+                    Spacer(Modifier.height(18.dp))
                 }
 
-                Spacer(Modifier.height(18.dp))
-
-                FieldLabel("헌혈 종류", required = true)
+                FieldLabel(if (isOtherForm) "종류" else "헌혈 종류", required = true)
                 Spacer(Modifier.height(6.dp))
-                TypeToggleRow(
-                    selected = type,
-                    onSelect = { newType ->
-                        // A scanned donatedVolumeMl was computed for the previously selected type
-                        // (e.g. the +30mL whole-blood draw); switching type manually invalidates it.
-                        if (newType != type) donatedVolumeMl = null
-                        type = newType
-                        restrictionError = null
-                    }
-                )
-                if (showErrors && type == null) ErrorHint("헌혈 종류를 선택해주세요")
+                TypeToggleRow(types = types, selected = type, onSelect = { selectType(it) })
+                if (showErrors && type == null) ErrorHint(if (isOtherForm) "종류를 선택해주세요" else "헌혈 종류를 선택해주세요")
+
+                if (type == DonationType.WHOLE_BLOOD) {
+                    Spacer(Modifier.height(14.dp))
+                    FieldLabel("헌혈량", required = true)
+                    Spacer(Modifier.height(6.dp))
+                    WholeBloodVolumeToggleRow(
+                        selectedDrawnMl = donatedVolumeMl,
+                        onSelect = { donatedVolumeMl = it; restrictionError = null }
+                    )
+                }
 
                 Spacer(Modifier.height(14.dp))
 
-                DateField(
-                    label = "헌혈일",
-                    required = true,
-                    date = donationDate,
-                    onDateChange = { donationDate = it; restrictionError = null }
-                )
+                FieldLabel(if (isOtherForm) "헌혈·기증일" else "헌혈일", required = true)
+                Spacer(Modifier.height(4.dp))
+                DateInputField(date = donationDate, onDateChange = { donationDate = it; restrictionError = null })
                 if (showErrors && donationDate == null) ErrorHint("필수 항목이에요")
                 restrictionError?.let { ErrorHint(it) }
 
@@ -1041,10 +1043,7 @@ private fun RecordFormDialog(
                             showErrors = true
                         } else {
                             val otherRecords = records.filterNot { it.id == initial?.id }
-                            // No birth date is collected in this form, so age-based rules (the
-                            // 16-17yo reduced whole-blood volume) can't apply to manually-entered
-                            // records; a scanned certificate's donatedVolumeMl still overrides this.
-                            val eligibleDate = earliestEligibleDate(t, otherRecords, null, dd)
+                            val eligibleDate = earliestEligibleDate(t, otherRecords, dd)
                             if (dd.isBefore(eligibleDate)) {
                                 restrictionError = "헌혈 제한기간이에요 (가능일: ${fmt(eligibleDate)})"
                             } else {
@@ -1207,18 +1206,43 @@ private fun CertificateCameraScreen(onCaptured: (Uri) -> Unit, onDismiss: () -> 
     }
 }
 
+/**
+ * 의료 정보: the medication and 감염병·체류 history that restrict donating, alongside the drug
+ * search that adds to the former. Both feed the next-eligible dates on 현황.
+ */
 @Composable
-private fun MyPageScreen(
-    profile: DonorProfile,
+private fun MedicalInfoScreen(
+    records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    onProfileChange: (DonorProfile) -> Unit,
-    onDeleteMedication: (MedicationRecord) -> Unit
+    health: HealthHistoryState,
+    today: LocalDate,
+    onDeleteMedication: (MedicationRecord) -> Unit,
+    onSaveDisease: (DiseaseRecord) -> Unit,
+    onDeleteDisease: (DiseaseRecord) -> Unit,
+    onSaveStay: (StayRecord) -> Unit,
+    onDeleteStay: (StayRecord) -> Unit,
+    onSaveStays: (List<StayRecord>) -> Unit
 ) {
-    PhysicalProfileCard(profile, onProfileChange = onProfileChange)
-    Spacer(Modifier.height(14.dp))
     ProhibitedDrugSearchScreen()
     Spacer(Modifier.height(14.dp))
     MedicationHistoryCard(medications = medications, onDelete = onDeleteMedication)
+    Spacer(Modifier.height(14.dp))
+    HealthHistoryCard(
+        health = health,
+        today = today,
+        onSaveDisease = onSaveDisease,
+        onDeleteDisease = onDeleteDisease,
+        onSaveStay = onSaveStay,
+        onDeleteStay = onDeleteStay
+    )
+    Spacer(Modifier.height(14.dp))
+    TimelineImportCard(
+        health = health,
+        records = records,
+        medications = medications,
+        today = today,
+        onSaveStays = onSaveStays
+    )
 }
 
 /**
@@ -1315,22 +1339,42 @@ private fun BottomNavItem(screen: Screen, active: Boolean, modifier: Modifier = 
 }
 
 @Composable
-private fun InputScreen(
+internal fun InputScreen(
     records: List<DonationRecord>,
-    onAddClick: () -> Unit,
+    onAddClick: (types: List<DonationType>) -> Unit,
     onRecordClick: (DonationRecord) -> Unit
 ) {
-    RecordListCard(records = records, onAddClick = onAddClick, onRecordClick = onRecordClick)
+    val (other, regular) = remember(records) { records.partition { it.type.isOther } }
+    RecordListCard(
+        title = "헌혈 기록",
+        emptyMessage = "아직 등록된 헌혈 기록이 없어요.\n+ 추가 버튼으로 첫 기록을 남겨보세요.",
+        records = regular,
+        onAddClick = { onAddClick(REGULAR_DONATION_TYPES) },
+        onRecordClick = onRecordClick
+    )
+    Spacer(Modifier.height(14.dp))
+    RecordListCard(
+        title = "기타",
+        emptyMessage = "백혈구성분헌혈이나 조혈모세포 기증을 했다면\n+ 추가 버튼으로 남겨보세요.",
+        records = other,
+        onAddClick = { onAddClick(OTHER_DONATION_TYPES) },
+        onRecordClick = onRecordClick
+    )
     Spacer(Modifier.height(14.dp))
     LegendCard()
 }
 
 @Composable
-private fun RecordListCard(
+internal fun RecordListCard(
+    title: String,
+    emptyMessage: String,
     records: List<DonationRecord>,
     onAddClick: () -> Unit,
     onRecordClick: (DonationRecord) -> Unit
 ) {
+    // The years the user opened or closed. The newest year starts open and the rest closed, so this
+    // holds only the exceptions - which keeps the newest year open by default as records change.
+    var toggledYears by remember { mutableStateOf(emptySet<Int>()) }
     Card(
         shape = CardShape,
         colors = CardDefaults.cardColors(containerColor = CardBg),
@@ -1344,7 +1388,7 @@ private fun RecordListCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text("헌혈 기록", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+                    Text(title, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
                     Spacer(Modifier.height(2.dp))
                     Text("${records.size}건 등록됨", fontSize = 11.sp, color = TextTertiary)
                 }
@@ -1354,7 +1398,7 @@ private fun RecordListCard(
             if (records.isEmpty()) {
                 Spacer(Modifier.height(24.dp))
                 Text(
-                    "아직 등록된 헌혈 기록이 없어요.\n+ 추가 버튼으로 첫 기록을 남겨보세요.",
+                    emptyMessage,
                     fontSize = 13.sp,
                     color = TextTertiary,
                     textAlign = TextAlign.Center,
@@ -1366,13 +1410,43 @@ private fun RecordListCard(
             } else {
                 Spacer(Modifier.height(14.dp))
                 HorizontalDivider(color = DividerColor)
-                val sorted = remember(records) { records.sortedByDescending { it.date } }
-                sorted.forEachIndexed { index, record ->
-                    RecordRow(record = record, onClick = { onRecordClick(record) })
-                    if (index != sorted.lastIndex) HorizontalDivider(color = DividerColor)
+                // Newest year first, each year's records newest first.
+                val byYear = remember(records) { records.sortedByDescending { it.date }.groupBy { it.date.year } }
+                val newestYear = byYear.keys.first()
+                byYear.entries.forEachIndexed { yearIndex, (year, yearRecords) ->
+                    val open = (year == newestYear) != (year in toggledYears)
+                    YearHeader(
+                        year = year,
+                        count = yearRecords.size,
+                        open = open,
+                        onClick = { toggledYears = if (year in toggledYears) toggledYears - year else toggledYears + year }
+                    )
+                    if (open) {
+                        yearRecords.forEachIndexed { index, record ->
+                            RecordRow(record = record, onClick = { onRecordClick(record) })
+                            if (index != yearRecords.lastIndex) HorizontalDivider(color = DividerColor)
+                        }
+                    }
+                    if (yearIndex != byYear.size - 1) HorizontalDivider(color = DividerColor)
                 }
             }
         }
+    }
+}
+
+/** A tappable "2026년 · 2건 ▲" header that opens or closes that year's records. */
+@Composable
+private fun YearHeader(year: Int, count: Int, open: Boolean, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
+            .clickable(onClickLabel = if (open) "접기" else "펼치기", onClick = onClick)
+            .padding(vertical = 10.dp, horizontal = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("${year}년 · ${count}건", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextSecondary, modifier = Modifier.weight(1f))
+        Text(if (open) "▲" else "▼", fontSize = 11.sp, color = TextTertiary)
     }
 }
 
@@ -1389,6 +1463,8 @@ private fun RecordRow(record: DonationRecord, onClick: () -> Unit) {
             record.certNumber?.let { "증서 $it" }
         ).ifEmpty { listOf("추가 정보 없음") }.joinToString(" · ")
     }
+    // Whole blood rows read like the certificate, with the amount picked in the form ("전혈헌혈 400mL").
+    val title = record.wholeBloodStatedVolumeMl()?.let { "${info.label} ${it}mL" } ?: info.label
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1403,9 +1479,10 @@ private fun RecordRow(record: DonationRecord, onClick: () -> Unit) {
         Spacer(Modifier.width(10.dp))
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(info.label, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                Text(title, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
                 Spacer(Modifier.width(8.dp))
-                Text(fmt(record.date), fontSize = 12.sp, color = TextSecondary)
+                // The year is in the YearHeader above.
+                Text(fmtShort(record.date), fontSize = 12.sp, color = TextSecondary)
             }
             Spacer(Modifier.height(2.dp))
             Text(subtitle, fontSize = 11.sp, color = TextTertiary, maxLines = 1)
@@ -1419,23 +1496,32 @@ private fun RecordRow(record: DonationRecord, onClick: () -> Unit) {
 private fun StatusScreen(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
+    health: HealthHistoryState,
     today: LocalDate,
     nextByType: Map<DonationType, IntegratedNextResult>
 ) {
-    CumulativeVolumeGauge(records)
+    CumulativeVolumeGauge(records, today)
 
     Spacer(Modifier.height(20.dp))
 
-    NextDatesCard(records, medications, nextByType)
+    NextDatesCard(records, medications, nextByType, hasHealthHistory = health.restrictions.isNotEmpty())
 
     Spacer(Modifier.height(20.dp))
+
+    if (health.restrictions.any { it.isActive(today) }) {
+        HealthRestrictionsCard(health.restrictions, today)
+        Spacer(Modifier.height(20.dp))
+    }
 
     DonationCalendarCard(records, today, nextByType)
 }
 
 @Composable
-private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
-    val totalVol = records.sumOf { it.volumeMl() }
+private fun CumulativeVolumeGauge(records: List<DonationRecord>, today: LocalDate) {
+    // The 2,160mL cap is an annual one, so only donations from the past year consume it - older
+    // donations have expired and are excluded from both the total and the per-type bar.
+    val recentRecords = records.withinAnnualWindow(today)
+    val totalVol = recentRecords.sumOf { it.volumeMl() }
     val pct = (totalVol.toDouble() / ANNUAL_LIMIT_ML * 100).coerceAtMost(100.0)
     val style = statusStyle(pct)
 
@@ -1452,7 +1538,7 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
             ) {
                 Column {
                     Text(
-                        "누적 채혈량",
+                        "최근 1년 누적 채혈량",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextSecondary
@@ -1487,7 +1573,7 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
 
             Spacer(Modifier.height(14.dp))
 
-            VolumeProgressBar(records)
+            VolumeProgressBar(recentRecords)
 
             Spacer(Modifier.height(4.dp))
             Text(
@@ -1502,15 +1588,16 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>) {
 }
 
 @Composable
-private fun NextDatesCard(
+internal fun NextDatesCard(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    nextByType: Map<DonationType, IntegratedNextResult>
+    nextByType: Map<DonationType, IntegratedNextResult>,
+    hasHealthHistory: Boolean = false
 ) {
     Text("📅 다음 헌혈 가능일", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
     Spacer(Modifier.height(10.dp))
 
-    if (records.isEmpty() && medications.isEmpty()) {
+    if (records.isEmpty() && medications.isEmpty() && !hasHealthHistory) {
         Card(
             shape = CardShape,
             colors = CardDefaults.cardColors(containerColor = CardBg),
@@ -1535,10 +1622,10 @@ private fun NextDatesCard(
             elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
         ) {
             Column(Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
-                DonationType.entries.forEachIndexed { index, type ->
+                REGULAR_DONATION_TYPES.forEachIndexed { index, type ->
                     val result = nextByType[type] ?: return@forEachIndexed
                     NextDateRow(type, result)
-                    if (index != DonationType.entries.lastIndex) {
+                    if (index != REGULAR_DONATION_TYPES.lastIndex) {
                         HorizontalDivider(color = DividerColor)
                     }
                 }
@@ -1587,7 +1674,7 @@ private fun NextDateRow(type: DonationType, result: IntegratedNextResult) {
 }
 
 @Composable
-private fun DonationCalendarCard(
+internal fun DonationCalendarCard(
     records: List<DonationRecord>,
     today: LocalDate,
     nextByType: Map<DonationType, IntegratedNextResult>
@@ -1768,7 +1855,7 @@ private fun CalendarNavButton(symbol: String, onClick: () -> Unit) {
 }
 
 @Composable
-private fun VolumeProgressBar(records: List<DonationRecord>) {
+private fun VolumeProgressBar(recentRecords: List<DonationRecord>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1777,7 +1864,7 @@ private fun VolumeProgressBar(records: List<DonationRecord>) {
             .background(ProgressTrack)
     ) {
         DonationType.entries.forEach { type ->
-            val vol = records.filter { it.type == type }.sumOf { it.volumeMl() }
+            val vol = recentRecords.filter { it.type == type }.sumOf { it.volumeMl() }
             val frac = (vol.toFloat() / ANNUAL_LIMIT_ML).coerceIn(0f, 1f)
             Box(
                 Modifier
@@ -1786,18 +1873,18 @@ private fun VolumeProgressBar(records: List<DonationRecord>) {
                     .background(TYPE_INFO.getValue(type).color)
             )
         }
-        val used = records.sumOf { it.volumeMl() }
+        val used = recentRecords.sumOf { it.volumeMl() }
         val usedFrac = (used.toFloat() / ANNUAL_LIMIT_ML).coerceIn(0f, 1f)
         val remaining = (1f - usedFrac).coerceAtLeast(0.0001f)
         Box(Modifier.weight(remaining).fillMaxHeight())
     }
 }
 
-// Fixed per-column widths (rather than Row weight()) so cells like "350~430mL" always lay out
+// Fixed per-column widths (rather than Row weight()) so cells like "조혈모세포 기증" always lay out
 // on one line instead of wrapping awkwardly on narrow phone screens; sized generously for the
 // longest real value in each column. horizontalScroll on the table is a safety net for very
 // narrow screens or larger accessibility font scales, rather than clipping or wrapping.
-private val LEGEND_TYPE_COL = 88.dp
+private val LEGEND_TYPE_COL = 96.dp
 private val LEGEND_VOLUME_COL = 84.dp
 private val LEGEND_COUNT_COL = 56.dp
 private val LEGEND_INTERVAL_COL = 76.dp
@@ -1821,10 +1908,10 @@ private fun LegendCell(
 }
 
 @Composable
-private fun LegendCard() {
+internal fun LegendCard() {
     // Material3 Card wraps its content, and nothing inside this one stretches - the table is
     // built from fixed-width columns - so without fillMaxWidth the card collapses to the table's
-    // intrinsic width (304.dp of columns + padding) and sits narrower than its sibling cards on
+    // intrinsic width (312.dp of columns + padding) and sits narrower than its sibling cards on
     // any screen wider than a small phone.
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -1851,10 +1938,9 @@ private fun LegendCard() {
                         val info = TYPE_INFO.getValue(type)
                         Row(Modifier.padding(vertical = 6.dp)) {
                             LegendCell(info.label, LEGEND_TYPE_COL, TextPrimary)
-                            val volumeText = if (type == DonationType.WHOLE_BLOOD) "350~430mL" else "${info.volumeMl}mL"
-                            LegendCell(volumeText, LEGEND_VOLUME_COL, info.color, bold = true)
+                            LegendCell("${info.volumeMl}mL", LEGEND_VOLUME_COL, info.color, bold = true)
                             LegendCell(info.yearMax?.let { "${it}회" } ?: "없음", LEGEND_COUNT_COL, TextPrimary)
-                            LegendCell("${info.gapDays / 7}주(${info.gapDays}일)", LEGEND_INTERVAL_COL, TextPrimary)
+                            LegendCell(info.intervalLegendText, LEGEND_INTERVAL_COL, TextPrimary)
                         }
                         if (index != DonationType.entries.lastIndex) HorizontalDivider(color = DividerColor)
                     }
@@ -1863,7 +1949,13 @@ private fun LegendCard() {
 
             Spacer(Modifier.height(10.dp))
             Text(
-                "※ 전혈헌혈량은 만 16~17세 350mL, 만 18세 이상 430mL",
+                "※ 전혈헌혈은 320mL·400mL 모두 430mL로 계산합니다.",
+                fontSize = 11.sp,
+                color = TextTertiary,
+                lineHeight = 17.sp
+            )
+            Text(
+                "※ 조혈모세포 채혈량은 알 수 없어 최소 기준인 30mL로 설정했습니다.",
                 fontSize = 11.sp,
                 color = TextTertiary,
                 lineHeight = 17.sp

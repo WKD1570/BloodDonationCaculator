@@ -11,6 +11,13 @@ const val WHOLE_BLOOD_ANNUAL_LIMIT = 5
 const val PLATELET_ANNUAL_LIMIT = 24
 const val ANNUAL_LIMIT_ML = 2160
 
+/**
+ * How long a donation keeps counting toward the annual count/volume limits, matching the +366일
+ * expiry [calcNext] uses: a donation is still counted on the 365th day after it, and no longer
+ * counted once 366 days have passed.
+ */
+const val ANNUAL_WINDOW_DAYS = 366L
+
 data class TypeInfo(
     val type: DonationType,
     val label: String,
@@ -19,36 +26,71 @@ data class TypeInfo(
     val border: Color
 ) {
     val volumeMl: Int get() = type.defaultVolumeMl
-    val gapDays: Int get() = type.minIntervalDays
+    val interval: Period get() = type.minInterval
+
+    /** The interval as the calculator's reasons word it: "56일", or "6개월" for a month-based one. */
+    val intervalText: String
+        get() = if (interval.months > 0) "${interval.months}개월" else "${interval.days}일"
+
+    /** The interval as the legend table words it: "8주(56일)", or "6개월" for a month-based one. */
+    val intervalLegendText: String
+        get() = if (interval.months > 0) intervalText else "${interval.days / 7}주($intervalText)"
+
     val yearMax: Int?
         get() = when (type) {
             DonationType.WHOLE_BLOOD -> WHOLE_BLOOD_ANNUAL_LIMIT
             DonationType.PLATELET -> PLATELET_ANNUAL_LIMIT
-            DonationType.PLASMA -> null
+            DonationType.PLASMA, DonationType.WHITE_BLOOD_CELL, DonationType.STEM_CELL -> null
         }
 }
 
 val TYPE_INFO: Map<DonationType, TypeInfo> = mapOf(
     DonationType.WHOLE_BLOOD to TypeInfo(DonationType.WHOLE_BLOOD, "전혈헌혈", Color(0xFFDC2626), Color(0xFFFEF2F2), Color(0xFFFCA5A5)),
     DonationType.PLASMA to TypeInfo(DonationType.PLASMA, "혈장성분헌혈", Color(0xFFEAB308), Color(0xFFFEFCE8), Color(0xFFFDE68A)),
-    DonationType.PLATELET to TypeInfo(DonationType.PLATELET, "혈소판성분헌혈", Color(0xFF38BDF8), Color(0xFFF0F9FF), Color(0xFFBAE6FD))
+    DonationType.PLATELET to TypeInfo(DonationType.PLATELET, "혈소판성분헌혈", Color(0xFF38BDF8), Color(0xFFF0F9FF), Color(0xFFBAE6FD)),
+    // The purple and green shades were picked to stay distinguishable from the three colors above for
+    // color-blind readers too (all pairs, light and dark), and the green from the 여유/이미 가능 green.
+    DonationType.WHITE_BLOOD_CELL to TypeInfo(DonationType.WHITE_BLOOD_CELL, "백혈구성분헌혈", Color(0xFFA855F7), Color(0xFFFAF5FF), Color(0xFFD8B4FE)),
+    DonationType.STEM_CELL to TypeInfo(DonationType.STEM_CELL, "조혈모세포 기증", Color(0xFF4ADE80), Color(0xFFF0FDF4), Color(0xFF86EFAC))
 )
 
 fun typeSubtitle(type: DonationType): String {
     val info = TYPE_INFO.getValue(type)
-    val weeks = info.gapDays / 7
+    val interval = if (info.interval.months > 0) info.intervalText else "${info.interval.days / 7}주"
     val yearText = info.yearMax?.let { "연 ${it}회" } ?: "횟수제한 없음"
-    return "1회 ${info.volumeMl}mL · 간격 ${weeks}주 · $yearText"
+    return "1회 ${info.volumeMl}mL · 간격 $interval · $yearText"
 }
 
-/** 대한적십자사 기준: 전혈헌혈은 만 16~17세는 350mL, 만 18세 이상은 430mL을 채혈한다. */
-fun actualVolumeMl(type: DonationType, age: Int?): Int =
-    if (type == DonationType.WHOLE_BLOOD && age != null && age in 16..17) 350 else type.defaultVolumeMl
+/** 대한적십자사 기준: whole blood donations draw an extra 30mL beyond the stated amount for diagnostic testing. */
+const val WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML = 30
 
-private fun DonationRecord.ageAtDonation(): Int? = birthDate?.let { Period.between(it, date).years }
+/** The whole blood amounts a donor can give (전혈 320mL/400mL), as stated on the certificate, before the diagnostic draw. */
+val WHOLE_BLOOD_STATED_VOLUMES_ML = listOf(320, 400)
 
-/** Uses the certificate-stated [DonationRecord.donatedVolumeMl] when known, otherwise the age-based default. */
-fun DonationRecord.volumeMl(): Int = donatedVolumeMl ?: actualVolumeMl(type, ageAtDonation())
+/**
+ * What this donation counts toward the annual 2,160mL cap. Whole blood always counts the standard
+ * 430mL, a 320mL donation the same as a 400mL one; other types use the certificate-stated
+ * [DonationRecord.donatedVolumeMl] when known, otherwise their standard volume.
+ */
+fun DonationRecord.volumeMl(): Int =
+    if (type == DonationType.WHOLE_BLOOD) type.defaultVolumeMl else donatedVolumeMl ?: type.defaultVolumeMl
+
+/**
+ * The whole blood amount as stated on the certificate (320 or 400mL) - the saved drawn volume
+ * without the diagnostic draw, or the standard 400mL for a record saved without one - which is how
+ * the volume picker and the record list show it. Null for plasma/platelet, whose counted volume
+ * isn't the amount printed on their certificate.
+ */
+fun DonationRecord.wholeBloodStatedVolumeMl(): Int? =
+    if (type == DonationType.WHOLE_BLOOD) (donatedVolumeMl ?: type.defaultVolumeMl) - WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML else null
+
+/**
+ * The records that still count toward the annual limits as of [today] — i.e. the donations from
+ * the past year ([ANNUAL_WINDOW_DAYS]). Donations older than that have expired and no longer
+ * consume any of the annual 2,160mL allowance.
+ */
+fun List<DonationRecord>.withinAnnualWindow(today: LocalDate): List<DonationRecord> =
+    filter { it.date.plusDays(ANNUAL_WINDOW_DAYS).isAfter(today) }
 
 data class DDay(val text: String, val color: Color)
 
@@ -94,14 +136,13 @@ fun calcNext(
     type: DonationType,
     records: List<DonationRecord>,
     today: LocalDate,
-    donorAge: Int? = null,
     asOfDate: LocalDate = today
 ): NextResult {
     val info = TYPE_INFO.getValue(type)
     val items = sortedByDate(records).filter { !it.date.isAfter(asOfDate) }
     val ofType = items.filter { it.type == type }
     val totalVol = items.sumOf { it.volumeMl() }
-    val nextVolumeMl = actualVolumeMl(type, donorAge)
+    val nextVolumeMl = info.volumeMl
 
     var nextDate = today
     val reasons = mutableListOf<Reason>()
@@ -110,14 +151,14 @@ fun calcNext(
     // e.g. a whole blood donation imposes 56 days on the next plasma/platelet donation, and a plasma or
     // platelet donation likewise imposes its own 14 days on the next donation of any other type.
     if (items.isNotEmpty()) {
-        val binding = items.maxBy { TYPE_INFO.getValue(it.type).let { i -> it.date.plusDays(i.gapDays.toLong()) } }
+        val binding = items.maxBy { it.date.plus(it.type.minInterval) }
         val bindingInfo = TYPE_INFO.getValue(binding.type)
-        val gapDate = binding.date.plusDays(bindingInfo.gapDays.toLong())
+        val gapDate = binding.date.plus(bindingInfo.interval)
         if (gapDate.isAfter(today)) {
             if (gapDate.isAfter(nextDate)) nextDate = gapDate
             reasons.add(
                 Reason(
-                    "마지막 ${bindingInfo.label} 후 ${bindingInfo.gapDays}일 간격 필요 (${fmtShort(binding.date)})",
+                    "마지막 ${bindingInfo.label} 후 ${bindingInfo.intervalText} 간격 필요 (${fmtShort(binding.date)})",
                     bindingInfo.color
                 )
             )
@@ -172,7 +213,11 @@ private val DISTANT_PAST: LocalDate = LocalDate.of(1, 1, 1)
  * the donation being placed/edited), ignoring today's date entirely — i.e. purely the
  * interval/annual-count/annual-volume constraints from [calcNext], with no "at least today" floor.
  * Only records at or before [asOfDate] can constrain it, so a record dated after [asOfDate] (e.g.
- * a later donation being backfilled before an earlier one) is correctly ignored.
+ * a later donation being backfilled before an earlier one) is correctly ignored. A
+ * [DonationType.STEM_CELL] donation is never restricted: it's arranged by the transplant center
+ * rather than the blood center, so blood donation limits don't apply to it (though it restricts the
+ * blood donations after it).
  */
-fun earliestEligibleDate(type: DonationType, records: List<DonationRecord>, ageAtDate: Int?, asOfDate: LocalDate): LocalDate =
-    calcNext(type, records, DISTANT_PAST, ageAtDate, asOfDate).nextDate
+fun earliestEligibleDate(type: DonationType, records: List<DonationRecord>, asOfDate: LocalDate): LocalDate =
+    if (type == DonationType.STEM_CELL) DISTANT_PAST
+    else calcNext(type, records, DISTANT_PAST, asOfDate).nextDate
