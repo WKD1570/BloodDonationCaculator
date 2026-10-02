@@ -67,22 +67,22 @@ const val WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML = 30
 /** The whole blood amounts a donor can give (전혈 320mL/400mL), as stated on the certificate, before the diagnostic draw. */
 val WHOLE_BLOOD_STATED_VOLUMES_ML = listOf(320, 400)
 
-/** 대한적십자사 기준: 전혈헌혈은 만 16~17세는 350mL, 만 18세 이상은 430mL을 채혈한다. */
-fun actualVolumeMl(type: DonationType, age: Int?): Int =
-    if (type == DonationType.WHOLE_BLOOD && age != null && age in 16..17) 350 else type.defaultVolumeMl
-
-private fun DonationRecord.ageAtDonation(): Int? = birthDate?.let { Period.between(it, date).years }
-
-/** Uses the certificate-stated [DonationRecord.donatedVolumeMl] when known, otherwise the age-based default. */
-fun DonationRecord.volumeMl(): Int = donatedVolumeMl ?: actualVolumeMl(type, ageAtDonation())
+/**
+ * What this donation counts toward the annual 2,160mL cap. Whole blood always counts the standard
+ * 430mL, a 320mL donation the same as a 400mL one; other types use the certificate-stated
+ * [DonationRecord.donatedVolumeMl] when known, otherwise their standard volume.
+ */
+fun DonationRecord.volumeMl(): Int =
+    if (type == DonationType.WHOLE_BLOOD) type.defaultVolumeMl else donatedVolumeMl ?: type.defaultVolumeMl
 
 /**
- * The whole blood amount as stated on the certificate (320 or 400mL) - [volumeMl] without the
- * diagnostic draw - which is how the volume picker and the record list show it. Null for
- * plasma/platelet, whose counted volume isn't the amount printed on their certificate.
+ * The whole blood amount as stated on the certificate (320 or 400mL) - the saved drawn volume
+ * without the diagnostic draw, or the standard 400mL for a record saved without one - which is how
+ * the volume picker and the record list show it. Null for plasma/platelet, whose counted volume
+ * isn't the amount printed on their certificate.
  */
 fun DonationRecord.wholeBloodStatedVolumeMl(): Int? =
-    if (type == DonationType.WHOLE_BLOOD) volumeMl() - WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML else null
+    if (type == DonationType.WHOLE_BLOOD) (donatedVolumeMl ?: type.defaultVolumeMl) - WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML else null
 
 /**
  * The records that still count toward the annual limits as of [today] — i.e. the donations from
@@ -131,22 +131,18 @@ private fun sortedByDate(records: List<DonationRecord>): List<DonationRecord> = 
  * explicit, earlier [asOfDate] when checking a specific candidate date - e.g. from
  * [earliestEligibleDate] - so a record dated *after* that candidate doesn't wrongly bind it with
  * a cooldown/count/volume constraint that (as of the candidate's date) hasn't happened yet.
- * @param nextVolumeMl What the next donation draws, checked against the annual 2,160mL cap.
- * Defaults to the standard volume for [type] at [donorAge]; pass the chosen volume when it's known
- * (e.g. 350mL for a 320mL whole blood donation).
  */
 fun calcNext(
     type: DonationType,
     records: List<DonationRecord>,
     today: LocalDate,
-    donorAge: Int? = null,
-    asOfDate: LocalDate = today,
-    nextVolumeMl: Int = actualVolumeMl(type, donorAge)
+    asOfDate: LocalDate = today
 ): NextResult {
     val info = TYPE_INFO.getValue(type)
     val items = sortedByDate(records).filter { !it.date.isAfter(asOfDate) }
     val ofType = items.filter { it.type == type }
     val totalVol = items.sumOf { it.volumeMl() }
+    val nextVolumeMl = info.volumeMl
 
     var nextDate = today
     val reasons = mutableListOf<Reason>()
@@ -217,18 +213,11 @@ private val DISTANT_PAST: LocalDate = LocalDate.of(1, 1, 1)
  * the donation being placed/edited), ignoring today's date entirely — i.e. purely the
  * interval/annual-count/annual-volume constraints from [calcNext], with no "at least today" floor.
  * Only records at or before [asOfDate] can constrain it, so a record dated after [asOfDate] (e.g.
- * a later donation being backfilled before an earlier one) is correctly ignored. [volumeMl] is what
- * this donation draws, checked against the annual 2,160mL cap; it defaults to the standard volume
- * for [type] at [ageAtDate]. A [DonationType.STEM_CELL] donation is never restricted: it's arranged by
- * the transplant center rather than the blood center, so blood donation limits don't apply to it
- * (though it restricts the blood donations after it).
+ * a later donation being backfilled before an earlier one) is correctly ignored. A
+ * [DonationType.STEM_CELL] donation is never restricted: it's arranged by the transplant center
+ * rather than the blood center, so blood donation limits don't apply to it (though it restricts the
+ * blood donations after it).
  */
-fun earliestEligibleDate(
-    type: DonationType,
-    records: List<DonationRecord>,
-    ageAtDate: Int?,
-    asOfDate: LocalDate,
-    volumeMl: Int = actualVolumeMl(type, ageAtDate)
-): LocalDate =
+fun earliestEligibleDate(type: DonationType, records: List<DonationRecord>, asOfDate: LocalDate): LocalDate =
     if (type == DonationType.STEM_CELL) DISTANT_PAST
-    else calcNext(type, records, DISTANT_PAST, ageAtDate, asOfDate, volumeMl).nextDate
+    else calcNext(type, records, DISTANT_PAST, asOfDate).nextDate

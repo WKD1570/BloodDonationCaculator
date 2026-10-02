@@ -14,7 +14,6 @@ import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
 import com.example.myapplication.model.MedicationRecord
-import com.example.myapplication.model.currentAge
 import java.time.LocalDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -74,7 +73,7 @@ class DonationViewModel(
             records = records,
             medications = medications,
             today = today,
-            nextByType = nextEligibleByType(records, medications, today, profile.currentAge(today))
+            nextByType = nextEligibleByType(records, medications, today)
         )
     }.stateIn(
         scope = viewModelScope,

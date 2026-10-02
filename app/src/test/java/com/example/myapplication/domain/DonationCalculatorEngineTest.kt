@@ -12,7 +12,7 @@ import org.junit.Test
 class DonationCalculatorEngineTest {
 
     @Test
-    fun `volumeMl uses the recorded donated volume when present`() {
+    fun `volumeMl counts a 400mL whole blood donation as 430mL`() {
         val record = DonationRecord(
             id = 1,
             type = DonationType.WHOLE_BLOOD,
@@ -23,7 +23,18 @@ class DonationCalculatorEngineTest {
     }
 
     @Test
-    fun `volumeMl falls back to the standard age-based default when no recorded volume`() {
+    fun `volumeMl counts a 320mL whole blood donation as 430mL too`() {
+        val record = DonationRecord(
+            id = 1,
+            type = DonationType.WHOLE_BLOOD,
+            date = LocalDate.of(2026, 7, 21),
+            donatedVolumeMl = 350
+        )
+        assertEquals(430, record.volumeMl())
+    }
+
+    @Test
+    fun `volumeMl counts a whole blood donation saved without a volume as 430mL`() {
         val record = DonationRecord(
             id = 1,
             type = DonationType.WHOLE_BLOOD,
@@ -34,26 +45,14 @@ class DonationCalculatorEngineTest {
     }
 
     @Test
-    fun `volumeMl falls back to the reduced age-based default for 16-17 year olds`() {
+    fun `volumeMl counts a 16-17 year old's whole blood donation as 430mL too`() {
         val record = DonationRecord(
             id = 1,
             type = DonationType.WHOLE_BLOOD,
             date = LocalDate.of(2026, 7, 21),
             birthDate = LocalDate.of(2009, 8, 1)
         )
-        assertEquals(350, record.volumeMl())
-    }
-
-    @Test
-    fun `recorded donated volume overrides the age-based default`() {
-        val record = DonationRecord(
-            id = 1,
-            type = DonationType.WHOLE_BLOOD,
-            date = LocalDate.of(2026, 7, 21),
-            birthDate = LocalDate.of(1990, 1, 1),
-            donatedVolumeMl = 350
-        )
-        assertEquals(350, record.volumeMl())
+        assertEquals(430, record.volumeMl())
     }
 
     @Test
@@ -62,7 +61,7 @@ class DonationCalculatorEngineTest {
         // Plasma donation on 2026-07-03 - the whole blood record hasn't happened yet as of 07-03.
         val wholeBlood = DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 7, 21))
         val candidateDate = LocalDate.of(2026, 7, 3)
-        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(wholeBlood), null, candidateDate)
+        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(wholeBlood), candidateDate)
         assertFalse(candidateDate.isBefore(eligibleDate))
     }
 
@@ -70,7 +69,7 @@ class DonationCalculatorEngineTest {
     fun `earliestEligibleDate still blocks a donation within the interval of a preceding donation`() {
         val plasma = DonationRecord(id = 1, type = DonationType.PLASMA, date = LocalDate.of(2026, 7, 21))
         val candidateDate = LocalDate.of(2026, 7, 25)
-        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(plasma), null, candidateDate)
+        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(plasma), candidateDate)
         assertEquals(LocalDate.of(2026, 8, 4), eligibleDate)
         assertTrue(candidateDate.isBefore(eligibleDate))
     }
@@ -80,7 +79,7 @@ class DonationCalculatorEngineTest {
         val early = DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 1, 1))
         val later = DonationRecord(id = 2, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 4, 10))
         val candidateDate = LocalDate.of(2026, 1, 20)
-        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(early, later), null, candidateDate)
+        val eligibleDate = earliestEligibleDate(DonationType.PLASMA, listOf(early, later), candidateDate)
         // Bound only by `early` (Jan 1 + 56 days); `later` (Apr 10) postdates the candidate and must not apply.
         assertEquals(LocalDate.of(2026, 2, 26), eligibleDate)
     }
@@ -135,22 +134,21 @@ class DonationCalculatorEngineTest {
     )
 
     @Test
-    fun `earliestEligibleDate lets a 320mL whole blood donation fit under the annual volume cap`() {
-        // 1,765 + 350mL (320mL + 30mL test draw) = 2,115mL, within 2,160mL - only the 56-day
-        // interval after the 07-01 donation binds.
-        val eligibleDate = earliestEligibleDate(
-            DonationType.WHOLE_BLOOD, nearAnnualVolumeCap, null, LocalDate.of(2026, 9, 30), volumeMl = 350
-        )
-        assertEquals(LocalDate.of(2026, 8, 26), eligibleDate)
+    fun `earliestEligibleDate blocks a whole blood donation that would exceed the annual volume cap`() {
+        // 1,765 + 430mL = 2,195mL, over 2,160mL - blocked until the oldest donation (2025-11-01)
+        // expires 366 days later.
+        val eligibleDate = earliestEligibleDate(DonationType.WHOLE_BLOOD, nearAnnualVolumeCap, LocalDate.of(2026, 9, 30))
+        assertEquals(LocalDate.of(2026, 11, 2), eligibleDate)
     }
 
     @Test
-    fun `earliestEligibleDate blocks a 400mL whole blood donation that would exceed the annual volume cap`() {
-        // 1,765 + 430mL (400mL + 30mL test draw) = 2,195mL, over 2,160mL - blocked until the oldest
-        // donation (2025-11-01) expires 366 days later.
-        val eligibleDate = earliestEligibleDate(
-            DonationType.WHOLE_BLOOD, nearAnnualVolumeCap, null, LocalDate.of(2026, 9, 30), volumeMl = 430
-        )
+    fun `320mL whole blood donations count 430mL toward the annual volume cap`() {
+        // The same donations given as 320mL still total 1,765mL, so the next whole blood donation is
+        // blocked just the same. Counted at 350mL they'd total 1,445mL and leave room for it.
+        val records = nearAnnualVolumeCap.map {
+            if (it.type == DonationType.WHOLE_BLOOD) it.copy(donatedVolumeMl = 350) else it
+        }
+        val eligibleDate = earliestEligibleDate(DonationType.WHOLE_BLOOD, records, LocalDate.of(2026, 9, 30))
         assertEquals(LocalDate.of(2026, 11, 2), eligibleDate)
     }
 
@@ -197,8 +195,8 @@ class DonationCalculatorEngineTest {
         assertEquals(LocalDate.of(2026, 9, 15), result.nextDate)
     }
 
-    // 4 whole blood donations (430mL each) = 1,720mL: on its own, a 400mL donation (430mL drawn) on
-    // 2026-09-30 still fits under the 2,160mL cap (2,150mL), and only the 56-day interval to 08-26 binds.
+    // 4 whole blood donations (430mL each) = 1,720mL: on its own, another whole blood donation (430mL)
+    // on 2026-09-30 still fits under the 2,160mL cap (2,150mL), and only the 56-day interval to 08-26 binds.
     private val fourWholeBloodDonations = listOf(
         DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2025, 11, 1)),
         DonationRecord(id = 2, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 1, 1)),
@@ -208,15 +206,15 @@ class DonationCalculatorEngineTest {
 
     @Test
     fun `white blood cell donations count 90mL each toward the annual volume cap`() {
-        // 1,720 + 2 x 90 + 350mL (a 320mL donation) = 2,250mL, over 2,160mL - blocked until the
-        // 2025-11-01 donation expires. Counted at plasma's 45mL they'd total exactly 2,160mL and pass.
+        // 1,720 + 4 x 90 + a 90mL platelet donation = 2,170mL, over 2,160mL - blocked until the
+        // 2025-11-01 donation expires. Counted at plasma's 45mL they'd total 1,990mL and pass.
         val records = fourWholeBloodDonations + listOf(
-            DonationRecord(id = 5, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 8, 27)),
-            DonationRecord(id = 6, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 9, 10))
+            DonationRecord(id = 5, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 5, 1)),
+            DonationRecord(id = 6, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 5, 15)),
+            DonationRecord(id = 7, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 8, 27)),
+            DonationRecord(id = 8, type = DonationType.WHITE_BLOOD_CELL, date = LocalDate.of(2026, 9, 10))
         )
-        val eligibleDate = earliestEligibleDate(
-            DonationType.WHOLE_BLOOD, records, null, LocalDate.of(2026, 9, 30), volumeMl = 350
-        )
+        val eligibleDate = earliestEligibleDate(DonationType.PLATELET, records, LocalDate.of(2026, 9, 30))
         assertEquals(LocalDate.of(2026, 11, 2), eligibleDate)
     }
 
@@ -226,9 +224,7 @@ class DonationCalculatorEngineTest {
         // stem cell donation's own 6-month block (to 2026-08-01) has already passed.
         val records = fourWholeBloodDonations +
             DonationRecord(id = 5, type = DonationType.STEM_CELL, date = LocalDate.of(2026, 2, 1))
-        val eligibleDate = earliestEligibleDate(
-            DonationType.WHOLE_BLOOD, records, null, LocalDate.of(2026, 9, 30), volumeMl = 430
-        )
+        val eligibleDate = earliestEligibleDate(DonationType.WHOLE_BLOOD, records, LocalDate.of(2026, 9, 30))
         assertEquals(LocalDate.of(2026, 11, 2), eligibleDate)
     }
 
@@ -237,7 +233,7 @@ class DonationCalculatorEngineTest {
         // 9 days after a whole blood donation, which blocks other blood donations for 56 days.
         val wholeBlood = DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 9, 1))
         val candidateDate = LocalDate.of(2026, 9, 10)
-        val eligibleDate = earliestEligibleDate(DonationType.STEM_CELL, listOf(wholeBlood), null, candidateDate)
+        val eligibleDate = earliestEligibleDate(DonationType.STEM_CELL, listOf(wholeBlood), candidateDate)
         assertFalse(candidateDate.isBefore(eligibleDate))
     }
 }

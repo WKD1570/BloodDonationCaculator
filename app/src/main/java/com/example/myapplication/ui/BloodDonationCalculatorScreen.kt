@@ -108,7 +108,6 @@ import com.example.myapplication.domain.Reason
 import com.example.myapplication.domain.TYPE_INFO
 import com.example.myapplication.domain.WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML
 import com.example.myapplication.domain.WHOLE_BLOOD_STATED_VOLUMES_ML
-import com.example.myapplication.domain.actualVolumeMl
 import com.example.myapplication.domain.donationTypeEnum
 import com.example.myapplication.domain.drawnVolumeMl
 import com.example.myapplication.domain.earliestEligibleDate
@@ -760,10 +759,11 @@ internal fun RecordFormDialog(
     var donationDate by remember { mutableStateOf(initial?.date) }
     var certNumber by remember { mutableStateOf(initial?.certNumber ?: "") }
     var centerName by remember { mutableStateOf(initial?.centerName ?: "") }
-    // A whole blood record opens on the volume it's counted at - even one saved before the volume
-    // could be picked, which has no donatedVolumeMl - so the volume picker shows it selected.
+    // A whole blood record opens on the amount it was saved with - or the standard 400mL for one
+    // saved before the amount could be picked, which has no donatedVolumeMl - so the volume picker
+    // always shows one selected.
     var donatedVolumeMl by remember {
-        mutableStateOf(initial?.let { if (it.type == DonationType.WHOLE_BLOOD) it.volumeMl() else it.donatedVolumeMl })
+        mutableStateOf(initial?.let { it.donatedVolumeMl ?: if (it.type == DonationType.WHOLE_BLOOD) it.type.defaultVolumeMl else null })
     }
     var showErrors by remember { mutableStateOf(false) }
     var restrictionError by remember { mutableStateOf<String?>(null) }
@@ -978,12 +978,7 @@ internal fun RecordFormDialog(
                             showErrors = true
                         } else {
                             val otherRecords = records.filterNot { it.id == initial?.id }
-                            // Whole blood is checked against the annual volume cap at the amount
-                            // picked above, so a 320mL donation isn't rejected as if it were 400mL;
-                            // other types use their standard volume. (No birth date is collected in
-                            // this form, so the 16-17yo age-based default can't apply.)
-                            val volumeMl = donatedVolumeMl?.takeIf { t == DonationType.WHOLE_BLOOD } ?: actualVolumeMl(t, null)
-                            val eligibleDate = earliestEligibleDate(t, otherRecords, null, dd, volumeMl)
+                            val eligibleDate = earliestEligibleDate(t, otherRecords, dd)
                             if (dd.isBefore(eligibleDate)) {
                                 restrictionError = "헌혈 제한기간이에요 (가능일: ${fmt(eligibleDate)})"
                             } else {
@@ -1788,7 +1783,7 @@ private fun VolumeProgressBar(recentRecords: List<DonationRecord>) {
     }
 }
 
-// Fixed per-column widths (rather than Row weight()) so cells like "350~430mL" always lay out
+// Fixed per-column widths (rather than Row weight()) so cells like "조혈모세포 기증" always lay out
 // on one line instead of wrapping awkwardly on narrow phone screens; sized generously for the
 // longest real value in each column. horizontalScroll on the table is a safety net for very
 // narrow screens or larger accessibility font scales, rather than clipping or wrapping.
@@ -1846,8 +1841,7 @@ internal fun LegendCard() {
                         val info = TYPE_INFO.getValue(type)
                         Row(Modifier.padding(vertical = 6.dp)) {
                             LegendCell(info.label, LEGEND_TYPE_COL, TextPrimary)
-                            val volumeText = if (type == DonationType.WHOLE_BLOOD) "350~430mL" else "${info.volumeMl}mL"
-                            LegendCell(volumeText, LEGEND_VOLUME_COL, info.color, bold = true)
+                            LegendCell("${info.volumeMl}mL", LEGEND_VOLUME_COL, info.color, bold = true)
                             LegendCell(info.yearMax?.let { "${it}회" } ?: "없음", LEGEND_COUNT_COL, TextPrimary)
                             LegendCell(info.intervalLegendText, LEGEND_INTERVAL_COL, TextPrimary)
                         }
@@ -1858,7 +1852,7 @@ internal fun LegendCard() {
 
             Spacer(Modifier.height(10.dp))
             Text(
-                "※ 전혈헌혈량은 만 16~17세 350mL, 만 18세 이상 430mL",
+                "※ 전혈헌혈은 320mL·400mL 모두 430mL로 계산합니다.",
                 fontSize = 11.sp,
                 color = TextTertiary,
                 lineHeight = 17.sp

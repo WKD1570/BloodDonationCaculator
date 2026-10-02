@@ -71,10 +71,9 @@ private val PermanentReasonColor = Color(0xFFE11D48)
 fun nextEligibleByType(
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    today: LocalDate,
-    donorAge: Int? = null
+    today: LocalDate
 ): Map<DonationType, IntegratedNextResult> =
-    REGULAR_DONATION_TYPES.associateWith { integratedNextEligible(it, records, medications, today, donorAge) }
+    REGULAR_DONATION_TYPES.associateWith { integratedNextEligible(it, records, medications, today) }
 
 /**
  * Combines the donation-history constraint ("Date A", from [calcNext]) with the medication-history
@@ -88,10 +87,9 @@ fun integratedNextEligible(
     type: DonationType,
     records: List<DonationRecord>,
     medications: List<MedicationRecord>,
-    today: LocalDate,
-    donorAge: Int? = null
+    today: LocalDate
 ): IntegratedNextResult {
-    val fromDonations = calcNext(type, records, today, donorAge)
+    val fromDonations = calcNext(type, records, today)
 
     return when (val constraint = medicationConstraint(medications)) {
         is MedicationConstraint.Permanent -> IntegratedNextResult.PermanentlyProhibited(

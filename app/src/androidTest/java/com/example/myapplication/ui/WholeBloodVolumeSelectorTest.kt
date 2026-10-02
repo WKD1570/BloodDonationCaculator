@@ -90,7 +90,7 @@ class WholeBloodVolumeSelectorTest {
 
     // 4 whole blood donations (430mL each) + 1 plasma donation (45mL) = 1,765mL in the past year, the
     // last one 91 days ago: a whole blood donation today is only limited by the 2,160mL annual cap,
-    // which a 320mL donation (350mL drawn) fits under and a 400mL one (430mL drawn) doesn't.
+    // which it goes over at 430mL whether it's 320mL or 400mL.
     private fun nearAnnualVolumeCap(): List<DonationRecord> {
         val today = LocalDate.now()
         return listOf(
@@ -103,13 +103,14 @@ class WholeBloodVolumeSelectorTest {
     }
 
     @Test
-    fun a320mLDonationThatFitsUnderTheAnnualVolumeCapSaves() {
+    fun a320mLDonationOverTheAnnualVolumeCapIsBlocked() {
         showForm(records = nearAnnualVolumeCap())
         composeTestRule.onNodeWithText("전혈헌혈").performClick()
         composeTestRule.onNodeWithText("320mL").performClick()
 
         saveWithTodaysDate()
-        assertEquals(350, saved?.donatedVolumeMl)
+        assertNull(saved)
+        composeTestRule.onNodeWithText("헌혈 제한기간이에요", substring = true).assertIsDisplayed()
     }
 
     @Test
@@ -128,5 +129,12 @@ class WholeBloodVolumeSelectorTest {
         // have been counted at the standard 430mL.
         showForm(DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 7, 21)))
         composeTestRule.onNodeWithText("400mL").assertIsSelected()
+    }
+
+    @Test
+    fun wholeBloodRecordSavedAs320mLOpensOn320mL() {
+        // It counts 430mL like a 400mL donation, but the picker still shows the amount it was given as.
+        showForm(DonationRecord(id = 1, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2026, 7, 21), donatedVolumeMl = 350))
+        composeTestRule.onNodeWithText("320mL").assertIsSelected()
     }
 }
