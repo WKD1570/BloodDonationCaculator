@@ -259,6 +259,7 @@ fun BloodDonationCalculatorScreen(
                             onRecordClick = { record -> formMode = RecordFormMode.Edit(record) }
                         )
                         Screen.MEDICAL -> MedicalInfoScreen(
+                            records = records,
                             medications = state.medications,
                             health = state.health,
                             today = today,
@@ -266,7 +267,8 @@ fun BloodDonationCalculatorScreen(
                             onSaveDisease = viewModel::saveDisease,
                             onDeleteDisease = viewModel::deleteDisease,
                             onSaveStay = viewModel::saveStay,
-                            onDeleteStay = viewModel::deleteStay
+                            onDeleteStay = viewModel::deleteStay,
+                            onSaveStays = viewModel::saveStays
                         )
                         Screen.MYPAGE -> PhysicalProfileCard(profile, onProfileChange = viewModel::updateProfile)
                     }
@@ -1156,6 +1158,7 @@ private fun CertificateCameraScreen(onCaptured: (Uri) -> Unit, onDismiss: () -> 
  */
 @Composable
 private fun MedicalInfoScreen(
+    records: List<DonationRecord>,
     medications: List<MedicationRecord>,
     health: HealthHistoryState,
     today: LocalDate,
@@ -1163,7 +1166,8 @@ private fun MedicalInfoScreen(
     onSaveDisease: (DiseaseRecord) -> Unit,
     onDeleteDisease: (DiseaseRecord) -> Unit,
     onSaveStay: (StayRecord) -> Unit,
-    onDeleteStay: (StayRecord) -> Unit
+    onDeleteStay: (StayRecord) -> Unit,
+    onSaveStays: (List<StayRecord>) -> Unit
 ) {
     ProhibitedDrugSearchScreen()
     Spacer(Modifier.height(14.dp))
@@ -1176,6 +1180,14 @@ private fun MedicalInfoScreen(
         onDeleteDisease = onDeleteDisease,
         onSaveStay = onSaveStay,
         onDeleteStay = onDeleteStay
+    )
+    Spacer(Modifier.height(14.dp))
+    TimelineImportCard(
+        health = health,
+        records = records,
+        medications = medications,
+        today = today,
+        onSaveStays = onSaveStays
     )
 }
 

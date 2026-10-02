@@ -18,6 +18,8 @@ class HealthHistoryRepository(private val dao: HealthHistoryDao) {
 
     suspend fun saveStay(record: StayRecord): Long = dao.upsertStay(record)
 
+    suspend fun saveStays(records: List<StayRecord>) = dao.upsertStays(records)
+
     suspend fun deleteDisease(record: DiseaseRecord) = dao.deleteDisease(record)
 
     suspend fun deleteStay(record: StayRecord) = dao.deleteStay(record)

@@ -203,14 +203,17 @@ private fun minStayDays(minStay: Period): Long = minStay.toTotalMonths() * 30 + 
 fun vcjdRestrictions(stays: List<StayRecord>, rules: InfectionRules): List<HealthRestriction> =
     rules.vcjdRules.mapNotNull { rule -> vcjdRestriction(stays, rule) }
 
+/** Days of [stay] inside [rule]'s target period, both ends counted; 0 when it's entirely outside. */
+private fun daysInTargetPeriod(stay: StayRecord, rule: VcjdRule): Long {
+    val start = maxOf(stay.startDate, rule.from)
+    val end = minOf(stay.endDate, rule.to)
+    return if (start.isAfter(end)) 0 else inclusiveDays(start, end)
+}
+
 private fun vcjdRestriction(stays: List<StayRecord>, rule: VcjdRule): HealthRestriction? {
     val counted = stays
         .filter { it.regionName in rule.countries }
-        .mapNotNull { stay ->
-            val start = maxOf(stay.startDate, rule.from)
-            val end = minOf(stay.endDate, rule.to)
-            if (start.isAfter(end)) null else stay to inclusiveDays(start, end)
-        }
+        .mapNotNull { stay -> daysInTargetPeriod(stay, rule).takeIf { it > 0 }?.let { stay to it } }
     val totalDays = counted.sumOf { it.second }
     if (counted.isEmpty() || totalDays < minStayDays(rule.minStay)) return null
 
@@ -225,6 +228,27 @@ private fun vcjdRestriction(stays: List<StayRecord>, rule: VcjdRule): HealthRest
         sources = counted.map { HistorySource.Stay(it.first.id) }.toSet()
     )
 }
+
+/**
+ * Time spent in one vCJD country: [totalDays] in all, and [daysInPeriod] of them inside its rule's
+ * target period - the part that counts toward the rule's [VcjdRule.minStay].
+ */
+data class VcjdExposure(val country: String, val rule: VcjdRule, val totalDays: Long, val daysInPeriod: Long)
+
+/** [VcjdExposure] for each vCJD country [stays] spent any time in, in the rules' order. */
+fun vcjdExposures(stays: List<StayRecord>, rules: InfectionRules): List<VcjdExposure> =
+    rules.vcjdRules.flatMap { rule ->
+        rule.countries.mapNotNull { country ->
+            val inCountry = stays.filter { it.regionName == country }
+            if (inCountry.isEmpty()) return@mapNotNull null
+            VcjdExposure(
+                country = country,
+                rule = rule,
+                totalDays = inCountry.sumOf { inclusiveDays(it.startDate, it.endDate) },
+                daysInPeriod = inCountry.sumOf { daysInTargetPeriod(it, rule) }
+            )
+        }
+    }
 
 /** Every restriction the donor's 감염병 and 체류 history places on donation, active or elapsed. */
 fun healthRestrictions(

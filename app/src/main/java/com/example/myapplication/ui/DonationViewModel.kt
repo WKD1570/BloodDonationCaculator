@@ -175,6 +175,10 @@ class DonationViewModel(
         viewModelScope.launch { healthRepository.saveStay(record) }
     }
 
+    fun saveStays(records: List<StayRecord>) {
+        viewModelScope.launch { healthRepository.saveStays(records) }
+    }
+
     fun deleteStay(record: StayRecord) {
         viewModelScope.launch { healthRepository.deleteStay(record) }
     }

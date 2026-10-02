@@ -189,7 +189,7 @@ internal fun HealthHistoryCard(
     }
 }
 
-private fun stayPeriodText(stay: StayRecord): String {
+internal fun stayPeriodText(stay: StayRecord): String {
     val nights = ChronoUnit.DAYS.between(stay.startDate, stay.endDate)
     return "${fmt(stay.startDate)} ~ ${fmt(stay.endDate)} · ${nights}박 ${nights + 1}일"
 }
@@ -244,7 +244,7 @@ private fun HistoryRow(
 
 /** When [restriction] ends, and which donation types it leaves open. */
 @Composable
-private fun RestrictionOutcome(restriction: HealthRestriction, today: LocalDate) {
+internal fun RestrictionOutcome(restriction: HealthRestriction, today: LocalDate) {
     val eligibleFrom = restriction.eligibleFrom
     when {
         eligibleFrom == null -> Text(

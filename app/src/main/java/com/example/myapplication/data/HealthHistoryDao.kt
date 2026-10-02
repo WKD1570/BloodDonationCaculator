@@ -27,6 +27,9 @@ interface HealthHistoryDao {
     @Upsert
     suspend fun upsertStay(record: StayRecord): Long
 
+    @Upsert
+    suspend fun upsertStays(records: List<StayRecord>)
+
     @Delete
     suspend fun deleteDisease(record: DiseaseRecord)
 
