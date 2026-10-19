@@ -54,7 +54,7 @@ internal fun PreferredProvinceCard(
             Spacer(Modifier.height(12.dp))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 PROVINCE_ORDER.forEach { province ->
-                    ProvinceChip(
+                    ChoiceChip(
                         label = province,
                         active = province == selected,
                         onClick = { onSelect(if (province == selected) null else province) }

@@ -5,13 +5,15 @@ package com.example.myapplication.model
  *
  * @param bloodBank The 혈액원 it belongs to, without the suffix ("서울중앙").
  * @param type The funding category as published: 국고, 자체, 원내, 국고대학 or 자체대학.
+ * @param machines Its 성분헌혈 machines, or null when the machines list doesn't cover it.
  */
 data class BloodCenter(
     val bloodBank: String,
     val name: String,
     val type: String,
     val address: String,
-    val phone: String
+    val phone: String,
+    val machines: CenterMachines? = null
 ) {
     /** Names repeat across 혈액원 only in principle, but the pair is what the data keys on. */
     val id: String get() = "$bloodBank/$name"
@@ -30,3 +32,13 @@ data class BloodCenter(
             else -> null
         }
 }
+
+/**
+ * The 성분헌혈 machines at one 헌혈의 집: each model with how many the center has, in the order the
+ * machines list gives them. Only models it has are listed, so an empty [platelet] means 혈소판 can't
+ * be given there.
+ */
+data class CenterMachines(
+    val plasma: Map<String, Int>,
+    val platelet: Map<String, Int>
+)

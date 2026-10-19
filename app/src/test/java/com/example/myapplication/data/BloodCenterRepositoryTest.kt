@@ -2,6 +2,7 @@ package com.example.myapplication.data
 
 import com.example.myapplication.domain.PROVINCE_ORDER
 import com.example.myapplication.domain.provinceOf
+import com.example.myapplication.model.CenterMachines
 import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -56,11 +57,53 @@ class BloodCenterRepositoryTest {
     }
 
     @Test
+    fun `parses each center's machines in order, keeping only the models it has`() {
+        val list = parse(
+            """
+            {"centers": [{
+              "name": "중앙센터", "address": "서울 강서구 공항대로 591",
+              "machines": {
+                "plasma": {"Nexsys": 1, "PCS2": 0, "Aurora": 2},
+                "platelet": {"Trima": 1, " ": 3, "MCS+": null, "Amicus": 1}
+              }
+            }]}
+            """.trimIndent()
+        )
+        val machines = list.centers.single().machines
+        assertEquals(listOf("Nexsys" to 1, "Aurora" to 2), machines?.plasma?.toList())
+        assertEquals(listOf("Trima" to 1, "Amicus" to 1), machines?.platelet?.toList())
+    }
+
+    @Test
+    fun `a center the machines list doesn't cover has no machines, unlike one with none`() {
+        val list = parse(
+            """
+            {"centers": [
+              {"name": "A센터", "address": "서울"},
+              {"name": "B센터", "address": "서울", "machines": {"plasma": {}, "platelet": {}}},
+              {"name": "C센터", "address": "서울", "machines": {}}
+            ]}
+            """.trimIndent()
+        )
+        val none = CenterMachines(plasma = emptyMap(), platelet = emptyMap())
+        assertNull(list.centers[0].machines)
+        assertEquals(none, list.centers[1].machines)
+        assertEquals(none, list.centers[2].machines)
+    }
+
+    @Test
     fun `bundled asset parses with unique ids and every center in a known province`() {
         val list = File("src/main/assets/$BLOOD_CENTERS_ASSET").inputStream().use(::parseBloodCenters)
         assertTrue("only ${list.centers.size} centers", list.centers.size > 100)
         assertEquals(list.centers.size, list.centers.map { it.id }.toSet().size)
         list.centers.forEach { assertTrue("${it.name}: ${it.address}", provinceOf(it.address) in PROVINCE_ORDER) }
         assertTrue(list.asOf != null)
+    }
+
+    @Test
+    fun `bundled asset carries machines for nearly every center`() {
+        val list = File("src/main/assets/$BLOOD_CENTERS_ASSET").inputStream().use(::parseBloodCenters)
+        val covered = list.centers.count { it.machines != null }
+        assertTrue("machines for only $covered of ${list.centers.size}", covered >= list.centers.size * 9 / 10)
     }
 }

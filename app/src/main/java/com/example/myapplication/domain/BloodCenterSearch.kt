@@ -126,10 +126,17 @@ fun searchCenters(centers: List<BloodCenter>, query: String): List<BloodCenter> 
         .sortedBy { center -> if (words.all { it in center.name }) 0 else 1 }
 }
 
-/** The list as shown: narrowed to [province] when one is picked, then searched. */
-fun filterCenters(centers: List<BloodCenter>, query: String, province: String?): List<BloodCenter> {
-    val inProvince = if (province == null) centers else centers.filter { provinceOf(it.address) == province }
-    return searchCenters(inProvince, query)
+/** The list as shown: narrowed to [province] and [machine] when picked, then searched. */
+fun filterCenters(
+    centers: List<BloodCenter>,
+    query: String,
+    province: String?,
+    machine: MachineFilter? = null
+): List<BloodCenter> {
+    val narrowed = centers.filter { center ->
+        (province == null || provinceOf(center.address) == province) && (machine == null || center.has(machine))
+    }
+    return searchCenters(narrowed, query)
 }
 
 /**

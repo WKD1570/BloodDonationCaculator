@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -58,18 +59,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.domain.MachineFilter
+import com.example.myapplication.domain.TYPE_INFO
+import com.example.myapplication.domain.machineSummary
 import com.example.myapplication.domain.mapQueryOf
+import com.example.myapplication.domain.modelList
 import com.example.myapplication.domain.preferredFirst
 import com.example.myapplication.domain.splitPreferred
 import com.example.myapplication.model.BloodCenter
+import com.example.myapplication.model.DonationType
 
 /** List key of the 다른 지역 heading that follows the 자주 헌혈하는 지역's centers. */
 internal const val OTHERS_HEADING_KEY = "others-heading"
 
 /**
- * 헌혈의 집 목록: every center from 대한적십자사's list, narrowed by province chips and search.
- * Tapping a row opens its phone number with 전화하기 and 지도에서 보기, which hand off to the
- * phone's dialer and map app - the app itself makes no network calls.
+ * 헌혈의 집 목록: every center from 대한적십자사's list, narrowed by province and machine chips and
+ * search. Each row counts the center's 성분헌혈 machines; tapping it opens the models, its phone
+ * number, 전화하기 and 지도에서 보기, which hand off to the phone's dialer and map app - the app
+ * itself makes no network calls.
  *
  * [preferredProvince] is 마이페이지's 자주 헌혈하는 지역. Its chip comes right after 전체, and under
  * 전체 its centers are listed first under their own heading, then 다른 지역. It's taken as a
@@ -91,8 +98,14 @@ fun BloodCenterListScreen(
         splitPreferred(state.visible, state.province, preferredProvince)
     }
 
-    BackHandler(enabled = state.query.isNotEmpty() || state.province != null) {
-        if (state.query.isNotEmpty()) viewModel.onQueryChange("") else viewModel.onProvinceSelect(null)
+    // Back undoes the narrowing a step at a time - search, then machine, then province - before
+    // it leaves the app.
+    BackHandler(enabled = state.query.isNotEmpty() || state.machine != null || state.province != null) {
+        when {
+            state.query.isNotEmpty() -> viewModel.onQueryChange("")
+            state.machine != null -> viewModel.onMachineSelect(null)
+            else -> viewModel.onProvinceSelect(null)
+        }
     }
 
     Column(
@@ -120,6 +133,17 @@ fun BloodCenterListScreen(
                     onSelect = {
                         focusManager.clearFocus()
                         viewModel.onProvinceSelect(it)
+                    }
+                )
+            }
+            if (state.machines.isNotEmpty()) {
+                Spacer(Modifier.height(6.dp))
+                MachineChips(
+                    machines = state.machines,
+                    selected = state.machine,
+                    onSelect = {
+                        focusManager.clearFocus()
+                        viewModel.onMachineSelect(it)
                     }
                 )
             }
@@ -158,13 +182,13 @@ fun BloodCenterListScreen(
                 }
 
                 state.visible.isEmpty() -> item(key = "empty") {
-                    Message("검색 결과가 없어요. 다른 지역을 고르거나 검색어를 바꿔 보세요.")
+                    Message("검색 결과가 없어요. 다른 지역·기기를 고르거나 검색어를 바꿔 보세요.")
                 }
 
                 else -> {
                     item(key = "count") {
                         Text(
-                            "${state.province ?: "전국"} ${state.visible.size}곳",
+                            "${state.province ?: "전국"} ${state.visible.size}곳" + state.machine?.let { " · ${it.label}" }.orEmpty(),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = TextSecondary,
@@ -182,7 +206,7 @@ fun BloodCenterListScreen(
                             buildString {
                                 append("대한적십자사 헌혈의 집 정보")
                                 state.asOf?.let { append(" (${it} 기준)") }
-                                append(". 운영 시간과 휴무일은 방문 전에 전화로 확인해 주세요.")
+                                append(". 운영 시간·휴무일과 성분헌혈 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
                             },
                             fontSize = 10.sp,
                             color = TextTertiary,
@@ -251,16 +275,38 @@ private fun ProvinceChips(
             .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        ProvinceChip("전체", active = selected == null, onClick = { onSelect(null) }, count = total)
+        ChoiceChip("전체", active = selected == null, onClick = { onSelect(null) }, count = total)
         provinces.forEach { (province, count) ->
-            ProvinceChip(province, active = selected == province, onClick = { onSelect(province) }, count = count)
+            ChoiceChip(province, active = selected == province, onClick = { onSelect(province) }, count = count)
         }
     }
 }
 
-/** A province chip, here and on 마이페이지's [PreferredProvinceCard], which has no [count] to show. */
+/** 혈소판 가능 and each model, every chip counting the centers that have it. */
 @Composable
-internal fun ProvinceChip(label: String, active: Boolean, onClick: () -> Unit, count: Int? = null) {
+private fun MachineChips(
+    machines: List<Pair<MachineFilter, Int>>,
+    selected: MachineFilter?,
+    onSelect: (MachineFilter) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        machines.forEach { (machine, count) ->
+            ChoiceChip(machine.label, active = selected == machine, onClick = { onSelect(machine) }, count = count)
+        }
+    }
+}
+
+/**
+ * A pill chip for the province and machine rows here and 마이페이지's [PreferredProvinceCard], which
+ * has no [count] to show.
+ */
+@Composable
+internal fun ChoiceChip(label: String, active: Boolean, onClick: () -> Unit, count: Int? = null) {
     val shape = RoundedCornerShape(50)
     Row(
         modifier = Modifier
@@ -347,11 +393,17 @@ private fun CenterRow(
                 maxLines = if (expanded) Int.MAX_VALUE else 1,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(Modifier.height(2.dp))
+            Text(machineSummary(center.machines), fontSize = 11.sp, color = TextTertiary)
 
             if (expanded) {
                 Spacer(Modifier.height(8.dp))
                 if (center.phone.isNotBlank()) DetailLine("☎", center.phone)
                 if (center.bloodBankLabel.isNotBlank()) DetailLine("🏥", center.bloodBankLabel)
+                center.machines?.takeIf { it.plasma.isNotEmpty() || it.platelet.isNotEmpty() }?.let { machines ->
+                    MachineLine(DonationType.PLASMA, "혈장", machines.plasma)
+                    MachineLine(DonationType.PLATELET, "혈소판", machines.platelet)
+                }
                 Spacer(Modifier.height(10.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (center.phone.isNotBlank()) {
@@ -384,6 +436,24 @@ private fun DetailLine(icon: String, text: String) {
     Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(icon, fontSize = 12.sp, modifier = Modifier.width(22.dp))
         Text(text, fontSize = 13.sp, color = TextPrimary)
+    }
+}
+
+/** One kind's models in an open row, its dot in that 헌혈's color from 현황. */
+@Composable
+private fun MachineLine(type: DonationType, kind: String, models: Map<String, Int>) {
+    Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.width(22.dp)) {
+            Box(
+                Modifier
+                    .padding(start = 2.dp)
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(TYPE_INFO.getValue(type).color)
+            )
+        }
+        Text(kind, fontSize = 13.sp, color = TextSecondary, modifier = Modifier.width(48.dp))
+        Text(modelList(models), fontSize = 13.sp, color = if (models.isEmpty()) TextTertiary else TextPrimary)
     }
 }
 
