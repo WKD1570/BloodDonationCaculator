@@ -18,6 +18,7 @@ private const val KEY_PROFILE_SEX = "profile_sex"
 private const val KEY_PROFILE_NAME = "profile_name"
 private const val KEY_PROFILE_BIRTHDATE = "profile_birthdate"
 private const val KEY_PROFILE_DONATED_60_64 = "profile_donated_60_64"
+private const val KEY_PROFILE_PREFERRED_PROVINCE = "profile_preferred_province"
 private const val KEY_DONATION_RECORDS = "donation_records"
 private const val KEY_THEME_MODE = "theme_mode"
 
@@ -44,7 +45,8 @@ fun loadDonorProfile(context: Context): DonorProfile {
         sex = prefs.getString(KEY_PROFILE_SEX, null)?.let { runCatching { Sex.valueOf(it) }.getOrNull() },
         name = prefs.getString(KEY_PROFILE_NAME, null)?.takeIf { it.isNotBlank() },
         birthDate = prefs.getString(KEY_PROFILE_BIRTHDATE, null)?.let { runCatching { LocalDate.parse(it) }.getOrNull() },
-        donatedAge60To64 = prefs.getBoolean(KEY_PROFILE_DONATED_60_64, false)
+        donatedAge60To64 = prefs.getBoolean(KEY_PROFILE_DONATED_60_64, false),
+        preferredProvince = prefs.getString(KEY_PROFILE_PREFERRED_PROVINCE, null)?.takeIf { it.isNotBlank() }
     )
 }
 
@@ -57,6 +59,7 @@ fun saveDonorProfile(context: Context, profile: DonorProfile) {
         if (!profile.name.isNullOrBlank()) putString(KEY_PROFILE_NAME, profile.name) else remove(KEY_PROFILE_NAME)
         if (profile.birthDate != null) putString(KEY_PROFILE_BIRTHDATE, profile.birthDate.toString()) else remove(KEY_PROFILE_BIRTHDATE)
         putBoolean(KEY_PROFILE_DONATED_60_64, profile.donatedAge60To64)
+        if (!profile.preferredProvince.isNullOrBlank()) putString(KEY_PROFILE_PREFERRED_PROVINCE, profile.preferredProvince) else remove(KEY_PROFILE_PREFERRED_PROVINCE)
     }
 }
 

@@ -142,6 +142,7 @@ private enum class Screen(val label: String, val icon: String) {
     STATUS("현황", "🩸"),
     INPUT("헌혈 입력", "📝"),
     MEDICAL("의료 정보", "🩺"),
+    CENTERS("헌혈의 집", "📍"),
     MYPAGE("마이페이지", "🧍")
 }
 
@@ -242,7 +243,10 @@ fun BloodDonationCalculatorScreen(
                 .padding(innerPadding),
             contentAlignment = Alignment.TopCenter
         ) {
-            Column(
+            // The center list is lazy and scrolls on its own, so it sits outside the page scroll.
+            if (selectedScreen == Screen.CENTERS) {
+                BloodCenterListScreen(preferredProvince = profile.preferredProvince)
+            } else Column(
                 modifier = Modifier
                     .widthIn(max = 640.dp)
                     .fillMaxWidth()
@@ -274,7 +278,15 @@ fun BloodDonationCalculatorScreen(
                             onDeleteStay = viewModel::deleteStay,
                             onSaveStays = viewModel::saveStays
                         )
-                        Screen.MYPAGE -> PhysicalProfileCard(profile, onProfileChange = viewModel::updateProfile)
+                        Screen.CENTERS -> Unit // drawn above, outside the scroll
+                        Screen.MYPAGE -> {
+                            PhysicalProfileCard(profile, onProfileChange = viewModel::updateProfile)
+                            Spacer(Modifier.height(14.dp))
+                            PreferredProvinceCard(
+                                selected = profile.preferredProvince,
+                                onSelect = { viewModel.updateProfile(profile.copy(preferredProvince = it)) }
+                            )
+                        }
                     }
                 }
             }
@@ -1519,7 +1531,7 @@ private fun StatusScreen(
 @Composable
 private fun CumulativeVolumeGauge(records: List<DonationRecord>, today: LocalDate) {
     // The 2,160mL cap is an annual one, so only donations from the past year consume it - older
-    // donations have expired and are excluded from both the total and the per-type bar.
+    // donations have expired and are excluded from both the total and the per-donation bar.
     val recentRecords = records.withinAnnualWindow(today)
     val totalVol = recentRecords.sumOf { it.volumeMl() }
     val pct = (totalVol.toDouble() / ANNUAL_LIMIT_ML * 100).coerceAtMost(100.0)
@@ -1576,13 +1588,13 @@ private fun CumulativeVolumeGauge(records: List<DonationRecord>, today: LocalDat
             VolumeProgressBar(recentRecords)
 
             Spacer(Modifier.height(4.dp))
-            Text(
-                "제한: 2,160 mL",
-                fontSize = 10.sp,
-                color = TextTertiary,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.End
-            )
+            Row(Modifier.fillMaxWidth()) {
+                if (recentRecords.isNotEmpty()) {
+                    Text("헌혈 ${recentRecords.size}건 · 왼쪽부터 오래된 순", fontSize = 10.sp, color = TextTertiary)
+                }
+                Spacer(Modifier.weight(1f))
+                Text("제한: 2,160 mL", fontSize = 10.sp, color = TextTertiary)
+            }
         }
     }
 }
@@ -1854,8 +1866,16 @@ private fun CalendarNavButton(symbol: String, onClick: () -> Unit) {
     }
 }
 
+/** The cut between two donations' segments, in the card color so each reads as its own piece. */
+private val VOLUME_SEGMENT_GAP = 2.dp
+
+/**
+ * One segment per donation, colored by its type and as wide as its share of [ANNUAL_LIMIT_ML].
+ * Oldest on the left - the order they drop out of the annual window and free up volume.
+ */
 @Composable
 private fun VolumeProgressBar(recentRecords: List<DonationRecord>) {
+    val segments = recentRecords.sortedWith(compareBy({ it.date }, { it.id }))
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1863,14 +1883,14 @@ private fun VolumeProgressBar(recentRecords: List<DonationRecord>) {
             .clip(RoundedCornerShape(50))
             .background(ProgressTrack)
     ) {
-        DonationType.entries.forEach { type ->
-            val vol = recentRecords.filter { it.type == type }.sumOf { it.volumeMl() }
-            val frac = (vol.toFloat() / ANNUAL_LIMIT_ML).coerceIn(0f, 1f)
+        segments.forEachIndexed { index, record ->
             Box(
                 Modifier
-                    .weight(frac.coerceAtLeast(0.0001f))
+                    .weight(record.volumeMl().toFloat() / ANNUAL_LIMIT_ML)
                     .fillMaxHeight()
-                    .background(TYPE_INFO.getValue(type).color)
+                    .background(CardBg)
+                    .padding(end = if (index == segments.lastIndex) 0.dp else VOLUME_SEGMENT_GAP)
+                    .background(TYPE_INFO.getValue(record.type).color)
             )
         }
         val used = recentRecords.sumOf { it.volumeMl() }
