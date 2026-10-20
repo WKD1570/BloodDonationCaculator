@@ -899,7 +899,9 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 - **Version catalog.** All dependency coordinates live in `gradle/libs.versions.toml`; no hardcoded versions in build files.
 - **KSP** (not KAPT) generates Room code.
 - **Core library desugaring** is required — `java.time` is used throughout and `minSdk` is 24.
-- **Release build.** `optimization { enable = false }` — R8/ProGuard is currently **disabled** for release. Enabling it will require keep rules for Room entities and Gson-deserialized models (`ProhibitedDrugJson` is reflectively constructed).
+- **Release build.** `optimization { enable = true }`: R8 shrinks code and resources. Gson fills the `*Json` classes in `data/` by reflection, so `app/src/main/keepRules/rules.keep` keeps their field names and no-argument constructors. A new Gson-parsed class must follow that naming or get its own rule; otherwise its fields come back null in release builds only, while debug builds and tests keep passing. Room, ML Kit, CameraX and lifecycle ship their own rules.
+- **App ID and signing.** `applicationId` is `io.github.wkd1570.bdcalculator`, the Play Store ID, which can't change after the first upload. The Kotlin `namespace` stays `com.example.myapplication`. Release signing reads the upload key from the gitignored `keystore.properties` (see `keystore.properties.example`); without it, release builds come out unsigned. Publishing steps are in `docs/play-store/README.md`.
+- **Launcher icon.** The adaptive icon is vector (`res/drawable/ic_launcher_*.xml`), and its foreground doubles as the monochrome layer. `tools/render_icons.py` (needs Pillow) draws the API 24–25 bitmaps and the 512px Play icon from the same shapes.
 - **`exportSchema = false`** on the Room database. Schema export should be enabled before shipping a version 2 migration.
 
 ---
