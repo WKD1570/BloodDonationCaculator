@@ -20,3 +20,6 @@ local.properties
 
 # Play upload key settings (see keystore.properties.example)
 keystore.properties
+
+# Python bytecode from the tools/ scripts
+__pycache__/

@@ -8,8 +8,8 @@ Everything prepared for publishing the app on Google Play, and what's left to do
 | App icon 512×512 (`icon-512.png`, drawn by `tools/render_icons.py`) | Ready |
 | Privacy policy (`docs/privacy-policy.md`) | Ready, needs publishing (step 4) |
 | Store listing text and policy-form answers (below) | Drafted |
-| Feature graphic 1024×500 | To do |
-| Phone screenshots, 2–8 | To do. Use demo data, not your own records |
+| Feature graphic 1024×500 (`feature-graphic.png`) | Ready |
+| Phone screenshots (`screenshots/`, six at 1080×1920, in listing order) | Ready, captured with made-up data |
 | Signed `.aab` | Built with the new upload key. Rebuild with `./gradlew bundleRelease` |
 
 ## Steps, in order
@@ -21,10 +21,12 @@ Everything prepared for publishing the app on Google Play, and what's left to do
 4. **Publish the privacy policy.** Merge to `main`, then in the GitHub repo go to *Settings → Pages* and choose *Deploy from a branch*, branch `main`, folder `/docs`. The policy appears at `https://wkd1570.github.io/BloodDonationCaculator/privacy-policy.html`. Open it in a browser to check before entering it in Play Console.
 5. **Create the app** in Play Console: default language Korean, type app, free.
 6. **Fill in App content** (*Policy → App content*) using the answers below.
-7. **Fill in the store listing** with the text below, the icon, a feature graphic and screenshots. Category: Medical (or Health & Fitness). Contact email: p9131015@naver.com.
+7. **Fill in the store listing** with the text below, `icon-512.png`, `feature-graphic.png` and the files in `screenshots/`, in their numbered order. Category: Medical (or Health & Fitness). Contact email: p9131015@naver.com.
 8. **Closed test.** Upload the `.aab` to the closed testing track, add at least 12 testers by their Google account emails, and share the opt-in link. Testers install from Play and stay opted in for 14 days. Google checks that they actually use the app, so ask them to open it a few times.
 9. **Production.** Apply for production access in the Dashboard. You'll answer questions about how the test went. After approval, create a production release. Reviews usually take a few days.
 10. **Every update** needs a higher `versionCode` in `app/build.gradle.kts` (and usually a new `versionName`).
+
+**Regenerating the graphics** after the UI changes: `tools/render_store_graphics.py` draws the banner and frames emulator captures under their captions, which are listed in the script. Fill a debug build with made-up data, never real records, and capture each screen with `adb exec-out screencap -p`. Pull the font with `adb pull /system/fonts/NotoSansCJK-Regular.ttc`, then run `python3 tools/render_store_graphics.py NotoSansCJK-Regular.ttc <captures dir>` (needs Pillow).
 
 ## Store listing (ready to paste)
 
