@@ -84,7 +84,7 @@ Before publishing, check the data rights:
 
 - **Machine data.** The 성분헌혈 machine counts are transcribed from 헤마토필리아's post [「헌혈의집 성분채혈기기 현황 (26.10.14. 기준)」](https://gall.dcinside.com/mgallery/board/view/?id=blooddonation&no=79901) on DC Inside's 헌혈 마이너 갤러리. The post states no reuse terms, so ask the author for permission before release, by commenting on the post or messaging them in the gallery. Keep the credit, which is already in the 자료 출처 line above and under the app's 헌혈의 집 list. If they decline, take the machine data out of the app before releasing.
 - **Center list.** The 공공데이터포털 dataset [「대한적십자사_헌혈의집 정보」](https://www.data.go.kr/data/15050729/fileData.do) is licensed 이용허락범위 제한 없음 (no restrictions). Attribution isn't required, but the app, this listing and the README cite it anyway.
-- **Dates.** The machine data (2026.10.14) is newer than the center list (2026.07.01). 마곡역센터, 가산센터 and 정읍가두 have machine data but aren't in the July list, and they're probably new. The portal updates the dataset once a year, and its current file is still the 2026.07.01 one. To list newer centers before the next update, they'd have to be added by hand.
+- **Dates.** The machine data (2026.10.14) is newer than the center list (2026.07.01). 화곡역센터, 가산센터 and 정읍가두 have machine data but aren't in the July list, and they're probably new. The portal updates the dataset once a year, and its current file is still the 2026.07.01 one. To list newer centers before the next update, they'd have to be added by hand.
 
 **첫 출시 출시 노트:**
 
