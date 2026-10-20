@@ -19,6 +19,7 @@
    - [2.6 Persistence Strategy](#26-persistence-strategy)
    - [2.7 Theming](#27-theming)
    - [2.8 헌혈의 집 목록 (Blood Center List)](#28-헌혈의-집-목록-blood-center-list)
+   - [2.9 헌혈 계획 (Donation Planner)](#29-헌혈-계획-donation-planner)
 3. [Calculation Logic & Formulas](#3-calculation-logic--formulas)
    - [3.1 Domain Constants](#31-domain-constants)
    - [3.2 Physical Eligibility (Nadler's Formula)](#32-physical-eligibility-nadlers-formula)
@@ -95,6 +96,7 @@ com.example.myapplication
 ├── model/                           Plain data types (no logic beyond simple derivations)
 │   ├── DonationType.kt              enum: volume + interval per type
 │   ├── DonationRecord.kt            One donation event
+│   ├── PlannedDonation.kt           One donation planned on 헌혈 계획
 │   ├── DonorProfile.kt              Physical profile, 자주 헌혈하는 지역 + Sex enum
 │   ├── MedicationRecord.kt          Room @Entity: one drug intake
 │   ├── RestrictedDrug.kt            Catalog entry
@@ -107,7 +109,8 @@ com.example.myapplication
 │   ├── IntegratedEligibility.kt     Merges donation + medication constraints
 │   ├── CertificateParser.kt         OCR text → structured certificate fields
 │   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈의 집
-│   └── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈의 집
+│   ├── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈의 집
+│   └── DonationPlan.kt              Checking a plan, filling earliest days, planned volume
 ├── data/                            Persistence + device I/O
 │   ├── DonationStateStore.kt        SharedPreferences (profile, records, theme)
 │   ├── AppDatabase.kt               Room database singleton
@@ -124,6 +127,7 @@ com.example.myapplication
     ├── ProhibitedDrugSearchScreen.kt / ...ViewModel.kt
     ├── BloodCenterListScreen.kt / ...ViewModel.kt  헌혈의 집 tab (province chips, search, list)
     ├── PreferredProvinceCard.kt     마이페이지's 자주 헌혈하는 지역 picker
+    ├── DonationPlannerScreen.kt     헌혈 계획 page, opened from 현황's calendar
     ├── MedicationHistoryCard.kt
     └── theme/                       Theme.kt, Color.kt, Type.kt
 ```
@@ -244,6 +248,7 @@ Storage is split by shape, not by convenience:
 |---|---|---|---|
 | Donor profile | SharedPreferences (`donation_state`) | Typed keys | Small, flat, single-row |
 | Donation records | SharedPreferences | Custom line/pipe-delimited text | Small list; predates Room in this codebase |
+| Planned donations | SharedPreferences | Line/pipe-delimited id, type and date | Small list kept beside the records it's checked against |
 | Theme mode | SharedPreferences | Enum name | Must be readable **synchronously** on the first frame to avoid a launch flash |
 | Medication history | Room (`donation.db`) | `medication_history` table | Needs reactive queries + ordering |
 | Drug catalog | `assets/prohibited_drugs.json` | JSON array (14 entries) | Read-only reference data, updatable without code changes |
@@ -291,6 +296,16 @@ The 📍 헌혈의 집 tab lists every 헌혈의 집 from 대한적십자사's o
 
 **Why no in-app map.** An embedded map (osmdroid/OpenStreetMap) was tried and dropped: it added a library, network and location permissions, and on-device geocoding for an app that is otherwise fully offline, and OpenStreetMap's tile servers require a distinct app User-Agent (they block `com.example.*` IDs). Handing off to the phone's map app covers the same need.
 
+
+### 2.9 헌혈 계획 (Donation Planner)
+
+더보기 under 현황's calendar opens 헌혈 계획, a page of its own (the bottom tabs hide while it's open, and back returns). Pick 전혈, 혈장 or 혈소판, then tap a day from today on to plan that type there; tapping a planned day takes it off. 가능한 날짜로 채우기 adds the chosen type on every earliest day it fits from today through 1, 3, 6 or 12 months. Below, each planned donation shows ✓ 가능 or ✗ with its first allowed day and the reason, under a summary of counts and the 1-year volume as of the last planned day (`plannedAnnualVolume`).
+
+**Checking a plan.** `checkPlan` walks the plan in date order and calls `integratedNextEligible` with the planned day standing in for "today", so a planned donation meets exactly the rules 현황 applies to the next one: intervals, yearly counts and the 2,160 mL limit from the records, medications, and 감염병·체류 restrictions. Records and planned donations after it can't bind it, because `calcNext` only looks at what's on or before its "today". An allowed planned donation is assumed to happen and joins the history for the ones after it; one that isn't allowed can't happen as planned, so it binds nothing.
+
+**Filling.** `fillPlan` steps through the days greedily. A day that already holds a planned donation is skipped; when the type isn't allowed yet, it jumps straight to the first allowed day, since nothing before then can change; and it never takes a day that would stop an already allowed planned donation from happening. A lifetime ban ends the fill.
+
+**State and storage.** The plan belongs to `DonationViewModel`, which checks it into `DonationUiState.plan`; `DonationPlannerScreen` is stateless. It's saved under `planned_donations` in `donation_state`, one `id|TYPE|date` line per planned donation, and malformed lines are dropped on read (`decodePlan`). Planned days that have passed are dropped when the app starts (`upcomingPlan`), and saving a real record takes off the planned donation for its day and type (`planWithout`). 현황's calendar shares its grid with the planner (`CalendarMonthGrid`) and marks planned days with a hollow dot in the type's color, or a red × when the planned donation wouldn't be allowed.
 ---
 
 ## 3. Calculation Logic & Formulas

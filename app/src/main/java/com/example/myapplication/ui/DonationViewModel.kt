@@ -9,18 +9,26 @@ import com.example.myapplication.data.InfectionRuleRepository
 import com.example.myapplication.data.MedicationHistoryRepository
 import com.example.myapplication.data.loadDonationRecords
 import com.example.myapplication.data.loadDonorProfile
+import com.example.myapplication.data.loadPlannedDonations
 import com.example.myapplication.data.saveDonationRecords
 import com.example.myapplication.data.saveDonorProfile
+import com.example.myapplication.data.savePlannedDonations
 import com.example.myapplication.domain.HealthRestriction
 import com.example.myapplication.domain.IntegratedNextResult
+import com.example.myapplication.domain.PlanCheck
+import com.example.myapplication.domain.checkPlan
+import com.example.myapplication.domain.fillPlan
 import com.example.myapplication.domain.healthRestrictions
 import com.example.myapplication.domain.nextEligibleByType
+import com.example.myapplication.domain.planWithout
+import com.example.myapplication.domain.upcomingPlan
 import com.example.myapplication.model.DiseaseRecord
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
 import com.example.myapplication.model.InfectionRules
 import com.example.myapplication.model.MedicationRecord
+import com.example.myapplication.model.PlannedDonation
 import com.example.myapplication.model.StayRecord
 import java.time.LocalDate
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +48,9 @@ data class DonationUiState(
     val today: LocalDate = LocalDate.now(),
     val health: HealthHistoryState = HealthHistoryState(),
     /** Next eligible date per type, with donation, medication *and* health history combined. */
-    val nextByType: Map<DonationType, IntegratedNextResult> = emptyMap()
+    val nextByType: Map<DonationType, IntegratedNextResult> = emptyMap(),
+    /** 헌혈 계획: each planned donation from today on, in date order, with whether it's allowed. */
+    val plan: List<PlanCheck> = emptyList()
 )
 
 /**
@@ -79,6 +89,8 @@ class DonationViewModel(
 
     private val profile = MutableStateFlow(DonorProfile())
     private val records = MutableStateFlow<List<DonationRecord>>(emptyList())
+    private val plan = MutableStateFlow<List<PlannedDonation>>(emptyList())
+    private var lastPlanId = 0L
     private val isLoading = MutableStateFlow(true)
     private val rules = MutableStateFlow<InfectionRules?>(null)
     private val rulesWarning = MutableStateFlow<String?>(null)
@@ -101,13 +113,15 @@ class DonationViewModel(
         )
     }
 
+    private val recordsAndPlan = combine(records, plan) { records, plan -> records to plan }
+
     val uiState: StateFlow<DonationUiState> = combine(
         profile,
-        records,
+        recordsAndPlan,
         medicationRepository.medications,
         health,
         isLoading
-    ) { profile, records, medications, health, loading ->
+    ) { profile, (records, plan), medications, health, loading ->
         DonationUiState(
             isLoading = loading,
             profile = profile,
@@ -115,7 +129,8 @@ class DonationViewModel(
             medications = medications,
             today = today,
             health = health,
-            nextByType = nextEligibleByType(records, medications, today, health.restrictions)
+            nextByType = nextEligibleByType(records, medications, today, health.restrictions),
+            plan = checkPlan(plan, records, medications, health.restrictions)
         )
     }.stateIn(
         scope = viewModelScope,
@@ -136,8 +151,12 @@ class DonationViewModel(
             // one-time legacy-format migration cannot recover from the old records themselves.
             val loadedProfile = withContext(Dispatchers.IO) { loadDonorProfile(context) }
             val loadedRecords = withContext(Dispatchers.IO) { loadDonationRecords(context, loadedProfile) }
+            val savedPlan = withContext(Dispatchers.IO) { loadPlannedDonations(context) }
             profile.value = loadedProfile
             records.value = loadedRecords
+            lastPlanId = savedPlan.maxOfOrNull { it.id } ?: 0L
+            val upcoming = upcomingPlan(savedPlan, today)
+            if (upcoming.size == savedPlan.size) plan.value = upcoming else persistPlan(upcoming)
             isLoading.value = false
         }
     }
@@ -147,16 +166,63 @@ class DonationViewModel(
         viewModelScope.launch(Dispatchers.IO) { saveDonorProfile(context, updated) }
     }
 
-    fun addRecord(record: DonationRecord) = persistRecords(records.value + record)
+    fun addRecord(record: DonationRecord) {
+        persistRecords(records.value + record)
+        dropPlannedFor(record)
+    }
 
-    fun updateRecord(record: DonationRecord) =
+    fun updateRecord(record: DonationRecord) {
         persistRecords(records.value.map { if (it.id == record.id) record else it })
+        dropPlannedFor(record)
+    }
 
     fun deleteRecord(id: Long) = persistRecords(records.value.filterNot { it.id == id })
 
     private fun persistRecords(updated: List<DonationRecord>) {
         records.value = updated
         viewModelScope.launch(Dispatchers.IO) { saveDonationRecords(context, updated) }
+    }
+
+    /** A donation made as planned takes its planned day and type off the plan. */
+    private fun dropPlannedFor(record: DonationRecord) {
+        val remaining = planWithout(plan.value, record)
+        if (remaining.size != plan.value.size) persistPlan(remaining)
+    }
+
+    /** Tapping a day on 헌혈 계획: plans [type] there, or takes off what's already planned that day. */
+    fun togglePlannedDay(date: LocalDate, type: DonationType) {
+        if (date.isBefore(today)) return
+        val current = plan.value
+        persistPlan(
+            if (current.any { it.date == date }) current.filterNot { it.date == date }
+            else current + PlannedDonation(newPlanId(), type, date)
+        )
+    }
+
+    fun removePlanned(id: Long) = persistPlan(plan.value.filterNot { it.id == id })
+
+    fun clearPlan() = persistPlan(emptyList())
+
+    /** 가능한 날짜로 채우기: [type] on every earliest day it fits from today through [months] months on. */
+    fun fillEarliest(type: DonationType, months: Long) {
+        val state = uiState.value
+        persistPlan(
+            fillPlan(
+                type, today, today.plusMonths(months), plan.value,
+                records.value, state.medications, state.health.restrictions
+            ) { newPlanId() }
+        )
+    }
+
+    /** Unique even when [fillEarliest] makes several within the same millisecond. */
+    private fun newPlanId(): Long {
+        lastPlanId = maxOf(lastPlanId + 1, System.currentTimeMillis())
+        return lastPlanId
+    }
+
+    private fun persistPlan(updated: List<PlannedDonation>) {
+        plan.value = updated
+        viewModelScope.launch(Dispatchers.IO) { savePlannedDonations(context, updated) }
     }
 
     fun deleteMedication(record: MedicationRecord) {

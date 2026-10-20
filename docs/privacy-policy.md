@@ -11,6 +11,7 @@
 - 프로필: 이름(선택), 생년월일, 성별, 체중·신장, 60~64세 헌혈 경험 여부, 자주 헌혈하는 지역
 - 헌혈 기록: 헌혈 종류, 헌혈일, 채혈량, 헌혈증서 번호, 헌혈 장소
 - 의료 정보: 헌혈 제한 약물과 복용일, 감염병 이력, 해외·위험지역 체류 이력
+- 헌혈 계획: 계획한 헌혈의 종류와 날짜
 - 앱 설정: 화면 테마
 
 ## 2. 카메라와 사진
@@ -55,7 +56,7 @@ Effective: October 19, 2026
 
 BDCalculator ("the app") is an unofficial app made by the independent developer WKD1570 and is not affiliated with the Korean Red Cross. The app has no accounts and no server. What you enter stays on your device; the developer never receives or sees it.
 
-**Stored on your device only**, when you enter it, and used only to calculate your next eligible donation dates, annual donation volume and eligibility: your profile (optional name, birth date, sex, weight and height, whether you donated at 60–64, your usual donation region), donation records (type, date, volume, certificate number, place), medical information (restricted medications and dates, infectious disease history, travel and stays in risk areas) and the theme setting.
+**Stored on your device only**, when you enter it, and used only to calculate your next eligible donation dates, annual donation volume and eligibility: your profile (optional name, birth date, sex, weight and height, whether you donated at 60–64, your usual donation region), donation records (type, date, volume, certificate number, place), medical information (restricted medications and dates, infectious disease history, travel and stays in risk areas), planned donations (type and date) and the theme setting.
 
 **Camera and photos.** The camera or a photo is used only when you tap "사진으로 채우기" (fill from photo). Text recognition runs on the device and photos are never sent off it. Photos taken with the in-app camera may remain in the app's cache until you clear the app's data or uninstall it. Photos from your gallery are chosen through Android's photo picker, so the app reads only the photo you pick.
 

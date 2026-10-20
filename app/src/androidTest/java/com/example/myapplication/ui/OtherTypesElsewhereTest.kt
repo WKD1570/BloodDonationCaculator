@@ -47,7 +47,7 @@ class OtherTypesElsewhereTest {
 
     @Test
     fun calendarLegendHasAnEntryPerType() {
-        show { DonationCalendarCard(records = records, today = today, nextByType = nextByType) }
+        show { DonationCalendarCard(records = records, today = today, nextByType = nextByType, plan = emptyList(), onMore = {}) }
         composeTestRule.onNodeWithText("백혈구성분").assertExists()
         composeTestRule.onNodeWithText("조혈모세포 기증").assertExists()
         composeTestRule.onNodeWithText("기타").assertDoesNotExist()

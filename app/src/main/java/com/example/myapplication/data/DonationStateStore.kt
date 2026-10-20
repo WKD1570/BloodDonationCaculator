@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import com.example.myapplication.model.DonationRecord
 import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
+import com.example.myapplication.model.PlannedDonation
 import com.example.myapplication.model.Sex
 import com.example.myapplication.model.ThemeMode
 import java.net.URLDecoder
@@ -21,6 +22,7 @@ private const val KEY_PROFILE_DONATED_60_64 = "profile_donated_60_64"
 private const val KEY_PROFILE_PREFERRED_PROVINCE = "profile_preferred_province"
 private const val KEY_DONATION_RECORDS = "donation_records"
 private const val KEY_THEME_MODE = "theme_mode"
+private const val KEY_PLANNED_DONATIONS = "planned_donations"
 
 /**
  * Reads the saved theme preference, falling back to [ThemeMode.SYSTEM] both when nothing has been
@@ -183,3 +185,32 @@ private fun migrateLegacyState(
     }
     return records
 }
+
+/** The 헌혈 계획 page's planned donations; days that have passed are the caller's to drop. */
+fun loadPlannedDonations(context: Context): List<PlannedDonation> {
+    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    return prefs.getString(KEY_PLANNED_DONATIONS, null)?.let(::decodePlan).orEmpty()
+}
+
+fun savePlannedDonations(context: Context, plan: List<PlannedDonation>) {
+    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    prefs.edit {
+        if (plan.isEmpty()) remove(KEY_PLANNED_DONATIONS) else putString(KEY_PLANNED_DONATIONS, encodePlan(plan))
+    }
+}
+
+/** One planned donation per line, as id|TYPE|date. */
+internal fun encodePlan(plan: List<PlannedDonation>): String =
+    plan.joinToString("\n") { "${it.id}|${it.type.name}|${it.date}" }
+
+/** Reads [encodePlan]'s format back, dropping any line that doesn't parse rather than the whole plan. */
+internal fun decodePlan(raw: String): List<PlannedDonation> =
+    raw.split("\n").filter { it.isNotBlank() }.mapNotNull { line ->
+        val parts = line.split("|")
+        if (parts.size < 3) return@mapNotNull null
+        PlannedDonation(
+            id = parts[0].toLongOrNull() ?: return@mapNotNull null,
+            type = runCatching { DonationType.valueOf(parts[1]) }.getOrNull() ?: return@mapNotNull null,
+            date = runCatching { LocalDate.parse(parts[2]) }.getOrNull() ?: return@mapNotNull null
+        )
+    }

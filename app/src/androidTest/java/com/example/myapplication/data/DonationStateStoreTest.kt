@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.SharedPreferences
 import androidx.test.platform.app.InstrumentationRegistry
+import com.example.myapplication.model.DonationType
 import com.example.myapplication.model.DonorProfile
+import com.example.myapplication.model.PlannedDonation
+import java.time.LocalDate
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -44,5 +47,18 @@ class DonationStateStoreTest {
         saveDonorProfile(context, DonorProfile(preferredProvince = null))
 
         assertNull(loadDonorProfile(context).preferredProvince)
+    }
+
+    @Test
+    fun aPlanIsSavedAndClearedWithoutTouchingTheProfile() {
+        saveDonorProfile(context, DonorProfile(name = "홍길동"))
+        val plan = listOf(PlannedDonation(1, DonationType.PLATELET, LocalDate.of(2026, 10, 24)))
+
+        savePlannedDonations(context, plan)
+        assertEquals(plan, loadPlannedDonations(context))
+
+        savePlannedDonations(context, emptyList())
+        assertEquals(emptyList<PlannedDonation>(), loadPlannedDonations(context))
+        assertEquals("홍길동", loadDonorProfile(context).name)
     }
 }

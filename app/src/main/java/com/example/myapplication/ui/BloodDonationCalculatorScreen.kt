@@ -77,6 +77,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -104,6 +105,7 @@ import com.example.myapplication.data.recognizeCertificateInfo
 import com.example.myapplication.domain.ANNUAL_LIMIT_ML
 import com.example.myapplication.domain.BloodDonationInfo
 import com.example.myapplication.domain.IntegratedNextResult
+import com.example.myapplication.domain.PlanCheck
 import com.example.myapplication.domain.Reason
 import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_HEIGHT_CM
 import com.example.myapplication.domain.BLOOD_VOLUME_TABLE_WEIGHT_KG
@@ -230,12 +232,14 @@ fun BloodDonationCalculatorScreen(
 
     var selectedScreen by remember { mutableStateOf(Screen.STATUS) }
     var formMode by remember { mutableStateOf<RecordFormMode?>(null) }
+    // 헌혈 계획, opened from the calendar's 더보기: a page of its own, so the tabs hide meanwhile.
+    var planning by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = PageBg,
         topBar = { AppTopBar(onToggleTheme = onToggleTheme) },
-        bottomBar = { BottomNavBar(selectedScreen, onSelect = { selectedScreen = it }) }
+        bottomBar = { if (!planning) BottomNavBar(selectedScreen, onSelect = { selectedScreen = it }) }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -243,8 +247,20 @@ fun BloodDonationCalculatorScreen(
                 .padding(innerPadding),
             contentAlignment = Alignment.TopCenter
         ) {
-            // The center list is lazy and scrolls on its own, so it sits outside the page scroll.
-            if (selectedScreen == Screen.CENTERS) {
+            // The planner and the center list scroll on their own, so they sit outside the page scroll.
+            if (planning) {
+                DonationPlannerScreen(
+                    records = records,
+                    plan = state.plan,
+                    nextByType = state.nextByType,
+                    today = today,
+                    onToggleDay = viewModel::togglePlannedDay,
+                    onRemove = viewModel::removePlanned,
+                    onFill = viewModel::fillEarliest,
+                    onClear = viewModel::clearPlan,
+                    onBack = { planning = false }
+                )
+            } else if (selectedScreen == Screen.CENTERS) {
                 BloodCenterListScreen(preferredProvince = profile.preferredProvince)
             } else Column(
                 modifier = Modifier
@@ -259,7 +275,9 @@ fun BloodDonationCalculatorScreen(
                             medications = state.medications,
                             health = state.health,
                             today = today,
-                            nextByType = state.nextByType
+                            nextByType = state.nextByType,
+                            plan = state.plan,
+                            onOpenPlanner = { planning = true }
                         )
                         Screen.INPUT -> InputScreen(
                             records = records,
@@ -653,7 +671,7 @@ private fun ColoredToggleButton(
 }
 
 @Composable
-private fun TypeToggleRow(types: List<DonationType>, selected: DonationType?, onSelect: (DonationType) -> Unit) {
+internal fun TypeToggleRow(types: List<DonationType>, selected: DonationType?, onSelect: (DonationType) -> Unit) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth().selectableGroup()) {
         types.forEach { type ->
             val info = TYPE_INFO.getValue(type)
@@ -693,7 +711,7 @@ private fun WholeBloodVolumeToggleRow(selectedDrawnMl: Int?, onSelect: (Int) -> 
 }
 
 @Composable
-private fun PrimaryButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
+internal fun PrimaryButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
     val interactionSource = remember { MutableInteractionSource() }
     val bg by rememberHoverColor(interactionSource, Accent, AccentHover)
     Box(
@@ -1510,7 +1528,9 @@ private fun StatusScreen(
     medications: List<MedicationRecord>,
     health: HealthHistoryState,
     today: LocalDate,
-    nextByType: Map<DonationType, IntegratedNextResult>
+    nextByType: Map<DonationType, IntegratedNextResult>,
+    plan: List<PlanCheck>,
+    onOpenPlanner: () -> Unit
 ) {
     CumulativeVolumeGauge(records, today)
 
@@ -1525,7 +1545,7 @@ private fun StatusScreen(
         Spacer(Modifier.height(20.dp))
     }
 
-    DonationCalendarCard(records, today, nextByType)
+    DonationCalendarCard(records, today, nextByType, plan, onOpenPlanner)
 }
 
 @Composable
@@ -1689,19 +1709,10 @@ private fun NextDateRow(type: DonationType, result: IntegratedNextResult) {
 internal fun DonationCalendarCard(
     records: List<DonationRecord>,
     today: LocalDate,
-    nextByType: Map<DonationType, IntegratedNextResult>
+    nextByType: Map<DonationType, IntegratedNextResult>,
+    plan: List<PlanCheck>,
+    onMore: () -> Unit
 ) {
-    val donationTypesByDay = remember(records) {
-        records.groupBy({ it.date }) { it.type }
-    }
-    // A permanently prohibited type has no next date, so it contributes no calendar marker.
-    val nextTypesByDay = remember(nextByType) {
-        nextByType.entries
-            .mapNotNull { (type, result) ->
-                (result as? IntegratedNextResult.Eligible)?.let { it.nextDate to type }
-            }
-            .groupBy({ (date, _) -> date }, { (_, type) -> type })
-    }
     var displayedMonth by remember { mutableStateOf(YearMonth.from(today)) }
 
     Text("🗓️ 헌혈 캘린더", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
@@ -1714,93 +1725,144 @@ internal fun DonationCalendarCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(Modifier.padding(16.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CalendarNavButton("‹") { displayedMonth = displayedMonth.minusMonths(1) }
-                Text(
-                    "${displayedMonth.year}년 ${displayedMonth.monthValue}월",
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary
-                )
-                CalendarNavButton("›") { displayedMonth = displayedMonth.plusMonths(1) }
-            }
-
-            Spacer(Modifier.height(12.dp))
-
-            Row(Modifier.fillMaxWidth()) {
-                listOf("일", "월", "화", "수", "목", "금", "토").forEach { d ->
-                    Text(
-                        d,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = TextTertiary,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-
-            Spacer(Modifier.height(4.dp))
-
-            val firstOfMonth = displayedMonth.atDay(1)
-            val leading = firstOfMonth.dayOfWeek.value % 7
-            val daysInMonth = displayedMonth.lengthOfMonth()
-            val rows = (leading + daysInMonth + 6) / 7
-
-            for (row in 0 until rows) {
-                Row(Modifier.fillMaxWidth()) {
-                    for (col in 0 until 7) {
-                        val dayNum = row * 7 + col - leading + 1
-                        Box(
-                            modifier = Modifier.weight(1f).height(44.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            if (dayNum in 1..daysInMonth) {
-                                val date = displayedMonth.atDay(dayNum)
-                                CalendarDayCell(
-                                    day = dayNum,
-                                    isToday = date == today,
-                                    donationTypes = donationTypesByDay[date].orEmpty(),
-                                    nextTypes = nextTypesByDay[date].orEmpty()
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+            CalendarMonthGrid(displayedMonth, { displayedMonth = it }, today, records, nextByType, plan)
 
             Spacer(Modifier.height(10.dp))
             HorizontalDivider(color = DividerColor)
             Spacer(Modifier.height(10.dp))
 
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.size(9.dp).clip(CircleShape).background(TextSecondary))
-                    Spacer(Modifier.width(6.dp))
-                    Text("헌혈한 날", fontSize = 11.sp, color = TextSecondary)
-                    Spacer(Modifier.width(14.dp))
-                    Box(
-                        Modifier
-                            .size(9.dp)
-                            .clip(CircleShape)
-                            .border(1.5.dp, TextSecondary, CircleShape)
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text("다음 헌혈 가능일", fontSize = 11.sp, color = TextSecondary)
-                }
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    DonationType.entries.forEach { type ->
-                        val info = TYPE_INFO.getValue(type)
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Box(Modifier.size(8.dp).clip(CircleShape).background(info.color))
-                            Spacer(Modifier.width(5.dp))
-                            Text(info.label.removeSuffix("헌혈"), fontSize = 11.sp, color = TextSecondary)
-                        }
+            CalendarLegend()
+
+            Spacer(Modifier.height(4.dp))
+            TextButton(onClick = onMore, modifier = Modifier.fillMaxWidth()) {
+                Text("더보기 ›", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = Accent)
+            }
+        }
+    }
+}
+
+/**
+ * One month of the calendar - ‹ month › header, weekday row and days - marking [records], the next
+ * eligible day of each type in [nextByType], and [plan]. [onDayClick] makes today and later days
+ * tappable, as on the 헌혈 계획 page.
+ */
+@Composable
+internal fun CalendarMonthGrid(
+    month: YearMonth,
+    onMonthChange: (YearMonth) -> Unit,
+    today: LocalDate,
+    records: List<DonationRecord>,
+    nextByType: Map<DonationType, IntegratedNextResult>,
+    plan: List<PlanCheck>,
+    onDayClick: ((LocalDate) -> Unit)? = null
+) {
+    val donationTypesByDay = remember(records) {
+        records.groupBy({ it.date }) { it.type }
+    }
+    // A permanently prohibited type has no next date, so it contributes no calendar marker.
+    val nextTypesByDay = remember(nextByType) {
+        nextByType.entries
+            .mapNotNull { (type, result) ->
+                (result as? IntegratedNextResult.Eligible)?.let { it.nextDate to type }
+            }
+            .groupBy({ (date, _) -> date }, { (_, type) -> type })
+    }
+    val plannedByDay = remember(plan) { plan.associateBy { it.planned.date } }
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CalendarNavButton("‹") { onMonthChange(month.minusMonths(1)) }
+        Text(
+            "${month.year}년 ${month.monthValue}월",
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            color = TextPrimary
+        )
+        CalendarNavButton("›") { onMonthChange(month.plusMonths(1)) }
+    }
+
+    Spacer(Modifier.height(12.dp))
+
+    Row(Modifier.fillMaxWidth()) {
+        listOf("일", "월", "화", "수", "목", "금", "토").forEach { d ->
+            Text(
+                d,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = TextTertiary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+
+    Spacer(Modifier.height(4.dp))
+
+    val firstOfMonth = month.atDay(1)
+    val leading = firstOfMonth.dayOfWeek.value % 7
+    val daysInMonth = month.lengthOfMonth()
+    val rows = (leading + daysInMonth + 6) / 7
+
+    for (row in 0 until rows) {
+        Row(Modifier.fillMaxWidth()) {
+            for (col in 0 until 7) {
+                val dayNum = row * 7 + col - leading + 1
+                Box(
+                    modifier = Modifier.weight(1f).height(44.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (dayNum in 1..daysInMonth) {
+                        val date = month.atDay(dayNum)
+                        CalendarDayCell(
+                            day = dayNum,
+                            isToday = date == today,
+                            donationTypes = donationTypesByDay[date].orEmpty(),
+                            nextTypes = nextTypesByDay[date].orEmpty(),
+                            planned = plannedByDay[date],
+                            onClick = onDayClick?.takeIf { !date.isBefore(today) }?.let { click -> { click(date) } }
+                        )
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CalendarLegend() {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.size(9.dp).clip(CircleShape).background(TextSecondary))
+                Spacer(Modifier.width(6.dp))
+                Text("헌혈한 날", fontSize = 11.sp, color = TextSecondary)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(9.dp)
+                        .clip(CircleShape)
+                        .border(1.5.dp, TextSecondary, CircleShape)
+                )
+                Spacer(Modifier.width(6.dp))
+                Text("다음 헌혈 가능일", fontSize = 11.sp, color = TextSecondary)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.size(7.dp).border(1.dp, TextSecondary, CircleShape))
+                Spacer(Modifier.width(6.dp))
+                Text("계획", fontSize = 11.sp, color = TextSecondary)
+            }
+        }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            DonationType.entries.forEach { type ->
+                val info = TYPE_INFO.getValue(type)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.size(8.dp).clip(CircleShape).background(info.color))
+                    Spacer(Modifier.width(5.dp))
+                    Text(info.label.removeSuffix("헌혈"), fontSize = 11.sp, color = TextSecondary)
                 }
             }
         }
@@ -1812,7 +1874,9 @@ private fun CalendarDayCell(
     day: Int,
     isToday: Boolean,
     donationTypes: List<DonationType>,
-    nextTypes: List<DonationType>
+    nextTypes: List<DonationType>,
+    planned: PlanCheck?,
+    onClick: (() -> Unit)?
 ) {
     val bg = if (isToday) InputBgHover else Color.Transparent
     val textColor = if (isToday) TextPrimary else CalendarDayText
@@ -1821,7 +1885,8 @@ private fun CalendarDayCell(
             .fillMaxSize()
             .padding(2.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(bg),
+            .background(bg)
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(3.dp))
@@ -1841,16 +1906,40 @@ private fun CalendarDayCell(
             )
         }
         Spacer(Modifier.height(2.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(2.dp), verticalAlignment = Alignment.CenterVertically) {
             donationTypes.take(3).forEach { type ->
                 Box(Modifier.size(5.dp).clip(CircleShape).background(TYPE_INFO.getValue(type).color))
             }
+            planned?.let { PlannedMark(it) }
         }
     }
 }
 
+/** A planned day: a hollow dot in its type's color, or a red × when it wouldn't be allowed. */
 @Composable
-private fun CalendarNavButton(symbol: String, onClick: () -> Unit) {
+private fun PlannedMark(check: PlanCheck) {
+    val info = TYPE_INFO.getValue(check.planned.type)
+    if (check.isAllowed) {
+        Box(
+            Modifier
+                .size(5.dp)
+                .border(1.dp, info.color, CircleShape)
+                .semantics { contentDescription = "${info.label} 계획" }
+        )
+    } else {
+        Text(
+            "×",
+            fontSize = 9.sp,
+            lineHeight = 9.sp,
+            fontWeight = FontWeight.Bold,
+            color = ErrorText,
+            modifier = Modifier.semantics { contentDescription = "${info.label} 계획 (제한)" }
+        )
+    }
+}
+
+@Composable
+internal fun CalendarNavButton(symbol: String, onClick: () -> Unit) {
     val interactionSource = remember { MutableInteractionSource() }
     val bg by rememberHoverColor(interactionSource, InputBg, InputBgHover)
     Box(
