@@ -7,10 +7,11 @@ plugins {
 }
 
 // The Play upload key, read from the gitignored keystore.properties in the project root (see
-// keystore.properties.example). Without that file release builds come out unsigned.
+// keystore.properties.example). Without that file release builds come out unsigned. Read as UTF-8
+// rather than Properties' default Latin-1, so a keystore path with Korean in it still resolves.
 val keystoreProperties = Properties().apply {
     val file = rootProject.file("keystore.properties")
-    if (file.exists()) file.inputStream().use { load(it) }
+    if (file.exists()) file.reader(Charsets.UTF_8).use { load(it) }
 }
 
 android {

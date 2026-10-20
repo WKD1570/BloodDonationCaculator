@@ -10,13 +10,13 @@ Everything prepared for publishing the app on Google Play, and what's left to do
 | Store listing text and policy-form answers (below) | Drafted |
 | Feature graphic 1024×500 | To do |
 | Phone screenshots, 2–8 | To do. Use demo data, not your own records |
-| Signed `.aab` | Run step 3 once `keystore.properties` exists |
+| Signed `.aab` | Built with the new upload key. Rebuild with `./gradlew bundleRelease` |
 
 ## Steps, in order
 
 1. **Developer account.** Create one at [play.google.com/console](https://play.google.com/console): a one-time $25 fee plus identity verification, which can take a few days.
    A *personal* account created after November 13, 2023 must run a closed test with at least 12 testers who stay opted in for 14 days in a row before production unlocks (step 8). Older personal accounts and organization accounts skip that step.
-2. **Upload key.** `무제.jks` in the project root is your upload key. Back it up together with its passwords. Then copy `keystore.properties.example` to `keystore.properties`, which is gitignored, and fill in the store password, key alias and key password. On the first upload, Play App Signing creates the key that actually signs the app on users' phones. If you lose the upload key, you can ask Play Console support to reset it.
+2. **Upload key.** The upload key is `~/keystores/bdcalculator-upload.jks`, alias `upload`. It's kept outside the repo, and its password is only in the gitignored `keystore.properties`. Back up both the keystore file and the password, ideally in a password manager plus an offline copy. Never use the old `무제.jks`: it was committed in PR #1 and is still downloadable from that pull request's history, so treat it as public. On the first upload, Play App Signing creates the key that actually signs the app on users' phones, and registers this one as your upload key. If the upload key is ever lost or leaked, Play Console support can reset it.
 3. **Build the bundle.** Run `./gradlew bundleRelease`. The signed bundle is at `app/build/outputs/bundle/release/app-release.aab`. Android Studio's *Build → Generate Signed App Bundle* does the same without `keystore.properties`. Release builds are shrunk with R8, and the keep rules for the bundled JSON files are in `app/src/main/keepRules/rules.keep`.
 4. **Publish the privacy policy.** Merge to `main`, then in the GitHub repo go to *Settings → Pages* and choose *Deploy from a branch*, branch `main`, folder `/docs`. The policy appears at `https://wkd1570.github.io/BloodDonationCaculator/privacy-policy.html`. Open it in a browser to check before entering it in Play Console.
 5. **Create the app** in Play Console: default language Korean, type app, free.
