@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """
 Builds app/src/main/assets/blood_centers.json - every 헌혈의 집 the 헌혈의 집 tab lists - from
-대한적십자사's open data CSV (공공데이터포털 "대한적십자사_헌혈의집 정보"), with each center's
+대한적십자사's open data CSV (공공데이터포털 "대한적십자사_헌혈의집 정보", https://www.data.go.kr/data/15050729/fileData.do,
+licensed 이용허락범위 제한 없음, updated yearly), with each center's
 성분헌혈 machines merged in from a second CSV.
 
 The centers CSV ships in CP949 with the columns 혈액원, 헌혈의 집, 구분, 주소지, 전화번호. Its file name
 (kept as "source" in the JSON) carries the date the app shows the list as of.
 
-The machines CSV has 권역 (혈액원) and 지점명, then one "<model> (혈장)" or "<model> (혈소판)" column
+The machines CSV is transcribed from 헤마토필리아's post 「헌혈의집 성분채혈기기 현황」 on DC Inside's
+헌혈 마이너 갤러리 (https://gall.dcinside.com/mgallery/board/view/?id=blooddonation&no=79901). Like the centers CSV, its file name
+carries its date (bd_mechanical_20261014.csv), kept as "machineSource" and shown under the list.
+It has 권역 (혈액원) and 지점명, then one "<model> (혈장)" or "<model> (혈소판)" column
 per machine model holding how many the center has. Its total columns and closing 합계 row are
 ignored. A center gets "machines": {"plasma": {model: count}, "platelet": {...}} listing only the
 models it has; a center the CSV doesn't cover gets no "machines" at all (기기 정보 없음 in the app).

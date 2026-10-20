@@ -101,9 +101,21 @@ class BloodCenterRepositoryTest {
     }
 
     @Test
+    fun `the machines' date comes from the machines file name`() {
+        val center = """{"name": "A센터", "address": "서울"}"""
+        val dated = parse("""{"source": "헌혈의집_20260701.csv", "machineSource": "bd_mechanical_20261014.csv", "centers": [$center]}""")
+        assertEquals("2026.10.14", dated.machinesAsOf)
+        assertEquals("2026.07.01", dated.asOf)
+
+        assertNull(parse("""{"machineSource": "bd_mechanical.csv", "centers": [$center]}""").machinesAsOf)
+        assertNull(parse("""{"centers": [$center]}""").machinesAsOf)
+    }
+
+    @Test
     fun `bundled asset carries machines for nearly every center`() {
         val list = File("src/main/assets/$BLOOD_CENTERS_ASSET").inputStream().use(::parseBloodCenters)
         val covered = list.centers.count { it.machines != null }
         assertTrue("machines for only $covered of ${list.centers.size}", covered >= list.centers.size * 9 / 10)
+        assertTrue(list.machinesAsOf != null)
     }
 }

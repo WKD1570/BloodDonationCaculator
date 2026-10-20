@@ -204,9 +204,14 @@ fun BloodCenterListScreen(
                     item(key = "source") {
                         Text(
                             buildString {
-                                append("대한적십자사 헌혈의 집 정보")
+                                append("헌혈의 집: 공공데이터포털 「대한적십자사_헌혈의집 정보」")
                                 state.asOf?.let { append(" (${it} 기준)") }
-                                append(". 운영 시간·휴무일과 성분헌혈 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
+                                // The machines come from a donor community's post, credited to its author.
+                                if (state.machines.isNotEmpty()) {
+                                    append("\n성분헌혈 기기: 헌혈 마이너 갤러리 헤마토필리아님의 「헌혈의집 성분채혈기기 현황」")
+                                    state.machinesAsOf?.let { append(" (${it} 기준)") }
+                                }
+                                append("\n운영 시간·휴무일과 성분헌혈 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
                             },
                             fontSize = 10.sp,
                             color = TextTertiary,

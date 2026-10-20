@@ -26,6 +26,8 @@ data class BloodCenterListUiState(
     val machines: List<Pair<MachineFilter, Int>> = emptyList(),
     /** Date of the source CSV ("2026.07.01"), shown under the list. */
     val asOf: String? = null,
+    /** Date of the machines CSV ("2026.10.14"), shown under the list with its credit. */
+    val machinesAsOf: String? = null,
     val query: String = "",
     /** Null means 전체. */
     val province: String? = null,
@@ -57,6 +59,7 @@ class BloodCenterListViewModel(application: Application) : AndroidViewModel(appl
                     provinces = provinceCounts(list.centers),
                     machines = machineCounts(list.centers),
                     asOf = list.asOf,
+                    machinesAsOf = list.machinesAsOf,
                     visible = list.centers
                 )
             } catch (e: BloodCenterDataException) {

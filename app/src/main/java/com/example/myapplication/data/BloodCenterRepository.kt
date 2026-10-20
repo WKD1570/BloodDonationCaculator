@@ -19,10 +19,15 @@ class BloodCenterDataException(message: String, cause: Throwable? = null) : Exce
  * The bundled list.
  *
  * @param asOf The date of the CSV it was built from, as "2026.07.01", when the file name has one.
+ * @param machinesAsOf The same for the machines CSV the centers' machines came from.
  */
-data class BloodCenterList(val centers: List<BloodCenter>, val asOf: String?)
+data class BloodCenterList(val centers: List<BloodCenter>, val asOf: String?, val machinesAsOf: String? = null)
 
-private class BloodCentersJson(val source: String? = null, val centers: List<BloodCenterJson?>? = null)
+private class BloodCentersJson(
+    val source: String? = null,
+    val machineSource: String? = null,
+    val centers: List<BloodCenterJson?>? = null
+)
 
 /** All-nullable for the same reason as ProhibitedDrugJson: Gson bypasses Kotlin's null checks. */
 private class BloodCenterJson(
@@ -47,6 +52,10 @@ private fun Map<String, Int?>?.models(): Map<String, Int> = buildMap {
 /** "대한적십자사_헌혈의집_정보_20260701.csv" -> 2026, 07, 01. */
 private val SOURCE_DATE = Regex("(20\\d{2})(\\d{2})(\\d{2})")
 
+/** "2026.07.01" out of a source file name that carries its date, else null. */
+private fun dateIn(fileName: String?): String? =
+    fileName?.let { SOURCE_DATE.find(it) }?.destructured?.let { (y, m, d) -> "$y.$m.$d" }
+
 /**
  * Parses the bundled list. Kept free of Android types so JVM unit tests can use it directly.
  * Entries without a name or address are skipped.
@@ -70,8 +79,7 @@ fun parseBloodCenters(input: InputStream): BloodCenterList {
         )
     }
     if (centers.isEmpty()) throw BloodCenterDataException("$BLOOD_CENTERS_ASSET contained no centers")
-    val asOf = raw?.source?.let { SOURCE_DATE.find(it) }?.destructured?.let { (y, m, d) -> "$y.$m.$d" }
-    return BloodCenterList(centers, asOf)
+    return BloodCenterList(centers, asOf = dateIn(raw?.source), machinesAsOf = dateIn(raw?.machineSource))
 }
 
 /** Reads and parses the bundled list, caching it for the process lifetime. Entirely offline. */

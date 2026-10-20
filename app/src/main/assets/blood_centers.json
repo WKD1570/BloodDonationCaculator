@@ -1,6 +1,6 @@
 {
  "source": "대한적십자사_헌혈의집_정보_20260701.csv",
- "machineSource": "bd_mechanical.csv",
+ "machineSource": "bd_mechanical_20261014.csv",
  "centers": [
   {
    "bloodBank": "서울중앙",

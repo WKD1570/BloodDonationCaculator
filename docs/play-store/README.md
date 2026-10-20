@@ -73,11 +73,15 @@ Alternative: `연간채혈량 계산기`, the title shown inside the app. The la
 · 이 앱은 의료기기가 아니며, 질병을 진단·치료·치유·예방하지 않습니다. 실제 헌혈 가능 여부는 헌혈의 집 문진과 검사로 결정되니, 건강에 관한 판단은 의사 등 의료 전문가와 상담하세요.
 · 헌혈 기준·약물·지역·기기 정보는 공개 자료를 바탕으로 정리했으며, 빠졌거나 바뀐 내용이 있을 수 있습니다.
 
-자료 출처: 대한적십자사 공개 자료, 공공데이터포털 「대한적십자사_헌혈의집 정보」(2026.07.01 기준)
+자료 출처: 대한적십자사 공개 자료, 공공데이터포털 「대한적십자사_헌혈의집 정보」(2026.07.01 기준), 디시인사이드 헌혈 마이너 갤러리 「헌혈의집 성분채혈기기 현황」(헤마토필리아, 2026.10.14 기준)
 문의: p9131015@naver.com
 ```
 
-Before publishing, check the data rights. Confirm the license of the 공공데이터포털 dataset (shown on its page), and where `tools/data/bd_mechanical.csv` comes from and whether you may publish it. If it has a named source, add it to the 자료 출처 line.
+Before publishing, check the data rights:
+
+- **Machine data.** The 성분헌혈 machine counts are transcribed from 헤마토필리아's post [「헌혈의집 성분채혈기기 현황 (26.10.14. 기준)」](https://gall.dcinside.com/mgallery/board/view/?id=blooddonation&no=79901) on DC Inside's 헌혈 마이너 갤러리. The post states no reuse terms, so ask the author for permission before release, by commenting on the post or messaging them in the gallery. Keep the credit, which is already in the 자료 출처 line above and under the app's 헌혈의 집 list. If they decline, take the machine data out of the app before releasing.
+- **Center list.** The 공공데이터포털 dataset [「대한적십자사_헌혈의집 정보」](https://www.data.go.kr/data/15050729/fileData.do) is licensed 이용허락범위 제한 없음 (no restrictions). Attribution isn't required, but the app, this listing and the README cite it anyway.
+- **Dates.** The machine data (2026.10.14) is newer than the center list (2026.07.01). 마곡역센터, 가산센터 and 정읍가두 have machine data but aren't in the July list, and they're probably new. The portal updates the dataset once a year, and its current file is still the 2026.07.01 one. To list newer centers before the next update, they'd have to be added by hand.
 
 **첫 출시 출시 노트:**
 
