@@ -1,12 +1,8 @@
-# Add project specific R8 rules here.
-# AGP will combine all keep rule files in src/main/keepRules to pass to R8
-#
-# For more details, see
-#   https://d.android.com/r/tools/r8/keep-rules
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Gson fills these in by reflection from the bundled assets (blood_centers.json,
+# prohibited_drugs.json, restricted_region_shapes.json), matching each JSON key to a field name.
+# Keep the field names, and the no-argument constructor Kotlin generates when every parameter has
+# a default, or R8 renames the fields and every list loads empty.
+-keep class com.example.myapplication.data.*Json {
+    <fields>;
+    <init>();
+}

@@ -10,6 +10,7 @@ import com.example.myapplication.model.InfectionRules
 import com.example.myapplication.model.InternationalMalariaRules
 import com.example.myapplication.model.MalariaCountry
 import com.example.myapplication.model.MalariaRestriction
+import com.example.myapplication.model.OverseasTravelRule
 import com.example.myapplication.model.VcjdRule
 import java.io.IOException
 import java.io.InputStream
@@ -156,6 +157,14 @@ private fun parseInternational(root: Element): InternationalMalariaRules {
     )
 }
 
+private fun parseOverseasTravel(root: Element): OverseasTravelRule {
+    val travel = root.child("OverseasTravel")
+    return OverseasTravelRule(
+        excludedCountry = travel.attr("excludedCountry"),
+        restriction = travel.child("Restriction").toRestriction()
+    )
+}
+
 /**
  * Parses the `blood_donation_rules.xml` payload. Uses the JDK's DOM parser rather than Android's
  * XmlPullParser so it runs directly in JVM unit tests. Anything a restriction would be computed
@@ -172,7 +181,8 @@ fun parseInfectionRules(input: InputStream): InfectionRules {
         diseases = parseDiseases(root),
         vcjdRules = parseVcjd(root),
         domesticMalaria = parseDomestic(root),
-        internationalMalaria = parseInternational(root)
+        internationalMalaria = parseInternational(root),
+        overseasTravel = parseOverseasTravel(root)
     )
     if (rules.diseases.isEmpty()) fail("contained no diseases")
     return rules

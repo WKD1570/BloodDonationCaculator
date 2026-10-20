@@ -17,3 +17,6 @@ local.properties
 # Signing keystores
 *.jks
 *.keystore
+
+# Play upload key settings (see keystore.properties.example)
+keystore.properties

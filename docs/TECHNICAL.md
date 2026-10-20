@@ -18,6 +18,7 @@
    - [2.5 State Management & Data Flow](#25-state-management--data-flow)
    - [2.6 Persistence Strategy](#26-persistence-strategy)
    - [2.7 Theming](#27-theming)
+   - [2.8 헌혈의 집 목록 (Blood Center List)](#28-헌혈의-집-목록-blood-center-list)
 3. [Calculation Logic & Formulas](#3-calculation-logic--formulas)
    - [3.1 Domain Constants](#31-domain-constants)
    - [3.2 Physical Eligibility (Nadler's Formula)](#32-physical-eligibility-nadlers-formula)
@@ -94,16 +95,19 @@ com.example.myapplication
 ├── model/                           Plain data types (no logic beyond simple derivations)
 │   ├── DonationType.kt              enum: volume + interval per type
 │   ├── DonationRecord.kt            One donation event
-│   ├── DonorProfile.kt              Physical profile + Sex enum
+│   ├── DonorProfile.kt              Physical profile, 자주 헌혈하는 지역 + Sex enum
 │   ├── MedicationRecord.kt          Room @Entity: one drug intake
 │   ├── RestrictedDrug.kt            Catalog entry
+│   ├── BloodCenter.kt               One 헌혈의 집 and its 성분헌혈 machines
 │   └── ThemeMode.kt                 SYSTEM / LIGHT / DARK
 ├── domain/                          Pure calculation — the rules engine
 │   ├── DonationCalculatorEngine.kt  Interval / annual count / annual volume rules
 │   ├── PhysicalEligibilityCalculator.kt  Age / weight / Nadler blood volume
 │   ├── DrugRestrictionCalculator.kt Drug catalog fallback + restriction math
 │   ├── IntegratedEligibility.kt     Merges donation + medication constraints
-│   └── CertificateParser.kt         OCR text → structured certificate fields
+│   ├── CertificateParser.kt         OCR text → structured certificate fields
+│   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈의 집
+│   └── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈의 집
 ├── data/                            Persistence + device I/O
 │   ├── DonationStateStore.kt        SharedPreferences (profile, records, theme)
 │   ├── AppDatabase.kt               Room database singleton
@@ -111,12 +115,15 @@ com.example.myapplication
 │   ├── MedicationHistoryRepository.kt
 │   ├── LocalDateConverters.kt       Room TypeConverter (ISO-8601 text)
 │   ├── ProhibitedDrugRepository.kt  Bundled JSON asset loader
+│   ├── BloodCenterRepository.kt     Bundled 헌혈의 집 list loader
 │   └── CertificateTextRecognizer.kt OCR pipeline (CameraX output → ML Kit)
 └── ui/                              Compose screens + ViewModels
     ├── BloodDonationCalculatorScreen.kt  Root screen, nav, all main composables
     ├── DonationViewModel.kt
     ├── ThemeViewModel.kt
     ├── ProhibitedDrugSearchScreen.kt / ...ViewModel.kt
+    ├── BloodCenterListScreen.kt / ...ViewModel.kt  헌혈의 집 tab (province chips, search, list)
+    ├── PreferredProvinceCard.kt     마이페이지's 자주 헌혈하는 지역 picker
     ├── MedicationHistoryCard.kt
     └── theme/                       Theme.kt, Color.kt, Type.kt
 ```
@@ -267,6 +274,22 @@ internal val PageBg: Color
 They read `LocalDarkTheme` rather than `isSystemInDarkTheme()` so an explicit in-app choice overrides the device setting. `MyApplicationTheme` is the only provider of `LocalDarkTheme`, which keeps the tokens and the Material color scheme from drifting apart.
 
 `ThemeMode.forDarkSelection` means flipping the switch always commits to `LIGHT` or `DARK` — never back to `SYSTEM` — so the choice survives the device later switching itself.
+
+### 2.8 헌혈의 집 목록 (Blood Center List)
+
+The 📍 헌혈의 집 tab lists every 헌혈의 집 from 대한적십자사's open data, with province chips (서울, 경기, … each with its count), machine chips (혈소판 가능, Trima, Amicus, …) and a search over name, 혈액원 and address. Each row counts the center's 성분헌혈 machines ("혈장 3 · 혈소판 2"). Tapping a row expands it to show the models, the phone number, 전화하기 (`ACTION_DIAL`) and 지도에서 보기 — a `map.kakao.com/link/search/…` URL, which opens Kakao Map if installed and the mobile web otherwise. The app itself makes no network call and needs no extra permission; dialing and maps are handed to other apps.
+
+**Data.** `tools/build_blood_centers.py` converts the CSV (`tools/data/*헌혈의집*.csv`, CP949) into `assets/blood_centers.json` (UTF-8). The date in the CSV's file name is shown under the list as "기준" date. The same script merges each center's machines from `tools/data/*mechanical*.csv` (one "<model> (혈장)" or "<model> (혈소판)" column per model; its 합계 row is skipped) as `"machines": {"plasma": {...}, "platelet": {...}}`, listing only the models a center has. The two files name a few centers differently (고속터미널센터/고속터미널역센터, 신매센터/신매광장센터); `NAME_ALIASES` maps those. The script prints any machine row with no matching center (skipped) and any center with no machine row, which gets no `machines` and shows 기기 정보 없음. To update, drop a newer CSV into `tools/data/`, re-run the script and read its warnings.
+
+**Province vs 혈액원.** Chips group by the province in the address (`provinceOf`), not by 혈액원, because a 혈액원 can run centers in a neighbouring province (서울중앙 runs 고양's). Long spellings (서울특별시, 경기도, …) and the 2026 merged name 전남광주 are folded into the short forms.
+
+**자주 헌혈하는 지역.** 마이페이지's `PreferredProvinceCard` saves one province as `DonorProfile.preferredProvince`; tapping the picked chip again clears it. The tab then moves that province's chip right after 전체 (`preferredFirst`) and, under 전체, lists its centers first under "부산 (자주 헌혈하는 지역)" and the rest under "다른 지역" (`splitPreferred`). Both parts keep the search ranking, so a search under 전체 also shows the preferred province's matches first. Once a province chip is picked the list is a single province, so it isn't split. The root passes the province into `BloodCenterListScreen` rather than the list's ViewModel holding a copy, so a change on 마이페이지 shows from the tab's first frame; the tab's own chip, search and open row still survive tab switches as before.
+
+**성분헌혈 기기.** The second chip row (`machineCounts`) starts with 혈소판 가능 — the filter most donors need, since about one center in seven has no 혈소판 machine — then the 혈소판 models, then the 혈장 ones, each kind with the model most centers have first (ties go to the one with more machines). There is no 혈장 가능 chip, as nearly every center has one. A machine chip narrows the list together with the province chip and search (`filterCenters`); tapping it again clears it, and the count line reads "전국 130곳 · 혈소판 가능". A center with no machine data never matches a machine chip. Back undoes search, then the machine chip, then the province chip before it leaves the app.
+
+**Map link.** `mapQueryOf` searches the map app for the road address cut after the building number ("서울 중구 한강대로 405" out of "… 서울역사 지하1층 B05호"), which map search resolves far more reliably than the full address with floor and unit.
+
+**Why no in-app map.** An embedded map (osmdroid/OpenStreetMap) was tried and dropped: it added a library, network and location permissions, and on-device geocoding for an app that is otherwise fully offline, and OpenStreetMap's tile servers require a distinct app User-Agent (they block `com.example.*` IDs). Handing off to the phone's map app covers the same need.
 
 ---
 
@@ -876,7 +899,9 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 - **Version catalog.** All dependency coordinates live in `gradle/libs.versions.toml`; no hardcoded versions in build files.
 - **KSP** (not KAPT) generates Room code.
 - **Core library desugaring** is required — `java.time` is used throughout and `minSdk` is 24.
-- **Release build.** `optimization { enable = false }` — R8/ProGuard is currently **disabled** for release. Enabling it will require keep rules for Room entities and Gson-deserialized models (`ProhibitedDrugJson` is reflectively constructed).
+- **Release build.** `optimization { enable = true }`: R8 shrinks code and resources. Gson fills the `*Json` classes in `data/` by reflection, so `app/src/main/keepRules/rules.keep` keeps their field names and no-argument constructors. A new Gson-parsed class must follow that naming or get its own rule; otherwise its fields come back null in release builds only, while debug builds and tests keep passing. Room, ML Kit, CameraX and lifecycle ship their own rules.
+- **App ID and signing.** `applicationId` is `io.github.wkd1570.bdcalculator`, the Play Store ID, which can't change after the first upload. The Kotlin `namespace` stays `com.example.myapplication`. Release signing reads the upload key from the gitignored `keystore.properties` (see `keystore.properties.example`); without it, release builds come out unsigned. Publishing steps are in `docs/play-store/README.md`.
+- **Launcher icon.** The adaptive icon is vector (`res/drawable/ic_launcher_*.xml`), and its foreground doubles as the monochrome layer. `tools/render_icons.py` (needs Pillow) draws the API 24–25 bitmaps and the 512px Play icon from the same shapes.
 - **`exportSchema = false`** on the Room database. Schema export should be enabled before shipping a version 2 migration.
 
 ---
@@ -888,7 +913,7 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `MainActivity.kt` | Entry point; edge-to-edge, theme resolution |
 | `model/DonationType.kt` | Per-type volume + interval constants |
 | `model/DonationRecord.kt` | One donation event |
-| `model/DonorProfile.kt` | Physical profile, `currentAge()` |
+| `model/DonorProfile.kt` | Physical profile, 자주 헌혈하는 지역, `currentAge()` |
 | `model/MedicationRecord.kt` | Room entity, `eligibleFrom`, permanent sentinel |
 | `model/RestrictedDrug.kt` | Drug catalog entry |
 | `model/ThemeMode.kt` | Theme preference resolution |

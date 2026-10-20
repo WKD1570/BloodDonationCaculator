@@ -11,7 +11,8 @@ data class InfectionRules(
     val diseases: List<DiseaseRule>,
     val vcjdRules: List<VcjdRule>,
     val domesticMalaria: DomesticMalariaRules,
-    val internationalMalaria: InternationalMalariaRules
+    val internationalMalaria: InternationalMalariaRules,
+    val overseasTravel: OverseasTravelRule
 )
 
 /** How long a disease (or stay) defers donation. */
@@ -86,3 +87,9 @@ data class InternationalMalariaRules(
     val travelText: String,
     val countries: List<MalariaCountry>
 )
+
+/**
+ * 해외 방문: any stay outside [excludedCountry] (대한민국) defers donation by [restriction] from the
+ * day the donor came back, on top of any 말라리아·vCJD restriction the same stay places.
+ */
+data class OverseasTravelRule(val excludedCountry: String, val restriction: MalariaRestriction)

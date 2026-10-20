@@ -278,4 +278,9 @@
             </Continent>
         </Continents>
     </MalariaInternational>
+
+    <!-- 5. 해외 방문 후 헌혈 제한 (대한민국 제외 모든 국가, 말라리아·vCJD 기준과 별도로 적용) -->
+    <OverseasTravel excludedCountry="대한민국" countedFrom="귀국일">
+        <Restriction wholeBlood="불가" platelet="불가" plasma="불가" deferralPeriod="1개월" />
+    </OverseasTravel>
 </BloodDonationRules>
