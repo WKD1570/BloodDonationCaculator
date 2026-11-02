@@ -9,7 +9,7 @@ Everything prepared for publishing the app on Google Play, and what's left to do
 | Privacy policy (`docs/privacy-policy.md`) | Ready, needs publishing (step 4) |
 | Store listing text and policy-form answers (below) | Drafted |
 | Feature graphic 1024×500 (`feature-graphic.png`) | Ready |
-| Phone screenshots (`screenshots/`, six at 1080×1920, in listing order) | Ready, captured with made-up data |
+| Phone screenshots (`screenshots/`, seven at 1080×1920, in listing order) | Ready, captured with made-up data |
 | Signed `.aab` | Built with the new upload key. Rebuild with `./gradlew bundleRelease` |
 
 ## Steps, in order

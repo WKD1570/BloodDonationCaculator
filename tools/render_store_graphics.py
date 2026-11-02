@@ -27,16 +27,20 @@ OUT = os.path.join(ROOT, "docs/play-store")
 APP_NAME = "연간채혈량 계산기"
 TAGLINE = "다음 헌혈일 · 연간 채혈량 · 헌혈의 집"
 
-# (output name, capture file, caption, sub-caption, rows to cut), in listing order: the first few
-# matter most. Rows to cut are capture pixel rows dropped between the title bar and the content, for
-# a screen that can't scroll its subject up any further.
+# (output name, capture, caption, sub-caption), in listing order: the first few matter most. A capture
+# is a file in the captures dir, or a list of (file, first row, end row) slices of captures stacked top
+# to bottom, for a subject that doesn't fit one capture: to drop what lies between the title bar and
+# the subject, or to join two scroll positions of a long screen.
 SCREENSHOTS = [
-    ("01-status", "status.png", "다음 헌혈 가능일을 한눈에", "최근 1년 채혈량과 종류별 헌혈 가능일", None),
-    ("02-centers", "centers.png", "전국 헌혈의 집 찾기", "자주 헌혈하는 지역을 맨 위에", None),
-    ("03-machines", "machines.png", "성분헌혈 기기로 센터 찾기", "혈소판 가능 여부와 기종별 대수", None),
-    ("04-records", "records.png", "헌혈 기록을 한곳에", "종류·날짜·장소별로 정리돼요", None),
-    ("05-calendar", "calendar.png", "헌혈 캘린더", "지난 헌혈과 다음 가능일을 달력에서", (232, 840)),
-    ("06-mypage", "mypage.png", "헌혈 자격과 예측 혈량", "나이·체중·신장·성별로 바로 확인", None),
+    ("01-status", "status.png", "다음 헌혈 가능일을 한눈에", "최근 1년 채혈량과 종류별 헌혈 가능일"),
+    ("02-planner", [("planner.png", 0, 385), ("planner.png", 613, 1509), ("planner-list.png", 433, 2400)],
+     "헌혈 계획 세우기", "계획한 날 헌혈할 수 있는지 미리 확인"),
+    ("03-centers", "centers.png", "전국 헌혈의 집 찾기", "자주 헌혈하는 지역을 맨 위에"),
+    ("04-machines", "machines.png", "성분헌혈 기기로 센터 찾기", "혈소판 가능 여부와 기종별 대수"),
+    ("05-records", "records.png", "헌혈 기록을 한곳에", "종류·날짜·장소별로 정리돼요"),
+    ("06-calendar", [("calendar.png", 0, 232), ("calendar.png", 703, 2400)],
+     "헌혈 캘린더", "지난 헌혈과 다음 가능일을 달력에서"),
+    ("07-mypage", "mypage.png", "헌혈 자격과 예측 혈량", "나이·체중·신장·성별로 바로 확인"),
 ]
 
 TOP = (0xF4, 0x3F, 0x5E)  # rose-500
@@ -102,20 +106,29 @@ def feature_graphic(font_path):
     return image
 
 
-def screenshot(font_path, capture_path, caption, sub, cut=None):
+def load_capture(folder, capture):
+    """A capture file from folder, or its slices stacked top to bottom (see SCREENSHOTS)."""
+    if isinstance(capture, str):
+        return Image.open(os.path.join(folder, capture)).convert("RGB")
+    parts = []
+    for name, top, bottom in capture:
+        image = Image.open(os.path.join(folder, name)).convert("RGB")
+        parts.append(image.crop((0, top, image.width, bottom)))
+    stacked = Image.new("RGB", (parts[0].width, sum(part.height for part in parts)))
+    y = 0
+    for part in parts:
+        stacked.paste(part, (0, y))
+        y += part.height
+    return stacked
+
+
+def screenshot(font_path, capture, caption, sub):
     width, height = 1080, 1920
     image = gradient(width, height)
     draw = ImageDraw.Draw(image)
     centered_text(draw, width, 112, caption, font(font_path, 70, 800), WHITE)
     centered_text(draw, width, 222, sub, font(font_path, 38, 500), (255, 228, 232))
 
-    capture = Image.open(capture_path).convert("RGB")
-    if cut:
-        start, end = cut
-        joined = Image.new("RGB", (capture.width, capture.height - (end - start)))
-        joined.paste(capture.crop((0, 0, capture.width, start)), (0, 0))
-        joined.paste(capture.crop((0, end, capture.width, capture.height)), (0, start))
-        capture = joined
     capture = capture.crop((0, STATUS_BAR_PX, capture.width, capture.height))
     shot_width = 864
     shot = capture.resize((shot_width, round(capture.height * shot_width / capture.width)), Image.LANCZOS)
@@ -139,8 +152,8 @@ def main():
     feature_graphic(font_path).save(os.path.join(OUT, "feature-graphic.png"))
     folder = os.path.join(OUT, "screenshots")
     os.makedirs(folder, exist_ok=True)
-    for name, capture, caption, sub, cut in SCREENSHOTS:
-        image = screenshot(font_path, os.path.join(captures, capture), caption, sub, cut)
+    for name, capture, caption, sub in SCREENSHOTS:
+        image = screenshot(font_path, load_capture(captures, capture), caption, sub)
         image.save(os.path.join(folder, f"{name}.png"))
     print(f"Wrote feature-graphic.png and {len(SCREENSHOTS)} screenshots to {os.path.relpath(OUT, ROOT)}")
 
