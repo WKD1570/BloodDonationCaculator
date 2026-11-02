@@ -1,0 +1,4790 @@
+{
+ "source": "식품의약품안전처 의약품 제품 허가정보 (공공데이터포털 15095677)",
+ "fetched": "2026-11-03",
+ "products": [
+  {
+   "name": "보령아스트릭스캡슐100밀리그람(아스피린)",
+   "englishName": "Boryung Astrix Cap. 100mg(Aspirine)",
+   "company": "(주)보령",
+   "ingredient": "Aspirin Enteric Granules",
+   "itemSeq": "199001012"
+  },
+  {
+   "name": "초당아스피린장용정100mg(아스피린)",
+   "englishName": "Chodang Asprin Enteric Coated Tab. 100mg",
+   "company": "초당약품공업(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "199703010"
+  },
+  {
+   "name": "알타질주(주사용아스피린리신90%)",
+   "englishName": "Arthalgyl Injection",
+   "company": "일양약품(주)",
+   "ingredient": "Aspirin Lysine For Injection 90%",
+   "itemSeq": "199901188"
+  },
+  {
+   "name": "한미아스피린장용정100밀리그램",
+   "englishName": "Hanmi Aspirin Enteric Coated Tab. 100mg",
+   "company": "한미약품(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "200003092"
+  },
+  {
+   "name": "바이엘아스피린정500밀리그람",
+   "englishName": "Aspirin Tab. 500mg Bayerkorea",
+   "company": "바이엘코리아(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "200008591"
+  },
+  {
+   "name": "아스피린프로텍트정100밀리그람",
+   "englishName": "Aspirin Protect Tab. 100mg",
+   "company": "바이엘코리아(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "200108429"
+  },
+  {
+   "name": "영진아스피린장용정",
+   "englishName": "Aspirin Enteric Coated Tab. Youngjin",
+   "company": "영진약품(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "200200734"
+  },
+  {
+   "name": "이텍스엑세드린정(수출용)",
+   "englishName": "Etex Exedrin Tab.",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin",
+   "itemSeq": "200804143"
+  },
+  {
+   "name": "이텍스아나신정(수출용)",
+   "englishName": "Etex Anacin Tab.",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Anhydrous Caffeine/Aspirin",
+   "itemSeq": "200807674"
+  },
+  {
+   "name": "보령바이오아스트릭스캡슐100밀리그램(아스피린장용과립)",
+   "englishName": "Boryungbio Astrix Cap. 100mg",
+   "company": "(주)보령바이오파마",
+   "ingredient": "Aspirin Enteric Granules",
+   "itemSeq": "200906484"
+  },
+  {
+   "name": "클라스핀캡슐75/100밀리그램(클로피도그렐,아스피린)",
+   "englishName": "CLASPIN Caps.",
+   "company": "한국바이오켐제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201111148"
+  },
+  {
+   "name": "클로스원캡슐",
+   "englishName": "Closone Cap.",
+   "company": "에이치케이이노엔(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201111149"
+  },
+  {
+   "name": "클라빅신듀오캡슐75/100밀리그램(클로피도그렐,아스피린)",
+   "englishName": "CLAVIXIN DUO Caps.",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201111150"
+  },
+  {
+   "name": "클로피린캡슐",
+   "englishName": "Clopirin Cap.",
+   "company": "제일약품(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201200634"
+  },
+  {
+   "name": "슈퍼피린캡슐75/100밀리그램(클로피도그렐, 아스피린)",
+   "englishName": "Superpirin Cap.",
+   "company": "명인제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201200635"
+  },
+  {
+   "name": "아리그렐캡슐",
+   "englishName": "Arigrel Cap. (Aspirin (enteric coated) pellet, clopidogrel bisulfate)",
+   "company": "(주)휴온스",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201200636"
+  },
+  {
+   "name": "코프리그렐캡슐",
+   "englishName": "Copregrel Cap.",
+   "company": "(주)종근당",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201202398"
+  },
+  {
+   "name": "이텍스아스피린장용정100mg(아스피린)",
+   "englishName": "Etex Aspirin Enteric Coated Tab. 100mg",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Aspirin",
+   "itemSeq": "201206625"
+  },
+  {
+   "name": "경보아스피린장용정",
+   "englishName": "Kyongbo Aspirin Enteric Coated Tab.",
+   "company": "(주)경보제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201206820"
+  },
+  {
+   "name": "아나피린장용정100밀리그램(아스피린)",
+   "englishName": "ANAPIRIN ER TAB 100MG",
+   "company": "아주약품(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201207417"
+  },
+  {
+   "name": "아스테린정(아스피린)",
+   "englishName": "Asterin Tab.",
+   "company": "성원애드콕제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201208281"
+  },
+  {
+   "name": "에이에스피장용정100mg(아스피린)",
+   "englishName": "ASP 100mg TAB",
+   "company": "(주)파마킹",
+   "ingredient": "Aspirin",
+   "itemSeq": "201210591"
+  },
+  {
+   "name": "삼익아스피린장용정",
+   "englishName": "Samik Aspirin Enteric coated Tab.",
+   "company": "삼익제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201211564"
+  },
+  {
+   "name": "아스텍트정(아스피린)",
+   "englishName": "Astect Tab.",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201300051"
+  },
+  {
+   "name": "유니온아스피린장용정",
+   "englishName": "Union Aspirin Tab.",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201301377"
+  },
+  {
+   "name": "프라임아스피린장용정100밀리그램",
+   "englishName": "Prime Aspirin Enteric Coated Tab. 100mg",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201301656"
+  },
+  {
+   "name": "아스필장용정(아스피린100밀리그람)",
+   "englishName": "Aspil Enteric Coated Tab.",
+   "company": "익수제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201306112"
+  },
+  {
+   "name": "아스피바장용정(아스피린)",
+   "englishName": "Aspiva Enteric Coated Tab.",
+   "company": "(주)바이넥스",
+   "ingredient": "Aspirin",
+   "itemSeq": "201306277"
+  },
+  {
+   "name": "린아스장용정(아스피린)",
+   "englishName": "Rinas enteric coated Tab.",
+   "company": "알리코제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201307061"
+  },
+  {
+   "name": "에이스린장용정(아스피린)",
+   "englishName": "Acerin Enteric Coated Tablet",
+   "company": "(주)한국파비스제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201307928"
+  },
+  {
+   "name": "아스피드정(아스피린)",
+   "englishName": "Aspid Tab.",
+   "company": "(주)일화",
+   "ingredient": "Aspirin",
+   "itemSeq": "201308448"
+  },
+  {
+   "name": "하원아스피린장용정100mg",
+   "englishName": "Hawon Aspirin Enteric Coated Tab. 100mg",
+   "company": "(주)하원제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201308924"
+  },
+  {
+   "name": "경동아스피린장용정",
+   "englishName": "KyungDong Aspirin enteric coated Tab.",
+   "company": "경동제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201309112"
+  },
+  {
+   "name": "영일아스피린장용정100mg(아스피린)",
+   "englishName": "Youngil Aspirin Enteric Coated Tab. 100mg",
+   "company": "영일제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201310133"
+  },
+  {
+   "name": "명문아스피린장용정100mg",
+   "englishName": "Myungmoon Aspirin Enteric Coated Tab. 100mg",
+   "company": "명문제약(주)",
+   "ingredient": "Aspirin/Aspirin",
+   "itemSeq": "201310207"
+  },
+  {
+   "name": "넥스핀장용정100mg(아스피린)",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Aspirin",
+   "itemSeq": "201310349"
+  },
+  {
+   "name": "바소피린장용정(아스피린)",
+   "englishName": "Vasopirin Enteric Coated Tab.",
+   "company": "조아제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201310592"
+  },
+  {
+   "name": "유한아스피린장용정(아스피린)",
+   "englishName": "Yuhan Aspirin Enteric Coated Tablet",
+   "company": "(주)유한양행",
+   "ingredient": "Aspirin",
+   "itemSeq": "201400318"
+  },
+  {
+   "name": "유영아스피린장용정100mg",
+   "englishName": "Yooyoung Aspirin Enteic Coated Tab. 100mg",
+   "company": "(주)유영제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201400493"
+  },
+  {
+   "name": "알카파워정",
+   "englishName": "Alkapower Tab.",
+   "company": "익수제약(주)",
+   "ingredient": "Anhydrous Citric Acid/Aspirin/Sodium Bicarbonate",
+   "itemSeq": "201400930"
+  },
+  {
+   "name": "씨엠지아스피린장용정100mg",
+   "englishName": "CMG Aspirin Enteric Coated Tab. 100mg",
+   "company": "(주)씨엠지제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201401484"
+  },
+  {
+   "name": "삼진아스피린장용정",
+   "englishName": "Samjin Aspirin Enteric Coated Tab.",
+   "company": "삼진제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201402678"
+  },
+  {
+   "name": "글로아스피린장용정100mg(아스피린)",
+   "englishName": "Gloaspirin Enteric Coated Tab. 100mg",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Aspirin",
+   "itemSeq": "201402959"
+  },
+  {
+   "name": "알피린장용정(아스피린)(수출용)",
+   "englishName": "Alpirin Enteric Coated Tablet (Aspirin)",
+   "company": "(주)제일제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201404364"
+  },
+  {
+   "name": "휴비스트아스피린장용정",
+   "englishName": "Huvist aspirin enteric coated Tab.",
+   "company": "(주)휴비스트제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201404696"
+  },
+  {
+   "name": "아사프장용정100mg(아스피린)",
+   "englishName": "ASAP Enteric Coated Tab.",
+   "company": "(주)제뉴파마",
+   "ingredient": "Aspirin",
+   "itemSeq": "201405003"
+  },
+  {
+   "name": "아스텍션장용정100밀리그램(아스피린)",
+   "englishName": "Astection Enteric Coated Tablets 100mg (Aspirin)",
+   "company": "(주)셀트리온제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201600396"
+  },
+  {
+   "name": "아디녹스캡슐",
+   "englishName": "Adinox Cap.",
+   "company": "초당약품공업(주)",
+   "ingredient": "Aspirin/Dipyridamole",
+   "itemSeq": "201600889"
+  },
+  {
+   "name": "플라빅스에이정",
+   "englishName": "PlavixA tablet",
+   "company": "(주)사노피-아벤티스코리아",
+   "ingredient": "Aspirin Granules/Clopidogrel Bisulfate",
+   "itemSeq": "201603148"
+  },
+  {
+   "name": "아스필로장용정100밀리그램(아스피린)",
+   "englishName": "Aspilo Enteric Coated Tab. 100mg",
+   "company": "안국약품(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201603416"
+  },
+  {
+   "name": "아스피도캡슐",
+   "englishName": "Aspido Cap.",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201605650"
+  },
+  {
+   "name": "아스그렐캡슐(수출용)",
+   "englishName": "Asgrel Cap. (for export)",
+   "company": "한국코러스(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201700400"
+  },
+  {
+   "name": "피도겔듀오캡슐",
+   "englishName": "Pidogel Duo Cap.",
+   "company": "(주)휴비스트제약",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201700402"
+  },
+  {
+   "name": "클로렌캡슐",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201700540"
+  },
+  {
+   "name": "클로본스에이캡슐",
+   "englishName": "CLOVONS-A CAP.",
+   "company": "대웅바이오(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201700718"
+  },
+  {
+   "name": "플빅스에이캡슐",
+   "englishName": "Plvix A Cap.",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201701038"
+  },
+  {
+   "name": "에라빅스플러스캡슐",
+   "englishName": "Eravix Plus Cap.",
+   "company": "삼익제약(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201701528"
+  },
+  {
+   "name": "광동아스피린장용정100mg",
+   "englishName": "",
+   "company": "광동제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201702015"
+  },
+  {
+   "name": "코미아스피린정(수출용)",
+   "englishName": "",
+   "company": "(주)코미팜",
+   "ingredient": "Aspirin",
+   "itemSeq": "201702179"
+  },
+  {
+   "name": "디피아녹스서방캡슐",
+   "englishName": "Dipianox SR cap.",
+   "company": "현대약품(주)",
+   "ingredient": "Aspirin/Dipyridamole",
+   "itemSeq": "201702432"
+  },
+  {
+   "name": "아스팜장용정(아스피린)",
+   "englishName": "Aspharm Enteric Coated Tab.",
+   "company": "한국코러스(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201706882"
+  },
+  {
+   "name": "클로아핀캡슐",
+   "englishName": "Cloapin Cap.",
+   "company": "(주)일화",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201706891"
+  },
+  {
+   "name": "아나빅스듀오캡슐",
+   "englishName": "ANAVIX DUO CAP",
+   "company": "아주약품(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201706909"
+  },
+  {
+   "name": "슈퍼피린캡슐75/75밀리그램(클로피도그렐, 아스피린)",
+   "englishName": "Superpirin Cap. 75/75mg",
+   "company": "명인제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201708219"
+  },
+  {
+   "name": "비엘피린장용정100밀리그램(아스피린)",
+   "englishName": "BLpirin Enteric Coated Tablet(Aspirin)",
+   "company": "(주)씨엘팜",
+   "ingredient": "Aspirin",
+   "itemSeq": "201708490"
+  },
+  {
+   "name": "클로스피린캡슐(클로피도그렐황산염, 아스피린장용펠렛)",
+   "englishName": "Clospirin Cap.",
+   "company": "이연제약(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201708499"
+  },
+  {
+   "name": "프래빅스듀오캡슐",
+   "englishName": "Pravix Duo Capsule",
+   "company": "알리코제약(주)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate",
+   "itemSeq": "201800668"
+  },
+  {
+   "name": "클라빅신듀오캡슐75/75밀리그램",
+   "englishName": "Clavixin Duo Cap. 75/75mg",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201800764"
+  },
+  {
+   "name": "뉴스피린장용정100밀리그램(아스피린)",
+   "englishName": "NEWSPIRIN Enteric Coated Tab. 100mg (Aspirin)",
+   "company": "(주)다산제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201801356"
+  },
+  {
+   "name": "휴텍스아스피린장용정100mg(아스피린)",
+   "englishName": "Hutecs Aspirin enteric coated Tab.",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201802534"
+  },
+  {
+   "name": "클라스핀캡슐75/75밀리그램",
+   "englishName": "CLASPIN Caps. 75/75mg (Clopidogrel, Aspirin)",
+   "company": "한국바이오켐제약(주)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate",
+   "itemSeq": "201803083"
+  },
+  {
+   "name": "대웅바이오아스피린장용정100밀리그램",
+   "englishName": "DAEWOONGBIO ASPIRIN ENTERIC COATED TAB. 100MG",
+   "company": "대웅바이오(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201803126"
+  },
+  {
+   "name": "마더스아스피린장용정100mg(아스피린)",
+   "englishName": "Mothers Aspirin Enteric Coated Tab. 100mg",
+   "company": "(주)마더스제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201803431"
+  },
+  {
+   "name": "서울아스피린장용정",
+   "englishName": "Seoul Aspirin Enteric Coated Tab.",
+   "company": "(주)서울제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "201900178"
+  },
+  {
+   "name": "케이아스피린장용정(아스피린)",
+   "englishName": "K-Aspirin Enteric Coated Tab.",
+   "company": "한국넬슨제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201900221"
+  },
+  {
+   "name": "지엘아스피린장용정100밀리그램",
+   "englishName": "GL Aspirin Enteric Coated Tab. 100mg",
+   "company": "지엘팜텍(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "201901869"
+  },
+  {
+   "name": "보령바이오아스피린장용정100밀리그램",
+   "englishName": "Boryung Bio Aspirin Enteric Coated Tab. 100mg",
+   "company": "(주)보령바이오파마",
+   "ingredient": "Aspirin",
+   "itemSeq": "201908303"
+  },
+  {
+   "name": "삼성아스피린장용정100밀리그램",
+   "englishName": "samsung Aspirin Enteric Coated Tab. 100mg",
+   "company": "삼성제약(주)",
+   "ingredient": "Aspirin",
+   "itemSeq": "202001489"
+  },
+  {
+   "name": "에이스린장용정(아스피린)(수출용)",
+   "englishName": "Acerin Enteric Coated Tablet",
+   "company": "(주)한국파비스제약",
+   "ingredient": "Aspirin",
+   "itemSeq": "202300475"
+  },
+  {
+   "name": "라스피린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Raspirin Cap. 100/5mg(Aspirin, Rabeprazole)",
+   "company": "한미약품(주)",
+   "ingredient": "Aspirin Enteric Pellets/Rabeprazole Sodium",
+   "itemSeq": "202303032"
+  },
+  {
+   "name": "코아피린산375/100밀리그램",
+   "englishName": "Corepirin Powder 375/100 mg",
+   "company": "(주)코아팜바이오",
+   "ingredient": "Ascorbic Acid/Aspirin",
+   "itemSeq": "202303263"
+  },
+  {
+   "name": "라베피린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Rabepirin Cap. 100/5mg",
+   "company": "동광제약(주)",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202401364"
+  },
+  {
+   "name": "아스프라졸캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asprazol Cap. 100/5mg(Aspirin, Rabeprazole)",
+   "company": "지엘팜텍(주)",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202401369"
+  },
+  {
+   "name": "아라텍트캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Aratect Cap.100/5mg",
+   "company": "(주)한국파마",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202402338"
+  },
+  {
+   "name": "아스라베캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asrabe Cap.100/5mg(Aspirin,Rabeprazole)",
+   "company": "(주)휴온스",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202402347"
+  },
+  {
+   "name": "아스라졸캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asrazole Cap. 100/5mg",
+   "company": "영진약품(주)",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202402348"
+  },
+  {
+   "name": "라베트릭스캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Rabetrix Capsule 100/5mg",
+   "company": "(주)보령",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202402464"
+  },
+  {
+   "name": "코아피린리보정100/2밀리그램",
+   "englishName": "Corepirinribo Tab. 100/2 mg",
+   "company": "(주)코아팜바이오",
+   "ingredient": "Aspirin/Riboflavin",
+   "itemSeq": "202402526"
+  },
+  {
+   "name": "아스베린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "ASBERIN capsule 100/5mg",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Aspirin/Rabeprazole Sodium",
+   "itemSeq": "202500715"
+  },
+  {
+   "name": "스피다정",
+   "englishName": "Speeda Tab.",
+   "company": "명인제약(주)",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin",
+   "itemSeq": "202502194"
+  },
+  {
+   "name": "페인싹트리플정",
+   "englishName": "Painssak triple Tab.",
+   "company": "(주)한풍제약",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin",
+   "itemSeq": "202502660"
+  },
+  {
+   "name": "안티싹트리플정",
+   "englishName": "Antissactriple tab.",
+   "company": "(주)시어스제약",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin",
+   "itemSeq": "202603167"
+  },
+  {
+   "name": "하이빅스정(클로피도그렐황산수소염)",
+   "englishName": "Hyvix Tab. 75mg",
+   "company": "신풍제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500044"
+  },
+  {
+   "name": "플라비톨정(클로피도그렐황산수소염)",
+   "englishName": "Plavitor tablet (Clopidogrel bisulfate)",
+   "company": "동아에스티(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500249"
+  },
+  {
+   "name": "유유클로피도그렐정(클로피도그렐황산염)(수출용)",
+   "englishName": "Yuyuclopidogrel Tab. (Clopidogrel Bisulfate)",
+   "company": "(주)유유제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500282"
+  },
+  {
+   "name": "건일클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Kuhnil Clopidogrel Tab.",
+   "company": "건일제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500494"
+  },
+  {
+   "name": "코빅스정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Kovix Tab. 75mg",
+   "company": "코오롱제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500585"
+  },
+  {
+   "name": "클로피정(클로피도그렐황산수소염)",
+   "englishName": "Clopi Tab.",
+   "company": "동화약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500715"
+  },
+  {
+   "name": "클로델정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Claudel Tab.",
+   "company": "영진약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500873"
+  },
+  {
+   "name": "맥스그렐정(클로피도그렐황산수소염)",
+   "englishName": "Maxgrel Tablet (Clopidogrel Bisulfate)",
+   "company": "알보젠코리아(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200500965"
+  },
+  {
+   "name": "일양클로피도그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clopidogrel Tab. 75mg Ilyang",
+   "company": "일양약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501208"
+  },
+  {
+   "name": "큐오렐정(클로피도그렐황산수소염)",
+   "englishName": "Q.O.L. Tab.",
+   "company": "일성아이에스(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501380"
+  },
+  {
+   "name": "크로피겔정(클로피도그렐황산염)",
+   "englishName": "Clopigel Tab.",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501427"
+  },
+  {
+   "name": "프레토정(클로피도그렐황산염)",
+   "englishName": "Preto Tab.",
+   "company": "(주)한국파마",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501543"
+  },
+  {
+   "name": "플래리스정(클로피도그렐황산염)",
+   "englishName": "Platless Tab.",
+   "company": "삼진제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501568"
+  },
+  {
+   "name": "대원클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Clopidogrel Tab. 75mg Daewon",
+   "company": "대원제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501593"
+  },
+  {
+   "name": "클로피젠정(클로피도그렐황산염)",
+   "englishName": "CLOPIGEN TAB.(CLOPIDOGREL BISULFATE)",
+   "company": "(주)셀릭스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501667"
+  },
+  {
+   "name": "영일클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Youngil Clopidogrel Tab.",
+   "company": "영일제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200501925"
+  },
+  {
+   "name": "피도빅스정(클로피도그렐황산염)",
+   "englishName": "Pidovix Tab.",
+   "company": "한림제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200502869"
+  },
+  {
+   "name": "클로피드정(클로피도그렐황산염)",
+   "englishName": "Clopid Tablet",
+   "company": "부광약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200503302"
+  },
+  {
+   "name": "세레나데정(클로피도그렐황산수소염)",
+   "englishName": "Cerenade Tab.",
+   "company": "유니메드제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200512335"
+  },
+  {
+   "name": "프라빅정(클로피도그렐황산수소염)",
+   "englishName": "Plavic Tab.",
+   "company": "신일제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200600466"
+  },
+  {
+   "name": "크라빅스정(클로피도그렐황산수소염)",
+   "englishName": "Cravix Tab.",
+   "company": "영풍제약(주)",
+   "ingredient": "Clopidogrel Bisulfate/Clopidogrel Bisulfate",
+   "itemSeq": "200600522"
+  },
+  {
+   "name": "클로펙트정(클로피도그렐황산염)",
+   "englishName": "Clopect Tab.",
+   "company": "안국약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200604227"
+  },
+  {
+   "name": "크리빅스정(클로피도그렐황산수소염)",
+   "englishName": "Krivix Tab.",
+   "company": "진양제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200604239"
+  },
+  {
+   "name": "인히플라정(클로피도그렐황산염)",
+   "englishName": "Inhipla Tab.",
+   "company": "경동제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200604277"
+  },
+  {
+   "name": "플라메드정(클로피도그렐황산수소염)[수출명:플라독스정(FLADOXTablet)",
+   "englishName": "Plamed Tab.",
+   "company": "고려제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200606996"
+  },
+  {
+   "name": "트롬빅스정(클로피도그렐황산수소염)",
+   "englishName": "Tromvix Tab.(Clopidogrel bisulfate)",
+   "company": "일동제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200607699"
+  },
+  {
+   "name": "큐로빅스정(클로피도그렐황산염)",
+   "englishName": "Curovix Tab.",
+   "company": "(주)메디카코리아",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200607874"
+  },
+  {
+   "name": "클로아트정(클로피도그렐황산염)",
+   "englishName": "Cloart Tab. 75mg",
+   "company": "(주)대웅제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200608038"
+  },
+  {
+   "name": "클로본스정(클로피도그렐황산염)",
+   "englishName": "CLOVONS TAB.",
+   "company": "대웅바이오(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200608465"
+  },
+  {
+   "name": "플라빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Plavix Tab. 75mg",
+   "company": "(주)한독",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200700907"
+  },
+  {
+   "name": "휴로픽스정(클로피도그렐황산수소염)",
+   "englishName": "Hurofix Tab.",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200701040"
+  },
+  {
+   "name": "플라벨정(클로피도그렐황산수소염)",
+   "englishName": "Plavel Tab.",
+   "company": "(주)서울제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200701189"
+  },
+  {
+   "name": "프리그렐정(클로피도그렐레지네이트)",
+   "englishName": "Pregrel Tab.",
+   "company": "(주)종근당",
+   "ingredient": "Clopidogrel Resinate",
+   "itemSeq": "200701809"
+  },
+  {
+   "name": "에이프로젠클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Aprogen Clopidogrel Tab.",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200702138"
+  },
+  {
+   "name": "클로그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clogrel Tablet 75mg",
+   "company": "(주)유한양행",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200703654"
+  },
+  {
+   "name": "클로비드정(클로피도그렐베실산염)",
+   "englishName": "Clovid Tab.",
+   "company": "한올바이오파마(주)",
+   "ingredient": "Clopidogrel Besylate",
+   "itemSeq": "200708091"
+  },
+  {
+   "name": "피도글정75밀리그램(클로피도그렐나파디실레이트일수화물)",
+   "englishName": "Pidogul Tab. 75mg",
+   "company": "한미약품(주)",
+   "ingredient": "Clopidogrel Napadisilate Monohydrate",
+   "itemSeq": "200713517"
+  },
+  {
+   "name": "클로베인정(클로피도그렐황산수소염)",
+   "englishName": "Clovein Tab.",
+   "company": "하나제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200713885"
+  },
+  {
+   "name": "인히플라트정(클로피도그렐캄실산염)",
+   "englishName": "Inhiplat Tab.",
+   "company": "경동제약(주)",
+   "ingredient": "Clopidogrel Camsilate",
+   "itemSeq": "200805211"
+  },
+  {
+   "name": "필그렐정(클로피도그렐황산수소염)",
+   "englishName": "Pilgrel Tab.",
+   "company": "제일약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200805936"
+  },
+  {
+   "name": "비알빅스정(클로피도그렐캄실산염)",
+   "englishName": "Brvix Tab.",
+   "company": "(주)보령",
+   "ingredient": "Clopidogrel Camsilate",
+   "itemSeq": "200808253"
+  },
+  {
+   "name": "코빅스비정(베실산클로피도그렐)(수출용)",
+   "englishName": "Kovix Tab. (Clopidogrel Besylate)(for export)",
+   "company": "코오롱제약(주)",
+   "ingredient": "Clopidogrel Besylate",
+   "itemSeq": "200900447"
+  },
+  {
+   "name": "클라빅신정(클로피도그렐황산수소염)",
+   "englishName": "Clavixin Tab.",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "200907189"
+  },
+  {
+   "name": "클로피도정(클로피도그렐황산수소염)",
+   "englishName": "Clopido Tab.",
+   "company": "대화제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201006511"
+  },
+  {
+   "name": "플빅스정(클로피도그렐황산염)",
+   "englishName": "Plvix Tab.",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201200603"
+  },
+  {
+   "name": "프라임테보랄정(황산수소클로피도그렐)(수출용)",
+   "englishName": "Prime-Tevoral Tab.",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201206830"
+  },
+  {
+   "name": "파비클렌정(클로피도그렐황산수소염)",
+   "englishName": "Pabiclen Tablet",
+   "company": "(주)한국파비스제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201206952"
+  },
+  {
+   "name": "프라빅센정 (클로피도그렐황산염)",
+   "englishName": "Prabigsen Tab.",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201206953"
+  },
+  {
+   "name": "클로렐정(클로피도그렐황산염)",
+   "englishName": "Chrorel Tablet (Clopidogrel Bisulfate)",
+   "company": "동국제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201206954"
+  },
+  {
+   "name": "클빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clvix Tab. 75mg (clopidogrel )",
+   "company": "(주)휴온스메디텍",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207379"
+  },
+  {
+   "name": "에라빅스정(클로피도그렐황산수소염)",
+   "englishName": "Eravix Tab.",
+   "company": "삼익제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207403"
+  },
+  {
+   "name": "클리델정(클로피도그렐황산수소염)",
+   "englishName": "Clidel Tab.",
+   "company": "(주)일화",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207459"
+  },
+  {
+   "name": "프로빅스정(클로피도그렐황산수소염)",
+   "englishName": "Provix Tab.",
+   "company": "(주)한국피엠지제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207508"
+  },
+  {
+   "name": "클로피나정(클로피도그렐황산염)",
+   "englishName": "Clopina Tab.",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207510"
+  },
+  {
+   "name": "클로린정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clorin Tab. 75mg (Clopidogrel bisulfate)",
+   "company": "(주)휴온스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201207517"
+  },
+  {
+   "name": "플라넥신정(클로피도그렐황산수소염)",
+   "englishName": "Planexine Tab.",
+   "company": "성원애드콕제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201208077"
+  },
+  {
+   "name": "현대클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "Hyundai Clopidogrel Tab. (Clopidogrel Bisulfate)",
+   "company": "현대약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201209005"
+  },
+  {
+   "name": "경보클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Kyongbo Clopidogrel Tab.",
+   "company": "(주)경보제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201300318"
+  },
+  {
+   "name": "명문클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "MyungMoon Clopidogrel Tab.",
+   "company": "명문제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201301376"
+  },
+  {
+   "name": "클로제정(클로피도그렐황산염)",
+   "englishName": "Cloje Tab.",
+   "company": "화일약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201301620"
+  },
+  {
+   "name": "뉴빅스정(클로피도그렐황산염)",
+   "englishName": "Newvix tablet(Clopidogrel Bisulphate)",
+   "company": "에스피씨(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201306332"
+  },
+  {
+   "name": "크로피렐정(클로피도그렐황산수소염)",
+   "englishName": "Clopirel Tab.",
+   "company": "(주)유영제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201306342"
+  },
+  {
+   "name": "아나빅스정(클로피도그렐황산수소염)",
+   "englishName": "ANAVIX CAP",
+   "company": "아주약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201306363"
+  },
+  {
+   "name": "로피렐정(클로피도그렐황산염)",
+   "englishName": "LOPIREL TAB.",
+   "company": "(주)씨엠지제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201306377"
+  },
+  {
+   "name": "알피클로피아정(클로피도그렐황산염)",
+   "englishName": "RP Clopia Tab.",
+   "company": "(주)알피바이오",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201306524"
+  },
+  {
+   "name": "클로필정(클로피도그렐황산염)",
+   "englishName": "Clopil Tab.(Clopidogrel Bisulfate)",
+   "company": "대우제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201307490"
+  },
+  {
+   "name": "플라그렐정(클로피도그렐황산염)",
+   "englishName": "PLAGREL (Clopidogrel bisulfate)",
+   "company": "국제약품(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201307537"
+  },
+  {
+   "name": "엘피도그렐정(클로피도그렐황산염)",
+   "englishName": "Arahan Tab.",
+   "company": "미래바이오제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201307935"
+  },
+  {
+   "name": "이연클로피도그렐황산수소염정",
+   "englishName": "Reyon Clopidogrel bisulfate Tab.",
+   "company": "이연제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201308397"
+  },
+  {
+   "name": "바소빅스정(클로피도그렐황산수소염)",
+   "englishName": "Vasovix Tab.",
+   "company": "구주제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201308626"
+  },
+  {
+   "name": "클로젝스정(클로피도그렐황산염)",
+   "englishName": "Clozex Tab.",
+   "company": "삼성제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201308825"
+  },
+  {
+   "name": "글로그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Glogrel Tab. 75mg",
+   "company": "한국넬슨제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201309184"
+  },
+  {
+   "name": "아트크렐정(클로피도그렐황산염)",
+   "englishName": "Atcrel Tab.",
+   "company": "(주)화이트생명과학",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201309561"
+  },
+  {
+   "name": "클로피렌정(클로피도그렐황산염)",
+   "englishName": "Clopiren Tablet(Clopidogrel Bisulfate)",
+   "company": "에이치엘비제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201309810"
+  },
+  {
+   "name": "글로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Glopidogrel Tab.",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201309855"
+  },
+  {
+   "name": "클피도엠정(클로피도그렐황산염)",
+   "englishName": "Clpidoem Tab.",
+   "company": "(주)마더스제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201310609"
+  },
+  {
+   "name": "피도그린정75mg(클로피도그렐황산염)",
+   "englishName": "Pidogrin Tab. 75mg",
+   "company": "위더스제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201310896"
+  },
+  {
+   "name": "크린빅스정(클로피도그렐황산염)",
+   "englishName": "Clinvix tab. (Clopidogrel Bisulfate)",
+   "company": "삼천당제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201401455"
+  },
+  {
+   "name": "케이그렐정(클로피도그렐황산염)",
+   "englishName": "K Grel Tab.",
+   "company": "한국코러스(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201402838"
+  },
+  {
+   "name": "일양바이오클로피도그렐황산염정75밀리그램",
+   "englishName": "Clopidogrel Sulfate Tab 75mg Ilyang Bio",
+   "company": "일양바이오팜(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201403943"
+  },
+  {
+   "name": "피도겔정(클로피도그렐황산염)",
+   "englishName": "Pidogel Tab.",
+   "company": "(주)휴비스트제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201404299"
+  },
+  {
+   "name": "그로리정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Grory Tab. 75mg",
+   "company": "한화제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201404538"
+  },
+  {
+   "name": "클로드정75밀리그램(클로피도그렐황산염)",
+   "englishName": "",
+   "company": "(주)이든파마",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201405255"
+  },
+  {
+   "name": "클로피오정(클로피도그렐황산염)",
+   "englishName": "Clopio Tab.",
+   "company": "환인제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201500929"
+  },
+  {
+   "name": "휴니즈클로피도그렐황산염정",
+   "englishName": "Huniz Clopidogrel Bisulfate Tablet",
+   "company": "(주)휴메딕스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201502401"
+  },
+  {
+   "name": "프로빅트정(클로피도그렐황산염)",
+   "englishName": "",
+   "company": "광동제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201503157"
+  },
+  {
+   "name": "프래빅스정(클로피도그렐황산수소염)",
+   "englishName": "PRAVIX tablet",
+   "company": "알리코제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201504255"
+  },
+  {
+   "name": "클로피딜정(클로피도그렐황산염)",
+   "englishName": "Clopidil Tab.",
+   "company": "주식회사제뉴원사이언스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201505737"
+  },
+  {
+   "name": "뉴피도정(클로피도그렐황산수소염)",
+   "englishName": "Newpido Tab.",
+   "company": "대한뉴팜(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201506676"
+  },
+  {
+   "name": "크레빅스정(클로피도그렐황산염)",
+   "englishName": "Crevix Tab.",
+   "company": "익수제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201507094"
+  },
+  {
+   "name": "클로첸스정(클로피도그렐황산염)",
+   "englishName": "Clochance Tab.",
+   "company": "(주)씨티씨바이오",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201507899"
+  },
+  {
+   "name": "클로피엘티정(클로피도그렐황산염)",
+   "englishName": "Clo-PLT Tab.",
+   "company": "신신제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201601120"
+  },
+  {
+   "name": "우리빅스정(클로피도그렐황산염)",
+   "englishName": "WOORIVIX Tab.",
+   "company": "(주)팜젠사이언스",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201602804"
+  },
+  {
+   "name": "아이클로정(클로피도그렐황산수소염)",
+   "englishName": "",
+   "company": "(주)아이월드제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201603030"
+  },
+  {
+   "name": "클로큐어정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clocure Tab. 75mg(Clopidogrel Bisulfate)",
+   "company": "아이큐어(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201603497"
+  },
+  {
+   "name": "클로스타정(클로피도그렐황산수소염)",
+   "englishName": "Clostar Tab.",
+   "company": "한국신텍스제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201603516"
+  },
+  {
+   "name": "비보존클로피도그렐정75mg(클로피도그렐황산수소염)",
+   "englishName": "VIVOZON-CLOPIDOGREL TAB. 75mg",
+   "company": "(주)비보존제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201603691"
+  },
+  {
+   "name": "클로도렐정75mg(클로피도그렐황산염)",
+   "englishName": "Clodorel Tab. 75mg",
+   "company": "조아제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201604022"
+  },
+  {
+   "name": "네오빅스정(클로피도그렐황산수소염)",
+   "englishName": "Neovix tab.",
+   "company": "엔비케이제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201701057"
+  },
+  {
+   "name": "셀라빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Celavix Tablets 75mg(Clopidogrelbisulfate)",
+   "company": "(주)셀트리온제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201701198"
+  },
+  {
+   "name": "다림클로피도그렐정75mg(클로피도그렐황산수소염)",
+   "englishName": "Dalim Clopidogrel Tab.75mg",
+   "company": "(주)다림바이오텍",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201701565"
+  },
+  {
+   "name": "이노엔클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "inno.N Clopidgrel Tab.",
+   "company": "에이치케이이노엔(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201703070"
+  },
+  {
+   "name": "유그렐정(클로피도그렐황산염)",
+   "englishName": "Yugrel Tab.(Clopidogrel bisulfate)",
+   "company": "(주)유유제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201707642"
+  },
+  {
+   "name": "안티플라정(클로피도그렐황산수소염)",
+   "englishName": "Antipla Tab.",
+   "company": "(주)중헌제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201707646"
+  },
+  {
+   "name": "플라비토르정(클로피도그렐황산수소염)",
+   "englishName": "Plabitor Tab.",
+   "company": "지엘팜텍(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201800144"
+  },
+  {
+   "name": "클로메디정(클로피도그렐황산수소염)",
+   "englishName": "Clomedi Tab.",
+   "company": "(주)인트로바이오파마",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201800992"
+  },
+  {
+   "name": "뉴클로파인정(클로피도그렐황산염)",
+   "englishName": "New Clopine Tab.",
+   "company": "안국뉴팜(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201801536"
+  },
+  {
+   "name": "텔로그렐정(클로피도그렐황산수소염)",
+   "englishName": "Telogrel Tablet",
+   "company": "(주)텔콘알에프제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201802008"
+  },
+  {
+   "name": "클피그렐정(클로피도그렐황산염)",
+   "englishName": "CLPIGREL Tab. (Clopidogrel Bisulfate)",
+   "company": "(주)다산제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201802536"
+  },
+  {
+   "name": "제이그렐정(클로피도그렐황산염)",
+   "englishName": "Jgrel Tab.",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201803080"
+  },
+  {
+   "name": "큐로벡스정(클로피도그렐황산수소염)",
+   "englishName": "Qurovex Tab.",
+   "company": "정우신약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201803777"
+  },
+  {
+   "name": "한빅스정75mg(클로피도그렐황산수소염)",
+   "englishName": "Hanvix Tab. 75mg(Clopidogrel Bisulfate)",
+   "company": "대한약품공업(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201804600"
+  },
+  {
+   "name": "오코도렐정(클로피도그렐황산염)",
+   "englishName": "Aukodorel Tab.",
+   "company": "(주)오스코리아제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201804935"
+  },
+  {
+   "name": "케라픽스정(클로피도그렐황산수소염)",
+   "englishName": "Kerapix Tablet",
+   "company": "케이엠에스제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201900649"
+  },
+  {
+   "name": "플라킴정75mg(클로피도그렐황산수소염)",
+   "englishName": "",
+   "company": "(주)킴스제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201900676"
+  },
+  {
+   "name": "클로빅스정(클로피도그렐황산염)",
+   "englishName": "Clovix Tab.",
+   "company": "(주)보령바이오파마",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201900807"
+  },
+  {
+   "name": "클로윈정(클로피도그렐황산염)",
+   "englishName": "Clowin Tab.",
+   "company": "코스맥스파마(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201901894"
+  },
+  {
+   "name": "동성클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Dongsung Clopidogrel Tab.(Clopidogrel bisulfate)",
+   "company": "동성제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201902442"
+  },
+  {
+   "name": "클로픽정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clopic Tab.",
+   "company": "명인제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201902793"
+  },
+  {
+   "name": "케이플라정(클로피도그렐황산염)",
+   "englishName": "K-pla Tablet(Clopidogrel Bisulfafe)",
+   "company": "(주)그린제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201903079"
+  },
+  {
+   "name": "클로디드정(클로피도그렐황산염)",
+   "englishName": "Clodid Tab.",
+   "company": "하이플생명과학(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201903331"
+  },
+  {
+   "name": "에스디클로정75mg(클로피도그렐황산염)",
+   "englishName": "SD.Clo Tab. 75mg",
+   "company": "(주)라이트팜텍",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201903445"
+  },
+  {
+   "name": "클로텍정(클로피도그렐황산염)",
+   "englishName": "",
+   "company": "대원바이오텍주식회사",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201903699"
+  },
+  {
+   "name": "클로핀정(클로피도그렐황산염)",
+   "englishName": "Clopin Tab.(Clopidogrel Bisulfate)",
+   "company": "(주)한풍제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201904612"
+  },
+  {
+   "name": "유빅스정(클로피도그렐황산수소염)",
+   "englishName": "Ubix Tab.",
+   "company": "에스에스팜(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201904721"
+  },
+  {
+   "name": "클로부스트정(클로피도그렐황산염)",
+   "englishName": "Cloboost Tab.",
+   "company": "주식회사케이에스제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201906125"
+  },
+  {
+   "name": "에이빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "",
+   "company": "(주)아리제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201907066"
+  },
+  {
+   "name": "크로피도정(클로피도그렐황산수소염)",
+   "englishName": "Clopido Tab.(Clopidogrel Bisulfate)",
+   "company": "(주)티디에스팜",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201907075"
+  },
+  {
+   "name": "메가클로피정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Megaclopi Tab 75mg",
+   "company": "(주)엘앤씨바이오",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201907801"
+  },
+  {
+   "name": "클로드린정(클로피도그렐황산염)",
+   "englishName": "Clodrin Tab.",
+   "company": "독립바이오제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "201908185"
+  },
+  {
+   "name": "클로드릴정(클로피도그렐황산수소염)",
+   "englishName": "Clodril Tab. (clopidogrel Bisulfate)",
+   "company": "(주)새한제약",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202000426"
+  },
+  {
+   "name": "메딕그렐정(클로피도그렐황산수소염)",
+   "englishName": "Medicgrel Tab.",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202000538"
+  },
+  {
+   "name": "클로리정(클로피도그렐황산수소염)",
+   "englishName": "Clory Tab.(Clopidogrel Bisulfate)",
+   "company": "(주)서흥",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202000943"
+  },
+  {
+   "name": "플라엠정(클로피도그렐황산수소염)",
+   "englishName": "Pla-M Tab.",
+   "company": "맥널티제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202002145"
+  },
+  {
+   "name": "뉴프렐정(클로피도그렐황산수소염)",
+   "englishName": "Newprel Tab(Clopidogrel bisulfate)",
+   "company": "(주)한국팜비오",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202002176"
+  },
+  {
+   "name": "플래리스정300밀리그램(클로피도그렐황산염)",
+   "englishName": "Platless Tablet 300 mg",
+   "company": "삼진제약(주)",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202105592"
+  },
+  {
+   "name": "비엘클로비스정(클로피도그렐황산수소염)",
+   "englishName": "BLCLOVIS TAB.",
+   "company": "성이바이오제약주식회사",
+   "ingredient": "Clopidogrel Bisulfate",
+   "itemSeq": "202107045"
+  },
+  {
+   "name": "디스포트주(클로스트리디움보툴리눔A형독소-혈구응집소복합체)",
+   "englishName": "Dysport(Clostridium botulinum type A toxin-haemagglutinin complex)",
+   "company": "입센코리아(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A-Haemagglutinin",
+   "itemSeq": "199907127",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주(클로스트리디움보툴리눔독소A형)[수출명:뉴로녹스주(클로스트리디움보툴리눔독소A형), 시악스주(클로스트리디움보툴리눔독소A형), 에복시아주(클로스트리디움보툴리눔독소A형), 아이록신주(클로스트리디움보툴리눔독소A형), 보타넥스주(클로스트리디움보툴리눔독소A형), 큐녹스주(클로스트리디움보툴리눔독소A형), 보툴리프트주(클로스트리디움보툴리눔독소A형)]",
+   "englishName": "Meditoxin Inj.",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "200600841",
+   "route": "injection"
+  },
+  {
+   "name": "보톡스주(클로스트리디움 보툴리눔 독소 A형)",
+   "englishName": "Botox Injection (Clostridium Botulinum Toxin Type A)",
+   "company": "한국애브비(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "200804190",
+   "route": "injection"
+  },
+  {
+   "name": "보톡스주 50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botox Injection 50 (Clostridium Botulinum Toxin Type A)",
+   "company": "한국애브비(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "200901660",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax® (Clostridium Botulinum Toxin A type)",
+   "company": "휴젤주식회사",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "itemSeq": "200901953",
+   "route": "injection"
+  },
+  {
+   "name": "제오민주(클로스트리디움 보툴리눔 독소 A형(150kDa))",
+   "englishName": "XEOMIN 100 units powder for solution for injection",
+   "company": "멀츠아시아퍼시픽피티이엘티디",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "itemSeq": "200904004",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주 200단위(클로스트리디움보툴리눔독소A형)[수출명:뉴로녹스주 200단위(클로스트리디움보툴리눔독소A형), 시악스주 200단위(클로스트리디움보툴리눔독소A형), 에복시아주 200단위(클로스트리디움보툴리눔독소A형), 아이록신주 200단위(클로스트리디움보툴리눔독소A형), 보타넥스주 200단위(클로스트리디움보툴리눔독소A형), 큐녹스주 200단위(클로스트리디움보툴리눔독소A형), 보툴리프트주 200단위(클로스트리디움보툴리눔독소A형)]",
+   "englishName": "Meditoxin Inj. 200U",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "200902348",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®200 unit",
+   "company": "휴젤주식회사",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "itemSeq": "201001176",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주 50단위(클로스트리디움보툴리눔독소A형)[수출명:뉴로녹스주 50단위(클로스트리디움보툴리눔독소A형), 시악스주 50단위(클로스트리디움보툴리눔독소A형), 에복시아주 50단위(클로스트리디움보툴리눔독소A형), 아이록신주 50단위(클로스트리디움보툴리눔독소A형), 보타넥스주 50단위(클로스트리디움보툴리눔독소A형), 큐녹스주 50단위(클로스트리디움보툴리눔독소A형), 보툴리프트주 50단위(클로스트리디움보툴리눔독소A형)]",
+   "englishName": "MEDITOXIN Inj.",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "201001655",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®50 unit",
+   "company": "휴젤주식회사",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "itemSeq": "201108443",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주150단위(클로스트리디움보툴리눔독소A형)[수출명:뉴로녹스주 150단위, 시악스주 150단위, 에복시아주 150단위, 아이록신주 150단위, 보타넥스주 150단위, 큐녹스주 150단위, 보툴리프트주 150단위]",
+   "englishName": "Meditoxin Inj. 150U",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "201309732",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj",
+   "company": "(주)대웅제약",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201310386",
+   "route": "injection"
+  },
+  {
+   "name": "이노톡스주(클로스트리디움보툴리눔독소A형)(수출명 : INNOTOX Inj.)",
+   "englishName": "Innotox Inj.",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "201310633",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 50 Unit",
+   "company": "(주)대웅제약",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201500080",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 200 Unit",
+   "company": "(주)대웅제약",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201503760",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주150단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®150 unit",
+   "company": "휴젤주식회사",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "itemSeq": "201602416",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주150단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 150 Unit",
+   "company": "(주)대웅제약",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201603000",
+   "route": "injection"
+  },
+  {
+   "name": "코어톡스주(클로스트리디움보툴리눔독소A형(150kDa))(수출명 : Coretox Inj.)",
+   "englishName": "Coretox Inj.",
+   "company": "(주)메디톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "itemSeq": "201603891",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주100단위(클로스트리디움보툴리눔독소A형)(수출명:휴톡스주100단위)",
+   "englishName": "LIZTOX Inj. 100Unit",
+   "company": "(주)휴온스바이오파마",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201605990",
+   "route": "injection"
+  },
+  {
+   "name": "대웅보툴리눔톡신주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "DW Botulinum Toxin Inj. 100 unit",
+   "company": "(주)대웅제약",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201700291",
+   "route": "injection"
+  },
+  {
+   "name": "제오민주50단위(클로스트리디움보툴리눔독소A형(150kDa))",
+   "englishName": "XEOMIN 50 units powder for solution for injection",
+   "company": "멀츠아시아퍼시픽피티이엘티디",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "itemSeq": "201801515",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡스주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Rientox Inj. 100Unit(for export)",
+   "company": "(주)파마리서치바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201900955",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 100unit",
+   "company": "(주)종근당",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "201905671",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주100단위(클로스트리디움보툴리눔독소A형)(수출용)[수출명:엠유렉스주(Mulex inj.)]",
+   "englishName": "Hitox inj.100 unit",
+   "company": "(주)한국비엠아이",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202000203",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BIENOX Injection(Clostridium Botulinum Toxin Type A)(for export only)",
+   "company": "(주)한국비엔씨",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202000204",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주100U(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "JETEMA THE TOXIN Inj. 100U (Clostridium Botulinum toxin type A)(for export)",
+   "company": "(주)제테마",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202004236",
+   "route": "injection"
+  },
+  {
+   "name": "프로톡신주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BTSA9 (Clostridium botulinum toxin type A)",
+   "company": "(주)프로톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202005784",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "INIBO Inj. 100UNITS(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)이니바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202006506",
+   "route": "injection"
+  },
+  {
+   "name": "톡스나인주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Tox9 Inj. 100unit",
+   "company": "(주)메디카코리아",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202007736",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡스주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Rientox Inj. 200Unit(for export)",
+   "company": "(주)파마리서치바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202008174",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주300단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®300 unit",
+   "company": "휴젤주식회사",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "itemSeq": "202100911",
+   "route": "injection"
+  },
+  {
+   "name": "비비톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Vivitoxin Inj. 100unit(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)휴메딕스",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202102247",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주50단위(클로스트리디움보툴리눔독소A형)(수출명:휴톡스주50단위)",
+   "englishName": "LIZTOX Inj. 50Unit",
+   "company": "(주)휴온스바이오파마",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202104572",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 50unit",
+   "company": "(주)종근당",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202104584",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주200단위(클로스트리디움보툴리눔독소A형)(수출명:휴톡스주200단위)",
+   "englishName": "LIZTOX Inj. 200Unit",
+   "company": "(주)휴온스바이오파마",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202105225",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 200unit",
+   "company": "(주)종근당",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202105230",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "JETEMA THE TOXIN Inj. 200U (Clostridium Botulinum toxin type A)",
+   "company": "(주)제테마",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202107200",
+   "route": "injection"
+  },
+  {
+   "name": "프루비보주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "PRUVYBO for Injection 100 Units(Clostridium botulinum Toxin Type A)(for export only)",
+   "company": "(주)종근당바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202200626",
+   "route": "injection"
+  },
+  {
+   "name": "에이톡신주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "ATOXIN Inj.",
+   "company": "대웅바이오(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202203465",
+   "route": "injection"
+  },
+  {
+   "name": "보타원주(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BOTAONE Inj.(Clostridium botulinum Toxin Type A)(For export only)",
+   "company": "제네톡스(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202203926",
+   "route": "injection"
+  },
+  {
+   "name": "프루비보주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "PRUVYBO for Injection 200 Units(Clostridium botulinum Toxin Type A)(for export only)",
+   "company": "(주)종근당바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202300501",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "INIBO Inj. 100UNITS(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)이니바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202302186",
+   "route": "injection"
+  },
+  {
+   "name": "뉴럭스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "NEWLUX Inj.(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)뉴메코",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "202302604",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "HITOX Injection 200Unit(Clostridium botulinum toxin type A)",
+   "company": "(주)한국비엠아이",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202302793",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주50단위 (클로스트리디움보툴리눔독소A형)",
+   "englishName": "HITOX Injection 50Unit(Clostridium botulinum toxin type A)",
+   "company": "(주)한국비엠아이",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202302967",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Hitox Injection 100Units(Clostridium botulinum toxin type A)",
+   "company": "(주)한국비엠아이",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202400165",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Re N Tox Injection 100Units(Clostridium botulinum toxin type A)",
+   "company": "(주)파마리서치바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202400243",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "BIENOX Injection(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)한국비엔씨",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202400591",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BIENOX Injection 200 unit(Clostridium Botulinum Toxin Type A)(for export)",
+   "company": "(주)한국비엔씨",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202402821",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "JETEMA THE TOXIN Inj. 100U(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)제테마",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202402879",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "INIBO Inj. 200UNITS(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)이니바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202500171",
+   "route": "injection"
+  },
+  {
+   "name": "톡스온주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TOXON Injection",
+   "company": "(주)에이티지씨",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202500353",
+   "route": "injection"
+  },
+  {
+   "name": "티엠버스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TYEMVERS for Injection 100 Units(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)종근당바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202500753",
+   "route": "injection"
+  },
+  {
+   "name": "보타루마주(클로스트리디움보툴리눔독소A형(150kDa))",
+   "englishName": "Botaluma Inj.",
+   "company": "(주)에이티지씨",
+   "ingredient": "Clostridium Botulinum Type A(150kDa)",
+   "itemSeq": "202501408",
+   "route": "injection"
+  },
+  {
+   "name": "보타원주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BOTAONE Inj. 200Units(Clostridium botulinum Toxin Type A)(For export only)",
+   "company": "제네톡스(주)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202501980",
+   "route": "injection"
+  },
+  {
+   "name": "티엠버스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TYEMVERS for Injection 200 Units(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)종근당바이오",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202502453",
+   "route": "injection"
+  },
+  {
+   "name": "프로톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Protoxin Inj. 100U",
+   "company": "(주)프로톡스",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202502960",
+   "route": "injection"
+  },
+  {
+   "name": "뉴럭스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "NEWLUX Inj. 200U(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)뉴메코",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "itemSeq": "202601737",
+   "route": "injection"
+  },
+  {
+   "name": "톡스타주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TOXTA Inj. 100U(Clostridium Botulinum Toxin Type A)",
+   "company": "(주)퍼슨",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "itemSeq": "202602854",
+   "route": "injection"
+  },
+  {
+   "name": "유유크리드정(티클로피딘염산염)",
+   "englishName": "YuyuClid Tab. 250mg (Ticlopidine Hydrochloride)",
+   "company": "(주)유유제약",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "198300091"
+  },
+  {
+   "name": "유유크리드정100mg(티클로피딘염산염)",
+   "englishName": "YuyuClid Tab. 100mg (Ticlopidine Hydrochloride)",
+   "company": "(주)유유제약",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "198300092"
+  },
+  {
+   "name": "코러스염산티클로피딘정100밀리그람(수출명:TicodineTab.)(수출용)",
+   "englishName": "Ticodine Tab.",
+   "company": "한국코러스(주)",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "199603103"
+  },
+  {
+   "name": "코러스염산티클로피딘정250밀리그램(수출용)",
+   "englishName": "Korus Ticlopidine HCl Tab. 250mg",
+   "company": "한국코러스(주)",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "199603104"
+  },
+  {
+   "name": "티날핀정100밀리그람(염산티클로피딘)(수출용)",
+   "englishName": "Tinalpin Tab. 100mg",
+   "company": "하나제약(주)",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "199702377"
+  },
+  {
+   "name": "티날핀정250밀리그람(염산티클로피딘)(수출용)",
+   "englishName": "Tinalpin Tab. 250mg",
+   "company": "하나제약(주)",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "199702378"
+  },
+  {
+   "name": "티클로딘정(염산티클로피딘)(수출용)[수출명:Ticlopidine Tab.]",
+   "englishName": "Ticlopidine Tab.",
+   "company": "대한뉴팜(주)",
+   "ingredient": "Ticlopidine Hydrochloride",
+   "itemSeq": "200607039"
+  },
+  {
+   "name": "유크리드정250/80밀리그램",
+   "englishName": "Yuclid Tab. 250/80",
+   "company": "(주)유유제약",
+   "ingredient": "Ginkgo Biloba Leaf Dried Extract/Ticlopidine Hydrochloride",
+   "itemSeq": "200803805"
+  },
+  {
+   "name": "프로스카정(피나스테리드)",
+   "englishName": "PROSCAR tab. (Finasteride, 5 mg)",
+   "company": "한국오가논(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "199504272"
+  },
+  {
+   "name": "프로페시아정1밀리그램(피나스테리드)",
+   "englishName": "PROPECIA tab. (Finasteride, 1mg)",
+   "company": "한국오가논(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200009059"
+  },
+  {
+   "name": "피나스타정(피나스테리드)",
+   "englishName": "Finastar Tablet (Finasteride)",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Finasteride/Finasteride",
+   "itemSeq": "200200252"
+  },
+  {
+   "name": "프로피나정(피나스테리드)",
+   "englishName": "Profina Tab.",
+   "company": "신풍제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400011"
+  },
+  {
+   "name": "프로스몰정(피나스테리드)",
+   "englishName": "Prosmol Tab.",
+   "company": "(주)종근당",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400104"
+  },
+  {
+   "name": "알파스카정(피나스테리드)",
+   "englishName": "Alphascar Tab.",
+   "company": "이연제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400150"
+  },
+  {
+   "name": "한올피나스테리드정",
+   "englishName": "HANALL Finasteride Tab.",
+   "company": "한올바이오파마(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400340"
+  },
+  {
+   "name": "스카렉스정(피나스테리드)",
+   "englishName": "SKAREX TAB 5MG",
+   "company": "아주약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400691"
+  },
+  {
+   "name": "피나드론정(피나스테리드)",
+   "englishName": "Finadron Tablet (Finasteride)",
+   "company": "알보젠코리아(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200400993"
+  },
+  {
+   "name": "스카테론정(피나스테리드)",
+   "englishName": "Scateron Tab.",
+   "company": "(주)메디카코리아",
+   "ingredient": "Finasteride",
+   "itemSeq": "200401373"
+  },
+  {
+   "name": "유로리드정(피나스테리드)",
+   "englishName": "Urorid Tab.",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200401512"
+  },
+  {
+   "name": "대웅바이오피나스테리드정5밀리그램",
+   "englishName": "DAEWOONGBIO FINASTERIDE TAB. 5mg",
+   "company": "대웅바이오(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200401555"
+  },
+  {
+   "name": "핀카정(피나스테리드)",
+   "englishName": "Finca Tab.",
+   "company": "대원제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200401751"
+  },
+  {
+   "name": "유로피나정(피나스테리드)",
+   "englishName": "Uropina Tab.",
+   "company": "고려제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200402149"
+  },
+  {
+   "name": "피나베린정(피나스테리드)",
+   "englishName": "Finaberin Tab.",
+   "company": "영일제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200402286"
+  },
+  {
+   "name": "피로이드정(피나스테리드)",
+   "englishName": "PIROID Tab. (Finasteride)",
+   "company": "제이더블유신약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200402677"
+  },
+  {
+   "name": "푸로스타정(피나스테리드)",
+   "englishName": "PROSTARTAB.(FINASTERIDE)",
+   "company": "영풍제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200402944"
+  },
+  {
+   "name": "프로리드정(피나스테리드)",
+   "englishName": "Proride Tab.",
+   "company": "(주)유영제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200403305"
+  },
+  {
+   "name": "피나스티드정(피나스테리드)",
+   "englishName": "FINASTID(Finasteride)",
+   "company": "국제약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200500410"
+  },
+  {
+   "name": "파나스카정(피나스테리드)",
+   "englishName": "Panascar Tablet",
+   "company": "(주)유한양행",
+   "ingredient": "Finasteride",
+   "itemSeq": "200500572"
+  },
+  {
+   "name": "트로피나정(피나스테리드)",
+   "englishName": "Trofina Tab.(Finasteride)",
+   "company": "동성제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200500853"
+  },
+  {
+   "name": "파나드정(피나스테리드)",
+   "englishName": "Panad Tab. 5mg (Finasteride)",
+   "company": "삼천당제약(주)",
+   "ingredient": "Finasteride/Finasteride",
+   "itemSeq": "200501004"
+  },
+  {
+   "name": "보령피나스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Boryung Finasteride Tab. 75mg(Finasteride)",
+   "company": "(주)보령",
+   "ingredient": "Finasteride",
+   "itemSeq": "200501194"
+  },
+  {
+   "name": "일양피나스테리드정(피나스테리드)",
+   "englishName": "Finasterid Tab. IL-YANG",
+   "company": "일양약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200501225"
+  },
+  {
+   "name": "유로스칸정(피나스테리드)",
+   "englishName": "Uroscan Tab.",
+   "company": "경동제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200501987"
+  },
+  {
+   "name": "푸로케어정(피나스테리드)",
+   "englishName": "Procare Tab.",
+   "company": "하나제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200502109"
+  },
+  {
+   "name": "피나테드정1밀리그램(피나스테리드)",
+   "englishName": "Finated Tab. 1mg",
+   "company": "한미약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200502193"
+  },
+  {
+   "name": "한림피나스테리드정(피나스테리드)",
+   "englishName": "Finasterid Tab. Hanlim",
+   "company": "한림제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200502868"
+  },
+  {
+   "name": "알로시아정(피나스테리드)",
+   "englishName": "Alocia Tab.",
+   "company": "유니메드제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200503075"
+  },
+  {
+   "name": "피나스틴정(피나스테리드)",
+   "englishName": "Finastin Tablet",
+   "company": "부광약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200512320"
+  },
+  {
+   "name": "모나스타정1밀리그램(피나스테리드)",
+   "englishName": "Monastar Tablet 1mg (Finasteride)",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200600052"
+  },
+  {
+   "name": "헤어페시아정(피나스테리드)",
+   "englishName": "Hairpecia Tab. 1mg",
+   "company": "동화약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200605386"
+  },
+  {
+   "name": "피나모린정(피나스테리드)",
+   "englishName": "Finamorin Tab",
+   "company": "태극제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200605399"
+  },
+  {
+   "name": "바로피나정(피나스테리드)",
+   "englishName": "Baropina Tab.",
+   "company": "신풍제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200610951"
+  },
+  {
+   "name": "미노페시아정1밀리그람(피나스테리드)",
+   "englishName": "Minopecia Tab. 1mg (Finasteride)",
+   "company": "현대약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200611317"
+  },
+  {
+   "name": "마이시아정(피나스테리드)",
+   "englishName": "Mycia Tab.",
+   "company": "(주)씨티씨바이오",
+   "ingredient": "Finasteride",
+   "itemSeq": "200611392"
+  },
+  {
+   "name": "다모케어정(피나스테리드)",
+   "englishName": "DAMOCARE TAB.",
+   "company": "명문제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200700565"
+  },
+  {
+   "name": "메디페시아정1밀리그램(피나스테리드)",
+   "englishName": "Medipecia Tab. 1mg",
+   "company": "고려제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200700566"
+  },
+  {
+   "name": "그로모정1밀리그램(피나스테리드)",
+   "englishName": "Gromo Tab. 1mg",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Finasteride",
+   "itemSeq": "200701016"
+  },
+  {
+   "name": "모나리드정1밀리그램(피나스테리드)",
+   "englishName": "Monarid Tab. 1mg",
+   "company": "진양제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200701020"
+  },
+  {
+   "name": "모나스틴정(피나스테리드)",
+   "englishName": "Monastin Tab.",
+   "company": "(주)셀트리온제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200701023"
+  },
+  {
+   "name": "두피나정(피나스테리드)",
+   "englishName": "Dupina Tab.",
+   "company": "(주)하원제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200701024"
+  },
+  {
+   "name": "스카테리드정(피나스테리드)(수출용)",
+   "englishName": "Scateride Tab. (for export)",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200703342"
+  },
+  {
+   "name": "피나베린정1밀리그램(피나스테리드)",
+   "englishName": "Finaberin Tab. 1mg",
+   "company": "영일제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200703343"
+  },
+  {
+   "name": "피나시딜정(피나스테리드)",
+   "englishName": "Finasidil Tablet (Finasteride)",
+   "company": "동국제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200703801"
+  },
+  {
+   "name": "모나드정(피나스테리드)",
+   "englishName": "MONAD Tab. (Finasteride)",
+   "company": "제이더블유신약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200704420"
+  },
+  {
+   "name": "파세드정1mg(피나스테리드)",
+   "englishName": "Pased Tab. 1mg",
+   "company": "삼익제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200704531"
+  },
+  {
+   "name": "피나스텔정1mg(피나스테리드)",
+   "englishName": "FINASTEL Tab. 1mg",
+   "company": "동광제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200704533"
+  },
+  {
+   "name": "다모페시아정(피나스테리드)",
+   "englishName": "Damopesia Tab.",
+   "company": "(주)메디카코리아",
+   "ingredient": "Finasteride",
+   "itemSeq": "200704541"
+  },
+  {
+   "name": "알로펙정(피나스테리드)",
+   "englishName": "Alopec Tablet",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200705099"
+  },
+  {
+   "name": "알로스칸정(피나스테리드)",
+   "englishName": "Alloskan Tab.",
+   "company": "경동제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200705313"
+  },
+  {
+   "name": "마이페시아정(피나스테리드)",
+   "englishName": "Mypecia Tab.",
+   "company": "주식회사제뉴원사이언스",
+   "ingredient": "Finasteride/Finasteride",
+   "itemSeq": "200705402"
+  },
+  {
+   "name": "유니볼드정(피나스테리드)(수출용)",
+   "englishName": "Unibald Tab.",
+   "company": "유니메드제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200705737"
+  },
+  {
+   "name": "베아리모정(피나스테리드)",
+   "englishName": "BEARREMO Tab",
+   "company": "(주)대웅제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "200708364"
+  },
+  {
+   "name": "프로시정(피나스테리드)",
+   "englishName": "Proci Tablet",
+   "company": "케이엠에스제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200708405"
+  },
+  {
+   "name": "헤어그로정1밀리그램(피나스테리드)",
+   "englishName": "Hairgrow Tab. 1mg",
+   "company": "한올바이오파마(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200711309"
+  },
+  {
+   "name": "유나시아정(피나스테리드)",
+   "englishName": "Unacia Tab.",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200803186"
+  },
+  {
+   "name": "모나필정1밀리그램(피나스테리드)",
+   "englishName": "Monafeel Tab. 1mg",
+   "company": "제일약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "200805553"
+  },
+  {
+   "name": "피나젠정5밀리그램(피나스테리드)",
+   "englishName": "Finazen Tab. 5mg",
+   "company": "제일약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201207332"
+  },
+  {
+   "name": "프리스타정5밀리그램(피나스테리드)",
+   "englishName": "Freestar Tab. 5mg(Finasteride)",
+   "company": "(주)휴메딕스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201207578"
+  },
+  {
+   "name": "피나트라정5밀리그램(피나스테리드)",
+   "englishName": "Finatra Tab. 5mg",
+   "company": "한미약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201208465"
+  },
+  {
+   "name": "AG피나스테리드정(피나스테리드)(수출용)",
+   "englishName": "AG Finasteride (for export)",
+   "company": "안국약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201209017"
+  },
+  {
+   "name": "핀스타정5밀리그램(피나스테리드)",
+   "englishName": "Finstar Tab. 5mg(Finasteride)",
+   "company": "오스틴제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201300109"
+  },
+  {
+   "name": "피나라이드정(피나스테리드)",
+   "englishName": "Finaride Tab.",
+   "company": "(주)제뉴파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201305403"
+  },
+  {
+   "name": "필라스트정(피나스테리드)",
+   "englishName": "Filast Tab.",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201307566"
+  },
+  {
+   "name": "프로스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Prosteride Tab.",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201310312"
+  },
+  {
+   "name": "피나시아정5밀리그램(피나스테리드)",
+   "englishName": "Finasia Tab. 5mg",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201310348"
+  },
+  {
+   "name": "피나그렌정5mg(피나스테리드)",
+   "englishName": "Finagren Tab. 5mg",
+   "company": "구주제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201310785"
+  },
+  {
+   "name": "피나린정(피나스테리드)",
+   "englishName": "Finarin Tab.",
+   "company": "주식회사제뉴원사이언스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201400381"
+  },
+  {
+   "name": "프로스타트정(피나스테리드)",
+   "englishName": "Prostart Tab.",
+   "company": "(주)바이넥스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201401626"
+  },
+  {
+   "name": "마이피나정(피나스테리드)",
+   "englishName": "Myfina Tab.",
+   "company": "(주)일화",
+   "ingredient": "Finasteride",
+   "itemSeq": "201402071"
+  },
+  {
+   "name": "메리나정(피나스테리드)",
+   "englishName": "Merina Tab. (Finasteride)",
+   "company": "(주)휴온스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201402875"
+  },
+  {
+   "name": "파나리드정5밀리그램(피나스테리드)",
+   "englishName": "Fanaride Tab. 5mg(Finasteride)",
+   "company": "풍림무약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201403175"
+  },
+  {
+   "name": "피나프로스정(피나스테리드)",
+   "englishName": "FINAPROS Tab.",
+   "company": "(주)팜젠사이언스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201403977"
+  },
+  {
+   "name": "그로모정5밀리그램(피나스테리드)",
+   "englishName": "Gromo Tab. 5mg",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201404126"
+  },
+  {
+   "name": "피나텐정5mg(피나스테리드)",
+   "englishName": "Finaten Tab. 5mg",
+   "company": "(주)휴비스트제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201404741"
+  },
+  {
+   "name": "피나스토정(피나스테리드)",
+   "englishName": "Finasto Tab.",
+   "company": "성원애드콕제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201405009"
+  },
+  {
+   "name": "에피나시정1밀리그램(피나스테리드)",
+   "englishName": "Epinasy Tab. 1mg(Finasteride)",
+   "company": "풍림무약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201405462"
+  },
+  {
+   "name": "씨엠피나정5mg(피나스테리드)",
+   "englishName": "CMFINA TAB 5mg",
+   "company": "(주)씨엠지제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201405888"
+  },
+  {
+   "name": "씨엠프로정1mg(피나스테리드)",
+   "englishName": "CM Pro Tab. 1mg",
+   "company": "(주)씨엠지제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201405889"
+  },
+  {
+   "name": "피나스칸정5mg(피나스테리드)",
+   "englishName": "Finascan Tab. 5mg",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201405966"
+  },
+  {
+   "name": "피나스칸정1mg(피나스테리드)",
+   "englishName": "Finascan Tab. 1mg",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201406197"
+  },
+  {
+   "name": "피나드정5mg(피나스테리드)",
+   "englishName": "",
+   "company": "(주)이든파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201500591"
+  },
+  {
+   "name": "모나정(피나스테리드)",
+   "englishName": "Mona Tab.",
+   "company": "(주)서울제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201501683"
+  },
+  {
+   "name": "모더페시아정1밀리그램(피나스테리드)",
+   "englishName": "MODERPECIA Tab. 1mg (Finasteride)",
+   "company": "(주)다산제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201502780"
+  },
+  {
+   "name": "비피케어정5밀리그램(피나스테리드)",
+   "englishName": "BP CARE Tab. 5mg (Finasteride)",
+   "company": "(주)다산제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201503168"
+  },
+  {
+   "name": "피나스로정5mg(피나스테리드)",
+   "englishName": "Finasro tab. 5mg",
+   "company": "알리코제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201503298"
+  },
+  {
+   "name": "피나프로정1밀리그램(피나스테리드)",
+   "englishName": "Finapro Tab. 1mg",
+   "company": "건일바이오팜주식회사",
+   "ingredient": "Finasteride",
+   "itemSeq": "201504073"
+  },
+  {
+   "name": "프로스틸정(피나스테리드)",
+   "englishName": "",
+   "company": "(주)아이월드제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201506121"
+  },
+  {
+   "name": "대웅바이오피나스테리드정1밀리그램",
+   "englishName": "DAEWOONGBIO FINASTERIDE TAB. 1MG",
+   "company": "대웅바이오(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201506502"
+  },
+  {
+   "name": "피나스테리드정 0.2mg「SN」(수출용)",
+   "englishName": "Finasteride Tab. 0.2mg",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201600565"
+  },
+  {
+   "name": "피나스테리드정 1.0mg「SN」(수출용)",
+   "englishName": "Finasteride Tab. 1.0mg",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201600566"
+  },
+  {
+   "name": "베르모나정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "company": "(주)아이월드제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201600572"
+  },
+  {
+   "name": "엔피스카정(피나스테리드)",
+   "englishName": "NPscar Tab.",
+   "company": "대한뉴팜(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201600874"
+  },
+  {
+   "name": "피나스테아정(피나스테리드)",
+   "englishName": "Finastea Tablet(Finasteride)",
+   "company": "에이치엘비제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201601093"
+  },
+  {
+   "name": "피나진정5밀리그램(피나스테리드)",
+   "englishName": "Finajin Tab. 5mg",
+   "company": "(주)화이트생명과학",
+   "ingredient": "Finasteride",
+   "itemSeq": "201601239"
+  },
+  {
+   "name": "피테스정5mg(피나스테리드)",
+   "englishName": "Fites Tab. 5mg(Finasteride)",
+   "company": "아이큐어(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201601763"
+  },
+  {
+   "name": "피나스카정(피나스테리드)",
+   "englishName": "Finascar Tab.(Finasteride)",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603165"
+  },
+  {
+   "name": "프로나드정5밀리그램(피나스테리드)",
+   "englishName": "Pronad Tab. 5mg (Finasteride)",
+   "company": "현대약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603224"
+  },
+  {
+   "name": "유레이드정(피나스테리드)",
+   "englishName": "Uraid Tab.",
+   "company": "(주)씨티씨바이오",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603616"
+  },
+  {
+   "name": "피나에이블정5밀리그램(피나스테리드)",
+   "englishName": "Finaable Tab. 5mg",
+   "company": "(주)인트로바이오파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603765"
+  },
+  {
+   "name": "비보존피나스테리드정5밀리그램",
+   "englishName": "VIVOZON-FINASTERIDE TAB. 5mg",
+   "company": "(주)비보존제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603906"
+  },
+  {
+   "name": "피나즈정(피나스테리드)",
+   "englishName": "Finaz Tablet",
+   "company": "(주)휴온스메디텍",
+   "ingredient": "Finasteride",
+   "itemSeq": "201603944"
+  },
+  {
+   "name": "피나론정(피나스테리드)",
+   "englishName": "Finaron Tab.",
+   "company": "조아제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201604011"
+  },
+  {
+   "name": "모나페시아정1밀리그램(피나스테리드)",
+   "englishName": "Monapecia Tab. 1mg(Finasteride)",
+   "company": "(주)티디에스팜",
+   "ingredient": "Finasteride",
+   "itemSeq": "201701055"
+  },
+  {
+   "name": "스텐카정1밀리그램(피나스테리드)",
+   "englishName": "Stenka Tablet 1mg",
+   "company": "(주)옵투스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201701291"
+  },
+  {
+   "name": "피나시딜정5밀리그램(피나스테리드)",
+   "englishName": "Finasidil Tablet 5mg (Finasteride)",
+   "company": "동국제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201701551"
+  },
+  {
+   "name": "이노엔피나스테리드정5밀리그램",
+   "englishName": "inno.N Finasteride Tab. 5mg",
+   "company": "에이치케이이노엔(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201704723"
+  },
+  {
+   "name": "이노엔피나스테리드정1밀리그램",
+   "englishName": "Finasteride Tab. 1mg inno.N",
+   "company": "에이치케이이노엔(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201705805"
+  },
+  {
+   "name": "피나스로정1mg(피나스테리드)",
+   "englishName": "Finasro tab. 1mg",
+   "company": "알리코제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201706266"
+  },
+  {
+   "name": "프로스테리드정1mg(피나스테리드)",
+   "englishName": "Prosteride Tab.",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201707104"
+  },
+  {
+   "name": "삼성피나스테리드정5밀리그램",
+   "englishName": "Samsung Finasteride Tab. 1mg",
+   "company": "삼성제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201707251"
+  },
+  {
+   "name": "피나스트리온정5밀리그램(피나스테리드)",
+   "englishName": "Finastrion Tablets 5mg(Finasteride)",
+   "company": "(주)셀트리온제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201707496"
+  },
+  {
+   "name": "모나시아정1밀리그램(피나스테리드)",
+   "englishName": "Monasia Tab. 1mg(Finasteride)",
+   "company": "아이큐어(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201802602"
+  },
+  {
+   "name": "큐로이드정(피나스테리드)",
+   "englishName": "Qloid Tab.",
+   "company": "주식회사큐엘파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201802729"
+  },
+  {
+   "name": "피나프로스정1밀리그램(피나스테리드)",
+   "englishName": "FINAPROS Tab. 1mg",
+   "company": "(주)팜젠사이언스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201802808"
+  },
+  {
+   "name": "프로화정(피나스테리드)",
+   "englishName": "Prohwa Tab",
+   "company": "대화제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201803189"
+  },
+  {
+   "name": "모리턴정1밀리그램(피나스테리드)",
+   "englishName": "Moreturn Tab. 1mg",
+   "company": "(주)바이넥스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201803548"
+  },
+  {
+   "name": "신신피나스테리드정1밀리그램",
+   "englishName": "Sinsin Finasteride Tab. 1mg",
+   "company": "신신제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201803800"
+  },
+  {
+   "name": "피나스정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Finasteride",
+   "itemSeq": "201804339"
+  },
+  {
+   "name": "피나윈정1밀리그램(피나스테리드)",
+   "englishName": "Finawin Tab. 1mg",
+   "company": "코스맥스파마(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201804506"
+  },
+  {
+   "name": "리모날정1밀리그램(피나스테리드)",
+   "englishName": "Remonal Tablet 1mg",
+   "company": "(주)한국파비스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201805362"
+  },
+  {
+   "name": "엔피나정(피나스테리드)",
+   "englishName": "Enpina Tab.",
+   "company": "대한뉴팜(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201900082"
+  },
+  {
+   "name": "다림피나스테리드정1밀리그램",
+   "englishName": "Dalim Finasteride Tab. 1mg",
+   "company": "(주)다림바이오텍",
+   "ingredient": "Finasteride",
+   "itemSeq": "201900938"
+  },
+  {
+   "name": "리모날정5밀리그램(피나스테리드)",
+   "englishName": "Remonal Tablet 1mg",
+   "company": "(주)한국파비스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201900940"
+  },
+  {
+   "name": "모어에이블정1밀리그램(피나스테리드)",
+   "englishName": "Moreable Tab. 1mg",
+   "company": "(주)바스칸바이오제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201901476"
+  },
+  {
+   "name": "피나스톤정5밀리그램(피나스테리드)",
+   "englishName": "Finastone Tab.",
+   "company": "지엘팜텍(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201901584"
+  },
+  {
+   "name": "피나테크정1밀리그램(피나스테리드)",
+   "englishName": "Finatech Tab 1mg(Finasteride)",
+   "company": "(주)시어스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201901821"
+  },
+  {
+   "name": "피나테크정5밀리그램(피나스테리드)",
+   "englishName": "Finatech Tab 5mg(Finasteride)",
+   "company": "(주)시어스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201901898"
+  },
+  {
+   "name": "피나스테린정5밀리그램(피나스테리드)",
+   "englishName": "Finasterine Tab. 5mg",
+   "company": "(주)바스칸바이오제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201901926"
+  },
+  {
+   "name": "유니테리드정5밀리그램(피나스테리드)",
+   "englishName": "Uniteride Tab. 5mg",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902071"
+  },
+  {
+   "name": "모그로정1밀리그램(피나스테리드)",
+   "englishName": "Mogrow Tab. 1mg",
+   "company": "정우신약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902249"
+  },
+  {
+   "name": "모그로정5밀리그램(피나스테리드)",
+   "englishName": "Mogrow Tab. 5mg",
+   "company": "정우신약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902250"
+  },
+  {
+   "name": "프로모아정5밀리그램(피나스테리드)",
+   "englishName": "Promoa Tab. 5mg",
+   "company": "맥널티제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902332"
+  },
+  {
+   "name": "피나세타정5밀리그램(피나스테리드)",
+   "englishName": "Finaseta Tab. 5mg",
+   "company": "화일약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902353"
+  },
+  {
+   "name": "피노테정5밀리그램(피나스테리드)",
+   "englishName": "Finote Tab. 5mg",
+   "company": "한국코러스(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902356"
+  },
+  {
+   "name": "스카페시아정1밀리그램(피나스테리드)",
+   "englishName": "SKAPECIA Tab. 1mg",
+   "company": "아주약품(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902474"
+  },
+  {
+   "name": "제이페시아정1mg(피나스테리드)",
+   "englishName": "J-pecia Tab. 1mg",
+   "company": "(주)라이트팜텍",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902552"
+  },
+  {
+   "name": "제이피나정5mg(피나스테리드)",
+   "englishName": "Jfina Tab. 5mg",
+   "company": "유니메드제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902553"
+  },
+  {
+   "name": "모모페시아정1밀리그램(피나스테리드)",
+   "englishName": "MOMOPECIA Tabs 1mg",
+   "company": "주식회사더유제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902594"
+  },
+  {
+   "name": "피나스정5밀리그램(피나스테리드)",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Finasteride",
+   "itemSeq": "201902805"
+  },
+  {
+   "name": "피나리정(피나스테리드)",
+   "englishName": "Finari Tab.(Finasteride)",
+   "company": "(주)서흥",
+   "ingredient": "Finasteride",
+   "itemSeq": "201903316"
+  },
+  {
+   "name": "에이페시아정1밀리그램(피나스테리드)",
+   "englishName": "Apecia Tab. 1mg",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Finasteride",
+   "itemSeq": "201903396"
+  },
+  {
+   "name": "피나프로정5밀리그램(피나스테리드)",
+   "englishName": "Finapro Tab. 5mg",
+   "company": "건일바이오팜주식회사",
+   "ingredient": "Finasteride",
+   "itemSeq": "201903425"
+  },
+  {
+   "name": "위피나정(피나스테리드)",
+   "englishName": "Wifina Tab.",
+   "company": "위더스제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201904321"
+  },
+  {
+   "name": "멕스페시아정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "company": "(주)이든파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905393"
+  },
+  {
+   "name": "피나온정1밀리그램(피나스테리드)",
+   "englishName": "Finaon Tab. 1mg",
+   "company": "(주)휴비스트제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905440"
+  },
+  {
+   "name": "피나세트정1mg(피나스테리드)",
+   "englishName": "Finaset Tab. 1mg",
+   "company": "익수제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905545"
+  },
+  {
+   "name": "명문피나스테리드정5밀리그램",
+   "englishName": "Myungmoon Finasteride Tab 5mg",
+   "company": "명문제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905590"
+  },
+  {
+   "name": "피나세트정5mg(피나스테리드)",
+   "englishName": "Finaset Tab. 5mg",
+   "company": "익수제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905647"
+  },
+  {
+   "name": "뉴페시아정1밀리그램(피나스테리드)",
+   "englishName": "Newfesia Tab. 1mg(Finasteride)",
+   "company": "(주)한풍제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905959"
+  },
+  {
+   "name": "피나에스정5밀리그램(피나스테리드)",
+   "englishName": "Fina-S Tab. 5mg(Finasteride)",
+   "company": "(주)한풍제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905960"
+  },
+  {
+   "name": "피나모아정1밀리그램(피나스테리드)",
+   "englishName": "Finamoa Tab. 1mg",
+   "company": "제이더블유생명과학(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201905988"
+  },
+  {
+   "name": "프로핀카정(피나스테리드)",
+   "englishName": "",
+   "company": "대원바이오텍주식회사",
+   "ingredient": "Finasteride",
+   "itemSeq": "201906559"
+  },
+  {
+   "name": "알로피나정5밀리그램(피나스테리드)",
+   "englishName": "Alofina Tab. 5mg",
+   "company": "(주)마더스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201906668"
+  },
+  {
+   "name": "피나스트정1밀리그램(피나스테리드)",
+   "englishName": "Finast Tab. 1mg",
+   "company": "(주)일화",
+   "ingredient": "Finasteride",
+   "itemSeq": "201906768"
+  },
+  {
+   "name": "넬슨피나스테리드정1밀리그램(피나스테리드)",
+   "englishName": "Nelsonfinasteride Tab. 1mg",
+   "company": "한국넬슨제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201906850"
+  },
+  {
+   "name": "넬슨피나스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Nelsonfinasteride Tab. 5mg",
+   "company": "한국넬슨제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201906851"
+  },
+  {
+   "name": "삼성피나스테리드정1밀리그램",
+   "englishName": "samsung finasteride  tablet",
+   "company": "삼성제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907100"
+  },
+  {
+   "name": "헤오나정1밀리그램(피나스테리드)",
+   "englishName": "Hairona Tab. 1mg",
+   "company": "(주)오스코리아제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907328"
+  },
+  {
+   "name": "피나앤정1밀리그램(피나스테리드)",
+   "englishName": "Fina N Tab. 1mg",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907357"
+  },
+  {
+   "name": "휴피나정5밀리그램(피나스테리드)",
+   "englishName": "Huefina Tab. 5mg",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907358"
+  },
+  {
+   "name": "피나신정(피나스테리드)",
+   "englishName": "",
+   "company": "(주)킴스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907777"
+  },
+  {
+   "name": "텔콘알에프피나스테리드정5밀리그램",
+   "englishName": "",
+   "company": "(주)텔콘알에프제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907898"
+  },
+  {
+   "name": "스테리정1밀리그램(피나스테리드)",
+   "englishName": "Steri Tablet 1mg",
+   "company": "(주)텔콘알에프제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201907899"
+  },
+  {
+   "name": "프로아모정1밀리그램(피나스테리드)",
+   "englishName": "Proamo Tab. 1mg",
+   "company": "맥널티제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201908019"
+  },
+  {
+   "name": "다모테리드정1밀리그램(피나스테리드)",
+   "englishName": "Damoteride Tab. 1mg",
+   "company": "한국신텍스제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "201908083"
+  },
+  {
+   "name": "비피스타정(피나스테리드)",
+   "englishName": "BP.STAR Tabs",
+   "company": "주식회사더유제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "201908113"
+  },
+  {
+   "name": "메가페시아정1밀리그램(피나스테리드)",
+   "englishName": "Megafesia Tab. 1mg",
+   "company": "(주)엘앤씨바이오",
+   "ingredient": "Finasteride",
+   "itemSeq": "201908369"
+  },
+  {
+   "name": "엔티테리드정5밀리그램(피나스테리드)",
+   "englishName": "NT-teride Tab. 5mg",
+   "company": "(주)셀비온",
+   "ingredient": "Finasteride",
+   "itemSeq": "202000208"
+  },
+  {
+   "name": "메가페시아정5밀리그램(피나스테리드)",
+   "englishName": "Mega Fesia Tab. 5mg",
+   "company": "(주)엘앤씨바이오",
+   "ingredient": "Finasteride",
+   "itemSeq": "202001337"
+  },
+  {
+   "name": "피나스텐정1밀리그램(피나스테리드)",
+   "englishName": "Finasten tab. 1mg",
+   "company": "엔비케이제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202001530"
+  },
+  {
+   "name": "피나스텐정5밀리그램(피나스테리드)",
+   "englishName": "Finasten tab. 5mg",
+   "company": "엔비케이제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202002329"
+  },
+  {
+   "name": "피나시드정5밀리그램(피나스테리드)",
+   "englishName": "",
+   "company": "주식회사케이에스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "202003376"
+  },
+  {
+   "name": "피나움정(피나스테리드)",
+   "englishName": "Finaum Tab.",
+   "company": "이연제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202003757"
+  },
+  {
+   "name": "모벤시아정(피나스테리드)",
+   "englishName": "",
+   "company": "대원바이오텍주식회사",
+   "ingredient": "Finasteride",
+   "itemSeq": "202004694"
+  },
+  {
+   "name": "피나엠정1밀리그램(피나스테리드)",
+   "englishName": "Fina M Tab. 1mg",
+   "company": "(주)인트로바이오파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "202005123"
+  },
+  {
+   "name": "모모드정(피나스테리드)",
+   "englishName": "Momod Tab. 1mg(Finastaride)",
+   "company": "(주)서흥",
+   "ingredient": "Finasteride",
+   "itemSeq": "202006563"
+  },
+  {
+   "name": "피나스톤정1밀리그램(피나스테리드)",
+   "englishName": "Finastone 1mg tab.(finasterid)",
+   "company": "지엘팜텍(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202006597"
+  },
+  {
+   "name": "다나페시아정1밀리그램(피나스테리드)",
+   "englishName": "Danapecia tablet 1mg(finasteride)",
+   "company": "(주)비보존제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "202009181"
+  },
+  {
+   "name": "피나시드정1밀리그램(피나스테리드)",
+   "englishName": "Finaside Tab. 1mg",
+   "company": "주식회사케이에스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "202009263"
+  },
+  {
+   "name": "모시아모정(피나스테리드)",
+   "englishName": "Mociamo tablet",
+   "company": "주식회사큐엘파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "202100729"
+  },
+  {
+   "name": "피나스테아정1밀리그램(피나스테리드)",
+   "englishName": "Finastea Tablet 1mg(Finasteride)",
+   "company": "에이치엘비제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202102023"
+  },
+  {
+   "name": "알로피나정1밀리그램(피나스테리드)",
+   "englishName": "Allofina Tab. 1mg",
+   "company": "(주)마더스제약",
+   "ingredient": "Finasteride",
+   "itemSeq": "202103355"
+  },
+  {
+   "name": "명문다모케어정(피나스테리드)(수출용)",
+   "englishName": "Myungmoon Damocare Tab.",
+   "company": "명문제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202103463"
+  },
+  {
+   "name": "알로테드정1밀리그램(피나스테리드)",
+   "englishName": "ALOTEDE Tab. 1mg",
+   "company": "삼아제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202105453"
+  },
+  {
+   "name": "그로페시아정1밀리그램(피나스테리드)",
+   "englishName": "Gropesia Tab. 10mg",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202106154"
+  },
+  {
+   "name": "피나모정1mg(피나스테리드)",
+   "englishName": "Finasto Tab. 1mg",
+   "company": "성원애드콕제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202106216"
+  },
+  {
+   "name": "피나시아정1밀리그램(피나스테리드)",
+   "englishName": "Finasia Tab. 1mg",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202106423"
+  },
+  {
+   "name": "제노페시아정(피나스테리드)",
+   "englishName": "Genopecia Tab.",
+   "company": "(주)제뉴파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "202107071"
+  },
+  {
+   "name": "오뉴페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onyoupecia Tab.",
+   "company": "미래바이오제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202107112"
+  },
+  {
+   "name": "핀스타정1밀리그램(피나스테리드)",
+   "englishName": "Finstar Tab. 1mg(Finasteride)",
+   "company": "오스틴제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202107289"
+  },
+  {
+   "name": "원페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onepecia Tab. 1mg",
+   "company": "하나제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202200293"
+  },
+  {
+   "name": "명문다모케어정1.3밀리그램(피나스테리드)(수출용)",
+   "englishName": "Myungmoon Damocare 1.3 milligram Tab",
+   "company": "명문제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202201129"
+  },
+  {
+   "name": "핀쥬베스프레이(피나스테리드)",
+   "englishName": "Finjuve Spray (Finasteride)",
+   "company": "(주)보령",
+   "ingredient": "Finasteride",
+   "itemSeq": "202203492"
+  },
+  {
+   "name": "다모케어플러스정(피나스테리드,미녹시딜)(수출용)",
+   "englishName": "Damocare Plus Tab.",
+   "company": "명문제약(주)",
+   "ingredient": "Finasteride/Minoxidil",
+   "itemSeq": "202204627"
+  },
+  {
+   "name": "피노테정1밀리그램(피나스테리드)",
+   "englishName": "Finote Tab. 1mg",
+   "company": "한국코러스(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202303302"
+  },
+  {
+   "name": "피나베린정1.5밀리그램(피나스테리드)(수출용)",
+   "englishName": "Finaberin Tablet 1.5mg",
+   "company": "영일제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202401636"
+  },
+  {
+   "name": "피나베린듀오정(미녹시딜,피나스테리드)(수출용)",
+   "englishName": "Finaberin Duo Tab.",
+   "company": "영일제약(주)",
+   "ingredient": "Finasteride/Minoxidil",
+   "itemSeq": "202402667"
+  },
+  {
+   "name": "온유페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onupecia Tab 1mg",
+   "company": "하이플생명과학(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202502390"
+  },
+  {
+   "name": "모모나정(피나스테리드)",
+   "englishName": "Momona Tab.",
+   "company": "(주)휴온스메디텍",
+   "ingredient": "Finasteride",
+   "itemSeq": "202601324"
+  },
+  {
+   "name": "프로시아정(피나스테리드)",
+   "englishName": "Procia Tab.",
+   "company": "주식회사 노바엠헬스케어",
+   "ingredient": "Finasteride",
+   "itemSeq": "202601829"
+  },
+  {
+   "name": "보란피나스테리드정1밀리그램",
+   "englishName": "BoranFinasteride Tab. 1mg",
+   "company": "보란파마",
+   "ingredient": "Finasteride",
+   "itemSeq": "202601981"
+  },
+  {
+   "name": "헤어엔정(피나스테리드)",
+   "englishName": "Hair N Tab.(finasteride)",
+   "company": "경방신약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202602209"
+  },
+  {
+   "name": "코오롱피나스테리드정1밀리그램",
+   "englishName": "Kolon Finasteride tab. 1mg",
+   "company": "코오롱제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202602447"
+  },
+  {
+   "name": "피나원정1밀리그램(피나스테리드)",
+   "englishName": "Fina One Tablet 1mg(Finasteride)",
+   "company": "씨에이치디제약주식회사",
+   "ingredient": "Finasteride",
+   "itemSeq": "202602490"
+  },
+  {
+   "name": "동성피나스테리드정",
+   "englishName": "Dongsung Finasteride Tab.",
+   "company": "동성제약(주)",
+   "ingredient": "Finasteride",
+   "itemSeq": "202603226"
+  },
+  {
+   "name": "아키놀연질캡슐(이소트레티노인)",
+   "englishName": "ISOTEEN AJUAKINOL",
+   "company": "아주약품(주)",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "199700909"
+  },
+  {
+   "name": "니메겐연질캡슐(이소트레티노인)",
+   "englishName": "Nimegen Soft Cap.",
+   "company": "(주)메디카코리아",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "199701393"
+  },
+  {
+   "name": "핀플연질캡슐(이소트레티노인)",
+   "englishName": "Pinple Soft Cap.",
+   "company": "주식회사더유제약",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "199801972"
+  },
+  {
+   "name": "이소틴연질캡슐[(이소트레티노인)(수출명:MARTOCO-10)](수출용)",
+   "englishName": "Desactin Soft Capsule",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "199900305"
+  },
+  {
+   "name": "이소트렌연질캡슐 (이소트레티노인)",
+   "englishName": "Isotren Soft Cap.",
+   "company": "고려제약(주)",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "200102110"
+  },
+  {
+   "name": "트레틴연질캡슐10mg(이소트레티노인)",
+   "englishName": "Tretin Soft Cap. 10mg(Isotretinoin)",
+   "company": "코오롱제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200200486"
+  },
+  {
+   "name": "이소티논연질캡슐10밀리그램(이소트레티노인)",
+   "englishName": "Isotinon Soft Cap 10mg",
+   "company": "한미약품(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200301825"
+  },
+  {
+   "name": "레씨범연질캡슐(이소트레티노인)",
+   "englishName": "Lecibum Soft Cap.",
+   "company": "위더스제약(주)",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "200400395"
+  },
+  {
+   "name": "트레인연질캡슐(이소트레티노인)",
+   "englishName": "Trein Soft Cap.",
+   "company": "(주)제뉴파마",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "200401172"
+  },
+  {
+   "name": "제로큐탄연질캡슐(이소트레티노인)",
+   "englishName": "ZEROCUTAN Soft cap. (Isotretinoin)",
+   "company": "제이더블유신약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200401432"
+  },
+  {
+   "name": "데삭틴20mg연질캡슐(이소트레티노인)(수출명:Desactin20)(수출용)",
+   "englishName": "Desactin 20mg Soft Capsule(Isotretinoin)(for export)(export Name : Desactin20)",
+   "company": "(주)서흥",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200607998"
+  },
+  {
+   "name": "에이프로젠이소틴연질캡슐20mg[(수출용)(이소트레티노인)(수출명 : MARTOCO-20)]",
+   "englishName": "Aprogen Isotine Soft Cap. 20mg",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200608004"
+  },
+  {
+   "name": "데삭틴10mg연질캡슐(이소트레티노인)(수출명:Desactin10)(수출용)",
+   "englishName": "Desactin 10mg Soft Capsule(Isotretinoin)(for export)(export Name : Desactin10)",
+   "company": "(주)서흥",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "200608100"
+  },
+  {
+   "name": "트레논연질캡슐(이소트레티노인)",
+   "englishName": "Trenon Soft Cap.",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Isotretinoin/Isotretinoin",
+   "itemSeq": "200712240"
+  },
+  {
+   "name": "이소레인연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isorein Soft Cap.(Isotretinoin)",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201003401"
+  },
+  {
+   "name": "이소트렌연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isotren Soft Cap. 20mg",
+   "company": "고려제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201207445"
+  },
+  {
+   "name": "이소레인연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Isorein Soft Cap.20mg(Isotretinoin)",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201306920"
+  },
+  {
+   "name": "트레논연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Trenon Soft Cap. 20mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201310664"
+  },
+  {
+   "name": "이소티나연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isotina Soft Cap. 20mg(for export)",
+   "company": "태극제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201400049"
+  },
+  {
+   "name": "트레인연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Trein Soft Cap. 20mg (for export)",
+   "company": "(주)제뉴파마",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201400192"
+  },
+  {
+   "name": "이소노에이신연질캡슐(이소트레티노인)(수출용)(수출명 : ISONOACN)",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201400608"
+  },
+  {
+   "name": "아키놀연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "AKINOL SC 20MG",
+   "company": "아주약품(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201401704"
+  },
+  {
+   "name": "유유이소트레티노인연질캡슐20밀리그램(이소트레티노인)(수출용)(수출명:지타코연질캡슐)",
+   "englishName": "Yuyu Isotretinoin soft cap. 20mg (Isotretinoin)",
+   "company": "(주)유유제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201402016"
+  },
+  {
+   "name": "아크린연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Acrin Soft Cap.(for export)",
+   "company": "(주)한국파마",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201403976"
+  },
+  {
+   "name": "티엘트레노인연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "TL-trenoin soft cap.",
+   "company": "영풍제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201404635"
+  },
+  {
+   "name": "티엘트레노인20연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "TL-trenoin20 soft cap.",
+   "company": "영풍제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201404636"
+  },
+  {
+   "name": "로이탄연질캡슐(이소트레티노인)",
+   "englishName": "Roitan Soft Cap.",
+   "company": "(주)마더스제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201405629"
+  },
+  {
+   "name": "셀노노스연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Celnonos Soft Cap.",
+   "company": "(주)한국피엠지제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201501000"
+  },
+  {
+   "name": "니메겐연질캡슐20밀리그램(수출용)",
+   "englishName": "Nimegen Soft Cap. 20mg (for export)",
+   "company": "(주)메디카코리아",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201501115"
+  },
+  {
+   "name": "트렉마이겔(수출용)",
+   "englishName": "Trek My Gel (for export)",
+   "company": "(주)제뉴파마",
+   "ingredient": "Erythromycin/Isotretinoin",
+   "itemSeq": "201503563"
+  },
+  {
+   "name": "유유이소트레티노인연질캡슐10밀리그램(이소트레티노인)(수출용)(수출명:지타코연질캡슐)",
+   "englishName": "yuyuisoterinoin soft cap.10mg(isoterinoin)",
+   "company": "(주)유유제약",
+   "ingredient": "Isotretinoin/Isotretinoin/Isotretinoin",
+   "itemSeq": "201504939"
+  },
+  {
+   "name": "티소푸트연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Tisofut Soft Cap",
+   "company": "(주)한국피엠지제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201504994"
+  },
+  {
+   "name": "오피큐탄연질캡슐(이소트레티노인)",
+   "englishName": "",
+   "company": "(주)아이월드제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201505259"
+  },
+  {
+   "name": "이소네스연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isones Soft Cap. 20mg(for export)",
+   "company": "영일제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201508158"
+  },
+  {
+   "name": "우리큐탄연질캡슐(이소트레티노인)",
+   "englishName": "WOORICCUTANE Cap.",
+   "company": "(주)팜젠사이언스",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201508411"
+  },
+  {
+   "name": "이소티닌연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isotinin Soft cap.",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201604105"
+  },
+  {
+   "name": "이소티에스연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isoti S Soft Cap. (for export)",
+   "company": "주식회사제뉴원사이언스",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201702323"
+  },
+  {
+   "name": "데삭연질캡슐10mg(이소트레티노인)(수출용)",
+   "englishName": "Detha Soft Cap. 10mg(for export)",
+   "company": "(주)알피바이오",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201906262"
+  },
+  {
+   "name": "데삭연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Detha Soft Cap. 20mg(for export)",
+   "company": "(주)알피바이오",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201906263"
+  },
+  {
+   "name": "이소티나연질캡슐(이소트레티노인)(수출명:ISONAL Soft. Capsule, ISOTINA Soft. Capsule)(수출용)",
+   "englishName": "Isotina Soft Cap(for export)",
+   "company": "태극제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "201907337"
+  },
+  {
+   "name": "이소네스연질캡슐10밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isones Soft Cap. 10mg(for export)",
+   "company": "영일제약(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "202103620"
+  },
+  {
+   "name": "트레논연질캡슐5밀리그램(이소트레티노인)",
+   "englishName": "Trenon Soft Cap. 5mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "202203947"
+  },
+  {
+   "name": "하이큐탄연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Highccutan Soft Capsule(Isotretinoin)(for export)",
+   "company": "하이플생명과학(주)",
+   "ingredient": "Isotretinoin",
+   "itemSeq": "202402589"
+  },
+  {
+   "name": "알리톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "",
+   "company": "(주)글락소스미스클라인",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201306905"
+  },
+  {
+   "name": "알리톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "",
+   "company": "(주)글락소스미스클라인",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201306906"
+  },
+  {
+   "name": "팜톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Palmtoc Soft Cap.30mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906396"
+  },
+  {
+   "name": "팜톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Palmtoc Soft Cap.10mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906693"
+  },
+  {
+   "name": "알리손연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Alison Soft Cap. 30mg (Alitretinoin)",
+   "company": "코오롱제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906921"
+  },
+  {
+   "name": "알리덤연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Aliderm Soft Cap. 30mg",
+   "company": "하나제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906947"
+  },
+  {
+   "name": "더마톡연질캡슐30mg(알리트레티노인)",
+   "englishName": "Dermatoc Soft Cap. 30mg",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906960"
+  },
+  {
+   "name": "알리손연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Alison Soft Cap. 10mg (Alitretinoin)",
+   "company": "코오롱제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906965"
+  },
+  {
+   "name": "알리덤연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Aliderm Soft Cap. 10mg",
+   "company": "하나제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906967"
+  },
+  {
+   "name": "더마톡연질캡슐10mg(알리트레티노인)",
+   "englishName": "Dermatoc Soft Cap. 10mg",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906968"
+  },
+  {
+   "name": "알티톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Altitoc Soft Cap. 30mg",
+   "company": "(주)메디카코리아",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201906969"
+  },
+  {
+   "name": "알티톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Altitoc Soft Cap. 10mg",
+   "company": "(주)메디카코리아",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201907134"
+  },
+  {
+   "name": "알리가연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "ALIGA Soft Cap. 30mg",
+   "company": "(주)대웅제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201907204"
+  },
+  {
+   "name": "알리가연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "ALIGA Soft Cap. 10mg",
+   "company": "(주)대웅제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "201907205"
+  },
+  {
+   "name": "알티논연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Altinon Soft Cap. 30mg",
+   "company": "(주)제뉴파마",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "202002948"
+  },
+  {
+   "name": "알티논연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Altinon Soft Cap. 10mg",
+   "company": "(주)제뉴파마",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "202005981"
+  },
+  {
+   "name": "아리톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Ari-toc Softcap. (alitretinoin)",
+   "company": "주식회사더유제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "202100495"
+  },
+  {
+   "name": "아리톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Ari-toc softcap. 10mg(Alitretinoin)",
+   "company": "주식회사더유제약",
+   "ingredient": "Alitretinoin",
+   "itemSeq": "202100496"
+  },
+  {
+   "name": "비엠에스탈리도마이드캡슐50밀리그램",
+   "englishName": "BMS Thalidomide capsule 50mg",
+   "company": "(유)한국비엠에스제약",
+   "ingredient": "Thalidomide",
+   "itemSeq": "200603990"
+  },
+  {
+   "name": "탈리그로브캡슐50밀리그램(탈리도마이드)",
+   "englishName": "Thaliglob Cap. 50mg",
+   "company": "에이징생명과학(주)",
+   "ingredient": "Thalidomide",
+   "itemSeq": "201308821"
+  },
+  {
+   "name": "탈리그로브캡슐100밀리그램(탈리도마이드)",
+   "englishName": "Thaliglob Cap. 100mg",
+   "company": "에이징생명과학(주)",
+   "ingredient": "Thalidomide",
+   "itemSeq": "201308822"
+  },
+  {
+   "name": "탈라이드캡슐50mg(탈리도마이드)",
+   "englishName": "Thalide capsules 50mg(thalidomide)",
+   "company": "제이텍바이오팜",
+   "ingredient": "Thalidomide",
+   "itemSeq": "201504775"
+  },
+  {
+   "name": "탈라이드캡슐100mg(탈리도마이드)",
+   "englishName": "Thalide capsules 100mg(thalidomide)",
+   "company": "제이텍바이오팜",
+   "ingredient": "Thalidomide",
+   "itemSeq": "201504776"
+  },
+  {
+   "name": "아보다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avodart Soft Cap. 0.5mg",
+   "company": "(주)글락소스미스클라인",
+   "ingredient": "Dutasteride",
+   "itemSeq": "200409982"
+  },
+  {
+   "name": "두타반연질캡슐(두타스테리드)",
+   "englishName": "Dutavan soft capsule (Dutasteride)",
+   "company": "동아에스티(주)",
+   "ingredient": "Dutasteride/Dutasteride",
+   "itemSeq": "201007777"
+  },
+  {
+   "name": "두테스몰연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutesmol Soft Cap.",
+   "company": "(주)종근당",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201007779"
+  },
+  {
+   "name": "아보스타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avostar Soft Cap. 0.5mg",
+   "company": "일양약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201007780"
+  },
+  {
+   "name": "아보테리드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avoteride Soft Capsule 0.5mg",
+   "company": "(주)유한양행",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201007781"
+  },
+  {
+   "name": "아나딘연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "ANADIN SOFT CAP 0.5MG",
+   "company": "아주약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201007782"
+  },
+  {
+   "name": "네오다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "NEODART Soft Cap. 0.5mg (Dutasteride)",
+   "company": "제이더블유신약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201007783"
+  },
+  {
+   "name": "유힐릭스연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Yuhylyx soft cap. 0.5mg (Dutasteride)",
+   "company": "(주)유유제약",
+   "ingredient": "Dutasteride/Dutasteride",
+   "itemSeq": "201007784"
+  },
+  {
+   "name": "두테드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Duted Soft Cap. 0.5mg",
+   "company": "한미약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201101581"
+  },
+  {
+   "name": "두타텍트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutatect Soft Cap. 0.5mg",
+   "company": "대원제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201205829"
+  },
+  {
+   "name": "두아보연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "광동제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201405883"
+  },
+  {
+   "name": "아보스티드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "AVOSTID 0.5mg(Dutasteride)",
+   "company": "국제약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201500515"
+  },
+  {
+   "name": "두타스카연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaska Soft Cap. 0.5mg",
+   "company": "이연제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201501741"
+  },
+  {
+   "name": "아두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "ADUTA Soft Cap.",
+   "company": "삼진제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201501878"
+  },
+  {
+   "name": "두타렉스연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutalex Soft Cap. 0.5mg",
+   "company": "초당약품공업(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201501965"
+  },
+  {
+   "name": "원투스테리드연질캡슐(두타스테리드)",
+   "englishName": "One Two Steride Soft Cap.",
+   "company": "한국휴텍스제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201502261"
+  },
+  {
+   "name": "두로칸연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Durocan Soft Cap. 0.5mg",
+   "company": "경동제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201502460"
+  },
+  {
+   "name": "두타젠연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutazen Soft Cap. 0.5mg",
+   "company": "제일약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201503148"
+  },
+  {
+   "name": "아보두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avoduta Soft Cap 0.5mg(Dutasteride)",
+   "company": "(주)한국팜비오",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201505703"
+  },
+  {
+   "name": "다모다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Domodart soft Cap. 0.5mg (Dutasteride)",
+   "company": "현대약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201505795"
+  },
+  {
+   "name": "아보탄연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avotan Soft Cap. 0.5mg",
+   "company": "한국유나이티드제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201506221"
+  },
+  {
+   "name": "두타드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutard Soft Capsule 0.5mg (Dutasteride)",
+   "company": "동국제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201506569"
+  },
+  {
+   "name": "두타겟연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAGET SOFT CAP. 0.5mg",
+   "company": "(주)대웅제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201507299"
+  },
+  {
+   "name": "두테론연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTERONE SOFT CAPSULE 0.5mg",
+   "company": "동광제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201507363"
+  },
+  {
+   "name": "대웅바이오두타스테리드연질캡슐0.5밀리그램",
+   "englishName": "DAEWOONGBIO DUTASTERIDE SOFT CAP. 0.5MG",
+   "company": "대웅바이오(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201507419"
+  },
+  {
+   "name": "삼천당두타스테리드연질캡슐0.5밀리그램",
+   "englishName": "Samchundang Dutasteride Soft Cap. 0.5mg",
+   "company": "삼천당제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201507472"
+  },
+  {
+   "name": "자이가드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Zygard soft capsule 0.5mg (Dutasteride)",
+   "company": "(주)한독테바",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201507518"
+  },
+  {
+   "name": "프로다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Prodart Soft Cap.",
+   "company": "주식회사제뉴원사이언스",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201601191"
+  },
+  {
+   "name": "씨엠두타연질캡슐0.5mg(두타스테리드)",
+   "englishName": "CM Duta Soft Cap. 0.5mg",
+   "company": "(주)씨엠지제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201601737"
+  },
+  {
+   "name": "두타락연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarac Soft Cap. 0.5mg",
+   "company": "알리코제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201602903"
+  },
+  {
+   "name": "유로다트연질캡슐0.5mg(두타스테리드)",
+   "englishName": "Urodart Soft Cap. 0.5mg",
+   "company": "(주)씨티씨바이오",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201603673"
+  },
+  {
+   "name": "타테린연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Taterin soft Cap.0.5mg",
+   "company": "(주)비보존제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201706885"
+  },
+  {
+   "name": "아다모연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Adamo Soft Cap.",
+   "company": "한올바이오파마(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201708604"
+  },
+  {
+   "name": "제이다트정0.5밀리그램(두타스테리드)",
+   "englishName": "Jdart Tab. 0.5mg",
+   "company": "제이더블유중외제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802719"
+  },
+  {
+   "name": "두타반플러스정(두타스테리드)",
+   "englishName": "Dutavan plus tablet (Dutasteride)",
+   "company": "동아에스티(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802793"
+  },
+  {
+   "name": "네오다트정0.5밀리그램(두타스테리드)",
+   "englishName": "NEODART Tab. (Dutasteride)",
+   "company": "제이더블유신약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802794"
+  },
+  {
+   "name": "엔피다트정(두타스테리드)",
+   "englishName": "NP-dart Tab.",
+   "company": "대한뉴팜(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802795"
+  },
+  {
+   "name": "두로케어정0.5밀리그램(두타스테리드)",
+   "englishName": "Durocare Tab. 0.5mg",
+   "company": "하나제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802826"
+  },
+  {
+   "name": "두타케어정0.5밀리그램(두타스테리드)",
+   "englishName": "DUTACARE Tabs 0.5mg",
+   "company": "주식회사더유제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802827"
+  },
+  {
+   "name": "아보그로정0.5밀리그램(두타스테리드)",
+   "englishName": "Avogro Tab. 0.5mg",
+   "company": "(주)킵스바이오파마",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802838"
+  },
+  {
+   "name": "두테스정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "(주)넥스팜코리아",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802839"
+  },
+  {
+   "name": "대웅바이오두타스테리드정0.5밀리그램",
+   "englishName": "DAEWOONGBIO DUTASTERIDE TAB. 0.5MG",
+   "company": "대웅바이오(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802873"
+  },
+  {
+   "name": "두타론정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaron Tablet 0.5mg (Dutasteride)",
+   "company": "알보젠코리아(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802875"
+  },
+  {
+   "name": "다모다트정0.5밀리그램(두타스테리드)",
+   "englishName": "Damodart Tab. 0.5mg (Dutasteride)",
+   "company": "현대약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802931"
+  },
+  {
+   "name": "두타리드정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutalid Tab. 0.5mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802932"
+  },
+  {
+   "name": "두타브정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutav Tab. 0.5mg",
+   "company": "(주)에이프로젠바이오로직스",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201802933"
+  },
+  {
+   "name": "아보타스정(두타스테리드)",
+   "englishName": "Avotars Tab.",
+   "company": "(주)한국파마",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201803153"
+  },
+  {
+   "name": "아보투윈연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avotwowin Soft capsule",
+   "company": "코스맥스파마(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201803547"
+  },
+  {
+   "name": "에이두타정0.5밀리그램(두타스테리드)",
+   "englishName": "A-duta Tab. 0.5mg",
+   "company": "안국약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201803731"
+  },
+  {
+   "name": "듀타그렌정0.5mg(두타스테리드)",
+   "englishName": "Dutagren Tab. 0.5mg",
+   "company": "구주제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201804318"
+  },
+  {
+   "name": "두타스테린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutasterin Tablet 0.5mg(Dutasteride)",
+   "company": "에이치엘비제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201901097"
+  },
+  {
+   "name": "두타온연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaon Soft Cap. 0.5mg",
+   "company": "맥널티제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201902598"
+  },
+  {
+   "name": "두타그로연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutagro Soft Cap. 0.5mg",
+   "company": "(주)휴온스메디텍",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201903342"
+  },
+  {
+   "name": "아보다칸정0.5밀리그램(두타스테리드)",
+   "englishName": "Abodacan Tab. 0.5mg",
+   "company": "(주)경보제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201903628"
+  },
+  {
+   "name": "모모타정(두타스테리드)",
+   "englishName": "MOMOTA TAB.(DUTASTERIDE)",
+   "company": "(주)셀릭스",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201904318"
+  },
+  {
+   "name": "두타윈연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutawin Soft Cap. 0.5mg",
+   "company": "(주)한풍제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201905664"
+  },
+  {
+   "name": "두타스텐정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutasten Tab. 0.5mg(Dutasteride)",
+   "company": "(주)한풍제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201905771"
+  },
+  {
+   "name": "두타모아정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutamoa Tab. 0.5mg",
+   "company": "제이더블유생명과학(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201905934"
+  },
+  {
+   "name": "두타스타정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "(주)화이트생명과학",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201906325"
+  },
+  {
+   "name": "아리드정0.5밀리그램(두타스테리드)",
+   "englishName": "Aride Tab.",
+   "company": "한국프라임제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201906842"
+  },
+  {
+   "name": "두타엘정0.5밀리그램(두타스테리드)",
+   "englishName": "Duta-L Tab.",
+   "company": "주식회사큐엘파마",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201907286"
+  },
+  {
+   "name": "아다모정0.5밀리그램(두타스테리드)",
+   "englishName": "Adamo Tab.",
+   "company": "한올바이오파마(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201907460"
+  },
+  {
+   "name": "아보테드정0.5밀리그램(두타스테리드)",
+   "englishName": "Avoted Tab. 0.5mg",
+   "company": "영풍제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201907491"
+  },
+  {
+   "name": "두타린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarine Tab. 0.5mg",
+   "company": "한국신텍스제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201907785"
+  },
+  {
+   "name": "삼성두타스테리드정0.5밀리그램",
+   "englishName": "samsung dutasteride tablet 0.5mg",
+   "company": "삼성제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201908004"
+  },
+  {
+   "name": "두리드정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "(주)텔콘알에프제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "201908233"
+  },
+  {
+   "name": "두타베린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaverine Tab. 0.5mg",
+   "company": "영일제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202000271"
+  },
+  {
+   "name": "두타프로정(두타스테리드)",
+   "englishName": "Dutapro Tab.",
+   "company": "(주)인트로바이오파마",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202000571"
+  },
+  {
+   "name": "두타프렌정0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAPREN Tab. 0.5mg (Dutasteride)",
+   "company": "(주)다산제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202002131"
+  },
+  {
+   "name": "두타시아정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutacia Tab. 0.5mg",
+   "company": "유니메드제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202002957"
+  },
+  {
+   "name": "두타엠정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "(주)이든파마",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202003666"
+  },
+  {
+   "name": "두로칸정0.5밀리그램(두타스테리드)",
+   "englishName": "Durocan Tab. 0.5mg",
+   "company": "경동제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202003741"
+  },
+  {
+   "name": "머카나정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "company": "(주)라이트팜텍",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202003882"
+  },
+  {
+   "name": "두모보연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dumobo Soft Cap. 0.5mg",
+   "company": "건일바이오팜주식회사",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202004077"
+  },
+  {
+   "name": "두타모정0.5밀리그램(두타스테리드)",
+   "englishName": "Yudat Tab. 0.5mg",
+   "company": "한국유니온제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202005608"
+  },
+  {
+   "name": "듀오다트캡슐",
+   "englishName": "Duodart Capsule",
+   "company": "(주)글락소스미스클라인",
+   "ingredient": "Dutasteride/Tamsulosin Hydrochloride",
+   "itemSeq": "202103982"
+  },
+  {
+   "name": "휴다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Hudart Soft Cap. 0.5mg (Dutasteride)",
+   "company": "(주)휴온스",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202106074"
+  },
+  {
+   "name": "두타원연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Duta One Soft Capsule 0.5mg(Dutasteride)",
+   "company": "씨에이치디제약주식회사",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202203625"
+  },
+  {
+   "name": "동구두타리드연질캡슐(두타스테리드)",
+   "englishName": "Dongkoo dutalid soft capsules(Dutasteride)",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202204330"
+  },
+  {
+   "name": "아보엠연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "AvoM softcapsule 0.5mg",
+   "company": "(주)마더스제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202301009"
+  },
+  {
+   "name": "모벤두타정0.5밀리그램(두타스테리드)",
+   "englishName": "Mobenduta Tab. 0.5mg",
+   "company": "대원바이오텍주식회사",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202302168"
+  },
+  {
+   "name": "에이두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "A-Duta Soft Cap. 0.5mg",
+   "company": "안국약품(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202400769"
+  },
+  {
+   "name": "유앤두타스테리드정0.5밀리그램(수출용)",
+   "englishName": "YuanDutasteride 0.5mg(Dutasteride)",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202400908"
+  },
+  {
+   "name": "두타앤연질캡슐0.5mg(두타스테리드)",
+   "englishName": "Dutaen Soft Cap. 0.5mg",
+   "company": "(주)킴스제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401516"
+  },
+  {
+   "name": "아보페시아정0.2밀리그램(두타스테리드)",
+   "englishName": "Avopecia(Dutasteride)",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401793"
+  },
+  {
+   "name": "두타리모정0.2밀리그램(두타스테리드)",
+   "englishName": "DUTARIMO",
+   "company": "(주)대웅제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401802"
+  },
+  {
+   "name": "두발칸정0.2밀리그램(두타스테리드)",
+   "englishName": "Duvalcan Tab. 0.2mg(Dutasteride)",
+   "company": "경동제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401803"
+  },
+  {
+   "name": "모두스타정0.2밀리그램(두타스테리드)",
+   "englishName": "MODUSTA Tab. 0.2mg (Dutasteride)",
+   "company": "(주)한독",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401804"
+  },
+  {
+   "name": "모바나정0.2밀리그램(두타스테리드)",
+   "englishName": "Movana Tablet 0.2mg(Dutasteride)",
+   "company": "(주)유한양행",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401805"
+  },
+  {
+   "name": "모더다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Moderdart Soft Capsule",
+   "company": "주식회사더유제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202401943"
+  },
+  {
+   "name": "영일두타스테리드정0.5밀리그램(두타스테리드)(수출용)",
+   "englishName": "Youngil Dutasteride Tab. 0.5mg (Dutasteride)",
+   "company": "영일제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202402942"
+  },
+  {
+   "name": "이노다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Innodart Soft cap. 0.5mg",
+   "company": "(주)테라젠이텍스",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202500167"
+  },
+  {
+   "name": "유레스코정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Uresco Tab. 0.5/5mg(dutasteride,tadalafil)",
+   "company": "동국제약(주)",
+   "ingredient": "Dutasteride/Tadalafil",
+   "itemSeq": "202500172"
+  },
+  {
+   "name": "유로가드정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "UROGUARD Tab. 0.5/5mg",
+   "company": "(주)동구바이오제약",
+   "ingredient": "Dutasteride/Tadalafil",
+   "itemSeq": "202500182"
+  },
+  {
+   "name": "듀타나정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Dutana tablet 0.5/5mg(Dutasteride, Tadalafil)",
+   "company": "동아에스티(주)",
+   "ingredient": "Dutasteride/Tadalafil",
+   "itemSeq": "202500183"
+  },
+  {
+   "name": "아보시알정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Avocial Tablet 0.5/5mg(Dutasteride,Tadalafil)",
+   "company": "신풍제약(주)",
+   "ingredient": "Dutasteride/Tadalafil",
+   "itemSeq": "202500184"
+  },
+  {
+   "name": "발모트정0.5밀리그램(두타스테리드)",
+   "englishName": "Valmote Tab. 0.5mg",
+   "company": "(주)서울제약",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202502557"
+  },
+  {
+   "name": "두타세트정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaset Tab. 0.5mg",
+   "company": "코스맥스파마(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202503311"
+  },
+  {
+   "name": "두타필연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAPHIL Soft Capsules(Dutasteride)",
+   "company": "(주)필인터내셔널",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202600762"
+  },
+  {
+   "name": "센모트정(두타스테리드)",
+   "englishName": "Cenmot Tab.",
+   "company": "(주)휴온스메디텍",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202600843"
+  },
+  {
+   "name": "스타라이드정0.5밀리그램(두타스테리드)",
+   "englishName": "Staride Tab. 0.5mg(Dutasteride)",
+   "company": "(주)코아팜바이오",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202601413"
+  },
+  {
+   "name": "아보타정0.5/5밀리그램(두타스테리드,타다라필)(수출용)",
+   "englishName": "Avota Tab. 0.5/5mg(Dutasteride, Tadalafil)",
+   "company": "주식회사 노바엠헬스케어",
+   "ingredient": "Dutasteride/Tadalafil",
+   "itemSeq": "202601487"
+  },
+  {
+   "name": "두타리온정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarion Tab. 0.5mg",
+   "company": "(주)유앤생명과학",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202601713"
+  },
+  {
+   "name": "모모두정(두타스테리드)",
+   "englishName": "MOMODU Tab",
+   "company": "주식회사 노바엠헬스케어",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202601949"
+  },
+  {
+   "name": "동성두타스테리드정0.5밀리그램",
+   "englishName": "Dongsung Dutasteride Tab.",
+   "company": "동성제약(주)",
+   "ingredient": "Dutasteride",
+   "itemSeq": "202602948"
+  },
+  {
+   "name": "네오티가손캡슐10밀리그램(아시트레틴)",
+   "englishName": "NEOTIGASON CAP 10MG",
+   "company": "(주)종근당",
+   "ingredient": "Spray Dried Acitretin 25%",
+   "itemSeq": "200806769"
+  }
+ ]
+}

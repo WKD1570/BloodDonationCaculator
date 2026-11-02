@@ -1,0 +1,4796 @@
+{
+ "source": "drug_products_20260720.csv",
+ "sourceNote": "의약품 목록(2026.07.20), 식약처 의약품 제품 허가정보(2026.11.03)",
+ "products": [
+  {
+   "name": "둘코락스좌약(비사코딜)",
+   "englishName": "Dulcolax Suppositories",
+   "ingredient": "비사코딜",
+   "ingredientCode": "117802CSP"
+  },
+  {
+   "name": "반델크림10g/Tube",
+   "englishName": "BANDEL CREAM[Hydrocortisone butyrate]",
+   "ingredient": "낙산히드로코르티손",
+   "ingredientCode": "171130CCM"
+  },
+  {
+   "name": "후메론점안액0.1% 5ml/B",
+   "englishName": "FUMELON EYE DROPS 5ml",
+   "ingredient": "플루오로메톨론",
+   "ingredientCode": "161237COS"
+  },
+  {
+   "name": "히아루론점안액(히알루론산나트륨)(1회용)",
+   "englishName": "Hyaluron Eye Drops.",
+   "ingredient": "히알루론산나트륨",
+   "ingredientCode": "530002COS"
+  },
+  {
+   "name": "케토크린플라스타(케토프로펜)",
+   "englishName": "KETOCLIN PLASTER.[Ketoprofen]",
+   "ingredient": "케토프로펜",
+   "ingredientCode": "179901CPL"
+  },
+  {
+   "name": "베아로반연고(무피로신)",
+   "englishName": "Bearoban Ointment 10g",
+   "ingredient": "무피로신",
+   "ingredientCode": "197631COM"
+  },
+  {
+   "name": "스프라바토나잘스프레이(에스케타민염산염)",
+   "englishName": "Spravato Nasal Spray",
+   "ingredient": "에스케타민염산염",
+   "ingredientCode": "689701CSI"
+  },
+  {
+   "name": "실크론지크림",
+   "englishName": "Silkron-G Cream",
+   "ingredient": "베타메타손디프로피오네이트",
+   "ingredientCode": "547100CCM"
+  },
+  {
+   "name": "무조날크림(테르비나핀염산염)",
+   "englishName": "MUJONAL CREAM 15g/Tube",
+   "ingredient": "테르비나핀염산염",
+   "ingredientCode": "235731CCM"
+  },
+  {
+   "name": "토라미신점안액0.3%(토브라마이신)",
+   "englishName": "TORAMICIN EYE DROPS 0.3%",
+   "ingredient": "토브라마이신",
+   "ingredientCode": "240833COS"
+  },
+  {
+   "name": "유리아크림 200mg",
+   "englishName": "HanMi UREA CREAM 200mg",
+   "ingredient": "우레아",
+   "ingredientCode": "246132CCM"
+  },
+  {
+   "name": "태극아시클로버크림",
+   "englishName": "ACYCLOVIR TGK CREAM",
+   "ingredient": "아시클로버",
+   "ingredientCode": "102935CCM"
+  },
+  {
+   "name": "대한 50% 포도당주 100ML",
+   "englishName": "Daihan 50% Glucose Inj.",
+   "ingredient": "포도당(함수)",
+   "ingredientCode": "142719BIJ"
+  },
+  {
+   "name": "대한5% 포도당가생리식염액",
+   "englishName": "Sodium Chloride & 5% Glucose inj. Daihan",
+   "ingredient": "포도당(함수)",
+   "ingredientCode": "348600BIJ"
+  },
+  {
+   "name": "대한 포도당주사액5%",
+   "englishName": "Glucose inj. 5% Daihan",
+   "ingredient": "포도당(함수)",
+   "ingredientCode": "142711BIJ"
+  },
+  {
+   "name": "코다론주사(아미오다론염산염)",
+   "englishName": "Cordarone Inj.",
+   "ingredient": "염산아미오다론",
+   "ingredientCode": "107430BIJ"
+  },
+  {
+   "name": "아빌리파이메인테나주300mg(아리피프라졸)",
+   "englishName": "Abilify Maintena Inj. 300mg",
+   "ingredient": "아리피프라졸일수화물",
+   "ingredientCode": "451506BIJ"
+  },
+  {
+   "name": "아빌리파이메인테나주400mg(아리피프라졸)",
+   "englishName": "Abilify Maintena Inj. 400mg",
+   "ingredient": "아리피프라졸일수화물",
+   "ingredientCode": "451507BIJ"
+  },
+  {
+   "name": "아빌리파이아심투파이주사720밀리그램(아리피프라졸일수화물)",
+   "englishName": "Abilify Asimtufii Inj. 720mg",
+   "ingredient": "아리피프라졸일수화물",
+   "ingredientCode": "451510BIJ"
+  },
+  {
+   "name": "아빌리파이아심투파이주사960밀리그램(아리피프라졸일수화물)",
+   "englishName": "Abilify Asimtufii Inj. 960mg",
+   "ingredient": "아리피프라졸일수화물",
+   "ingredientCode": "451509BIJ"
+  },
+  {
+   "name": "비씨디클로페낙나트륨주사(디클로페낙나트륨)",
+   "englishName": "Diclofenac Sodium inj. BC",
+   "ingredient": "디클로페낙나트륨",
+   "ingredientCode": "143535BIJ"
+  },
+  {
+   "name": "대원덱사메타손주사액(덱사메타손포스페이트이나트륨)",
+   "englishName": "Dexamethasone inj. Daewon",
+   "ingredient": "디나트륨인산덱사메타손",
+   "ingredientCode": "142232BIJ"
+  },
+  {
+   "name": "삼진디아제팜주",
+   "englishName": "Diazepam Inj. Samjin",
+   "ingredient": "디아제팜",
+   "ingredientCode": "142930BIJ"
+  },
+  {
+   "name": "대한에피네프린주사액",
+   "englishName": "Epinephrine Inj. Daihan",
+   "ingredient": "에피네프린",
+   "ingredientCode": "152630BIJ"
+  },
+  {
+   "name": "명인할로페리돌주사",
+   "englishName": "Haloperidol inj. Myungin",
+   "ingredient": "할로페리돌",
+   "ingredientCode": "167930BIJ"
+  },
+  {
+   "name": "하트만액 1000ml/B",
+   "englishName": "Hartmann Soln. Daihan",
+   "ingredient": "염화칼슘",
+   "ingredientCode": "349400BIJ"
+  },
+  {
+   "name": "하트만덱스액",
+   "englishName": "Hartmandex Sol.",
+   "ingredient": "염화칼슘수화물",
+   "ingredientCode": "349500BIJ"
+  },
+  {
+   "name": "인베가서스티나주 117mg",
+   "englishName": "Invega Sustenna Inj. 117mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586432BIJ"
+  },
+  {
+   "name": "인베가서스티나주 156mg(팔리페리돈팔미테이트)",
+   "englishName": "Invega Sustenna Inj. 156mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586433BIJ"
+  },
+  {
+   "name": "인베가서스티나주 234mg",
+   "englishName": "Invega Sustenna Inj. 234mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586434BIJ"
+  },
+  {
+   "name": "인베가하피에라주사 1092mg",
+   "englishName": "Invega Hafyera Inj. 1092mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586439BIJ"
+  },
+  {
+   "name": "인베가하피에라주사 1560mg",
+   "englishName": "Invega Hafyera Inj. 1560mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586440BIJ"
+  },
+  {
+   "name": "인베가트린자주사(팔리페리돈팔미테이트)",
+   "englishName": "Invega Trinza inj. 273mg",
+   "ingredient": "팔리페리돈팔미테이트",
+   "ingredientCode": "586435BIJ"
+  },
+  {
+   "name": "제일리도카인주사액 20ml",
+   "englishName": "Lidocaine Inj. Jeil",
+   "ingredient": "염산리도카인일수화물",
+   "ingredientCode": "183935BIJ"
+  },
+  {
+   "name": "아티반주사(로라제팜)",
+   "englishName": "Ativan Inj.",
+   "ingredient": "로라제팜",
+   "ingredientCode": "185530BIJ"
+  },
+  {
+   "name": "멕쿨주 10mg/2ml/Amp",
+   "englishName": "Meckool inj.",
+   "ingredient": "염산메토클로프라미드",
+   "ingredientCode": "193730BIJ"
+  },
+  {
+   "name": "중외엔에스주사액(염화나트륨)",
+   "englishName": "JW NS Inj.",
+   "ingredient": "염화나트륨",
+   "ingredientCode": "228714BIJ"
+  },
+  {
+   "name": "페니라민주사(클로르페니라민말레산염) 2mL",
+   "englishName": "Peniramin inj.",
+   "ingredient": "클로르페니라민말레산염",
+   "ingredientCode": "131830BIJ"
+  },
+  {
+   "name": "제일티아민염산염주사액 50mg/2ml",
+   "englishName": "Thiamine HCl Inj. Jeil",
+   "ingredient": "티아민염산염",
+   "ingredientCode": "237330BIJ"
+  },
+  {
+   "name": "삐콤헥사주",
+   "englishName": "Beecomhexa Inj.",
+   "ingredient": "시아노코발라민",
+   "ingredientCode": "316400BIJ"
+  },
+  {
+   "name": "삼남아세트아미노펜정500mg",
+   "englishName": "Samnam Acetaminophen Tab. 500mg",
+   "ingredient": "아세트아미노펜",
+   "ingredientCode": "101305ATB"
+  },
+  {
+   "name": "명인아캄프로세이트정333mg(아캄프로세이트칼슘)",
+   "englishName": "Myungin acamprosate Tab. 333mg",
+   "ingredient": "아캄프로세이트",
+   "ingredientCode": "100501ATE"
+  },
+  {
+   "name": "아기오과립 6g/P",
+   "englishName": "Agio Granule",
+   "ingredient": "아기오쿨원료과립",
+   "ingredientCode": "214630AGN"
+  },
+  {
+   "name": "아고틴정25밀리그램(아고멜라틴)",
+   "englishName": "Agotine Tab. 25mg",
+   "ingredient": "아고멜라틴",
+   "ingredientCode": "613101ATB"
+  },
+  {
+   "name": "아모디핀정(캄실산암로디핀)",
+   "englishName": "Amodipine Tab. 5mg",
+   "ingredient": "암로디핀캄실산염",
+   "ingredientCode": "459901ATB"
+  },
+  {
+   "name": "네시나정25밀리그램(알로글립틴벤조산염)",
+   "englishName": "Nesina Tab. 25mg",
+   "ingredient": "알로글립틴벤조산염",
+   "ingredientCode": "624203ATB"
+  },
+  {
+   "name": "록솔정(암브록솔염산염)",
+   "englishName": "Roxol Tab.",
+   "ingredient": "암브록솔염산염",
+   "ingredientCode": "106301ATB"
+  },
+  {
+   "name": "알프람정0.125밀리그램(알프라졸람)",
+   "englishName": "Alpram Tab. 0.125mg",
+   "ingredient": "알프라졸람",
+   "ingredientCode": "105507ATB"
+  },
+  {
+   "name": "알프라낙스정0.25밀리그람",
+   "englishName": "Alpranaks Tab. 0.25mg",
+   "ingredient": "알프라졸람",
+   "ingredientCode": "105502ATB"
+  },
+  {
+   "name": "알프라낙스정0.5밀리그람",
+   "englishName": "Alpranaks Tab. 0.5mg",
+   "ingredient": "알프라졸람",
+   "ingredientCode": "105505ATB"
+  },
+  {
+   "name": "아라빌정5밀리그램(아리피프라졸)",
+   "englishName": "Arabil Tab. 5mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451503ATB"
+  },
+  {
+   "name": "아라빌정15밀리그램(아리피프라졸)",
+   "englishName": "Arabil Tab. 15mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451502ATB"
+  },
+  {
+   "name": "아라빌정1밀리그램(아리피프라졸(미분화))",
+   "englishName": "Arabil Tab. 1mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451508ATB"
+  },
+  {
+   "name": "아라빌정10밀리그램(아리피프라졸)",
+   "englishName": "Arabil Tab. 10mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451501ATB"
+  },
+  {
+   "name": "아리피졸정2밀리그램(아리피프라졸)",
+   "englishName": "Aripizol Tab. 2mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451504ATB"
+  },
+  {
+   "name": "아빌리파이오디정10mg",
+   "englishName": "Abilify ODT. 10mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451501ATD"
+  },
+  {
+   "name": "아빌리파이오디정15mg",
+   "englishName": "Abilify ODT. 15mg",
+   "ingredient": "아리피프라졸",
+   "ingredientCode": "451502ATD"
+  },
+  {
+   "name": "한미아스피린장용정100밀리그램",
+   "englishName": "Aspirin Enteric Coated Tab. 100mg Hanmi",
+   "ingredient": "아스피린",
+   "ingredientCode": "111001ATE"
+  },
+  {
+   "name": "아미썰정400밀리그램(아미설피리드)",
+   "englishName": "Amisul Tab.400mg",
+   "ingredient": "아미설프리드",
+   "ingredientCode": "420002ATB"
+  },
+  {
+   "name": "아미썰정100밀리그램(아미설피리드)",
+   "englishName": "Amisul Tab. 100mg",
+   "ingredient": "아미설프리드",
+   "ingredientCode": "420003ATB"
+  },
+  {
+   "name": "아미썰정200밀리그램(아미설피리드)",
+   "englishName": "Amisul Tab. 300mg",
+   "ingredient": "아미설프리드",
+   "ingredientCode": "420004ATB"
+  },
+  {
+   "name": "아토목신캡슐10mg(아토목세틴염산염)",
+   "englishName": "Atomoxin Cap. 10mg",
+   "ingredient": "아토목세틴염산염",
+   "ingredientCode": "489601ACH"
+  },
+  {
+   "name": "아토목신캡슐25mg(아토목세틴염산염)",
+   "englishName": "Atomoxin Cap. 25mg",
+   "ingredient": "아토목세틴염산염",
+   "ingredientCode": "489603ACH"
+  },
+  {
+   "name": "환인아토목세틴캡슐40밀리그램(아토목세틴염산염)",
+   "englishName": "Whanin Atomoxetine Cap. 40mg",
+   "ingredient": "아토목세틴염산염",
+   "ingredientCode": "489604ACH"
+  },
+  {
+   "name": "아토목신캡슐80밀리그램(아토목세틴염산염)",
+   "englishName": "Atomoxin Cap. 80mg",
+   "ingredient": "아토목세틴염산염",
+   "ingredientCode": "489606ACH"
+  },
+  {
+   "name": "명인염산아미트리프틸린염산염정10mg",
+   "englishName": "Amitriptyline HCl Tab. 10mg Myungin",
+   "ingredient": "아미트리프틸린염산염",
+   "ingredientCode": "107501ATB"
+  },
+  {
+   "name": "에트라빌25mg정(아미트리프틸린염산염)",
+   "englishName": "Etravil Tab. 25mg",
+   "ingredient": "아미트리프틸린염산염",
+   "ingredientCode": "107502ATB"
+  },
+  {
+   "name": "아모시클정375밀리그램(아목시실린-클라불란산칼륨(2:1))",
+   "englishName": "Amocicle Tab. 375mg",
+   "ingredient": "아목시실린",
+   "ingredientCode": "310600ATB"
+  },
+  {
+   "name": "레포틸정(비페닐디메틸디카르복실레이트)",
+   "englishName": "Refortil Tab.",
+   "ingredient": "비페닐디메틸디카르복실레이트",
+   "ingredientCode": "117701ATB"
+  },
+  {
+   "name": "환인벤즈트로핀정1밀리그램(벤즈트로핀메실산염)",
+   "englishName": "Benztropine Tab. 1mg Whanin",
+   "ingredient": "메실산벤즈트로핀",
+   "ingredientCode": "116001ATB"
+  },
+  {
+   "name": "환인벤즈트로핀정(벤즈트로핀메실산염)",
+   "englishName": "Benztropine Tab. 2mg Whanin",
+   "ingredient": "메실산벤즈트로핀",
+   "ingredientCode": "116002ATB"
+  },
+  {
+   "name": "유니네콜정(베타네콜염화물)",
+   "englishName": "Uninechol Tab. 25mg",
+   "ingredient": "염화베타네콜",
+   "ingredientCode": "116902ATB"
+  },
+  {
+   "name": "신일브롬헥신염산염정(8mg/1정)",
+   "englishName": "Bromhexine HCl Tab. Sinil",
+   "ingredient": "브롬헥신염산염",
+   "ingredientCode": "118601ATB"
+  },
+  {
+   "name": "파마블로난세린정4밀리그램",
+   "englishName": "Pharma Blonanserin Tab. 4mg",
+   "ingredient": "블로난세린",
+   "ingredientCode": "511302ATB"
+  },
+  {
+   "name": "로나큐정2밀리그램(블로난세린)",
+   "englishName": "RonaQ Tab. 2mg",
+   "ingredient": "블로난세린",
+   "ingredientCode": "511301ATB"
+  },
+  {
+   "name": "파마블로난세린정8밀리그램",
+   "englishName": "Pharma Blonanserin Tab. 8mg",
+   "ingredient": "블로난세린",
+   "ingredientCode": "511303ATB"
+  },
+  {
+   "name": "아루펜정400밀리그람(이부프로펜)",
+   "englishName": "Aruphen Tab. 400mg",
+   "ingredient": "이부프로펜",
+   "ingredientCode": "172806ATB"
+  },
+  {
+   "name": "파피온서방정(부프로피온염산염)",
+   "englishName": "Papion ER Tab.",
+   "ingredient": "염산부프로피온",
+   "ingredientCode": "428102ATR"
+  },
+  {
+   "name": "보령부스파정10밀리그램(부스피론염산염)",
+   "englishName": "Buspar Tab. 10mg Boryung",
+   "ingredient": "염산부스피론",
+   "ingredientCode": "120501ATB"
+  },
+  {
+   "name": "카마제핀씨알정200밀리그람(카르바마제핀)",
+   "englishName": "Carmazepine-CR Tab. 200mg",
+   "ingredient": "카르바마제핀",
+   "ingredientCode": "123102ATR"
+  },
+  {
+   "name": "세파클리어캡슐(세파클러수화물)",
+   "englishName": "Cefaclear Cap.",
+   "ingredient": "세파클러",
+   "ingredientCode": "125201ACH"
+  },
+  {
+   "name": "콜리아센연질캡슐(콜린알포세레이트)",
+   "englishName": "Cholinacen Soft Cap.",
+   "ingredient": "콜린알포세레이트",
+   "ingredientCode": "138101ACS"
+  },
+  {
+   "name": "켑베이서방정 0.1mg(클로니딘염산염)",
+   "englishName": "Kapvay ER Tab. 0.1mg",
+   "ingredient": "클로니딘염산염",
+   "ingredientCode": "136505ATR"
+  },
+  {
+   "name": "클자핀정100mg(클로자핀)",
+   "englishName": "Clzapin Tab. 100mg",
+   "ingredient": "클로자핀",
+   "ingredientCode": "137501ATB"
+  },
+  {
+   "name": "클자핀정200mg(클로자핀)",
+   "englishName": "Clzapine Tab. 200mg",
+   "ingredient": "클로자핀",
+   "ingredientCode": "137504ATB"
+  },
+  {
+   "name": "클자핀정50mg(클로자핀)",
+   "englishName": "Clzapine Tab. 50mg",
+   "ingredient": "클로자핀",
+   "ingredientCode": "137503ATB"
+  },
+  {
+   "name": "클자핀정25mg(클로자핀)",
+   "englishName": "Clzapin Tab. 25mg",
+   "ingredient": "클로자핀",
+   "ingredientCode": "137502ATB"
+  },
+  {
+   "name": "그로민캡슐25mg(클로미프라민염산염)",
+   "englishName": "Gromin Cap. 25mg",
+   "ingredient": "클로미프라민염산염",
+   "ingredientCode": "136302ACH"
+  },
+  {
+   "name": "환인클로나제팜정0.5mg",
+   "englishName": "Whanin Clonazepam Tab. 0.5mg",
+   "ingredient": "클로나제팜",
+   "ingredientCode": "136401ATB"
+  },
+  {
+   "name": "코대원포르테시럽",
+   "englishName": "Codaewon Forte Syr.",
+   "ingredient": "염화암모늄",
+   "ingredientCode": "532500ASY"
+  },
+  {
+   "name": "명인클로르프로마진염산염정100mg",
+   "englishName": "Chlorpromazine HCl Tab. 100mg Myungin",
+   "ingredient": "염산클로로프로마진",
+   "ingredientCode": "131901ATB"
+  },
+  {
+   "name": "클로르프로마진염산염정200mg",
+   "englishName": "Chlorpromazine HCl Tab. 200mg Myungin",
+   "ingredient": "염산클로로프로마진",
+   "ingredientCode": "131905ATB"
+  },
+  {
+   "name": "명인클로르프로마진염산염정50mg",
+   "englishName": "Chlorpromazine HCl Tab. 50mg Myungin",
+   "ingredient": "염산클로로프로마진",
+   "ingredientCode": "131908ATB"
+  },
+  {
+   "name": "아로나민씨플러스정",
+   "englishName": "Aronamin C Plus Tab.",
+   "ingredient": "아스코르브산과립97%",
+   "ingredientCode": "B65200ATB"
+  },
+  {
+   "name": "파마데스벤라팍신서방정100밀리그램(데스벤라팍신숙신산염일수화물)",
+   "englishName": "Pharma Desvenlafaxine ER Tab. 100mg",
+   "ingredient": "데스벤라팍신숙신산염일수화물",
+   "ingredientCode": "626402ATR"
+  },
+  {
+   "name": "프리넥사서방정25밀리그램(데스벤라팍신벤조산염)",
+   "englishName": "Prinexor ER Tab. 25mg",
+   "ingredient": "데스벤라팍신벤조산염",
+   "ingredientCode": "687603ATR"
+  },
+  {
+   "name": "파마데스벤라팍신서방정50밀리그램(데스벤라팍신숙신산염일수화물)",
+   "englishName": "Pharma Desvenlafaxine ER Tab. 50mg",
+   "ingredient": "데스벤라팍신숙신산염일수화물",
+   "ingredientCode": "626401ATR"
+  },
+  {
+   "name": "바스티아정10밀리그램(도네페질염산염)",
+   "englishName": "Vastia Tab. 10mg",
+   "ingredient": "도네페질염산염",
+   "ingredientCode": "148601ATB"
+  },
+  {
+   "name": "명세핀정(3mg/1정)",
+   "englishName": "Myungcephin Tab. 3mg",
+   "ingredient": "독세핀염산염",
+   "ingredientCode": "149203ATB"
+  },
+  {
+   "name": "듀로셉톨캡슐30밀리그램(둘록세틴염산염)",
+   "englishName": "Duloxeptol Cap. 30mg",
+   "ingredient": "둘록세틴 염산염",
+   "ingredientCode": "495501ACE"
+  },
+  {
+   "name": "듀로셉톨캡슐60밀리그램(둘록세틴염산염)",
+   "englishName": "Duloxeptol Cap. 60mg",
+   "ingredient": "둘록세틴 염산염",
+   "ingredientCode": "495502ACE"
+  },
+  {
+   "name": "디발프로서방정250밀리그램(디발프로엑스나트륨)",
+   "englishName": "Divalpro ER Tab. 250mg",
+   "ingredient": "디발프로엑스나트륨",
+   "ingredientCode": "147701ATR"
+  },
+  {
+   "name": "데파코트서방정500㎎(디발프로엑스나트륨)",
+   "englishName": "Depakote ER Tab. 500mg",
+   "ingredient": "디발프로엑스나트륨",
+   "ingredientCode": "147702ATR"
+  },
+  {
+   "name": "삼진디아제팜정2밀리그람",
+   "englishName": "Diazepam Tab. 2mg Samjin",
+   "ingredient": "디아제팜",
+   "ingredientCode": "142902ATB"
+  },
+  {
+   "name": "삼진디아제팜정5mg",
+   "englishName": "Samjin Diazepam Tab. 5mg",
+   "ingredient": "디아제팜",
+   "ingredientCode": "142903ATB"
+  },
+  {
+   "name": "신신에스시탈로프람정10밀리그램(에스시탈로프람옥살산염)",
+   "englishName": "Sinsin Escitalopram Tab. 10mg",
+   "ingredient": "수산에스시탈로프람",
+   "ingredientCode": "474802ATB"
+  },
+  {
+   "name": "에프람정20밀리그램(에스시탈로프람옥살산염)",
+   "englishName": "Epram Tab. 20mg",
+   "ingredient": "에스시탈로프람옥살산염",
+   "ingredientCode": "474803ATB"
+  },
+  {
+   "name": "사로프람정5mg(에스시탈로프람옥살산염)",
+   "englishName": "Salopram Tab. 5mg",
+   "ingredient": "수산에스시탈로프람",
+   "ingredientCode": "474801ATB"
+  },
+  {
+   "name": "제프람멜츠구강붕해정10밀리그램(에스시탈로프람옥살산염)",
+   "englishName": "Jepram Melts OD Tab. 10mg",
+   "ingredient": "에스시탈로프람옥살산염",
+   "ingredientCode": "474802ATD"
+  },
+  {
+   "name": "제프람멜츠구강붕해정5밀리그램(에스시탈로프람옥살산염)",
+   "englishName": "Jepram Melts OD Tab. 5mg",
+   "ingredient": "에스시탈로프람옥살산염",
+   "ingredientCode": "474801ATD"
+  },
+  {
+   "name": "훼로바-유서방정(건조황산제일철)",
+   "englishName": "Feroba-You SR Tab.",
+   "ingredient": "건조황산제일철",
+   "ingredientCode": "303403ATR"
+  },
+  {
+   "name": "리도스캡슐(페노피브레이트 과립(미분화))",
+   "englishName": "Lidos Cap. 200mg",
+   "ingredient": "미분화페노피브레이트",
+   "ingredientCode": "194901ACH"
+  },
+  {
+   "name": "토비애즈서방정4mg(페소테로딘푸마르산염)",
+   "englishName": "Toviaz SR Tab. 4mg",
+   "ingredient": "페소테로딘 퓨마레이드",
+   "ingredientCode": "503801ATR"
+  },
+  {
+   "name": "루나팜정(플루니트라제팜)",
+   "englishName": "Lunapam Tab. 1mg",
+   "ingredient": "플루니트라제팜",
+   "ingredientCode": "160601ATB"
+  },
+  {
+   "name": "노르작캡슐(플루옥세틴염산염)",
+   "englishName": "Norzac Cap.",
+   "ingredient": "플루옥세틴염산염",
+   "ingredientCode": "161502ACH"
+  },
+  {
+   "name": "파마가바펜틴캡슐100밀리그람",
+   "englishName": "Gabapentin Cap.100mg",
+   "ingredient": "가바펜틴",
+   "ingredientCode": "164201ACH"
+  },
+  {
+   "name": "페리돌정10밀리그램(할로페리돌)",
+   "englishName": "Peridol Tabs. 10mg",
+   "ingredient": "할로페리돌",
+   "ingredientCode": "167904ATB"
+  },
+  {
+   "name": "페리돌정20밀리그램(할로페리돌)",
+   "englishName": "Peridol Tab. 20mg",
+   "ingredient": "할로페리돌",
+   "ingredientCode": "167905ATB"
+  },
+  {
+   "name": "페리돌정3밀리그램(할로페리돌)",
+   "englishName": "Peridol Tab. 3mg",
+   "ingredient": "할로페리돌",
+   "ingredientCode": "167906ATB"
+  },
+  {
+   "name": "페리돌정5밀리그램(할로페리돌)",
+   "englishName": "Peridol Tab. 5mg",
+   "ingredient": "할로페리돌",
+   "ingredientCode": "167908ATB"
+  },
+  {
+   "name": "환인이미프라민염산염정25밀리그램",
+   "englishName": "Whanin Imipramine Hydrochloride Tab.25mg",
+   "ingredient": "염산이미프라민",
+   "ingredientCode": "173701ATB"
+  },
+  {
+   "name": "인베가서방정3mg(팔리페리돈)",
+   "englishName": "Invega ER Tab. 3mg",
+   "ingredient": "팔리페리돈",
+   "ingredientCode": "503201ATR"
+  },
+  {
+   "name": "인베가서방정6mg(팔리페리돈)",
+   "englishName": "Invega ER Tab. 6mg",
+   "ingredient": "팔리페리돈",
+   "ingredientCode": "503202ATR"
+  },
+  {
+   "name": "인베가서방정9mg(팔리페리돈)",
+   "englishName": "Invega ER Tab. 9mg",
+   "ingredient": "팔리페리돈",
+   "ingredientCode": "503203ATR"
+  },
+  {
+   "name": "케이콘틴 서방정 600mg",
+   "englishName": "K-Contin Continus Tab. 600mg",
+   "ingredient": "염화칼륨",
+   "ingredientCode": "215801ATR"
+  },
+  {
+   "name": "듀락칸이지시럽(락툴로오즈농축액)",
+   "englishName": "Dulackhan Easy Syrup.",
+   "ingredient": "락툴로오즈농축액",
+   "ingredientCode": "180830ASY"
+  },
+  {
+   "name": "라비시틴정100밀리그람(라모트리진)",
+   "englishName": "Lavicitin Tab. 100mg",
+   "ingredient": "라모트리진",
+   "ingredientCode": "181001ATB"
+  },
+  {
+   "name": "라비시틴정25밀리그램(라모트리진)",
+   "englishName": "Labisitin Tab. 25mg",
+   "ingredient": "라모트리진",
+   "ingredientCode": "181002ATB"
+  },
+  {
+   "name": "환인탄산리튬정",
+   "englishName": "Whanin Lithium Carbonate Tab.",
+   "ingredient": "탄산리튬",
+   "ingredientCode": "184701ATB"
+  },
+  {
+   "name": "레보세린정(레보세티리진염산염)",
+   "englishName": "Levocerine Tab. 5mg",
+   "ingredient": "레보세티리진염산염",
+   "ingredientCode": "463601ATB"
+  },
+  {
+   "name": "지엘로페라미드염산염캡슐",
+   "englishName": "Loperamide HCl Cap. GL",
+   "ingredient": "로페라미드염산염",
+   "ingredientCode": "185102ACH"
+  },
+  {
+   "name": "티세르신정100mg(레보메프로마진말레산염)",
+   "englishName": "Tisercin Tab. 100mg",
+   "ingredient": "말레이산레보메프로마진",
+   "ingredientCode": "183301ATB"
+  },
+  {
+   "name": "티세르신정50mg(레보메프로마진말레산염)",
+   "englishName": "Tisercin Tab. 50mg",
+   "ingredient": "말레이산레보메프로마진",
+   "ingredientCode": "183303ATB"
+  },
+  {
+   "name": "라투다정40밀리그램(루라시돈염산염)",
+   "englishName": "Latuda Tab. 40mg",
+   "ingredient": "루라시돈염산염",
+   "ingredientCode": "729802ATB"
+  },
+  {
+   "name": "라투다정80밀리그램(루라시돈염산염)",
+   "englishName": "Latuda Tab. 80mg",
+   "ingredient": "루라시돈염산염",
+   "ingredientCode": "729804ATB"
+  },
+  {
+   "name": "로라반정 0.5mg",
+   "englishName": "Loravan Tab. 0.5mg",
+   "ingredient": "로라제팜",
+   "ingredientCode": "185504ATB"
+  },
+  {
+   "name": "로라반정1mg",
+   "englishName": "Loravan Tab. 1mg",
+   "ingredient": "로라제팜",
+   "ingredientCode": "185501ATB"
+  },
+  {
+   "name": "서카레딥서방정2밀리그램(멜라토닌)",
+   "englishName": "Circaledeep PR Tab. 2mg",
+   "ingredient": "멜라토닌",
+   "ingredientCode": "627701ATR"
+  },
+  {
+   "name": "멘틴정(메만틴염산염)",
+   "englishName": "Mentine Tab. 10mg",
+   "ingredient": "메만틴염산염",
+   "ingredientCode": "190001ATB"
+  },
+  {
+   "name": "부광메티마졸정",
+   "englishName": "Methimazol Tab. Bukwang",
+   "ingredient": "메치마졸",
+   "ingredientCode": "191801ATB"
+  },
+  {
+   "name": "메토폴정(메트포르민염산염)",
+   "englishName": "Metofol Tab.",
+   "ingredient": "메트포르민염산염",
+   "ingredientCode": "191502ATB"
+  },
+  {
+   "name": "마그밀정(수산화마그네슘)",
+   "englishName": "Magmil Tab.",
+   "ingredient": "수산화마그네슘",
+   "ingredientCode": "187402ATB"
+  },
+  {
+   "name": "익셀캡슐50mg(밀나시프란염산염)",
+   "englishName": "Ixel Cap. 50mg",
+   "ingredient": "밀나시프란염산염",
+   "ingredientCode": "355802ACH"
+  },
+  {
+   "name": "모사프라딘정(모사프리드시트르산염수화물)",
+   "englishName": "Mosapradin Tab.",
+   "ingredient": "모사프리드시트르산염수화물",
+   "ingredientCode": "421001ATB"
+  },
+  {
+   "name": "국제모사라이드서방정 15mg(모사프리드시트르산염수화물)",
+   "englishName": "Kukje Mosaride SR Tab. 15mg",
+   "ingredient": "모사프리드시트르산염수화물",
+   "ingredientCode": "421004ATR"
+  },
+  {
+   "name": "페니드정10밀리그램(메틸페니데이트염산염)",
+   "englishName": "Penid Tab. 10mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193201ATB"
+  },
+  {
+   "name": "콘서타OROS서방정18mg(메틸페니데이트염산염)",
+   "englishName": "Concerta OROS ER Tab. 18mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193203ATR"
+  },
+  {
+   "name": "콘서타OROS서방정 27mg(메틸페니데이트염산염)",
+   "englishName": "Concerta OROS ER Tab. 27mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193206ATR"
+  },
+  {
+   "name": "콘서타OROS서방정 36mg(메틸페니데이트염산염)",
+   "englishName": "Concerta OROS ER Tab. 36mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193204ATR"
+  },
+  {
+   "name": "콘서타OROS서방정 54mg(메틸페니데이트염산염)",
+   "englishName": "Concerta OROS ER Tab. 54mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193209ATR"
+  },
+  {
+   "name": "메디키넷리타드캡슐 10mg(메틸페니데트염산염)",
+   "englishName": "Medikinet Retard Cap. 10mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193201ACR"
+  },
+  {
+   "name": "메디키넷리타드캡슐 20mg(메틸페니데트염산염)",
+   "englishName": "Medikinet Retard Cap. 20mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193205ACR"
+  },
+  {
+   "name": "메디키넷리타드캡슐 30mg(메틸페니데트염산염)",
+   "englishName": "Medikinet Retard Cap. 30mg",
+   "ingredient": "메칠페니데이트염산염",
+   "ingredientCode": "193207ACR"
+  },
+  {
+   "name": "파마멀타자핀정15밀리그램(미르타자핀)",
+   "englishName": "Pharma Mirtazapine Tab. 15mg",
+   "ingredient": "미르타자핀",
+   "ingredientCode": "196201ATB"
+  },
+  {
+   "name": "파마멀타자핀정30밀리그램(미르타자핀)",
+   "englishName": "Pharma Mirtazapine Tab. 30mg",
+   "ingredient": "미르타자핀",
+   "ingredientCode": "196202ATB"
+  },
+  {
+   "name": "환인날트렉손정50밀리그램(날트렉손염산염)",
+   "englishName": "Whanin Naltrexon Tab. 50mg",
+   "ingredient": "염산날트렉손",
+   "ingredientCode": "199201ATB"
+  },
+  {
+   "name": "명문니트로글리세린0.6밀리그램설하정",
+   "englishName": "Nitroglycerin Sublingual Tab. 0.6mg Myungmoon",
+   "ingredient": "니트로글리세린",
+   "ingredientCode": "202602ATL"
+  },
+  {
+   "name": "올자핀정10밀리그램(올란자핀)",
+   "englishName": "Olzapine Tab. 10mg",
+   "ingredient": "올란자핀",
+   "ingredientCode": "204001ATB"
+  },
+  {
+   "name": "올자핀정5밀리그램(올란자핀)",
+   "englishName": "Olzapine Tab. 5mg",
+   "ingredient": "올란자핀",
+   "ingredientCode": "204002ATB"
+  },
+  {
+   "name": "자이프렉사자이디스확산정10밀리그램(미세올란자핀)",
+   "englishName": "Zyprexazydis Dispersible Tab. 10mg",
+   "ingredient": "올란자핀",
+   "ingredientCode": "204001ATD"
+  },
+  {
+   "name": "제뉴원올메사탄정20밀리그램(올메사탄메독소밀)",
+   "englishName": "Genuone Olmesartan Tab. 20mg",
+   "ingredient": "올메사탄메독소밀",
+   "ingredientCode": "468501ATB"
+  },
+  {
+   "name": "프리살탄정10밀리그램(올메사탄메독소밀)",
+   "englishName": "Presartan Tab. 10mg",
+   "ingredient": "올메사탄메독소밀",
+   "ingredientCode": "468502ATB"
+  },
+  {
+   "name": "올로피딘정5밀리그램(올로파타딘염산염)",
+   "englishName": "Olopidine Tab. 5mg",
+   "ingredient": "올로파타딘염산염",
+   "ingredientCode": "391703ATB"
+  },
+  {
+   "name": "판토라인정 20mg/T",
+   "englishName": "Pantoline Tab. 20mg",
+   "ingredient": "판토프라졸나트륨세스키히드레이트",
+   "ingredientCode": "208802ATE"
+  },
+  {
+   "name": "파마프로시클리딘정(프로시클리딘염산염)",
+   "englishName": "Pharma Procyclidine Tab.",
+   "ingredient": "염산프로시클리딘",
+   "ingredientCode": "218401ATB"
+  },
+  {
+   "name": "페니라민정(클로르페니라민말레산염)",
+   "englishName": "Peniramin Tab.",
+   "ingredient": "클로르페니라민말레산염",
+   "ingredientCode": "131801ATB"
+  },
+  {
+   "name": "동광피타바스타틴정2밀리그램(피타바스타틴칼슘)",
+   "englishName": "Dongkwang Pitavastatin Tab. 2mg",
+   "ingredient": "피타바스타틴칼슘",
+   "ingredientCode": "470901ATB"
+  },
+  {
+   "name": "명인페르페나진정4mg",
+   "englishName": "Perphenazine Tab. 4mg Myungin",
+   "ingredient": "페르페나진",
+   "ingredientCode": "211401ATB"
+  },
+  {
+   "name": "소론도정(프레드니솔론)",
+   "englishName": "Solondo Tab.",
+   "ingredient": "프레드니솔론",
+   "ingredientCode": "217001ATB"
+  },
+  {
+   "name": "인데놀정10mg(프로프라놀롤염산염)",
+   "englishName": "Indenol Tab. 10mg",
+   "ingredient": "프로프라놀롤염산염",
+   "ingredientCode": "219901ATB"
+  },
+  {
+   "name": "인데놀정40mg(프로프라놀롤염산염)",
+   "englishName": "Indenol Tab. 40mg",
+   "ingredient": "프로프라놀롤염산염",
+   "ingredientCode": "219904ATB"
+  },
+  {
+   "name": "팍세론틴서방정12.5밀리그램(파록세틴염산염수화물)",
+   "englishName": "Paxerontin CR Tab. 12.5mg",
+   "ingredient": "파록세틴염산염수화물",
+   "ingredientCode": "209304ATR"
+  },
+  {
+   "name": "파로자트씨알정25밀리그램(파록세틴염산염수화물)",
+   "englishName": "Paroxat CR Tab. 25mg",
+   "ingredient": "파록세틴염산염",
+   "ingredientCode": "209305ATR"
+  },
+  {
+   "name": "슈다페드정(슈도에페드린염산염)",
+   "englishName": "Pseudafed Tab. 60mg",
+   "ingredient": "슈도에페드린염산염",
+   "ingredientCode": "220902ATB"
+  },
+  {
+   "name": "신신쿠에티아핀정100밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Sinsin Quetiapine Tab. 100mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378602ATB"
+  },
+  {
+   "name": "동화쿠에티아핀정12.5밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Dongwha Quetiapine Tab. 12.5mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378610ATB"
+  },
+  {
+   "name": "쿠에티정200밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Quety Tab. 200mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378603ATB"
+  },
+  {
+   "name": "신신쿠에티아핀정25밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Sinsin Quetiapine Tab. 25mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378601ATB"
+  },
+  {
+   "name": "쿠에타핀정300밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Quetapine Tab. 300mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378604ATB"
+  },
+  {
+   "name": "환인쿠에타핀서방정200밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Whanin Quetiapine SR Tab. 200mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378606ATR"
+  },
+  {
+   "name": "환인쿠에타핀서방정300밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Whanin Quetiapine SR Tab. 300mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378607ATR"
+  },
+  {
+   "name": "환인쿠에타핀서방정400밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Whanin Quetiapine SR Tab. 400mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378608ATR"
+  },
+  {
+   "name": "환인쿠에타핀서방정50밀리그램(쿠에티아핀푸마르산염)",
+   "englishName": "Whanin Quetiapine SR Tab. 50mg",
+   "ingredient": "푸마르산쿠에티아핀",
+   "ingredientCode": "378605ATR"
+  },
+  {
+   "name": "광동레바미피드정",
+   "englishName": "Kwangdong Rebamipide Tab. 100mg",
+   "ingredient": "레바미피드",
+   "ingredientCode": "222901ATB"
+  },
+  {
+   "name": "파키놀정0.25mg(로피니롤염산염)",
+   "englishName": "Pakinol Tab. 0.25mg",
+   "ingredient": "염산로피니롤",
+   "ingredientCode": "224903ATB"
+  },
+  {
+   "name": "파키놀정1mg(로피니롤염산염)",
+   "englishName": "Pakinol Tab. 1mg",
+   "ingredient": "염산로피니롤",
+   "ingredientCode": "224901ATB"
+  },
+  {
+   "name": "리스페달정1밀리그램(리스페리돈)",
+   "englishName": "Risperdal Tab. 1mg",
+   "ingredient": "리스페리돈",
+   "ingredientCode": "224201ATB"
+  },
+  {
+   "name": "리스페달정2밀리그램(리스페리돈)",
+   "englishName": "Risperdal Tab. 2mg",
+   "ingredient": "리스페리돈",
+   "ingredientCode": "224202ATB"
+  },
+  {
+   "name": "리스페달정3밀리그램(리스페리돈)",
+   "englishName": "Risperdal Tab. 3mg",
+   "ingredient": "리스페리돈",
+   "ingredientCode": "224203ATB"
+  },
+  {
+   "name": "리스펜오디정1mg(리스페리돈)",
+   "englishName": "Rispen ODT. 1mg",
+   "ingredient": "리스페리돈",
+   "ingredientCode": "224201ATD"
+  },
+  {
+   "name": "리스펜오디정2mg(리스페리돈)",
+   "englishName": "Rispen ODT. 2mg",
+   "ingredient": "리스페리돈",
+   "ingredientCode": "224202ATD"
+  },
+  {
+   "name": "루리드정(록시트로마이신)",
+   "englishName": "Rulid Tab. 150mg",
+   "ingredient": "록시스로마이신",
+   "ingredientCode": "225301ATB"
+  },
+  {
+   "name": "포타겔현탁액(20mL)",
+   "englishName": "Fotagel Susp.",
+   "ingredient": "디옥타헤드랄스멕타이트",
+   "ingredientCode": "146431ASS"
+  },
+  {
+   "name": "엑시렌정(애엽95%에탄올연조엑스(20->1))",
+   "englishName": "Exilen Tab. 60mg",
+   "ingredient": "애엽95%에탄올연조엑스(20→1)",
+   "ingredientCode": "430101ATB"
+  },
+  {
+   "name": "파마설트랄린정50밀리그램(설트랄린염산염)",
+   "englishName": "Pharma Sertraline Tab. 50mg",
+   "ingredient": "설트랄린염산염",
+   "ingredientCode": "227001ATB"
+  },
+  {
+   "name": "파마설트랄린정100밀리그램(설트랄린염산염)",
+   "englishName": "Pharma Sertraline Tab. 100mg",
+   "ingredient": "설트랄린염산염",
+   "ingredientCode": "227002ATB"
+  },
+  {
+   "name": "설피딘정200mg(설피리드)",
+   "englishName": "Sulpidin Tab. 200mg",
+   "ingredient": "설피리드",
+   "ingredientCode": "233401ATB"
+  },
+  {
+   "name": "씬지록신정100마이크로그램(레보티록신나트륨수화물)",
+   "englishName": "Synthyroxine Tab. 100㎍",
+   "ingredient": "레보티록신나트륨수화물",
+   "ingredientCode": "183601ATB"
+  },
+  {
+   "name": "탐스핀캡슐(탐스로신염산염)",
+   "englishName": "Tamspin Cap. 0.2mg",
+   "ingredient": "탐스로신염산염",
+   "ingredientCode": "234601ACR"
+  },
+  {
+   "name": "티아본정(티아넵틴나트륨)",
+   "englishName": "Tiabon Tab.",
+   "ingredient": "티아넵틴나트륨",
+   "ingredientCode": "229601ATB"
+  },
+  {
+   "name": "타미플루캡슐 75mg",
+   "englishName": "Tamiflue Cap. 75mg",
+   "ingredient": "오셀타미비르인산염",
+   "ingredientCode": "358901ACH"
+  },
+  {
+   "name": "토피론정50mg(토피라메이트)",
+   "englishName": "Topiron Tab. 50mg",
+   "ingredient": "토피라메이트",
+   "ingredientCode": "241804ATB"
+  },
+  {
+   "name": "토피라트정100밀리그램(토피라메이트)",
+   "englishName": "Topirat Tab. 100mg",
+   "ingredient": "토피라메이트",
+   "ingredientCode": "241801ATB"
+  },
+  {
+   "name": "파라마셋정",
+   "englishName": "Paramacet Tab.",
+   "ingredient": "아세트아미노펜",
+   "ingredientCode": "513000ATB"
+  },
+  {
+   "name": "트리헥신정(트리헥시페니딜염산염)",
+   "englishName": "Trihexin Tab.",
+   "ingredient": "염산트리헥시페니딜",
+   "ingredientCode": "244201ATB"
+  },
+  {
+   "name": "제뉴원트리메부틴말레산염정",
+   "englishName": "Genuone Trimebutine Maleate Tab. 100mg",
+   "ingredient": "트리메부틴말레산염",
+   "ingredientCode": "244301ATB"
+  },
+  {
+   "name": "환인트라조돈염산염캡슐",
+   "englishName": "Trazodone HCl Cap. Whanin",
+   "ingredient": "염산트라조돈",
+   "ingredientCode": "242901ACH"
+  },
+  {
+   "name": "트리티코정50밀리그람(트라조돈염산염)",
+   "englishName": "Trittico Tab. 50mg",
+   "ingredient": "염산트라조돈",
+   "ingredientCode": "242902ATB"
+  },
+  {
+   "name": "우르콜정100밀리그램(우르소데옥시콜산)",
+   "englishName": "Urchol Tab. 100mg",
+   "ingredient": "우르소데옥시콜산(우르소데옥시콜린산)",
+   "ingredientCode": "246501ATB"
+  },
+  {
+   "name": "니코버정1mg(바레니클린살리실산염)",
+   "englishName": "Nicover Tab. 1mg",
+   "ingredient": "바레니클린살리실산염",
+   "ingredientCode": "673102ATB"
+  },
+  {
+   "name": "신일티아민염산염정10mg",
+   "englishName": "Thiamine HCl Tab. 10mg Sinil",
+   "ingredient": "티아민염산염",
+   "ingredientCode": "237301ATB"
+  },
+  {
+   "name": "알코타민정",
+   "englishName": "Alcotamin Tab.",
+   "ingredient": "폴산",
+   "ingredientCode": "E04900ATB"
+  },
+  {
+   "name": "파마벤라팍신서방캡슐75mg(벤라팍신염산염)",
+   "englishName": "Pharma Venlafaxine SR Cap. 75mg",
+   "ingredient": "벤라팍신",
+   "ingredientCode": "247502ACR"
+  },
+  {
+   "name": "파마벤라팍신서방캡슐37.5밀리그램(벤라팍신염산염)",
+   "englishName": "Pharma Venlafaxine SR Cap. 37.5mg",
+   "ingredient": "벤라팍신",
+   "ingredientCode": "247504ACR"
+  },
+  {
+   "name": "브린텔릭스정10mg(보티옥세틴브롬화수소산염)",
+   "englishName": "Brintellix Tab. 10mg",
+   "ingredient": "보티옥세틴브롬화수소산염",
+   "ingredientCode": "628502ATB"
+  },
+  {
+   "name": "브린텔릭스정5mg(보티옥세틴브롬화수소산염)",
+   "englishName": "Brintellix Tab. 5mg",
+   "ingredient": "보티옥세틴브롬화수소산염",
+   "ingredientCode": "628501ATB"
+  },
+  {
+   "name": "데파킨크로노정300밀리그램",
+   "englishName": "Depakine Chrono Tab. 300mg",
+   "ingredient": "발프로산나트륨",
+   "ingredientCode": "229705ATR"
+  },
+  {
+   "name": "오르필서방정150밀리그램(발프로산나트륨)",
+   "englishName": "Orfil SR Tab. 150mg",
+   "ingredient": "발프로산나트륨",
+   "ingredientCode": "229701ATR"
+  },
+  {
+   "name": "젤독스캡슐40mg(염산지프라시돈일수화물)",
+   "englishName": "Zeldox Cap. 40mg",
+   "ingredient": "염산지프라시돈일수화물",
+   "ingredientCode": "464902ACH"
+  },
+  {
+   "name": "젤독스캡슐80mg(염산지프라시돈일수화물)",
+   "englishName": "Zeldox Cap. 80mg",
+   "ingredient": "염산지프라시돈일수화물",
+   "ingredientCode": "464904ACH"
+  },
+  {
+   "name": "잘레딥캡슐5mg",
+   "englishName": "Zaledeep Cap. 5mg",
+   "ingredient": "잘레플론",
+   "ingredientCode": "717401ACH"
+  },
+  {
+   "name": "로도핀정100gmg(죠테핀)",
+   "englishName": "Lodopine Tab. 100mg",
+   "ingredient": "조테핀",
+   "ingredientCode": "250801ATB"
+  },
+  {
+   "name": "로도핀정50mg(죠테핀)",
+   "englishName": "Lodopine Tab. 50mg",
+   "ingredient": "조테핀",
+   "ingredientCode": "250803ATB"
+  },
+  {
+   "name": "졸피람정10밀리그램(졸피뎀타르타르산염)",
+   "englishName": "Zolpiram Tab. 10mg",
+   "ingredient": "주석산졸피뎀",
+   "ingredientCode": "250501ATB"
+  },
+  {
+   "name": "스틸녹스CR정12.5mg(졸피뎀타르타르산염)",
+   "englishName": "Stilnox CR Tab. 12.5mg",
+   "ingredient": "주석산졸피뎀",
+   "ingredientCode": "250504ATR"
+  },
+  {
+   "name": "스틸녹스CR정6.25mg(졸피뎀타르타르산염)",
+   "englishName": "Stilnox CR Tab. 6.25mg",
+   "ingredient": "주석산졸피뎀",
+   "ingredientCode": "250503ATR"
+  },
+  {
+   "name": "보령아스트릭스캡슐100밀리그람(아스피린)",
+   "englishName": "Boryung Astrix Cap. 100mg(Aspirine)",
+   "ingredient": "Aspirin Enteric Granules"
+  },
+  {
+   "name": "초당아스피린장용정100mg(아스피린)",
+   "englishName": "Chodang Asprin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "알타질주(주사용아스피린리신90%)",
+   "englishName": "Arthalgyl Injection",
+   "ingredient": "Aspirin Lysine For Injection 90%"
+  },
+  {
+   "name": "한미아스피린장용정100밀리그램",
+   "englishName": "Hanmi Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "바이엘아스피린정500밀리그람",
+   "englishName": "Aspirin Tab. 500mg Bayerkorea",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스피린프로텍트정100밀리그람",
+   "englishName": "Aspirin Protect Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "영진아스피린장용정",
+   "englishName": "Aspirin Enteric Coated Tab. Youngjin",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "이텍스엑세드린정(수출용)",
+   "englishName": "Etex Exedrin Tab.",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin"
+  },
+  {
+   "name": "이텍스아나신정(수출용)",
+   "englishName": "Etex Anacin Tab.",
+   "ingredient": "Anhydrous Caffeine/Aspirin"
+  },
+  {
+   "name": "보령바이오아스트릭스캡슐100밀리그램(아스피린장용과립)",
+   "englishName": "Boryungbio Astrix Cap. 100mg",
+   "ingredient": "Aspirin Enteric Granules"
+  },
+  {
+   "name": "클라스핀캡슐75/100밀리그램(클로피도그렐,아스피린)",
+   "englishName": "CLASPIN Caps.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로스원캡슐",
+   "englishName": "Closone Cap.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클라빅신듀오캡슐75/100밀리그램(클로피도그렐,아스피린)",
+   "englishName": "CLAVIXIN DUO Caps.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피린캡슐",
+   "englishName": "Clopirin Cap.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "슈퍼피린캡슐75/100밀리그램(클로피도그렐, 아스피린)",
+   "englishName": "Superpirin Cap.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아리그렐캡슐",
+   "englishName": "Arigrel Cap. (Aspirin (enteric coated) pellet, clopidogrel bisulfate)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "코프리그렐캡슐",
+   "englishName": "Copregrel Cap.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "이텍스아스피린장용정100mg(아스피린)",
+   "englishName": "Etex Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "경보아스피린장용정",
+   "englishName": "Kyongbo Aspirin Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아나피린장용정100밀리그램(아스피린)",
+   "englishName": "ANAPIRIN ER TAB 100MG",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스테린정(아스피린)",
+   "englishName": "Asterin Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "에이에스피장용정100mg(아스피린)",
+   "englishName": "ASP 100mg TAB",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "삼익아스피린장용정",
+   "englishName": "Samik Aspirin Enteric coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스텍트정(아스피린)",
+   "englishName": "Astect Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "유니온아스피린장용정",
+   "englishName": "Union Aspirin Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "프라임아스피린장용정100밀리그램",
+   "englishName": "Prime Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스필장용정(아스피린100밀리그람)",
+   "englishName": "Aspil Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스피바장용정(아스피린)",
+   "englishName": "Aspiva Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "린아스장용정(아스피린)",
+   "englishName": "Rinas enteric coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "에이스린장용정(아스피린)",
+   "englishName": "Acerin Enteric Coated Tablet",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스피드정(아스피린)",
+   "englishName": "Aspid Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "하원아스피린장용정100mg",
+   "englishName": "Hawon Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "경동아스피린장용정",
+   "englishName": "KyungDong Aspirin enteric coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "영일아스피린장용정100mg(아스피린)",
+   "englishName": "Youngil Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "명문아스피린장용정100mg",
+   "englishName": "Myungmoon Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin/Aspirin"
+  },
+  {
+   "name": "넥스핀장용정100mg(아스피린)",
+   "englishName": "",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "바소피린장용정(아스피린)",
+   "englishName": "Vasopirin Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "유한아스피린장용정(아스피린)",
+   "englishName": "Yuhan Aspirin Enteric Coated Tablet",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "유영아스피린장용정100mg",
+   "englishName": "Yooyoung Aspirin Enteic Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "알카파워정",
+   "englishName": "Alkapower Tab.",
+   "ingredient": "Anhydrous Citric Acid/Aspirin/Sodium Bicarbonate"
+  },
+  {
+   "name": "씨엠지아스피린장용정100mg",
+   "englishName": "CMG Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "삼진아스피린장용정",
+   "englishName": "Samjin Aspirin Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "글로아스피린장용정100mg(아스피린)",
+   "englishName": "Gloaspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "알피린장용정(아스피린)(수출용)",
+   "englishName": "Alpirin Enteric Coated Tablet (Aspirin)",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "휴비스트아스피린장용정",
+   "englishName": "Huvist aspirin enteric coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아사프장용정100mg(아스피린)",
+   "englishName": "ASAP Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스텍션장용정100밀리그램(아스피린)",
+   "englishName": "Astection Enteric Coated Tablets 100mg (Aspirin)",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아디녹스캡슐",
+   "englishName": "Adinox Cap.",
+   "ingredient": "Aspirin/Dipyridamole"
+  },
+  {
+   "name": "플라빅스에이정",
+   "englishName": "PlavixA tablet",
+   "ingredient": "Aspirin Granules/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아스필로장용정100밀리그램(아스피린)",
+   "englishName": "Aspilo Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "아스피도캡슐",
+   "englishName": "Aspido Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아스그렐캡슐(수출용)",
+   "englishName": "Asgrel Cap. (for export)",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "피도겔듀오캡슐",
+   "englishName": "Pidogel Duo Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로렌캡슐",
+   "englishName": "",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로본스에이캡슐",
+   "englishName": "CLOVONS-A CAP.",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플빅스에이캡슐",
+   "englishName": "Plvix A Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "에라빅스플러스캡슐",
+   "englishName": "Eravix Plus Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "광동아스피린장용정100mg",
+   "englishName": "",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "코미아스피린정(수출용)",
+   "englishName": "",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "디피아녹스서방캡슐",
+   "englishName": "Dipianox SR cap.",
+   "ingredient": "Aspirin/Dipyridamole"
+  },
+  {
+   "name": "아스팜장용정(아스피린)",
+   "englishName": "Aspharm Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "클로아핀캡슐",
+   "englishName": "Cloapin Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아나빅스듀오캡슐",
+   "englishName": "ANAVIX DUO CAP",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "슈퍼피린캡슐75/75밀리그램(클로피도그렐, 아스피린)",
+   "englishName": "Superpirin Cap. 75/75mg",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "비엘피린장용정100밀리그램(아스피린)",
+   "englishName": "BLpirin Enteric Coated Tablet(Aspirin)",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "클로스피린캡슐(클로피도그렐황산염, 아스피린장용펠렛)",
+   "englishName": "Clospirin Cap.",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프래빅스듀오캡슐",
+   "englishName": "Pravix Duo Capsule",
+   "ingredient": "Aspirin Enteric Pellets/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클라빅신듀오캡슐75/75밀리그램",
+   "englishName": "Clavixin Duo Cap. 75/75mg",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "뉴스피린장용정100밀리그램(아스피린)",
+   "englishName": "NEWSPIRIN Enteric Coated Tab. 100mg (Aspirin)",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "휴텍스아스피린장용정100mg(아스피린)",
+   "englishName": "Hutecs Aspirin enteric coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "클라스핀캡슐75/75밀리그램",
+   "englishName": "CLASPIN Caps. 75/75mg (Clopidogrel, Aspirin)",
+   "ingredient": "Aspirin/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "대웅바이오아스피린장용정100밀리그램",
+   "englishName": "DAEWOONGBIO ASPIRIN ENTERIC COATED TAB. 100MG",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "마더스아스피린장용정100mg(아스피린)",
+   "englishName": "Mothers Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "서울아스피린장용정",
+   "englishName": "Seoul Aspirin Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "케이아스피린장용정(아스피린)",
+   "englishName": "K-Aspirin Enteric Coated Tab.",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "지엘아스피린장용정100밀리그램",
+   "englishName": "GL Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "보령바이오아스피린장용정100밀리그램",
+   "englishName": "Boryung Bio Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "삼성아스피린장용정100밀리그램",
+   "englishName": "samsung Aspirin Enteric Coated Tab. 100mg",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "에이스린장용정(아스피린)(수출용)",
+   "englishName": "Acerin Enteric Coated Tablet",
+   "ingredient": "Aspirin"
+  },
+  {
+   "name": "라스피린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Raspirin Cap. 100/5mg(Aspirin, Rabeprazole)",
+   "ingredient": "Aspirin Enteric Pellets/Rabeprazole Sodium"
+  },
+  {
+   "name": "코아피린산375/100밀리그램",
+   "englishName": "Corepirin Powder 375/100 mg",
+   "ingredient": "Ascorbic Acid/Aspirin"
+  },
+  {
+   "name": "라베피린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Rabepirin Cap. 100/5mg",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "아스프라졸캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asprazol Cap. 100/5mg(Aspirin, Rabeprazole)",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "아라텍트캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Aratect Cap.100/5mg",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "아스라베캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asrabe Cap.100/5mg(Aspirin,Rabeprazole)",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "아스라졸캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Asrazole Cap. 100/5mg",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "라베트릭스캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "Rabetrix Capsule 100/5mg",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "코아피린리보정100/2밀리그램",
+   "englishName": "Corepirinribo Tab. 100/2 mg",
+   "ingredient": "Aspirin/Riboflavin"
+  },
+  {
+   "name": "아스베린캡슐100/5밀리그램(아스피린,라베프라졸)",
+   "englishName": "ASBERIN capsule 100/5mg",
+   "ingredient": "Aspirin/Rabeprazole Sodium"
+  },
+  {
+   "name": "스피다정",
+   "englishName": "Speeda Tab.",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin"
+  },
+  {
+   "name": "페인싹트리플정",
+   "englishName": "Painssak triple Tab.",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin"
+  },
+  {
+   "name": "안티싹트리플정",
+   "englishName": "Antissactriple tab.",
+   "ingredient": "Acetaminophen/Anhydrous Caffeine/Aspirin"
+  },
+  {
+   "name": "하이빅스정(클로피도그렐황산수소염)",
+   "englishName": "Hyvix Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라비톨정(클로피도그렐황산수소염)",
+   "englishName": "Plavitor tablet (Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "유유클로피도그렐정(클로피도그렐황산염)(수출용)",
+   "englishName": "Yuyuclopidogrel Tab. (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "건일클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Kuhnil Clopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "코빅스정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Kovix Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피정(클로피도그렐황산수소염)",
+   "englishName": "Clopi Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로델정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Claudel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "맥스그렐정(클로피도그렐황산수소염)",
+   "englishName": "Maxgrel Tablet (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "일양클로피도그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clopidogrel Tab. 75mg Ilyang",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "큐오렐정(클로피도그렐황산수소염)",
+   "englishName": "Q.O.L. Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크로피겔정(클로피도그렐황산염)",
+   "englishName": "Clopigel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프레토정(클로피도그렐황산염)",
+   "englishName": "Preto Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플래리스정(클로피도그렐황산염)",
+   "englishName": "Platless Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "대원클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Clopidogrel Tab. 75mg Daewon",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피젠정(클로피도그렐황산염)",
+   "englishName": "CLOPIGEN TAB.(CLOPIDOGREL BISULFATE)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "영일클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Youngil Clopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "피도빅스정(클로피도그렐황산염)",
+   "englishName": "Pidovix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피드정(클로피도그렐황산염)",
+   "englishName": "Clopid Tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "세레나데정(클로피도그렐황산수소염)",
+   "englishName": "Cerenade Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프라빅정(클로피도그렐황산수소염)",
+   "englishName": "Plavic Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크라빅스정(클로피도그렐황산수소염)",
+   "englishName": "Cravix Tab.",
+   "ingredient": "Clopidogrel Bisulfate/Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로펙트정(클로피도그렐황산염)",
+   "englishName": "Clopect Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크리빅스정(클로피도그렐황산수소염)",
+   "englishName": "Krivix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "인히플라정(클로피도그렐황산염)",
+   "englishName": "Inhipla Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라메드정(클로피도그렐황산수소염)",
+   "englishName": "Plamed Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "트롬빅스정(클로피도그렐황산수소염)",
+   "englishName": "Tromvix Tab.(Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "큐로빅스정(클로피도그렐황산염)",
+   "englishName": "Curovix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로아트정(클로피도그렐황산염)",
+   "englishName": "Cloart Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로본스정(클로피도그렐황산염)",
+   "englishName": "CLOVONS TAB.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Plavix Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "휴로픽스정(클로피도그렐황산수소염)",
+   "englishName": "Hurofix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라벨정(클로피도그렐황산수소염)",
+   "englishName": "Plavel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프리그렐정(클로피도그렐레지네이트)",
+   "englishName": "Pregrel Tab.",
+   "ingredient": "Clopidogrel Resinate"
+  },
+  {
+   "name": "에이프로젠클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Aprogen Clopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clogrel Tablet 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로비드정(클로피도그렐베실산염)",
+   "englishName": "Clovid Tab.",
+   "ingredient": "Clopidogrel Besylate"
+  },
+  {
+   "name": "피도글정75밀리그램(클로피도그렐나파디실레이트일수화물)",
+   "englishName": "Pidogul Tab. 75mg",
+   "ingredient": "Clopidogrel Napadisilate Monohydrate"
+  },
+  {
+   "name": "클로베인정(클로피도그렐황산수소염)",
+   "englishName": "Clovein Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "인히플라트정(클로피도그렐캄실산염)",
+   "englishName": "Inhiplat Tab.",
+   "ingredient": "Clopidogrel Camsilate"
+  },
+  {
+   "name": "필그렐정(클로피도그렐황산수소염)",
+   "englishName": "Pilgrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "비알빅스정(클로피도그렐캄실산염)",
+   "englishName": "Brvix Tab.",
+   "ingredient": "Clopidogrel Camsilate"
+  },
+  {
+   "name": "코빅스비정(베실산클로피도그렐)(수출용)",
+   "englishName": "Kovix Tab. (Clopidogrel Besylate)(for export)",
+   "ingredient": "Clopidogrel Besylate"
+  },
+  {
+   "name": "클라빅신정(클로피도그렐황산수소염)",
+   "englishName": "Clavixin Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피도정(클로피도그렐황산수소염)",
+   "englishName": "Clopido Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플빅스정(클로피도그렐황산염)",
+   "englishName": "Plvix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프라임테보랄정(황산수소클로피도그렐)(수출용)",
+   "englishName": "Prime-Tevoral Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "파비클렌정(클로피도그렐황산수소염)",
+   "englishName": "Pabiclen Tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프라빅센정 (클로피도그렐황산염)",
+   "englishName": "Prabigsen Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로렐정(클로피도그렐황산염)",
+   "englishName": "Chrorel Tablet (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clvix Tab. 75mg (clopidogrel )",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "에라빅스정(클로피도그렐황산수소염)",
+   "englishName": "Eravix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클리델정(클로피도그렐황산수소염)",
+   "englishName": "Clidel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프로빅스정(클로피도그렐황산수소염)",
+   "englishName": "Provix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피나정(클로피도그렐황산염)",
+   "englishName": "Clopina Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로린정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clorin Tab. 75mg (Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라넥신정(클로피도그렐황산수소염)",
+   "englishName": "Planexine Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "현대클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "Hyundai Clopidogrel Tab. (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "경보클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Kyongbo Clopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "명문클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "MyungMoon Clopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로제정(클로피도그렐황산염)",
+   "englishName": "Cloje Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "뉴빅스정(클로피도그렐황산염)",
+   "englishName": "Newvix tablet(Clopidogrel Bisulphate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크로피렐정(클로피도그렐황산수소염)",
+   "englishName": "Clopirel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아나빅스정(클로피도그렐황산수소염)",
+   "englishName": "ANAVIX CAP",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "로피렐정(클로피도그렐황산염)",
+   "englishName": "LOPIREL TAB.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "알피클로피아정(클로피도그렐황산염)",
+   "englishName": "RP Clopia Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로필정(클로피도그렐황산염)",
+   "englishName": "Clopil Tab.(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라그렐정(클로피도그렐황산염)",
+   "englishName": "PLAGREL (Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "엘피도그렐정(클로피도그렐황산염)",
+   "englishName": "Arahan Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "이연클로피도그렐황산수소염정",
+   "englishName": "Reyon Clopidogrel bisulfate Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "바소빅스정(클로피도그렐황산수소염)",
+   "englishName": "Vasovix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로젝스정(클로피도그렐황산염)",
+   "englishName": "Clozex Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "글로그렐정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Glogrel Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아트크렐정(클로피도그렐황산염)",
+   "englishName": "Atcrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피렌정(클로피도그렐황산염)",
+   "englishName": "Clopiren Tablet(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "글로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Glopidogrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클피도엠정(클로피도그렐황산염)",
+   "englishName": "Clpidoem Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "피도그린정75mg(클로피도그렐황산염)",
+   "englishName": "Pidogrin Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크린빅스정(클로피도그렐황산염)",
+   "englishName": "Clinvix tab. (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "케이그렐정(클로피도그렐황산염)",
+   "englishName": "K Grel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "일양바이오클로피도그렐황산염정75밀리그램",
+   "englishName": "Clopidogrel Sulfate Tab 75mg Ilyang Bio",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "피도겔정(클로피도그렐황산염)",
+   "englishName": "Pidogel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "그로리정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Grory Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로드정75밀리그램(클로피도그렐황산염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피오정(클로피도그렐황산염)",
+   "englishName": "Clopio Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "휴니즈클로피도그렐황산염정",
+   "englishName": "Huniz Clopidogrel Bisulfate Tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프로빅트정(클로피도그렐황산염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "프래빅스정(클로피도그렐황산수소염)",
+   "englishName": "PRAVIX tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피딜정(클로피도그렐황산염)",
+   "englishName": "Clopidil Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "뉴피도정(클로피도그렐황산수소염)",
+   "englishName": "Newpido Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크레빅스정(클로피도그렐황산염)",
+   "englishName": "Crevix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로첸스정(클로피도그렐황산염)",
+   "englishName": "Clochance Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로피엘티정(클로피도그렐황산염)",
+   "englishName": "Clo-PLT Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "우리빅스정(클로피도그렐황산염)",
+   "englishName": "WOORIVIX Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "아이클로정(클로피도그렐황산수소염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로큐어정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clocure Tab. 75mg(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로스타정(클로피도그렐황산수소염)",
+   "englishName": "Clostar Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "비보존클로피도그렐정75mg(클로피도그렐황산수소염)",
+   "englishName": "VIVOZON-CLOPIDOGREL TAB. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로도렐정75mg(클로피도그렐황산염)",
+   "englishName": "Clodorel Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "네오빅스정(클로피도그렐황산수소염)",
+   "englishName": "Neovix tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "셀라빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Celavix Tablets 75mg(Clopidogrelbisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "다림클로피도그렐정75mg(클로피도그렐황산수소염)",
+   "englishName": "Dalim Clopidogrel Tab.75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "이노엔클로피도그렐정(클로피도그렐황산수소염)",
+   "englishName": "inno.N Clopidgrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "유그렐정(클로피도그렐황산염)",
+   "englishName": "Yugrel Tab.(Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "안티플라정(클로피도그렐황산수소염)",
+   "englishName": "Antipla Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라비토르정(클로피도그렐황산수소염)",
+   "englishName": "Plabitor Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로메디정(클로피도그렐황산수소염)",
+   "englishName": "Clomedi Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "뉴클로파인정(클로피도그렐황산염)",
+   "englishName": "New Clopine Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "텔로그렐정(클로피도그렐황산수소염)",
+   "englishName": "Telogrel Tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클피그렐정(클로피도그렐황산염)",
+   "englishName": "CLPIGREL Tab. (Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "제이그렐정(클로피도그렐황산염)",
+   "englishName": "Jgrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "큐로벡스정(클로피도그렐황산수소염)",
+   "englishName": "Qurovex Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "한빅스정75mg(클로피도그렐황산수소염)",
+   "englishName": "Hanvix Tab. 75mg(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "오코도렐정(클로피도그렐황산염)",
+   "englishName": "Aukodorel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "케라픽스정(클로피도그렐황산수소염)",
+   "englishName": "Kerapix Tablet",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라킴정75mg(클로피도그렐황산수소염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로빅스정(클로피도그렐황산염)",
+   "englishName": "Clovix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로윈정(클로피도그렐황산염)",
+   "englishName": "Clowin Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "동성클로피도그렐정(클로피도그렐황산염)",
+   "englishName": "Dongsung Clopidogrel Tab.(Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로픽정75밀리그램(클로피도그렐황산염)",
+   "englishName": "Clopic Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "케이플라정(클로피도그렐황산염)",
+   "englishName": "K-pla Tablet(Clopidogrel Bisulfafe)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로디드정(클로피도그렐황산염)",
+   "englishName": "Clodid Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "에스디클로정75mg(클로피도그렐황산염)",
+   "englishName": "SD.Clo Tab. 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로텍정(클로피도그렐황산염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로핀정(클로피도그렐황산염)",
+   "englishName": "Clopin Tab.(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "유빅스정(클로피도그렐황산수소염)",
+   "englishName": "Ubix Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로부스트정(클로피도그렐황산염)",
+   "englishName": "Cloboost Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "에이빅스정75밀리그램(클로피도그렐황산염)",
+   "englishName": "",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "크로피도정(클로피도그렐황산수소염)",
+   "englishName": "Clopido Tab.(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "메가클로피정75밀리그램(클로피도그렐황산수소염)",
+   "englishName": "Megaclopi Tab 75mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로드린정(클로피도그렐황산염)",
+   "englishName": "Clodrin Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로드릴정(클로피도그렐황산수소염)",
+   "englishName": "Clodril Tab. (clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "메딕그렐정(클로피도그렐황산수소염)",
+   "englishName": "Medicgrel Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "클로리정(클로피도그렐황산수소염)",
+   "englishName": "Clory Tab.(Clopidogrel Bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플라엠정(클로피도그렐황산수소염)",
+   "englishName": "Pla-M Tab.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "뉴프렐정(클로피도그렐황산수소염)",
+   "englishName": "Newprel Tab(Clopidogrel bisulfate)",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "플래리스정300밀리그램(클로피도그렐황산염)",
+   "englishName": "Platless Tablet 300 mg",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "비엘클로비스정(클로피도그렐황산수소염)",
+   "englishName": "BLCLOVIS TAB.",
+   "ingredient": "Clopidogrel Bisulfate"
+  },
+  {
+   "name": "디스포트주(클로스트리디움보툴리눔A형독소-혈구응집소복합체)",
+   "englishName": "Dysport(Clostridium botulinum type A toxin-haemagglutinin complex)",
+   "ingredient": "Clostridium Botulinum Toxin Type A-Haemagglutinin",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Meditoxin Inj.",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "보톡스주(클로스트리디움 보툴리눔 독소 A형)",
+   "englishName": "Botox Injection (Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "보톡스주 50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botox Injection 50 (Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax® (Clostridium Botulinum Toxin A type)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "route": "injection"
+  },
+  {
+   "name": "제오민주(클로스트리디움 보툴리눔 독소 A형(150kDa))",
+   "englishName": "XEOMIN 100 units powder for solution for injection",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주 200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Meditoxin Inj. 200U",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®200 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주 50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "MEDITOXIN Inj.",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®50 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "route": "injection"
+  },
+  {
+   "name": "메디톡신주150단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Meditoxin Inj. 150U",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "이노톡스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Innotox Inj.",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 50 Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 200 Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주150단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®150 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "route": "injection"
+  },
+  {
+   "name": "나보타주150단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Nabota Inj 150 Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "코어톡스주(클로스트리디움보툴리눔독소A형(150kDa))",
+   "englishName": "Coretox Inj.",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "LIZTOX Inj. 100Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "대웅보툴리눔톡신주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "DW Botulinum Toxin Inj. 100 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "제오민주50단위(클로스트리디움보툴리눔독소A형(150kDa))",
+   "englishName": "XEOMIN 50 units powder for solution for injection",
+   "ingredient": "Clostridium Botulinum Toxin Type A 150KDa (Starin: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡스주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Rientox Inj. 100Unit(for export)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 100unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Hitox inj.100 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BIENOX Injection(Clostridium Botulinum Toxin Type A)(for export only)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주100U(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "JETEMA THE TOXIN Inj. 100U (Clostridium Botulinum toxin type A)(for export)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "프로톡신주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BTSA9 (Clostridium botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "INIBO Inj. 100UNITS(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "톡스나인주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Tox9 Inj. 100unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡스주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "Rientox Inj. 200Unit(for export)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "보툴렉스주300단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Botulax®300 unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: CBFC26)",
+   "route": "injection"
+  },
+  {
+   "name": "비비톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Vivitoxin Inj. 100unit(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "LIZTOX Inj. 50Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주50단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 50unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "리즈톡스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "LIZTOX Inj. 200Unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A/Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "원더톡스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "WonderTox Inj. 200unit",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "JETEMA THE TOXIN Inj. 200U (Clostridium Botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "프루비보주100단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "PRUVYBO for Injection 100 Units(Clostridium botulinum Toxin Type A)(for export only)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "에이톡신주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "ATOXIN Inj.",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "보타원주(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BOTAONE Inj.(Clostridium botulinum Toxin Type A)(For export only)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "프루비보주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "PRUVYBO for Injection 200 Units(Clostridium botulinum Toxin Type A)(for export only)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "INIBO Inj. 100UNITS(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "뉴럭스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "NEWLUX Inj.(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)/Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "HITOX Injection 200Unit(Clostridium botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주50단위 (클로스트리디움보툴리눔독소A형)",
+   "englishName": "HITOX Injection 50Unit(Clostridium botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "하이톡스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Hitox Injection 100Units(Clostridium botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "리엔톡주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Re N Tox Injection 100Units(Clostridium botulinum toxin type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "BIENOX Injection(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "비에녹스주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BIENOX Injection 200 unit(Clostridium Botulinum Toxin Type A)(for export)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "제테마더톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "JETEMA THE TOXIN Inj. 100U(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "이니보주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "INIBO Inj. 200UNITS(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "톡스온주(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TOXON Injection",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "티엠버스주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TYEMVERS for Injection 100 Units(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "보타루마주(클로스트리디움보툴리눔독소A형(150kDa))",
+   "englishName": "Botaluma Inj.",
+   "ingredient": "Clostridium Botulinum Type A(150kDa)",
+   "route": "injection"
+  },
+  {
+   "name": "보타원주200단위(클로스트리디움보툴리눔독소A형)(수출용)",
+   "englishName": "BOTAONE Inj. 200Units(Clostridium botulinum Toxin Type A)(For export only)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "티엠버스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TYEMVERS for Injection 200 Units(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "프로톡신주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "Protoxin Inj. 100U",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "뉴럭스주200단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "NEWLUX Inj. 200U(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A (Strain: Hall)",
+   "route": "injection"
+  },
+  {
+   "name": "톡스타주100단위(클로스트리디움보툴리눔독소A형)",
+   "englishName": "TOXTA Inj. 100U(Clostridium Botulinum Toxin Type A)",
+   "ingredient": "Clostridium Botulinum Toxin Type A",
+   "route": "injection"
+  },
+  {
+   "name": "유유크리드정(티클로피딘염산염)",
+   "englishName": "YuyuClid Tab. 250mg (Ticlopidine Hydrochloride)",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "유유크리드정100mg(티클로피딘염산염)",
+   "englishName": "YuyuClid Tab. 100mg (Ticlopidine Hydrochloride)",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "코러스염산티클로피딘정100밀리그람(수출용)",
+   "englishName": "Ticodine Tab.",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "코러스염산티클로피딘정250밀리그램(수출용)",
+   "englishName": "Korus Ticlopidine HCl Tab. 250mg",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "티날핀정100밀리그람(염산티클로피딘)(수출용)",
+   "englishName": "Tinalpin Tab. 100mg",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "티날핀정250밀리그람(염산티클로피딘)(수출용)",
+   "englishName": "Tinalpin Tab. 250mg",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "티클로딘정(염산티클로피딘)(수출용)",
+   "englishName": "Ticlopidine Tab.",
+   "ingredient": "Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "유크리드정250/80밀리그램",
+   "englishName": "Yuclid Tab. 250/80",
+   "ingredient": "Ginkgo Biloba Leaf Dried Extract/Ticlopidine Hydrochloride"
+  },
+  {
+   "name": "프로스카정(피나스테리드)",
+   "englishName": "PROSCAR tab. (Finasteride, 5 mg)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로페시아정1밀리그램(피나스테리드)",
+   "englishName": "PROPECIA tab. (Finasteride, 1mg)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스타정(피나스테리드)",
+   "englishName": "Finastar Tablet (Finasteride)",
+   "ingredient": "Finasteride/Finasteride"
+  },
+  {
+   "name": "프로피나정(피나스테리드)",
+   "englishName": "Profina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로스몰정(피나스테리드)",
+   "englishName": "Prosmol Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알파스카정(피나스테리드)",
+   "englishName": "Alphascar Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "한올피나스테리드정",
+   "englishName": "HANALL Finasteride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스카렉스정(피나스테리드)",
+   "englishName": "SKAREX TAB 5MG",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나드론정(피나스테리드)",
+   "englishName": "Finadron Tablet (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스카테론정(피나스테리드)",
+   "englishName": "Scateron Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유로리드정(피나스테리드)",
+   "englishName": "Urorid Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "대웅바이오피나스테리드정5밀리그램",
+   "englishName": "DAEWOONGBIO FINASTERIDE TAB. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "핀카정(피나스테리드)",
+   "englishName": "Finca Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유로피나정(피나스테리드)",
+   "englishName": "Uropina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나베린정(피나스테리드)",
+   "englishName": "Finaberin Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피로이드정(피나스테리드)",
+   "englishName": "PIROID Tab. (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "푸로스타정(피나스테리드)",
+   "englishName": "PROSTARTAB.(FINASTERIDE)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로리드정(피나스테리드)",
+   "englishName": "Proride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스티드정(피나스테리드)",
+   "englishName": "FINASTID(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "파나스카정(피나스테리드)",
+   "englishName": "Panascar Tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "트로피나정(피나스테리드)",
+   "englishName": "Trofina Tab.(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "파나드정(피나스테리드)",
+   "englishName": "Panad Tab. 5mg (Finasteride)",
+   "ingredient": "Finasteride/Finasteride"
+  },
+  {
+   "name": "보령피나스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Boryung Finasteride Tab. 75mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "일양피나스테리드정(피나스테리드)",
+   "englishName": "Finasterid Tab. IL-YANG",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유로스칸정(피나스테리드)",
+   "englishName": "Uroscan Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "푸로케어정(피나스테리드)",
+   "englishName": "Procare Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나테드정1밀리그램(피나스테리드)",
+   "englishName": "Finated Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "한림피나스테리드정(피나스테리드)",
+   "englishName": "Finasterid Tab. Hanlim",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로시아정(피나스테리드)",
+   "englishName": "Alocia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스틴정(피나스테리드)",
+   "englishName": "Finastin Tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나스타정1밀리그램(피나스테리드)",
+   "englishName": "Monastar Tablet 1mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "헤어페시아정(피나스테리드)",
+   "englishName": "Hairpecia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나모린정(피나스테리드)",
+   "englishName": "Finamorin Tab",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "바로피나정(피나스테리드)",
+   "englishName": "Baropina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "미노페시아정1밀리그람(피나스테리드)",
+   "englishName": "Minopecia Tab. 1mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "마이시아정(피나스테리드)",
+   "englishName": "Mycia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다모케어정(피나스테리드)",
+   "englishName": "DAMOCARE TAB.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "메디페시아정1밀리그램(피나스테리드)",
+   "englishName": "Medipecia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "그로모정1밀리그램(피나스테리드)",
+   "englishName": "Gromo Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나리드정1밀리그램(피나스테리드)",
+   "englishName": "Monarid Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나스틴정(피나스테리드)",
+   "englishName": "Monastin Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "두피나정(피나스테리드)",
+   "englishName": "Dupina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스카테리드정(피나스테리드)(수출용)",
+   "englishName": "Scateride Tab. (for export)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나베린정1밀리그램(피나스테리드)",
+   "englishName": "Finaberin Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시딜정(피나스테리드)",
+   "englishName": "Finasidil Tablet (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나드정(피나스테리드)",
+   "englishName": "MONAD Tab. (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "파세드정1mg(피나스테리드)",
+   "englishName": "Pased Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스텔정1mg(피나스테리드)",
+   "englishName": "FINASTEL Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다모페시아정(피나스테리드)",
+   "englishName": "Damopesia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로펙정(피나스테리드)",
+   "englishName": "Alopec Tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로스칸정(피나스테리드)",
+   "englishName": "Alloskan Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "마이페시아정(피나스테리드)",
+   "englishName": "Mypecia Tab.",
+   "ingredient": "Finasteride/Finasteride"
+  },
+  {
+   "name": "유니볼드정(피나스테리드)(수출용)",
+   "englishName": "Unibald Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "베아리모정(피나스테리드)",
+   "englishName": "BEARREMO Tab",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로시정(피나스테리드)",
+   "englishName": "Proci Tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "헤어그로정1밀리그램(피나스테리드)",
+   "englishName": "Hairgrow Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유나시아정(피나스테리드)",
+   "englishName": "Unacia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나필정1밀리그램(피나스테리드)",
+   "englishName": "Monafeel Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나젠정5밀리그램(피나스테리드)",
+   "englishName": "Finazen Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프리스타정5밀리그램(피나스테리드)",
+   "englishName": "Freestar Tab. 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나트라정5밀리그램(피나스테리드)",
+   "englishName": "Finatra Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "AG피나스테리드정(피나스테리드)(수출용)",
+   "englishName": "AG Finasteride (for export)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "핀스타정5밀리그램(피나스테리드)",
+   "englishName": "Finstar Tab. 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나라이드정(피나스테리드)",
+   "englishName": "Finaride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "필라스트정(피나스테리드)",
+   "englishName": "Filast Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Prosteride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시아정5밀리그램(피나스테리드)",
+   "englishName": "Finasia Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나그렌정5mg(피나스테리드)",
+   "englishName": "Finagren Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나린정(피나스테리드)",
+   "englishName": "Finarin Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로스타트정(피나스테리드)",
+   "englishName": "Prostart Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "마이피나정(피나스테리드)",
+   "englishName": "Myfina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "메리나정(피나스테리드)",
+   "englishName": "Merina Tab. (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "파나리드정5밀리그램(피나스테리드)",
+   "englishName": "Fanaride Tab. 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나프로스정(피나스테리드)",
+   "englishName": "FINAPROS Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "그로모정5밀리그램(피나스테리드)",
+   "englishName": "Gromo Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나텐정5mg(피나스테리드)",
+   "englishName": "Finaten Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스토정(피나스테리드)",
+   "englishName": "Finasto Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "에피나시정1밀리그램(피나스테리드)",
+   "englishName": "Epinasy Tab. 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "씨엠피나정5mg(피나스테리드)",
+   "englishName": "CMFINA TAB 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "씨엠프로정1mg(피나스테리드)",
+   "englishName": "CM Pro Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스칸정5mg(피나스테리드)",
+   "englishName": "Finascan Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스칸정1mg(피나스테리드)",
+   "englishName": "Finascan Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나드정5mg(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나정(피나스테리드)",
+   "englishName": "Mona Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모더페시아정1밀리그램(피나스테리드)",
+   "englishName": "MODERPECIA Tab. 1mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "비피케어정5밀리그램(피나스테리드)",
+   "englishName": "BP CARE Tab. 5mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스로정5mg(피나스테리드)",
+   "englishName": "Finasro tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나프로정1밀리그램(피나스테리드)",
+   "englishName": "Finapro Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로스틸정(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "대웅바이오피나스테리드정1밀리그램",
+   "englishName": "DAEWOONGBIO FINASTERIDE TAB. 1MG",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스테리드정 0.2mg「SN」(수출용)",
+   "englishName": "Finasteride Tab. 0.2mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스테리드정 1.0mg「SN」(수출용)",
+   "englishName": "Finasteride Tab. 1.0mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "베르모나정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "엔피스카정(피나스테리드)",
+   "englishName": "NPscar Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스테아정(피나스테리드)",
+   "englishName": "Finastea Tablet(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나진정5밀리그램(피나스테리드)",
+   "englishName": "Finajin Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피테스정5mg(피나스테리드)",
+   "englishName": "Fites Tab. 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스카정(피나스테리드)",
+   "englishName": "Finascar Tab.(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로나드정5밀리그램(피나스테리드)",
+   "englishName": "Pronad Tab. 5mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유레이드정(피나스테리드)",
+   "englishName": "Uraid Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나에이블정5밀리그램(피나스테리드)",
+   "englishName": "Finaable Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "비보존피나스테리드정5밀리그램",
+   "englishName": "VIVOZON-FINASTERIDE TAB. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나즈정(피나스테리드)",
+   "englishName": "Finaz Tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나론정(피나스테리드)",
+   "englishName": "Finaron Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나페시아정1밀리그램(피나스테리드)",
+   "englishName": "Monapecia Tab. 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스텐카정1밀리그램(피나스테리드)",
+   "englishName": "Stenka Tablet 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시딜정5밀리그램(피나스테리드)",
+   "englishName": "Finasidil Tablet 5mg (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "이노엔피나스테리드정5밀리그램",
+   "englishName": "inno.N Finasteride Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "이노엔피나스테리드정1밀리그램",
+   "englishName": "Finasteride Tab. 1mg inno.N",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스로정1mg(피나스테리드)",
+   "englishName": "Finasro tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로스테리드정1mg(피나스테리드)",
+   "englishName": "Prosteride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "삼성피나스테리드정5밀리그램",
+   "englishName": "Samsung Finasteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스트리온정5밀리그램(피나스테리드)",
+   "englishName": "Finastrion Tablets 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모나시아정1밀리그램(피나스테리드)",
+   "englishName": "Monasia Tab. 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "큐로이드정(피나스테리드)",
+   "englishName": "Qloid Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나프로스정1밀리그램(피나스테리드)",
+   "englishName": "FINAPROS Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로화정(피나스테리드)",
+   "englishName": "Prohwa Tab",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모리턴정1밀리그램(피나스테리드)",
+   "englishName": "Moreturn Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "신신피나스테리드정1밀리그램",
+   "englishName": "Sinsin Finasteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나윈정1밀리그램(피나스테리드)",
+   "englishName": "Finawin Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "리모날정1밀리그램(피나스테리드)",
+   "englishName": "Remonal Tablet 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "엔피나정(피나스테리드)",
+   "englishName": "Enpina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다림피나스테리드정1밀리그램",
+   "englishName": "Dalim Finasteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "리모날정5밀리그램(피나스테리드)",
+   "englishName": "Remonal Tablet 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모어에이블정1밀리그램(피나스테리드)",
+   "englishName": "Moreable Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스톤정5밀리그램(피나스테리드)",
+   "englishName": "Finastone Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나테크정1밀리그램(피나스테리드)",
+   "englishName": "Finatech Tab 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나테크정5밀리그램(피나스테리드)",
+   "englishName": "Finatech Tab 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스테린정5밀리그램(피나스테리드)",
+   "englishName": "Finasterine Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "유니테리드정5밀리그램(피나스테리드)",
+   "englishName": "Uniteride Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모그로정1밀리그램(피나스테리드)",
+   "englishName": "Mogrow Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모그로정5밀리그램(피나스테리드)",
+   "englishName": "Mogrow Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로모아정5밀리그램(피나스테리드)",
+   "englishName": "Promoa Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나세타정5밀리그램(피나스테리드)",
+   "englishName": "Finaseta Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피노테정5밀리그램(피나스테리드)",
+   "englishName": "Finote Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스카페시아정1밀리그램(피나스테리드)",
+   "englishName": "SKAPECIA Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "제이페시아정1mg(피나스테리드)",
+   "englishName": "J-pecia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "제이피나정5mg(피나스테리드)",
+   "englishName": "Jfina Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모모페시아정1밀리그램(피나스테리드)",
+   "englishName": "MOMOPECIA Tabs 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스정5밀리그램(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나리정(피나스테리드)",
+   "englishName": "Finari Tab.(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "에이페시아정1밀리그램(피나스테리드)",
+   "englishName": "Apecia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나프로정5밀리그램(피나스테리드)",
+   "englishName": "Finapro Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "위피나정(피나스테리드)",
+   "englishName": "Wifina Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "멕스페시아정1밀리그램(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나온정1밀리그램(피나스테리드)",
+   "englishName": "Finaon Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나세트정1mg(피나스테리드)",
+   "englishName": "Finaset Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "명문피나스테리드정5밀리그램",
+   "englishName": "Myungmoon Finasteride Tab 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나세트정5mg(피나스테리드)",
+   "englishName": "Finaset Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "뉴페시아정1밀리그램(피나스테리드)",
+   "englishName": "Newfesia Tab. 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나에스정5밀리그램(피나스테리드)",
+   "englishName": "Fina-S Tab. 5mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나모아정1밀리그램(피나스테리드)",
+   "englishName": "Finamoa Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로핀카정(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로피나정5밀리그램(피나스테리드)",
+   "englishName": "Alofina Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스트정1밀리그램(피나스테리드)",
+   "englishName": "Finast Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "넬슨피나스테리드정1밀리그램(피나스테리드)",
+   "englishName": "Nelsonfinasteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "넬슨피나스테리드정5밀리그램(피나스테리드)",
+   "englishName": "Nelsonfinasteride Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "삼성피나스테리드정1밀리그램",
+   "englishName": "samsung finasteride tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "헤오나정1밀리그램(피나스테리드)",
+   "englishName": "Hairona Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나앤정1밀리그램(피나스테리드)",
+   "englishName": "Fina N Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "휴피나정5밀리그램(피나스테리드)",
+   "englishName": "Huefina Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나신정(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "텔콘알에프피나스테리드정5밀리그램",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "스테리정1밀리그램(피나스테리드)",
+   "englishName": "Steri Tablet 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로아모정1밀리그램(피나스테리드)",
+   "englishName": "Proamo Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다모테리드정1밀리그램(피나스테리드)",
+   "englishName": "Damoteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "비피스타정(피나스테리드)",
+   "englishName": "BP.STAR Tabs",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "메가페시아정1밀리그램(피나스테리드)",
+   "englishName": "Megafesia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "엔티테리드정5밀리그램(피나스테리드)",
+   "englishName": "NT-teride Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "메가페시아정5밀리그램(피나스테리드)",
+   "englishName": "Mega Fesia Tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스텐정1밀리그램(피나스테리드)",
+   "englishName": "Finasten tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스텐정5밀리그램(피나스테리드)",
+   "englishName": "Finasten tab. 5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시드정5밀리그램(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나움정(피나스테리드)",
+   "englishName": "Finaum Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모벤시아정(피나스테리드)",
+   "englishName": "",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나엠정1밀리그램(피나스테리드)",
+   "englishName": "Fina M Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모모드정(피나스테리드)",
+   "englishName": "Momod Tab. 1mg(Finastaride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스톤정1밀리그램(피나스테리드)",
+   "englishName": "Finastone 1mg tab.(finasterid)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다나페시아정1밀리그램(피나스테리드)",
+   "englishName": "Danapecia tablet 1mg(finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시드정1밀리그램(피나스테리드)",
+   "englishName": "Finaside Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모시아모정(피나스테리드)",
+   "englishName": "Mociamo tablet",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나스테아정1밀리그램(피나스테리드)",
+   "englishName": "Finastea Tablet 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로피나정1밀리그램(피나스테리드)",
+   "englishName": "Allofina Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "명문다모케어정(피나스테리드)(수출용)",
+   "englishName": "Myungmoon Damocare Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "알로테드정1밀리그램(피나스테리드)",
+   "englishName": "ALOTEDE Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "그로페시아정1밀리그램(피나스테리드)",
+   "englishName": "Gropesia Tab. 10mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나모정1mg(피나스테리드)",
+   "englishName": "Finasto Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나시아정1밀리그램(피나스테리드)",
+   "englishName": "Finasia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "제노페시아정(피나스테리드)",
+   "englishName": "Genopecia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "오뉴페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onyoupecia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "핀스타정1밀리그램(피나스테리드)",
+   "englishName": "Finstar Tab. 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "원페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onepecia Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "명문다모케어정1.3밀리그램(피나스테리드)(수출용)",
+   "englishName": "Myungmoon Damocare 1.3 milligram Tab",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "핀쥬베스프레이(피나스테리드)",
+   "englishName": "Finjuve Spray (Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "다모케어플러스정(피나스테리드,미녹시딜)(수출용)",
+   "englishName": "Damocare Plus Tab.",
+   "ingredient": "Finasteride/Minoxidil"
+  },
+  {
+   "name": "피노테정1밀리그램(피나스테리드)",
+   "englishName": "Finote Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나베린정1.5밀리그램(피나스테리드)(수출용)",
+   "englishName": "Finaberin Tablet 1.5mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나베린듀오정(미녹시딜,피나스테리드)(수출용)",
+   "englishName": "Finaberin Duo Tab.",
+   "ingredient": "Finasteride/Minoxidil"
+  },
+  {
+   "name": "온유페시아정1밀리그램(피나스테리드)",
+   "englishName": "Onupecia Tab 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "모모나정(피나스테리드)",
+   "englishName": "Momona Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "프로시아정(피나스테리드)",
+   "englishName": "Procia Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "보란피나스테리드정1밀리그램",
+   "englishName": "BoranFinasteride Tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "헤어엔정(피나스테리드)",
+   "englishName": "Hair N Tab.(finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "코오롱피나스테리드정1밀리그램",
+   "englishName": "Kolon Finasteride tab. 1mg",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "피나원정1밀리그램(피나스테리드)",
+   "englishName": "Fina One Tablet 1mg(Finasteride)",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "동성피나스테리드정",
+   "englishName": "Dongsung Finasteride Tab.",
+   "ingredient": "Finasteride"
+  },
+  {
+   "name": "아키놀연질캡슐(이소트레티노인)",
+   "englishName": "ISOTEEN AJUAKINOL",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "니메겐연질캡슐(이소트레티노인)",
+   "englishName": "Nimegen Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "핀플연질캡슐(이소트레티노인)",
+   "englishName": "Pinple Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "이소틴연질캡슐[(이소트레티노인)](수출용)",
+   "englishName": "Desactin Soft Capsule",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "이소트렌연질캡슐 (이소트레티노인)",
+   "englishName": "Isotren Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "트레틴연질캡슐10mg(이소트레티노인)",
+   "englishName": "Tretin Soft Cap. 10mg(Isotretinoin)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소티논연질캡슐10밀리그램(이소트레티노인)",
+   "englishName": "Isotinon Soft Cap 10mg",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "레씨범연질캡슐(이소트레티노인)",
+   "englishName": "Lecibum Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "트레인연질캡슐(이소트레티노인)",
+   "englishName": "Trein Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "제로큐탄연질캡슐(이소트레티노인)",
+   "englishName": "ZEROCUTAN Soft cap. (Isotretinoin)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "데삭틴20mg연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Desactin 20mg Soft Capsule(Isotretinoin)(for export)(export Name : Desactin20)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "에이프로젠이소틴연질캡슐20mg[(수출용)(이소트레티노인)]",
+   "englishName": "Aprogen Isotine Soft Cap. 20mg",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "데삭틴10mg연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Desactin 10mg Soft Capsule(Isotretinoin)(for export)(export Name : Desactin10)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "트레논연질캡슐(이소트레티노인)",
+   "englishName": "Trenon Soft Cap.",
+   "ingredient": "Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "이소레인연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isorein Soft Cap.(Isotretinoin)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소트렌연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isotren Soft Cap. 20mg",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소레인연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Isorein Soft Cap.20mg(Isotretinoin)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "트레논연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Trenon Soft Cap. 20mg",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소티나연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isotina Soft Cap. 20mg(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "트레인연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Trein Soft Cap. 20mg (for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소노에이신연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "아키놀연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "AKINOL SC 20MG",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "유유이소트레티노인연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Yuyu Isotretinoin soft cap. 20mg (Isotretinoin)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "아크린연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Acrin Soft Cap.(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "티엘트레노인연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "TL-trenoin soft cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "티엘트레노인20연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "TL-trenoin20 soft cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "로이탄연질캡슐(이소트레티노인)",
+   "englishName": "Roitan Soft Cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "셀노노스연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Celnonos Soft Cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "니메겐연질캡슐20밀리그램(수출용)",
+   "englishName": "Nimegen Soft Cap. 20mg (for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "트렉마이겔(수출용)",
+   "englishName": "Trek My Gel (for export)",
+   "ingredient": "Erythromycin/Isotretinoin"
+  },
+  {
+   "name": "유유이소트레티노인연질캡슐10밀리그램(이소트레티노인)(수출용)",
+   "englishName": "yuyuisoterinoin soft cap.10mg(isoterinoin)",
+   "ingredient": "Isotretinoin/Isotretinoin/Isotretinoin"
+  },
+  {
+   "name": "티소푸트연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Tisofut Soft Cap",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "오피큐탄연질캡슐(이소트레티노인)",
+   "englishName": "",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소네스연질캡슐20밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isones Soft Cap. 20mg(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "우리큐탄연질캡슐(이소트레티노인)",
+   "englishName": "WOORICCUTANE Cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소티닌연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isotinin Soft cap.",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소티에스연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isoti S Soft Cap. (for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "데삭연질캡슐10mg(이소트레티노인)(수출용)",
+   "englishName": "Detha Soft Cap. 10mg(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "데삭연질캡슐20mg(이소트레티노인)(수출용)",
+   "englishName": "Detha Soft Cap. 20mg(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소티나연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Isotina Soft Cap(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "이소네스연질캡슐10밀리그램(이소트레티노인)(수출용)",
+   "englishName": "Isones Soft Cap. 10mg(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "트레논연질캡슐5밀리그램(이소트레티노인)",
+   "englishName": "Trenon Soft Cap. 5mg",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "하이큐탄연질캡슐(이소트레티노인)(수출용)",
+   "englishName": "Highccutan Soft Capsule(Isotretinoin)(for export)",
+   "ingredient": "Isotretinoin"
+  },
+  {
+   "name": "알리톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "팜톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Palmtoc Soft Cap.30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "팜톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Palmtoc Soft Cap.10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리손연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Alison Soft Cap. 30mg (Alitretinoin)",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리덤연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Aliderm Soft Cap. 30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "더마톡연질캡슐30mg(알리트레티노인)",
+   "englishName": "Dermatoc Soft Cap. 30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리손연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Alison Soft Cap. 10mg (Alitretinoin)",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리덤연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Aliderm Soft Cap. 10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "더마톡연질캡슐10mg(알리트레티노인)",
+   "englishName": "Dermatoc Soft Cap. 10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알티톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Altitoc Soft Cap. 30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알티톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Altitoc Soft Cap. 10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리가연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "ALIGA Soft Cap. 30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알리가연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "ALIGA Soft Cap. 10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알티논연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Altinon Soft Cap. 30mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "알티논연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Altinon Soft Cap. 10mg",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "아리톡연질캡슐30밀리그램(알리트레티노인)",
+   "englishName": "Ari-toc Softcap. (alitretinoin)",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "아리톡연질캡슐10밀리그램(알리트레티노인)",
+   "englishName": "Ari-toc softcap. 10mg(Alitretinoin)",
+   "ingredient": "Alitretinoin"
+  },
+  {
+   "name": "비엠에스탈리도마이드캡슐50밀리그램",
+   "englishName": "BMS Thalidomide capsule 50mg",
+   "ingredient": "Thalidomide"
+  },
+  {
+   "name": "탈리그로브캡슐50밀리그램(탈리도마이드)",
+   "englishName": "Thaliglob Cap. 50mg",
+   "ingredient": "Thalidomide"
+  },
+  {
+   "name": "탈리그로브캡슐100밀리그램(탈리도마이드)",
+   "englishName": "Thaliglob Cap. 100mg",
+   "ingredient": "Thalidomide"
+  },
+  {
+   "name": "탈라이드캡슐50mg(탈리도마이드)",
+   "englishName": "Thalide capsules 50mg(thalidomide)",
+   "ingredient": "Thalidomide"
+  },
+  {
+   "name": "탈라이드캡슐100mg(탈리도마이드)",
+   "englishName": "Thalide capsules 100mg(thalidomide)",
+   "ingredient": "Thalidomide"
+  },
+  {
+   "name": "아보다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avodart Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타반연질캡슐(두타스테리드)",
+   "englishName": "Dutavan soft capsule (Dutasteride)",
+   "ingredient": "Dutasteride/Dutasteride"
+  },
+  {
+   "name": "두테스몰연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutesmol Soft Cap.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보스타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avostar Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보테리드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avoteride Soft Capsule 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아나딘연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "ANADIN SOFT CAP 0.5MG",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "네오다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "NEODART Soft Cap. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "유힐릭스연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Yuhylyx soft cap. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride/Dutasteride"
+  },
+  {
+   "name": "두테드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Duted Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타텍트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutatect Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두아보연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보스티드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "AVOSTID 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타스카연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaska Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "ADUTA Soft Cap.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타렉스연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutalex Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "원투스테리드연질캡슐(두타스테리드)",
+   "englishName": "One Two Steride Soft Cap.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두로칸연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Durocan Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타젠연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutazen Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avoduta Soft Cap 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "다모다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Domodart soft Cap. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보탄연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avotan Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutard Soft Capsule 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타겟연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAGET SOFT CAP. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두테론연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTERONE SOFT CAPSULE 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "대웅바이오두타스테리드연질캡슐0.5밀리그램",
+   "englishName": "DAEWOONGBIO DUTASTERIDE SOFT CAP. 0.5MG",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "삼천당두타스테리드연질캡슐0.5밀리그램",
+   "englishName": "Samchundang Dutasteride Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "자이가드연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Zygard soft capsule 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "프로다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Prodart Soft Cap.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "씨엠두타연질캡슐0.5mg(두타스테리드)",
+   "englishName": "CM Duta Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타락연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarac Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "유로다트연질캡슐0.5mg(두타스테리드)",
+   "englishName": "Urodart Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "타테린연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Taterin soft Cap.0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아다모연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Adamo Soft Cap.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "제이다트정0.5밀리그램(두타스테리드)",
+   "englishName": "Jdart Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타반플러스정(두타스테리드)",
+   "englishName": "Dutavan plus tablet (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "네오다트정0.5밀리그램(두타스테리드)",
+   "englishName": "NEODART Tab. (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "엔피다트정(두타스테리드)",
+   "englishName": "NP-dart Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두로케어정0.5밀리그램(두타스테리드)",
+   "englishName": "Durocare Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타케어정0.5밀리그램(두타스테리드)",
+   "englishName": "DUTACARE Tabs 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보그로정0.5밀리그램(두타스테리드)",
+   "englishName": "Avogro Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두테스정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "대웅바이오두타스테리드정0.5밀리그램",
+   "englishName": "DAEWOONGBIO DUTASTERIDE TAB. 0.5MG",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타론정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaron Tablet 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "다모다트정0.5밀리그램(두타스테리드)",
+   "englishName": "Damodart Tab. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타리드정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutalid Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타브정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutav Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보타스정(두타스테리드)",
+   "englishName": "Avotars Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보투윈연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Avotwowin Soft capsule",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "에이두타정0.5밀리그램(두타스테리드)",
+   "englishName": "A-duta Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "듀타그렌정0.5mg(두타스테리드)",
+   "englishName": "Dutagren Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타스테린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutasterin Tablet 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타온연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaon Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타그로연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutagro Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보다칸정0.5밀리그램(두타스테리드)",
+   "englishName": "Abodacan Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모모타정(두타스테리드)",
+   "englishName": "MOMOTA TAB.(DUTASTERIDE)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타윈연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dutawin Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타스텐정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutasten Tab. 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타모아정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutamoa Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타스타정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아리드정0.5밀리그램(두타스테리드)",
+   "englishName": "Aride Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타엘정0.5밀리그램(두타스테리드)",
+   "englishName": "Duta-L Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아다모정0.5밀리그램(두타스테리드)",
+   "englishName": "Adamo Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보테드정0.5밀리그램(두타스테리드)",
+   "englishName": "Avoted Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarine Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "삼성두타스테리드정0.5밀리그램",
+   "englishName": "samsung dutasteride tablet 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두리드정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타베린정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaverine Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타프로정(두타스테리드)",
+   "englishName": "Dutapro Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타프렌정0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAPREN Tab. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타시아정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutacia Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타엠정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두로칸정0.5밀리그램(두타스테리드)",
+   "englishName": "Durocan Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "머카나정0.5밀리그램(두타스테리드)",
+   "englishName": "",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두모보연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Dumobo Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타모정0.5밀리그램(두타스테리드)",
+   "englishName": "Yudat Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "듀오다트캡슐",
+   "englishName": "Duodart Capsule",
+   "ingredient": "Dutasteride/Tamsulosin Hydrochloride"
+  },
+  {
+   "name": "휴다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Hudart Soft Cap. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타원연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Duta One Soft Capsule 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "동구두타리드연질캡슐(두타스테리드)",
+   "englishName": "Dongkoo dutalid soft capsules(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보엠연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "AvoM softcapsule 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모벤두타정0.5밀리그램(두타스테리드)",
+   "englishName": "Mobenduta Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "에이두타연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "A-Duta Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "유앤두타스테리드정0.5밀리그램(수출용)",
+   "englishName": "YuanDutasteride 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타앤연질캡슐0.5mg(두타스테리드)",
+   "englishName": "Dutaen Soft Cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보페시아정0.2밀리그램(두타스테리드)",
+   "englishName": "Avopecia(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타리모정0.2밀리그램(두타스테리드)",
+   "englishName": "DUTARIMO",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두발칸정0.2밀리그램(두타스테리드)",
+   "englishName": "Duvalcan Tab. 0.2mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모두스타정0.2밀리그램(두타스테리드)",
+   "englishName": "MODUSTA Tab. 0.2mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모바나정0.2밀리그램(두타스테리드)",
+   "englishName": "Movana Tablet 0.2mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모더다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Moderdart Soft Capsule",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "영일두타스테리드정0.5밀리그램(두타스테리드)(수출용)",
+   "englishName": "Youngil Dutasteride Tab. 0.5mg (Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "이노다트연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "Innodart Soft cap. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "유레스코정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Uresco Tab. 0.5/5mg(dutasteride,tadalafil)",
+   "ingredient": "Dutasteride/Tadalafil"
+  },
+  {
+   "name": "유로가드정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "UROGUARD Tab. 0.5/5mg",
+   "ingredient": "Dutasteride/Tadalafil"
+  },
+  {
+   "name": "듀타나정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Dutana tablet 0.5/5mg(Dutasteride, Tadalafil)",
+   "ingredient": "Dutasteride/Tadalafil"
+  },
+  {
+   "name": "아보시알정0.5/5밀리그램(두타스테리드,타다라필)",
+   "englishName": "Avocial Tablet 0.5/5mg(Dutasteride,Tadalafil)",
+   "ingredient": "Dutasteride/Tadalafil"
+  },
+  {
+   "name": "발모트정0.5밀리그램(두타스테리드)",
+   "englishName": "Valmote Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타세트정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutaset Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "두타필연질캡슐0.5밀리그램(두타스테리드)",
+   "englishName": "DUTAPHIL Soft Capsules(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "센모트정(두타스테리드)",
+   "englishName": "Cenmot Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "스타라이드정0.5밀리그램(두타스테리드)",
+   "englishName": "Staride Tab. 0.5mg(Dutasteride)",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "아보타정0.5/5밀리그램(두타스테리드,타다라필)(수출용)",
+   "englishName": "Avota Tab. 0.5/5mg(Dutasteride, Tadalafil)",
+   "ingredient": "Dutasteride/Tadalafil"
+  },
+  {
+   "name": "두타리온정0.5밀리그램(두타스테리드)",
+   "englishName": "Dutarion Tab. 0.5mg",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "모모두정(두타스테리드)",
+   "englishName": "MOMODU Tab",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "동성두타스테리드정0.5밀리그램",
+   "englishName": "Dongsung Dutasteride Tab.",
+   "ingredient": "Dutasteride"
+  },
+  {
+   "name": "네오티가손캡슐10밀리그램(아시트레틴)",
+   "englishName": "NEOTIGASON CAP 10MG",
+   "ingredient": "Spray Dried Acitretin 25%"
+  }
+ ]
+}

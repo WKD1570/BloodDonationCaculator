@@ -100,12 +100,14 @@ com.example.myapplication
 │   ├── DonorProfile.kt              Physical profile, 자주 헌혈하는 지역 + Sex enum
 │   ├── MedicationRecord.kt          Room @Entity: one drug intake
 │   ├── RestrictedDrug.kt            Catalog entry
+│   ├── DrugProduct.kt               Product dictionary entry + DrugRoute (먹는 약/주사/외용)
 │   ├── BloodCenter.kt               One 헌혈의 집 and its 성분헌혈 machines
 │   └── ThemeMode.kt                 SYSTEM / LIGHT / DARK
 ├── domain/                          Pure calculation — the rules engine
 │   ├── DonationCalculatorEngine.kt  Interval / annual count / annual volume rules
 │   ├── PhysicalEligibilityCalculator.kt  Age / weight / Nadler blood volume
 │   ├── DrugRestrictionCalculator.kt Drug catalog fallback + restriction math
+│   ├── DrugProductSearch.kt         상품명 search + product → catalog entry matching
 │   ├── IntegratedEligibility.kt     Merges donation + medication constraints
 │   ├── CertificateParser.kt         OCR text → structured certificate fields
 │   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈의 집
@@ -118,6 +120,7 @@ com.example.myapplication
 │   ├── MedicationHistoryRepository.kt
 │   ├── LocalDateConverters.kt       Room TypeConverter (ISO-8601 text)
 │   ├── ProhibitedDrugRepository.kt  Bundled JSON asset loader
+│   ├── DrugProductRepository.kt     Bundled product dictionary loader
 │   ├── BloodCenterRepository.kt     Bundled 헌혈의 집 list loader
 │   └── CertificateTextRecognizer.kt OCR pipeline (CameraX output → ML Kit)
 └── ui/                              Compose screens + ViewModels
@@ -252,6 +255,7 @@ Storage is split by shape, not by convenience:
 | Theme mode | SharedPreferences | Enum name | Must be readable **synchronously** on the first frame to avoid a launch flash |
 | Medication history | Room (`donation.db`) | `medication_history` table | Needs reactive queries + ordering |
 | Drug catalog | `assets/prohibited_drugs.json` | JSON array (14 entries) | Read-only reference data, updatable without code changes |
+| Product dictionary | `assets/drug_products.json` | JSON object (226 products) | Read-only; links product names to ingredients for search, carries no restrictions |
 
 **Donation record encoding.** One record per line, fields joined with `|`, free text URL-encoded so it can never contain a delimiter:
 
@@ -518,6 +522,18 @@ Catalog entries range from 3 days (아스피린) to permanent (에트레티네�
 3. If the history is empty → `MedicationConstraint.None`.
 
 The binding entry is the one whose window *ends* last, deliberately **not** the most recent intake: 두타스테라이드 taken five months ago (180 days) outlasts 아스피린 taken yesterday (3 days). Taking the latest intake would under-report the wait.
+
+**상품명 search.** The catalog names ingredients, but people know their medicine by product name. `assets/drug_products.json` is a product → ingredient dictionary (built by `tools/build_drug_products.py` from `tools/data/drug_products_*.csv`, a 226-product drug list dated 2026.07.20 whose columns are 약품한글명, 약품영문명, 성분한글명 and 주성분코드). It carries **no restriction data**: search (`searchProducts`, 2+ characters, spaces and case ignored) finds products by name, English name or ingredient, and `restrictionsFor` checks each product's ingredient against the catalog:
+
+- A plain catalog ingredient matches wherever it appears in the product's ingredient, so salts and hydrates count (클로피도그렐황산수소염 → 클로피도그렐). Product-data spellings are folded first (피나스테리드 → 피나스테라이드, 두타스테리드 → 두타스테라이드, 아세틸살리실산 → 아스피린), including the English names 식약처 data uses (Aspirin Enteric Granules → 아스피린, Clostridium Botulinum Toxin Type A → 보툴리눔).
+- The class words in "항생제/스테로이드/보톡스/클로피도그렐" and "태반주사제/혈액응고인자" apply **only to injections** (주성분코드 7th character `B`), as the catalog says: systemic steroids and botulinum toxin by ingredient name, 태반·혈액응고 by keyword. Oral and topical steroids do not match.
+- Antibiotics have too many names to recognise reliably and are never guessed. Instead, any unmatched injection carries a note that antibiotic, steroid and botulinum injections restrict for a week (`mayBeRestrictedInjection`).
+
+**식약처 products for the catalog's ingredients.** The drug list above barely touches the catalog (only 아스피린 and a 덱사메타손 injection), so `tools/fetch_restricted_products.py` fills that gap from 식약처 「의약품 제품 허가정보」 (공공데이터포털 15095677, `DrugPrdtPrmsnInfoService08/getDrugPrdtPrmsnInq08`, 이용허락범위 제한 없음). For each catalog ingredient it queries `item_ingr_name` with the English name (`QUERIES`: Aspirin, Finasteride, Botulinum …), because `ITEM_INGR_NAME` is English and the filter is a case-sensitive partial match (`Aspirin` finds 120 products, `aspirin` and `아스피린` none; each term is also tried in lower case). It pages through the results, drops cancelled items (`CANCEL_NAME` other than 정상) and anything whose `ITEM_INGR_NAME` doesn't actually contain the ingredient, and writes `tools/data/mfds_restricted_products_<date>.json`, which is committed. `build_drug_products.py` merges it after the CSV (deduplicated by name and ingredient) and records both sources with their dates in `sourceNote`, shown under the results. These products carry no 주성분코드, so `route` is written out where it matters (`"injection"` for 보툴리눔, which the catalog restricts only as an injection) and is otherwise unknown. The script needs network access to `apis.data.go.kr` and a 공공데이터포털 key approved for that API, read from `DATA_GO_KR_SERVICE_KEY` or `dataGoKrServiceKey=` in `local.properties`; it never takes the key as an argument or writes it anywhere. `--probe` prints one raw page so a changed response format can be spotted. Entries that name kinds of drug (태반주사제/혈액응고인자, 성장호르몬 등) aren't searched; a catalog entry with neither search terms nor a place in `NOT_SEARCHABLE` is reported when the script runs.
+
+`build_drug_products.py` drops export names from product names ("[수출명:뉴로녹스주…]", which ran some 식약처 names past 200 characters). As of 2026.11.03 the fetch kept 675 marketed products (cancelled ones skipped), every one of which matches a catalog entry; 비스모데깁 and 에트레티네이트 have no marketed product.
+
+A restricted product shows its rule and opens the same 복용일 flow as its catalog entry. A combination product can fall under several entries (플라빅스에이정: 아스피린 3일 and 클로피도그렐 1주); `ProductMatch.strictestRestriction` — a lifetime ban, else the longest wait — is the one shown and recorded. Search returns at most `PRODUCT_RESULT_LIMIT` (50) products and says so when it hits that limit. An unlisted one only says it isn't on the list, under a note that the reason for taking it (infection, illness) can still defer donation and should be mentioned at 문진. To widen coverage, drop a fuller product list with the same columns (for example 식약처 의약품 허가정보) into `tools/data/` and re-run the script.
 
 ### 3.6 Integration of Both Histories
 
@@ -943,6 +959,8 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `data/MedicationHistoryRepository.kt` | DAO wrapper |
 | `data/LocalDateConverters.kt` | `LocalDate` ↔ ISO-8601 text |
 | `data/ProhibitedDrugRepository.kt` | Asset JSON loading, validation, caching |
+| `data/DrugProductRepository.kt` | Product dictionary loading |
+| `domain/DrugProductSearch.kt` | 상품명 search, product → catalog matching |
 | `data/CertificateTextRecognizer.kt` | EXIF/crop/preprocess + ML Kit invocation |
 | `ui/BloodDonationCalculatorScreen.kt` | Root screen, navigation, design tokens, all main composables, camera screen |
 | `ui/DonationViewModel.kt` | Primary state owner |
@@ -950,4 +968,5 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `ui/MedicationHistoryCard.kt` | Saved medication list |
 | `ui/theme/` | `LocalDarkTheme`, Material color schemes, typography |
 | `assets/prohibited_drugs.json` | 14-entry drug catalog |
+| `assets/drug_products.json` | Product → ingredient dictionary for search |
 | `res/xml/file_paths.xml` | FileProvider scope for certificate photos |

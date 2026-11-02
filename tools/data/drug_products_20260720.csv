@@ -1,0 +1,230 @@
+순번,약품코드,약품영문명,약품한글명,규격,성분코드,성분한글명,성분영문명
+1,EBISA,Dulcolax Suppositories,둘코락스좌약(비사코딜)_(10mg/1개),1,117802CSP,비사코딜,Dulcolax Suppositories
+2,ECOT,BANDEL CREAM[Hydrocortisone butyrate],반델크림10g/Tube,1,171130CCM,낙산히드로코르티손,BANDEL CREAM[Hydrocortisone butyrate]
+3,EFLU2,FUMELON EYE DROPS 5ml,후메론점안액0.1% 5ml/B,1,161237COS,플루오로메톨론,FUMELON EYE DROPS 5ml
+4,EHYALU, Hyaluron Eye Drops.,히아루론점안액(히알루론산나트륨)(1회용)_(0.5mg/0.5mL),1,530002COS,히알루론산나트륨, Hyaluron Eye Drops.
+5,EKETO6, KETOCLIN PLASTER.[Ketoprofen],케토크린플라스타(케토프로펜)_(10X7㎠/1매),1,179901CPL,케토프로펜, KETOCLIN PLASTER.[Ketoprofen]
+6,EMUPI,  Bearoban Ointment 10g,베아로반연고(무피로신)_(0.2g/10g),1,197631COM,무피로신,  Bearoban Ointment 10g
+7,ESKETA28,Spravato Nasal Spray,스프라바토나잘스프레이(에스케타민염산염)_(32.3mg/0.2mL),1,689701CSI,에스케타민염산염,Spravato Nasal Spray
+8,ESTS,Silkron-G Cream,실크론지크림_(15g),1,547100CCM,베타메타손디프로피오네이트,Silkron-G Cream
+9,ETERBI, MUJONAL CREAM 15g/Tube,무조날크림(테르비나핀염산염)_(0.15g/15g),1,235731CCM,테르비나핀염산염, MUJONAL CREAM 15g/Tube
+10,ETOB,TORAMICIN EYE DROPS 0.3%,토라미신점안액0.3%(토브라마이신)_(15mg/5mL),1,240833COS,토브라마이신,TORAMICIN EYE DROPS 0.3%
+11,EURE,HanMi UREA CREAM 200mg,유리아크림 200mg,1,246132CCM,우레아,HanMi UREA CREAM 200mg
+12,EZVR,ACYCLOVIR TGK CREAM,태극아시클로버크림_(0.25g/5g),1,102935CCM,아시클로버,ACYCLOVIR TGK CREAM
+13,I50DW1,Daihan 50% Glucose Inj.,대한 50% 포도당주 100ML,1,142719BIJ,포도당(함수),Daihan 50% Glucose Inj.
+14,I5DS,Sodium Chloride & 5% Glucose inj. Daihan,대한5% 포도당가생리식염액_(1000mL) ,1,348600BIJ,포도당(함수),Sodium Chloride & 5% Glucose inj. Daihan
+15,I5DW,Glucose inj. 5% Daihan,대한 포도당주사액5%_(5g/1000mL/),1,142711BIJ,포도당(함수),Glucose inj. 5% Daihan
+16,IAMIO,Cordarone Inj.,코다론주사(아미오다론염산염)_(0.15g-3ml) ,1,107430BIJ,염산아미오다론,Cordarone Inj.
+17,IARPP3,Abilify Maintena Inj. 300mg,아빌리파이메인테나주300mg(아리피프라졸)_(0.3g/1.5mL),1,451506BIJ,아리피프라졸일수화물,Abilify Maintena Inj. 300mg
+18,IARPP4,Abilify Maintena Inj. 400mg,아빌리파이메인테나주400mg(아리피프라졸)_(0.4g/2mL),1,451507BIJ,아리피프라졸일수화물,Abilify Maintena Inj. 400mg
+19,IARPP7,Abilify Asimtufii Inj. 720mg,아빌리파이아심투파이주사720밀리그램(아리피프라졸일수화물)_(0.72g/2.4mL),1,451510BIJ,아리피프라졸일수화물,Abilify Asimtufii Inj. 720mg
+20,IARPP9,Abilify Asimtufii Inj. 960mg,아빌리파이아심투파이주사960밀리그램(아리피프라졸일수화물)_(0.96g/3.2mL),1,451509BIJ,아리피프라졸일수화물,Abilify Asimtufii Inj. 960mg
+21,IDCF,Diclofenac Sodium inj. BC,비씨디클로페낙나트륨주사(디클로페낙나트륨),1,143535BIJ,디클로페낙나트륨,Diclofenac Sodium inj. BC
+22,IDEXA,Dexamethasone inj. Daewon,대원덱사메타손주사액(덱사메타손포스페이트이나트륨)_(5mg/1mL),1,142232BIJ,디나트륨인산덱사메타손,Dexamethasone inj. Daewon
+23,IDZP,Diazepam Inj. Samjin,삼진디아제팜주_(10mg/2mL),1,142930BIJ,디아제팜,Diazepam Inj. Samjin
+24,IEPN,Epinephrine Inj. Daihan,대한에피네프린주사액_(1mg/mL),1,152630BIJ,에피네프린,Epinephrine Inj. Daihan
+25,IHP, Haloperidol inj. Myungin,명인할로페리돌주사_(5mg/1mL),1,167930BIJ,할로페리돌, Haloperidol inj. Myungin
+26,IHS,Hartmann Soln. Daihan,하트만액 1000ml/B,1,349400BIJ,염화칼슘,Hartmann Soln. Daihan
+27,IHSD,Hartmandex Sol.,하트만덱스액_(1000mL),1,349500BIJ,염화칼슘수화물,Hartmandex Sol.
+28,IIVG117,Invega Sustenna Inj. 117mg,인베가서스티나주 117mg,1,586432BIJ,팔리페리돈팔미테이트,Invega Sustenna Inj. 117mg
+29,IIVG156,Invega Sustenna Inj. 156mg,인베가서스티나주 156mg(팔리페리돈팔미테이트)_(0.156g/1mL),1,586433BIJ,팔리페리돈팔미테이트,Invega Sustenna Inj. 156mg
+30,IIVG234,Invega Sustenna Inj. 234mg,인베가서스티나주 234mg,1,586434BIJ,팔리페리돈팔미테이트,Invega Sustenna Inj. 234mg
+31,IIVGH1,Invega Hafyera Inj. 1092mg,인베가하피에라주사 1092mg,1,586439BIJ,팔리페리돈팔미테이트,Invega Hafyera Inj. 1092mg
+32,IIVGH1.5,Invega Hafyera Inj. 1560mg,인베가하피에라주사 1560mg,1,586440BIJ,팔리페리돈팔미테이트,Invega Hafyera Inj. 1560mg
+33,IIVGT2,Invega Trinza inj. 273mg,인베가트린자주사(팔리페리돈팔미테이트)_(0.273g/0.875mL),1,586435BIJ,팔리페리돈팔미테이트,Invega Trinza inj. 273mg
+34,IIVGT4,Invega Trinza inj. 410mg,인베가트린자주사(팔리페리돈팔미테이트)_(0.4103g/1.315mL),1,586436BIJ,팔리페리돈팔미테이트,Invega Trinza inj. 410mg
+35,IIVGT5,Invega Trinza inj. 546mg,인베가트린자주사(팔리페리돈팔미테이트)_(0.546g/1.75mL),1,586437BIJ,팔리페리돈팔미테이트,Invega Trinza inj. 546mg
+36,IIVGT8,Invega Trinza inj. 819mg,인베가트린자주사(팔리페리돈팔미테이트)_(0.819g/2.625mL),1,586438BIJ,팔리페리돈팔미테이트,Invega Trinza inj. 819mg
+37,ILD,Lidocaine Inj. Jeil,제일리도카인주사액 20ml,1,183935BIJ,염산리도카인일수화물,Lidocaine Inj. Jeil
+38,ILZP2,Ativan Inj.,아티반주사(로라제팜)_ (2mg/0.5ml) ,1,185530BIJ,로라제팜,Ativan Inj.
+39,IMXL,Meckool inj.,멕쿨주 10mg/2ml/Amp,1,193730BIJ,염산메토클로프라미드,Meckool inj.
+40,INS,JW NS Inj.,중외엔에스주사액(염화나트륨)_(9g/1000mL),1,228714BIJ,염화나트륨,JW NS Inj.
+41,IPENI, Peniramin inj.,페니라민주사(클로르페니라민말레산염) 2mL,1,131830BIJ,클로르페니라민말레산염, Peniramin inj.
+42,IVB1,Thiamine HCl Inj. Jeil,제일티아민염산염주사액 50mg/2ml,1,237330BIJ,티아민염산염,Thiamine HCl Inj. Jeil
+43,IVBH,Beecomhexa Inj.,삐콤헥사주,1,316400BIJ,시아노코발라민,Beecomhexa Inj.
+44,MAAP,Samnam Acetaminophen Tab. 500mg,삼남아세트아미노펜정500mg_(0.5g/1정),1,101305ATB,아세트아미노펜,Samnam Acetaminophen Tab. 500mg
+45,MACAM, Myungin acamprosate Tab. 333mg,명인아캄프로세이트정333mg(아캄프로세이트칼슘)_(0.333g/1정),1,100501ATE,아캄프로세이트, Myungin acamprosate Tab. 333mg
+46,MAGIO,Agio Granule,아기오과립 6g/P,1,214630AGN,아기오쿨원료과립,Agio Granule
+47,MAGMEL25,Agotine Tab. 25mg,아고틴정25밀리그램(아고멜라틴)_(25mg/1정),1,613101ATB,아고멜라틴,Agotine Tab. 25mg
+48,MALDP1,Amodipine Tab. 5mg,아모디핀정(캄실산암로디핀)_(7.841mg/1정),1,459901ATB,암로디핀캄실산염,Amodipine Tab. 5mg
+49,MALOG,Nesina Tab. 25mg,네시나정25밀리그램(알로글립틴벤조산염)_(34mg/1정),1,624203ATB,알로글립틴벤조산염,Nesina Tab. 25mg
+50,MAMB,Roxol Tab.,록솔정(암브록솔염산염)_(30mg/1정),1,106301ATB,암브록솔염산염,Roxol Tab.
+51,MAPZ0.125,Alpram Tab. 0.125mg,알프람정0.125밀리그램(알프라졸람)_(0.125mg/1정),1,105507ATB,알프라졸람,Alpram Tab. 0.125mg
+52,MAPZ0.25,Alpranaks Tab. 0.25mg,"알프라낙스정0.25밀리그람_(알프라졸람, 0.25mg/1정)",1,105502ATB,알프라졸람,Alpranaks Tab. 0.25mg
+53,MAPZ0.5,Alpranaks Tab. 0.5mg,"알프라낙스정0.5밀리그람_(알프라졸람, 0.5mg/1정)",1,105505ATB,알프라졸람,Alpranaks Tab. 0.5mg
+54,MARP5,Arabil Tab. 5mg,아라빌정5밀리그램(아리피프라졸)_(5mg/1정),1,451503ATB,아리피프라졸,Arabil Tab. 5mg
+55,MARPP,Arabil Tab. 15mg,아라빌정15밀리그램(아리피프라졸)_(15mg/1정),1,451502ATB,아리피프라졸,Arabil Tab. 15mg
+56,MARPP1,  Arabil Tab. 1mg,아라빌정1밀리그램(아리피프라졸(미분화))_(1mg/1정),1,451508ATB,아리피프라졸,  Arabil Tab. 1mg
+57,MARPP10,Arabil Tab. 10mg,아라빌정10밀리그램(아리피프라졸)_(10mg/1정),1,451501ATB,아리피프라졸,Arabil Tab. 10mg
+58,MARPP2,Aripizol Tab. 2mg,아리피졸정2밀리그램(아리피프라졸)_(2mg/1정),1,451504ATB,아리피프라졸,Aripizol Tab. 2mg
+59,MARPPQ10,Abilify ODT. 10mg,아빌리파이오디정10mg,1,451501ATD,아리피프라졸,Abilify ODT. 10mg
+60,MARPPQ15,Abilify ODT. 15mg,아빌리파이오디정15mg,1,451502ATD,아리피프라졸,Abilify ODT. 15mg
+61,MASAP,Aspirin Enteric Coated Tab. 100mg Hanmi,한미아스피린장용정100밀리그램_(0.1g/1정),1,111001ATE,아스피린,Aspirin Enteric Coated Tab. 100mg Hanmi
+62,MASR, Amisul Tab.400mg,아미썰정400밀리그램(아미설피리드)_(0.4g/1정),1,420002ATB,아미설프리드, Amisul Tab.400mg
+63,MASR100,Amisul Tab. 100mg,아미썰정100밀리그램(아미설피리드)_(0.1g/1정),1,420003ATB,아미설프리드,Amisul Tab. 100mg
+64,MASR200,Amisul Tab. 300mg,아미썰정200밀리그램(아미설피리드)_(0.2g/1정),1,420004ATB,아미설프리드,Amisul Tab. 300mg
+65,MATOM10,  Atomoxin Cap. 10mg,아토목신캡슐10mg(아토목세틴염산염)_(11.43mg/1캡슐),1,489601ACH,아토목세틴염산염,  Atomoxin Cap. 10mg
+66,MATOM25, Atomoxin Cap. 25mg,아토목신캡슐25mg(아토목세틴염산염)_(28.57mg/1캡슐),1,489603ACH,아토목세틴염산염, Atomoxin Cap. 25mg
+67,MATOM40,Whanin Atomoxetine Cap. 40mg,환인아토목세틴캡슐40밀리그램(아토목세틴염산염)_(45.71mg/1캡슐),1,489604ACH,아토목세틴염산염,Whanin Atomoxetine Cap. 40mg
+68,MATOM80, Atomoxin Cap. 80mg,아토목신캡슐80밀리그램(아토목세틴염산염)_(91.42mg/1캡슐),1,489606ACH,아토목세틴염산염, Atomoxin Cap. 80mg
+69,MATP10,Amitriptyline HCl Tab. 10mg Myungin,명인염산아미트리프틸린염산염정10mg_(10mg/1정),1,107501ATB,아미트리프틸린염산염,Amitriptyline HCl Tab. 10mg Myungin
+70,MATP25,Etravil Tab. 25mg,에트라빌25mg정(아미트리프틸린염산염)_(25mg/1정),1,107502ATB,아미트리프틸린염산염,Etravil Tab. 25mg
+71,MAUG375,Amocicle Tab. 375mg,아모시클정375밀리그램(아목시실린-클라불란산칼륨(2:1))_(1정),1,310600ATB,아목시실린,Amocicle Tab. 375mg
+72,MBDD25,Refortil Tab.,레포틸정(비페닐디메틸디카르복실레이트)_(25mg/1정),1,117701ATB,비페닐디메틸디카르복실레이트,Refortil Tab.
+73,MBENZ1, Benztropine Tab. 1mg Whanin,환인벤즈트로핀정1밀리그램(벤즈트로핀메실산염)_(1mg/1정),1,116001ATB,메실산벤즈트로핀, Benztropine Tab. 1mg Whanin
+74,MBENZ2, Benztropine Tab. 2mg Whanin,환인벤즈트로핀정(벤즈트로핀메실산염)_(2mg/1정),1,116002ATB,메실산벤즈트로핀, Benztropine Tab. 2mg Whanin
+75,MBETH25,Uninechol Tab. 25mg,유니네콜정(베타네콜염화물)_(25mg/1정),1,116902ATB,염화베타네콜,Uninechol Tab. 25mg
+76,MBHX,Bromhexine HCl Tab. Sinil,신일브롬헥신염산염정(8mg/1정),1,118601ATB,브롬헥신염산염,Bromhexine HCl Tab. Sinil
+77,MBLONA, Pharma Blonanserin Tab. 4mg,파마블로난세린정4밀리그램_(4mg/1정),1,511302ATB,블로난세린, Pharma Blonanserin Tab. 4mg
+78,MBLONA2,RonaQ Tab. 2mg,로나큐정2밀리그램(블로난세린)_(2mg/1정),1,511301ATB,블로난세린,RonaQ Tab. 2mg
+79,MBLONA8,Pharma Blonanserin Tab. 8mg,파마블로난세린정8밀리그램_(8mg/1정),1,511303ATB,블로난세린,Pharma Blonanserin Tab. 8mg
+80,MBRF400,Aruphen Tab. 400mg,아루펜정400밀리그람(이부프로펜)_(0.4g/1정),1,172806ATB,이부프로펜,Aruphen Tab. 400mg
+81,MBUPO, Papion ER Tab.,파피온서방정(부프로피온염산염)_(0.15g/1정),1,428102ATR,염산부프로피온, Papion ER Tab.
+82,MBUS, Buspar Tab. 10mg Boryung,보령부스파정10밀리그램(부스피론염산염)_(10mg/1정),1,120501ATB,염산부스피론, Buspar Tab. 10mg Boryung
+83,MCBM-CR2,Carmazepine-CR Tab. 200mg,카마제핀씨알정200밀리그람(카르바마제핀)_(0.2g/1정),1,123102ATR,카르바마제핀,Carmazepine-CR Tab. 200mg
+84,MCFR,Cefaclear Cap.,세파클리어캡슐(세파클러수화물)_(0.25g/1캡슐),1,125201ACH,세파클러,Cefaclear Cap.
+85,MCHOL,Cholinacen Soft Cap.,콜리아센연질캡슐(콜린알포세레이트)_(0.4g/1캡슐),1,138101ACS,콜린알포세레이트,Cholinacen Soft Cap.
+86,MCLON0.1,Kapvay ER Tab. 0.1mg,켑베이서방정 0.1mg(클로니딘염산염)_(0.1mg/1정),1,136505ATR,클로니딘염산염,Kapvay ER Tab. 0.1mg
+87,MCLOZ100,Clzapin Tab. 100mg,클자핀정100mg(클로자핀)_(0.1g/1정),1,137501ATB,클로자핀,Clzapin Tab. 100mg
+88,MCLOZ200,Clzapine Tab. 200mg,클자핀정200mg(클로자핀),1,137504ATB,클로자핀,Clzapine Tab. 200mg
+89,MCLOZ50,Clzapine Tab. 50mg,클자핀정50mg(클로자핀),1,137503ATB,클로자핀,Clzapine Tab. 50mg
+90,MCLOZA25,Clzapin Tab. 25mg,클자핀정25mg(클로자핀)_(25mg/1정),1,137502ATB,클로자핀,Clzapin Tab. 25mg
+91,MCMP,Gromin Cap. 25mg,그로민캡슐25mg(클로미프라민염산염)_(25mg/1캡슐),1,136302ACH,클로미프라민염산염,Gromin Cap. 25mg
+92,MCNZ,Whanin Clonazepam Tab. 0.5mg,환인클로나제팜정0.5mg_(0.5mg/1정),1,136401ATB,클로나제팜,Whanin Clonazepam Tab. 0.5mg
+93,MCOUF20, Codaewon Forte Syr.,코대원포르테시럽_(20mL),1,532500ASY,염화암모늄, Codaewon Forte Syr.
+94,MCP100,Chlorpromazine HCl Tab. 100mg Myungin,명인클로르프로마진염산염정100mg(수출명:클로진정100mg)_(0.1g/1정),1,131901ATB,염산클로로프로마진,Chlorpromazine HCl Tab. 100mg Myungin
+95,MCP200,Chlorpromazine HCl Tab. 200mg Myungin,클로르프로마진염산염정200mg_(0.2g/1정),1,131905ATB,염산클로로프로마진,Chlorpromazine HCl Tab. 200mg Myungin
+96,MCP50,Chlorpromazine HCl Tab. 50mg Myungin,명인클로르프로마진염산염정50mg(수출명:클로진정50mg)_(50mg/1정),1,131908ATB,염산클로로프로마진,Chlorpromazine HCl Tab. 50mg Myungin
+97,MCPLUS, Aronamin C Plus Tab.,아로나민씨플러스정,1,B65200ATB,아스코르브산과립97%, Aronamin C Plus Tab.
+98,MDES,Pharma Desvenlafaxine ER Tab. 100mg,파마데스벤라팍신서방정100밀리그램(데스벤라팍신숙신산염일수화물)_(0.15177g/1정),1,626402ATR,데스벤라팍신숙신산염일수화물,Pharma Desvenlafaxine ER Tab. 100mg
+99,MDES25,Prinexor ER Tab. 25mg,프리넥사서방정25밀리그램(데스벤라팍신벤조산염)_(36.5925mg/1정),1,687603ATR,데스벤라팍신벤조산염,Prinexor ER Tab. 25mg
+100,MDES50,Pharma Desvenlafaxine ER Tab. 50mg,파마데스벤라팍신서방정50밀리그램(데스벤라팍신숙신산염일수화물)_(75.885mg/1정),1,626401ATR,데스벤라팍신숙신산염일수화물,Pharma Desvenlafaxine ER Tab. 50mg
+101,MDONE,Vastia Tab. 10mg,바스티아정10밀리그램(도네페질염산염)_(10mg/1정),1,148601ATB,도네페질염산염,Vastia Tab. 10mg
+102,MDOXEP3,Myungcephin Tab. 3mg,명세핀정(3mg/1정),1,149203ATB,독세핀염산염,Myungcephin Tab. 3mg
+103,MDULO30,Duloxeptol Cap. 30mg,듀로셉톨캡슐30밀리그램(둘록세틴염산염)_(33.645mg/1캡슐),1,495501ACE,둘록세틴 염산염,Duloxeptol Cap. 30mg
+104,MDULO60,Duloxeptol Cap. 60mg,듀로셉톨캡슐60밀리그램(둘록세틴염산염)_(67.29mg/1캡슐),1,495502ACE,둘록세틴 염산염,Duloxeptol Cap. 60mg
+105,MDVAL250,Divalpro ER Tab. 250mg,디발프로서방정250밀리그램(디발프로엑스나트륨)_(0.26905g/1정),1,147701ATR,디발프로엑스나트륨,Divalpro ER Tab. 250mg
+106,MDVAL500,  Depakote ER Tab. 500mg,데파코트서방정500㎎(디발프로엑스나트륨)_(0.5381g/1정),1,147702ATR,디발프로엑스나트륨,  Depakote ER Tab. 500mg
+107,MDZP2, Diazepam Tab. 2mg Samjin,삼진디아제팜정2밀리그람_(2mg/1정),1,142902ATB,디아제팜, Diazepam Tab. 2mg Samjin
+108,MDZP5,Samjin Diazepam Tab. 5mg,삼진디아제팜정5mg_(5mg/1정),1,142903ATB,디아제팜,Samjin Diazepam Tab. 5mg
+109,MESCTL,Sinsin Escitalopram Tab. 10mg,신신에스시탈로프람정10밀리그램(에스시탈로프람옥살산염)_(12.77mg/1정),1,474802ATB,수산에스시탈로프람,Sinsin Escitalopram Tab. 10mg
+110,MESCTL20,Epram Tab. 20mg,에프람정20밀리그램(에스시탈로프람옥살산염)_(25.54mg/1정),1,474803ATB,에스시탈로프람옥살산염,Epram Tab. 20mg
+111,MESCTL5,  Salopram Tab. 5mg,사로프람정5mg(에스시탈로프람옥살산염)_(6.385mg/1정),1,474801ATB,수산에스시탈로프람,  Salopram Tab. 5mg
+112,MESTOD10,Jepram Melts OD Tab. 10mg,제프람멜츠구강붕해정10밀리그램(에스시탈로프람옥살산염)_(12.77mg/1정),1,474802ATD,에스시탈로프람옥살산염,Jepram Melts OD Tab. 10mg
+113,MESTOD5,Jepram Melts OD Tab. 5mg,제프람멜츠구강붕해정5밀리그램(에스시탈로프람옥살산염)_(6.385mg/1정),1,474801ATD,에스시탈로프람옥살산염,Jepram Melts OD Tab. 5mg
+114,MFE,Feroba-You SR Tab.,훼로바-유서방정(건조황산제일철)_(0.256g/1정),1,303403ATR,건조황산제일철,Feroba-You SR Tab.
+115,MFENO,Lidos Cap. 200mg,리도스캡슐(페노피브레이트 과립(미분화))_(0.2g/1캡슐),1,194901ACH,미분화페노피브레이트,Lidos Cap. 200mg
+116,MFESOT,Toviaz SR Tab. 4mg,토비애즈서방정4mg(페소테로딘푸마르산염)_(4mg/1정),1,503801ATR,페소테로딘 퓨마레이드,Toviaz SR Tab. 4mg
+117,MFLUNI,Lunapam Tab. 1mg,루나팜정(플루니트라제팜)_(1mg/1정),1,160601ATB,플루니트라제팜,Lunapam Tab. 1mg
+118,MFLXT, Norzac Cap.,노르작캡슐(플루옥세틴염산염)_(22.4mg/1캡슐),1,161502ACH,플루옥세틴염산염, Norzac Cap.
+119,MGABA100,Gabapentin Cap.100mg,파마가바펜틴캡슐100밀리그람_(0.1g/1캡슐),1,164201ACH,가바펜틴,Gabapentin Cap.100mg
+120,MHP10,Peridol Tabs. 10mg,페리돌정10밀리그램(할로페리돌)_(10mg/1정),1,167904ATB,할로페리돌,Peridol Tabs. 10mg
+121,MHP20,Peridol Tab. 20mg,페리돌정20밀리그램(할로페리돌)_(20mg/1정),1,167905ATB,할로페리돌,Peridol Tab. 20mg
+122,MHP3,Peridol Tab. 3mg,페리돌정3밀리그램(할로페리돌)_(3mg/1정),1,167906ATB,할로페리돌,Peridol Tab. 3mg
+123,MHP5,Peridol Tab. 5mg,페리돌정5밀리그램(할로페리돌)_(5mg/1정),1,167908ATB,할로페리돌,Peridol Tab. 5mg
+124,MIMP,Whanin Imipramine Hydrochloride Tab.25mg,환인이미프라민염산염정25밀리그램_(25mg/1정),1,173701ATB,염산이미프라민,Whanin Imipramine Hydrochloride Tab.25mg
+125,MIVG3,Invega ER Tab. 3mg,인베가서방정3mg(팔리페리돈)_(3mg/1정),1,503201ATR,팔리페리돈,Invega ER Tab. 3mg
+126,MIVG6,Invega ER Tab. 6mg,인베가서방정6mg(팔리페리돈)_(6mg/1정),1,503202ATR,팔리페리돈,Invega ER Tab. 6mg
+127,MIVG9,Invega ER Tab. 9mg,인베가서방정9mg(팔리페리돈)_(9mg/1정),1,503203ATR,팔리페리돈,Invega ER Tab. 9mg
+128,MKCL,K-Contin Continus Tab. 600mg,케이콘틴 서방정 600mg,1,215801ATR,염화칼륨,K-Contin Continus Tab. 600mg
+129,MLACT15,Dulackhan Easy Syrup.,듀락칸이지시럽(락툴로오즈농축액)_(10.05g/15ml),1,180830ASY,락툴로오즈농축액,Dulackhan Easy Syrup.
+130,MLAM100,Lavicitin Tab. 100mg,라비시틴정100밀리그람(라모트리진)_(0.1g/1정),1,181001ATB,라모트리진,Lavicitin Tab. 100mg
+131,MLAMO25,Labisitin Tab. 25mg,라비시틴정25밀리그램(라모트리진)_(25mg/1정),1,181002ATB,라모트리진,Labisitin Tab. 25mg
+132,MLC,Whanin Lithium Carbonate Tab.,환인탄산리튬정_(0.3g/1정),1,184701ATB,탄산리튬,Whanin Lithium Carbonate Tab.
+133,MLCETI5,Levocerine Tab. 5mg,레보세린정(레보세티리진염산염)_(5mg/1정),1,463601ATB,레보세티리진염산염,Levocerine Tab. 5mg
+134,MLOP,Loperamide HCl Cap. GL,지엘로페라미드염산염캡슐_(2mg/1캡슐),1,185102ACH,로페라미드염산염,Loperamide HCl Cap. GL
+135,MLP100,Tisercin Tab. 100mg,티세르신정100mg(레보메프로마진말레산염)_(0.1353g/1정),1,183301ATB,말레이산레보메프로마진,Tisercin Tab. 100mg
+136,MLP50,Tisercin Tab. 50mg,티세르신정50mg(레보메프로마진말레산염)_(67.7mg/1정),1,183303ATB,말레이산레보메프로마진,Tisercin Tab. 50mg
+137,MLURA40,Latuda Tab. 40mg,라투다정40밀리그램(루라시돈염산염)_(40mg/1정),1,729802ATB,루라시돈염산염,Latuda Tab. 40mg
+138,MLURA80,Latuda Tab. 80mg,라투다정80밀리그램(루라시돈염산염)_(80mg/1정),1,729804ATB,루라시돈염산염,Latuda Tab. 80mg
+139,MLZP0.5,Loravan Tab. 0.5mg,로라반정 0.5mg,1,185504ATB,로라제팜,Loravan Tab. 0.5mg
+140,MLZP1,Loravan Tab. 1mg,로라반정1mg,1,185501ATB,로라제팜,Loravan Tab. 1mg
+141,MMELA2,Circaledeep PR Tab. 2mg,서카레딥서방정2밀리그램(멜라토닌)_(2mg/1정),1,627701ATR,멜라토닌,Circaledeep PR Tab. 2mg
+142,MMEMA10, Mentine Tab. 10mg,멘틴정(메만틴염산염)_(10mg/1정),1,190001ATB,메만틴염산염, Mentine Tab. 10mg
+143,MMET,Methimazol Tab. Bukwang,부광메티마졸정_(5mg/1정),1,191801ATB,메치마졸,Methimazol Tab. Bukwang
+144,MMETF500,Metofol Tab.,메토폴정(메트포르민염산염)_(0.5g/1정),1,191502ATB,메트포르민염산염,Metofol Tab.
+145,MMGOH,Magmil Tab.,마그밀정(수산화마그네슘)_(0.5g/1정),1,187402ATB,수산화마그네슘,Magmil Tab.
+146,MMIL50,Ixel Cap. 50mg,익셀캡슐50mg(밀나시프란염산염)_(50mg/1캡슐),1,355802ACH,밀나시프란염산염,Ixel Cap. 50mg
+147,MMOSA, Mosapradin Tab.,모사프라딘정(모사프리드시트르산염수화물)_(5.29mg/1정),1,421001ATB,모사프리드시트르산염수화물, Mosapradin Tab.
+148,MMOSA15,Kukje Mosaride SR Tab. 15mg,국제모사라이드서방정 15mg(모사프리드시트르산염수화물),1,421004ATR,모사프리드시트르산염수화물,Kukje Mosaride SR Tab. 15mg
+149,MMPD,Penid Tab. 10mg,페니드정10밀리그램(메틸페니데이트염산염)_(10mg/1정),1,193201ATB,메칠페니데이트염산염,Penid Tab. 10mg
+150,MMPD18,Concerta OROS ER Tab. 18mg,콘서타OROS서방정18mg(메틸페니데이트염산염)_(18mg/1정),1,193203ATR,메칠페니데이트염산염,Concerta OROS ER Tab. 18mg
+151,MMPD27,Concerta OROS ER Tab. 27mg,콘서타OROS서방정 27mg(메틸페니데이트염산염)_(27mg/1정),1,193206ATR,메칠페니데이트염산염,Concerta OROS ER Tab. 27mg
+152,MMPD36,Concerta OROS ER Tab. 36mg,콘서타OROS서방정 36mg(메틸페니데이트염산염)_(36mg/1정),1,193204ATR,메칠페니데이트염산염,Concerta OROS ER Tab. 36mg
+153,MMPD54,Concerta OROS ER Tab. 54mg,콘서타OROS서방정 54mg(메틸페니데이트염산염)_(54mg/1정),1,193209ATR,메칠페니데이트염산염,Concerta OROS ER Tab. 54mg
+154,MMPDC10,Medikinet Retard Cap. 10mg,메디키넷리타드캡슐 10mg(메틸페니데트염산염)_(10mg/1캡슐),1,193201ACR,메칠페니데이트염산염,Medikinet Retard Cap. 10mg
+155,MMPDC20,Medikinet Retard Cap. 20mg,메디키넷리타드캡슐 20mg(메틸페니데트염산염)_(20mg/1캡슐),1,193205ACR,메칠페니데이트염산염,Medikinet Retard Cap. 20mg
+156,MMPDC30,Medikinet Retard Cap. 30mg,메디키넷리타드캡슐 30mg(메틸페니데트염산염)_(30mg/1캡슐),1,193207ACR,메칠페니데이트염산염,Medikinet Retard Cap. 30mg
+157,MMTA15,Pharma Mirtazapine Tab. 15mg,파마멀타자핀정15밀리그램(미르타자핀)_(15mg/1정),1,196201ATB,미르타자핀,Pharma Mirtazapine Tab. 15mg
+158,MMTA30,Pharma Mirtazapine Tab. 30mg,파마멀타자핀정30밀리그램(미르타자핀)_(30mg/1정),1,196202ATB,미르타자핀,Pharma Mirtazapine Tab. 30mg
+159,MNAL,Whanin Naltrexon Tab. 50mg,환인날트렉손정50밀리그램(날트렉손염산염)_(50mg/1정),1,199201ATB,염산날트렉손,Whanin Naltrexon Tab. 50mg
+160,MNIT,Nitroglycerin Sublingual Tab. 0.6mg Myungmoon,명문니트로글리세린0.6밀리그램설하정-(0.6mg/1정),1,202602ATL,니트로글리세린,Nitroglycerin Sublingual Tab. 0.6mg Myungmoon
+161,MOLAN10,  Olzapine Tab. 10mg,올자핀정10밀리그램(올란자핀)_(10mg/1정),1,204001ATB,올란자핀,  Olzapine Tab. 10mg
+162,MOLAN5,Olzapine Tab. 5mg,올자핀정5밀리그램(올란자핀)_(5mg/1정),1,204002ATB,올란자핀,Olzapine Tab. 5mg
+163,MOLAN-XD, Zyprexazydis Dispersible Tab. 10mg,자이프렉사자이디스확산정10밀리그램(미세올란자핀)_(10mg/1정),1,204001ATD,올란자핀, Zyprexazydis Dispersible Tab. 10mg
+164,MOLMET,Genuone Olmesartan Tab. 20mg,제뉴원올메사탄정20밀리그램(올메사탄메독소밀)_(20mg/1정),1,468501ATB,올메사탄메독소밀,Genuone Olmesartan Tab. 20mg
+165,MOLMET10,Presartan Tab. 10mg,프리살탄정10밀리그램(올메사탄메독소밀)_(10mg/1정),1,468502ATB,올메사탄메독소밀,Presartan Tab. 10mg
+166,MOLOPA,Olopidine Tab. 5mg,올로피딘정5밀리그램(올로파타딘염산염)_(5mg/1정),1,391703ATB,올로파타딘염산염,Olopidine Tab. 5mg
+167,MPANTO,Pantoline Tab. 20mg,판토라인정 20mg/T ,1,208802ATE,판토프라졸나트륨세스키히드레이트,Pantoline Tab. 20mg
+168,MPCL,Pharma Procyclidine Tab.,파마프로시클리딘정(프로시클리딘염산염)_(5mg/1정),1,218401ATB,염산프로시클리딘,Pharma Procyclidine Tab.
+169,MPENI,Peniramin Tab.,페니라민정(클로르페니라민말레산염)_(2mg/1정),1,131801ATB,클로르페니라민말레산염,Peniramin Tab.
+170,MPITA,Dongkwang Pitavastatin Tab. 2mg,동광피타바스타틴정2밀리그램(피타바스타틴칼슘)_(2mg/1정),1,470901ATB,피타바스타틴칼슘,Dongkwang Pitavastatin Tab. 2mg
+171,MPPZ,Perphenazine Tab. 4mg Myungin,명인페르페나진정4mg_(4mg/1정),1,211401ATB,페르페나진,Perphenazine Tab. 4mg Myungin
+172,MPRD,Solondo Tab.,소론도정(프레드니솔론)_(5mg/1정),1,217001ATB,프레드니솔론,Solondo Tab.
+173,MPRP10,Indenol Tab. 10mg,인데놀정10mg(프로프라놀롤염산염)_(10mg/1정),1,219901ATB,프로프라놀롤염산염,Indenol Tab. 10mg
+174,MPRP40, Indenol Tab. 40mg,인데놀정40mg(프로프라놀롤염산염)_(40mg/1정),1,219904ATB,프로프라놀롤염산염, Indenol Tab. 40mg
+175,MPRX-CR,Paxerontin CR Tab. 12.5mg,팍세론틴서방정12.5밀리그램(파록세틴염산염수화물)_(14.25mg/1정),1,209304ATR,파록세틴염산염수화물,Paxerontin CR Tab. 12.5mg
+176,MPRX-CR25, Paroxat CR Tab. 25mg,파로자트씨알정25밀리그램(파록세틴염산염수화물)_(28.5mg/1정),1,209305ATR,파록세틴염산염, Paroxat CR Tab. 25mg
+177,MPSEUDO,Pseudafed Tab. 60mg,슈다페드정(슈도에페드린염산염)_(60mg/1정),1,220902ATB,슈도에페드린염산염,Pseudafed Tab. 60mg
+178,MQUE100,Sinsin Quetiapine Tab. 100mg,신신쿠에티아핀정100밀리그램(쿠에티아핀푸마르산염)_(0.11513g/1정),1,378602ATB,푸마르산쿠에티아핀,Sinsin Quetiapine Tab. 100mg
+179,MQUE12.5, Dongwha Quetiapine Tab. 12.5mg,동화쿠에티아핀정12.5밀리그램(쿠에티아핀푸마르산염)_(14.39mg/1정),1,378610ATB,푸마르산쿠에티아핀, Dongwha Quetiapine Tab. 12.5mg
+180,MQUE200,Quety Tab. 200mg,쿠에티정200밀리그램(쿠에티아핀푸마르산염)_(0.23026g/1정),1,378603ATB,푸마르산쿠에티아핀,Quety Tab. 200mg
+181,MQUE25, Sinsin Quetiapine Tab. 25mg,신신쿠에티아핀정25밀리그램(쿠에티아핀푸마르산염)_(28.78mg/1정),1,378601ATB,푸마르산쿠에티아핀, Sinsin Quetiapine Tab. 25mg
+182,MQUE300,Quetapine Tab. 300mg,쿠에타핀정300밀리그램(쿠에티아핀푸마르산염)_(0.34539g/1정),1,378604ATB,푸마르산쿠에티아핀,Quetapine Tab. 300mg
+183,MQUEX200, Whanin Quetiapine SR Tab. 200mg,환인쿠에타핀서방정200밀리그램(쿠에티아핀푸마르산염)_(0.23026g/1정),1,378606ATR,푸마르산쿠에티아핀, Whanin Quetiapine SR Tab. 200mg
+184,MQUEX300, Whanin Quetiapine SR Tab. 300mg,환인쿠에타핀서방정300밀리그램(쿠에티아핀푸마르산염)_(0.34538g/1정),1,378607ATR,푸마르산쿠에티아핀, Whanin Quetiapine SR Tab. 300mg
+185,MQUEX400,Whanin Quetiapine SR Tab. 400mg,환인쿠에타핀서방정400밀리그램(쿠에티아핀푸마르산염)_(0.4605g/1정),1,378608ATR,푸마르산쿠에티아핀,Whanin Quetiapine SR Tab. 400mg
+186,MQUEX50, Whanin Quetiapine SR Tab. 50mg,환인쿠에타핀서방정50밀리그램(쿠에티아핀푸마르산염)_(57.56mg/1정),1,378605ATR,푸마르산쿠에티아핀, Whanin Quetiapine SR Tab. 50mg
+187,MREBAM,Kwangdong Rebamipide Tab. 100mg,광동레바미피드정_(0.1g/1정),1,222901ATB,레바미피드,Kwangdong Rebamipide Tab. 100mg
+188,MROP0.25,Pakinol Tab. 0.25mg,파키놀정0.25mg(로피니롤염산염)_(0.25mg/1정),1,224903ATB,염산로피니롤,Pakinol Tab. 0.25mg
+189,MROP1,Pakinol Tab. 1mg,파키놀정1mg(로피니롤염산염)_(1.14mg/1정) ,1,224901ATB,염산로피니롤,Pakinol Tab. 1mg
+190,MRSP1,Risperdal Tab. 1mg,리스페달정1밀리그램(리스페리돈)_(1mg/1정),1,224201ATB,리스페리돈,Risperdal Tab. 1mg
+191,MRSP2, Risperdal Tab. 2mg,리스페달정2밀리그램(리스페리돈)_(2mg/1정),1,224202ATB,리스페리돈, Risperdal Tab. 2mg
+192,MRSP3,Risperdal Tab. 3mg,리스페달정3밀리그램(리스페리돈)_(3mg/1정),1,224203ATB,리스페리돈,Risperdal Tab. 3mg
+193,MRSPQ1,Rispen ODT. 1mg,리스펜오디정1mg(리스페리돈)_(1mg/1정),1,224201ATD,리스페리돈,Rispen ODT. 1mg
+194,MRSPQ2,Rispen ODT. 2mg,리스펜오디정2mg(리스페리돈)_(2mg/1정),1,224202ATD,리스페리돈,Rispen ODT. 2mg
+195,MRXT,Rulid Tab. 150mg,루리드정(록시트로마이신))_(0.15g/1정),1,225301ATB,록시스로마이신,Rulid Tab. 150mg
+196,MSMECT,Fotagel Susp.,포타겔현탁액(20mL),1,146431ASS,디옥타헤드랄스멕타이트,Fotagel Susp.
+197,MSTILEN,  Exilen Tab. 60mg,엑시렌정(애엽95%에탄올연조엑스(20->1))_(60mg/1정),1,430101ATB,애엽95%에탄올연조엑스(20→1),  Exilen Tab. 60mg
+198,MSTL,Pharma Sertraline Tab. 50mg,파마설트랄린정50밀리그램(설트랄린염산염)_(55.95mg/1정),1,227001ATB,설트랄린염산염,Pharma Sertraline Tab. 50mg
+199,MSTL100,Pharma Sertraline Tab. 100mg,파마설트랄린정100밀리그램(설트랄린염산염)_(0.1119g/1정),1,227002ATB,설트랄린염산염,Pharma Sertraline Tab. 100mg
+200,MSULP,Sulpidin Tab. 200mg,설피딘정200mg(설피리드)_(0.2g/1정),1,233401ATB,설피리드,Sulpidin Tab. 200mg
+201,MT4,Synthyroxine Tab. 100㎍,씬지록신정100마이크로그램(레보티록신나트륨수화물)_(0.1mg/1정),1,183601ATB,레보티록신나트륨수화물,Synthyroxine Tab. 100㎍
+202,MTAM0.2,Tamspin Cap. 0.2mg,탐스핀캡슐(탐스로신염산염)_(0.2mg/1캡슐),1,234601ACR,탐스로신염산염,Tamspin Cap. 0.2mg
+203,MTINE, Tiabon Tab.,티아본정(티아넵틴나트륨)_(12.5mg/1정),1,229601ATB,티아넵틴나트륨, Tiabon Tab.
+204,MTMF75,Tamiflue Cap. 75mg,타미플루캡슐 75mg,1,358901ACH,오셀타미비르인산염,Tamiflue Cap. 75mg
+205,MTOPI,Topiron Tab. 50mg,토피론정50mg(토피라메이트)_(50mg/1정),1,241804ATB,토피라메이트,Topiron Tab. 50mg
+206,MTOPI100, Topirat Tab. 100mg,토피라트정100밀리그램(토피라메이트)_(0.1g/1정),1,241801ATB,토피라메이트, Topirat Tab. 100mg
+207,MTRA,Paramacet Tab.,파라마셋정,1,513000ATB,아세트아미노펜,Paramacet Tab.
+208,MTRIH,Trihexin Tab.,트리헥신정(트리헥시페니딜염산염)_(2mg/1정),1,244201ATB,염산트리헥시페니딜,Trihexin Tab.
+209,MTRIM,Genuone Trimebutine Maleate Tab. 100mg,제뉴원트리메부틴말레산염정_(0.1g/1정),1,244301ATB,트리메부틴말레산염,Genuone Trimebutine Maleate Tab. 100mg
+210,MTZD25,Trazodone HCl Cap. Whanin,환인트라조돈염산염캡슐_(25mg/1캡슐),1,242901ACH,염산트라조돈,Trazodone HCl Cap. Whanin
+211,MTZD50,Trittico Tab. 50mg,트리티코정50밀리그람(트라조돈염산염)_(50mg/1정),1,242902ATB,염산트라조돈,Trittico Tab. 50mg
+212,MUDCA,Urchol Tab. 100mg,우르콜정100밀리그램(우르소데옥시콜산)_(0.1g/1정),1,246501ATB,우르소데옥시콜산(우르소데옥시콜린산),Urchol Tab. 100mg
+213,MVARE,Nicover Tab. 1mg,니코버정1mg(바레니클린살리실산염) ,1,673102ATB,바레니클린살리실산염,Nicover Tab. 1mg
+214,MVB10,Thiamine HCl Tab. 10mg Sinil,신일티아민염산염정10mg_(10mg/1정),1,237301ATB,티아민염산염,Thiamine HCl Tab. 10mg Sinil
+215,MVBF,Alcotamin Tab.,알코타민정,1,E04900ATB,폴산,Alcotamin Tab.
+216,MVEN-SR,Pharma Venlafaxine SR Cap. 75mg,파마벤라팍신서방캡슐75mg(벤라팍신염산염)_(84.84mg/1캡슐),1,247502ACR,벤라팍신,Pharma Venlafaxine SR Cap. 75mg
+217,MVENSR37,Pharma Venlafaxine SR Cap. 37.5mg,파마벤라팍신서방캡슐37.5밀리그램(벤라팍신염산염)_(42.42mg/1캡슐),1,247504ACR,벤라팍신,Pharma Venlafaxine SR Cap. 37.5mg
+218,MVORT,Brintellix Tab. 10mg,브린텔릭스정10mg(보티옥세틴브롬화수소산염)_(12.71mg/1정),1,628502ATB,보티옥세틴브롬화수소산염,Brintellix Tab. 10mg
+219,MVORT5,Brintellix Tab. 5mg,브린텔릭스정5mg(보티옥세틴브롬화수소산염)_(6.355mg/1정),1,628501ATB,보티옥세틴브롬화수소산염,Brintellix Tab. 5mg
+220,MVP-CR,Depakine Chrono Tab. 300mg,"데파킨크로노정300밀리그램_(발프로산나트륨, 0.3g/1정)",1,229705ATR,발프로산나트륨,Depakine Chrono Tab. 300mg
+221,MVR-CR150,Orfil SR Tab. 150mg,오르필서방정150밀리그램(발프로산나트륨)_(0.15g/1정),1,229701ATR,발프로산나트륨,Orfil SR Tab. 150mg
+222,MZIPRA40,Zeldox Cap. 40mg,젤독스캡슐40mg(염산지프라시돈일수화물)_(45.3mg/1캡슐),1,464902ACH,염산지프라시돈일수화물,Zeldox Cap. 40mg
+223,MZIPRA80,Zeldox Cap. 80mg,젤독스캡슐80mg(염산지프라시돈일수화물)_(90.6mg/1캡슐),1,464904ACH,염산지프라시돈일수화물,Zeldox Cap. 80mg
+224,MZLP5,Zaledeep Cap. 5mg,잘레딥캡슐5mg,1,717401ACH,잘레플론,Zaledeep Cap. 5mg
+225,MZOT100,Lodopine Tab. 100mg,로도핀정100gmg(죠테핀)_(0.1g/1정),1,250801ATB,조테핀,Lodopine Tab. 100mg
+226,MZOT50,Lodopine Tab. 50mg,로도핀정50mg(죠테핀)_(50mg/1정),1,250803ATB,조테핀,Lodopine Tab. 50mg
+,MZPD10,Zolpiram Tab. 10mg,졸피람정10밀리그램(졸피뎀타르타르산염)_(10mg/1정),1,250501ATB,주석산졸피뎀,Zolpiram Tab. 10mg
+,MZPD12,Stilnox CR Tab. 12.5mg,스틸녹스CR정12.5mg(졸피뎀타르타르산염)_(12.5mg/1정),1,250504ATR,주석산졸피뎀,Stilnox CR Tab. 12.5mg
+,MZPD6,Stilnox CR Tab. 6.25mg,스틸녹스CR정6.25mg(졸피뎀타르타르산염)_(6.25mg/1정),1,250503ATR,주석산졸피뎀,Stilnox CR Tab. 6.25mg

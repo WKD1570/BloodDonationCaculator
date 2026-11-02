@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -44,13 +45,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.domain.PRODUCT_RESULT_LIMIT
+import com.example.myapplication.domain.ProductMatch
 import com.example.myapplication.domain.fmt
+import com.example.myapplication.domain.mayBeRestrictedInjection
 import com.example.myapplication.model.RestrictedDrug
 import java.time.LocalDate
 
 /**
  * Offline search over the bundled 헌혈 금지 약물 list. Picking a drug asks when it was taken and
  * shows the resulting 헌혈 가능일, or a permanent-restriction notice for lifetime bans.
+ *
+ * The official list names ingredients only, so search also looks product names up in the bundled
+ * product dictionary and shows, per product, whether its ingredient is on the list.
  *
  * The result list is a [LazyColumn] with a capped height because this card is hosted inside a
  * vertically scrolling parent, where an unbounded lazy list would fail to measure.
@@ -85,7 +92,7 @@ fun ProhibitedDrugSearchScreen(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                "헌혈 제한 약물을 검색하고 복용일을 입력하면 헌혈 가능일을 알려드려요.",
+                "약 이름이나 성분으로 검색하면 헌혈 제한 약물인지 알려드려요. 제한 약물은 복용일을 입력하면 헌혈 가능일을 계산해요.",
                 fontSize = 11.sp,
                 color = TextTertiary,
                 lineHeight = 16.sp
@@ -112,8 +119,11 @@ fun ProhibitedDrugSearchScreen(
                 selected == null -> SearchSection(
                     query = state.query,
                     results = state.results,
+                    productResults = state.productResults,
+                    productSource = state.productSource,
                     onQueryChange = viewModel::onQueryChange,
-                    onDrugClick = viewModel::onDrugSelected
+                    onDrugClick = viewModel::onDrugSelected,
+                    onProductClick = viewModel::onProductSelected
                 )
 
                 else -> SelectedDrugSection(
@@ -151,8 +161,11 @@ fun ProhibitedDrugSearchScreen(
 private fun SearchSection(
     query: String,
     results: List<RestrictedDrug>,
+    productResults: List<ProductMatch>,
+    productSource: String?,
     onQueryChange: (String) -> Unit,
-    onDrugClick: (RestrictedDrug) -> Unit
+    onDrugClick: (RestrictedDrug) -> Unit,
+    onProductClick: (ProductMatch) -> Unit
 ) {
     OutlinedTextField(
         value = query,
@@ -160,31 +173,137 @@ private fun SearchSection(
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         placeholder = {
-            Text("약물명을 검색하세요 (예: 아스피린)", fontSize = 12.sp, color = TextTertiary)
+            Text("약 이름·성분을 검색하세요 (예: 아스피린, 소론도)", fontSize = 12.sp, color = TextTertiary)
         }
     )
 
     if (query.isBlank()) return
 
     Spacer(Modifier.height(8.dp))
-    if (results.isEmpty()) {
-        Text("검색 결과가 없어요", fontSize = 12.sp, color = TextTertiary)
+    if (results.isEmpty() && productResults.isEmpty()) {
+        Text("검색 결과가 없어요. 성분명으로도 검색해 보세요.", fontSize = 12.sp, color = TextTertiary)
         return
     }
 
+    // Section labels only when products are listed too; an ingredient-only search looks as before.
+    val labelled = productResults.isNotEmpty()
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(max = 240.dp)
+            .heightIn(max = 320.dp)
             .clip(RoundedCornerShape(10.dp))
             .border(1.dp, InputBorder, RoundedCornerShape(10.dp))
     ) {
+        if (labelled && results.isNotEmpty()) item(key = "label-official") { SectionLabel("헌혈 제한 약물 목록") }
         itemsIndexed(
             items = results,
             key = { _, drug -> "${drug.ingredientName}|${drug.representativeBrands}" }
         ) { index, drug ->
             DrugRow(drug, onClick = { onDrugClick(drug) })
-            if (index != results.lastIndex) HorizontalDivider(color = DividerColor)
+            if (index != results.lastIndex || labelled) HorizontalDivider(color = DividerColor)
+        }
+        if (labelled) item(key = "label-products") { SectionLabel("의약품 (상품명)") }
+        itemsIndexed(
+            items = productResults,
+            key = { _, match -> "product|${match.product.name}|${match.product.ingredient}" }
+        ) { index, match ->
+            ProductRow(match, onClick = if (match.isRestricted) ({ onProductClick(match) }) else null)
+            if (index != productResults.lastIndex) HorizontalDivider(color = DividerColor)
+        }
+    }
+
+    if (productResults.isNotEmpty()) {
+        Spacer(Modifier.height(8.dp))
+        if (productResults.size >= PRODUCT_RESULT_LIMIT) {
+            Text(
+                "검색 결과가 많아 ${PRODUCT_RESULT_LIMIT}개까지만 보여요. 제품명으로 좁혀 보세요.",
+                fontSize = 10.sp,
+                color = TextSecondary,
+                lineHeight = 14.sp
+            )
+        }
+        Text(
+            "목록에 없는 성분이어도 복용 이유(감염·질환 등)에 따라 헌혈이 제한될 수 있어요. 헌혈 전 문진에서 복용한 약을 알려주세요.",
+            fontSize = 10.sp,
+            color = TextTertiary,
+            lineHeight = 14.sp
+        )
+        productSource?.let {
+            Text("상품명 정보: $it", fontSize = 10.sp, color = TextTertiary, lineHeight = 14.sp)
+        }
+    }
+}
+
+@Composable
+private fun SectionLabel(text: String) {
+    Text(
+        text,
+        fontSize = 10.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = TextTertiary,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(InputBg)
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+    )
+}
+
+/**
+ * One product from the dictionary. A restricted one says which rule applies and opens the
+ * 복용일 flow when tapped; an unlisted one just says so - it has nothing to calculate.
+ */
+@Composable
+private fun ProductRow(match: ProductMatch, onClick: (() -> Unit)?) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val hoverBg by rememberHoverColor(interactionSource, CardBg, InputBgHover)
+    val restriction = match.strictestRestriction
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(if (onClick != null) hoverBg else CardBg)
+            .then(
+                if (onClick != null) Modifier.hoverable(interactionSource).clickable(onClick = onClick)
+                else Modifier
+            )
+            .padding(horizontal = 12.dp, vertical = 10.dp)
+    ) {
+        Row(verticalAlignment = Alignment.Top) {
+            Text(
+                match.product.name,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = TextPrimary,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f)
+            )
+            val route = match.product.route.label
+            if (route.isNotEmpty()) {
+                Spacer(Modifier.width(8.dp))
+                Text(route, fontSize = 10.sp, color = TextTertiary)
+            }
+        }
+        Text("성분: ${match.product.ingredient}", fontSize = 11.sp, color = TextTertiary)
+        if (restriction != null) {
+            Text(
+                "⚠ 헌혈 제한 약물 · ${restriction.restrictionText}",
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = ErrorText,
+                lineHeight = 16.sp
+            )
+            Text("눌러서 복용일 입력", fontSize = 10.sp, color = Accent)
+        } else {
+            Text(
+                if (mayBeRestrictedInjection(match)) {
+                    "헌혈 제한 약물 목록에 없는 성분이에요. 참고로 항생제·스테로이드·보톡스 주사는 투여 후 1주간 헌혈이 제한돼요."
+                } else {
+                    "헌혈 제한 약물 목록에 없는 성분이에요."
+                },
+                fontSize = 11.sp,
+                color = TextSecondary,
+                lineHeight = 16.sp
+            )
         }
     }
 }

@@ -3,11 +3,17 @@ package com.example.myapplication.ui
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.data.DrugProductDataException
+import com.example.myapplication.data.DrugProductList
+import com.example.myapplication.data.DrugProductRepository
 import com.example.myapplication.data.MedicationHistoryRepository
 import com.example.myapplication.data.ProhibitedDrugRepository
 import com.example.myapplication.domain.PROHIBITED_DRUGS
+import com.example.myapplication.domain.ProductMatch
 import com.example.myapplication.domain.nextEligibleDonationDate
 import com.example.myapplication.domain.searchDrugs
+import com.example.myapplication.domain.searchProducts
+import com.example.myapplication.model.DrugProduct
 import com.example.myapplication.model.RestrictedDrug
 import com.example.myapplication.model.toMedicationRecord
 import java.time.LocalDate
@@ -30,6 +36,13 @@ data class ProhibitedDrugSearchUiState(
     val isLoading: Boolean = true,
     val query: String = "",
     val results: List<RestrictedDrug> = emptyList(),
+    /**
+     * Products from the product dictionary matching the query, each checked against the official
+     * list - so a product name finds its ingredient's restriction, or shows it isn't listed.
+     */
+    val productResults: List<ProductMatch> = emptyList(),
+    /** Where 상품명 search comes from ("의약품 226종 · 의약품 목록(2026.07.20)"); null when unavailable. */
+    val productSource: String? = null,
     val selectedDrug: RestrictedDrug? = null,
     val medicationDate: LocalDate? = null,
     val eligibility: DonationEligibility? = null,
@@ -40,7 +53,8 @@ data class ProhibitedDrugSearchUiState(
 class ProhibitedDrugSearchViewModel(
     application: Application,
     private val repository: ProhibitedDrugRepository,
-    private val medicationRepository: MedicationHistoryRepository
+    private val medicationRepository: MedicationHistoryRepository,
+    private val productRepository: DrugProductRepository = DrugProductRepository(application)
 ) : AndroidViewModel(application) {
 
     // AndroidViewModelFactory looks for a constructor taking exactly (Application), so keep this
@@ -55,6 +69,7 @@ class ProhibitedDrugSearchViewModel(
     val uiState: StateFlow<ProhibitedDrugSearchUiState> = _uiState.asStateFlow()
 
     private var allDrugs: List<RestrictedDrug> = emptyList()
+    private var allProducts: List<DrugProduct> = emptyList()
 
     /**
      * Row id of the history entry saved for the current selection, or 0 when nothing is saved yet.
@@ -76,19 +91,43 @@ class ProhibitedDrugSearchViewModel(
                 // still works, but say so instead of silently serving different data.
                 PROHIBITED_DRUGS to "약물 목록 파일을 읽지 못해 기본 목록을 사용합니다."
             }
+            // The product dictionary only widens search. Without it, ingredient search still works,
+            // so a missing file just means no 상품명 results rather than a warning.
+            val productList: DrugProductList? = try {
+                productRepository.load()
+            } catch (e: DrugProductDataException) {
+                null
+            }
             allDrugs = drugs
+            allProducts = productList?.products.orEmpty()
             _uiState.update { state ->
                 state.copy(
                     isLoading = false,
                     dataWarning = warning,
-                    results = searchDrugs(state.query, drugs)
+                    results = searchDrugs(state.query, drugs),
+                    productResults = searchProducts(state.query, allProducts, drugs),
+                    productSource = productList?.let { list ->
+                        "의약품 ${list.products.size}종" +
+                            (list.sourceNote?.let { " · $it" } ?: list.asOf?.let { " ($it 자료)" } ?: "")
+                    }
                 )
             }
         }
     }
 
     fun onQueryChange(query: String) {
-        _uiState.update { it.copy(query = query, results = searchDrugs(query, allDrugs)) }
+        _uiState.update {
+            it.copy(
+                query = query,
+                results = searchDrugs(query, allDrugs),
+                productResults = searchProducts(query, allProducts, allDrugs)
+            )
+        }
+    }
+
+    /** A restricted product leads to its official entry, with the same 복용일 flow as searching it. */
+    fun onProductSelected(match: ProductMatch) {
+        match.strictestRestriction?.let(::onDrugSelected)
     }
 
     /** Selecting a drug clears any previously entered date so a stale result is never shown. */
