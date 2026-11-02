@@ -7,6 +7,11 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+# Per-machine / per-user IDE state: selected device, device table, Gemini opt-in, local JDK name
+/.idea/deploymentTargetSelector.xml
+/.idea/deviceManager.xml
+/.idea/studiobot.xml
+/.idea/misc.xml
 .DS_Store
 /build
 /captures
