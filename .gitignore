@@ -23,3 +23,7 @@ keystore.properties
 
 # Python bytecode from the tools/ scripts
 __pycache__/
+
+# Release build output (app/release/*.apk, output-metadata.json, mapping.txt): built locally and
+# published as GitHub Releases assets, not versioned
+/app/release/
