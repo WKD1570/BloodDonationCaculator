@@ -17,7 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * 마이페이지's 자주 헌혈하는 지역 and what it does to the 헌혈의 집 tab. The list tests read the bundled
+ * 마이페이지's 자주 헌혈하는 지역 and what it does to the 헌혈 장소 tab (헌혈의 집 list). The list tests read the bundled
  * `blood_centers.json`, where 부산's first center is 전포센터 and the whole list starts with 서울's
  * 중앙센터.
  */

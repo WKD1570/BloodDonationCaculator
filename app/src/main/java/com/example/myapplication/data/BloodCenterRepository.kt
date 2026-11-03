@@ -13,6 +13,9 @@ import kotlinx.coroutines.withContext
 /** Built by `tools/build_blood_centers.py` from 대한적십자사's 헌혈의 집 CSV and the 성분헌혈 machines CSV. */
 const val BLOOD_CENTERS_ASSET = "blood_centers.json"
 
+/** Built by `tools/build_blood_cafes.py` from 한마음혈액원's 헌혈카페 pages; same shape as [BLOOD_CENTERS_ASSET]. */
+const val BLOOD_CAFES_ASSET = "blood_cafes.json"
+
 class BloodCenterDataException(message: String, cause: Throwable? = null) : Exception(message, cause)
 
 /**
@@ -36,9 +39,12 @@ private class BloodCenterJson(
     val type: String? = null,
     val address: String? = null,
     val phone: String? = null,
-    val machines: MachinesJson? = null
+    val machines: MachinesJson? = null,
+    val hours: String? = null,
+    val parking: String? = null
 )
 
+/** A missing [plasma] stays null - the source didn't say - while an empty one means none. */
 private class MachinesJson(val plasma: Map<String, Int?>? = null, val platelet: Map<String, Int?>? = null)
 
 /** Models the center has, in the order given; zero, missing and unnamed entries dropped. */
@@ -56,15 +62,18 @@ private val SOURCE_DATE = Regex("(20\\d{2})(\\d{2})(\\d{2})")
 private fun dateIn(fileName: String?): String? =
     fileName?.let { SOURCE_DATE.find(it) }?.destructured?.let { (y, m, d) -> "$y.$m.$d" }
 
+private fun String?.trimmedOrNull(): String? = this?.trim()?.takeIf { it.isNotEmpty() }
+
 /**
- * Parses the bundled list. Kept free of Android types so JVM unit tests can use it directly.
- * Entries without a name or address are skipped.
+ * Parses a bundled list - 헌혈의 집 or 헌혈카페, which share one shape. Kept free of Android types so
+ * JVM unit tests can use it directly. Entries without a name or address are skipped. [assetName]
+ * only names the file in error messages.
  */
-fun parseBloodCenters(input: InputStream): BloodCenterList {
+fun parseBloodCenters(input: InputStream, assetName: String = BLOOD_CENTERS_ASSET): BloodCenterList {
     val raw = try {
         Gson().fromJson(input.reader(Charsets.UTF_8), BloodCentersJson::class.java)
     } catch (e: JsonParseException) {
-        throw BloodCenterDataException("$BLOOD_CENTERS_ASSET is not valid JSON", e)
+        throw BloodCenterDataException("$assetName is not valid JSON", e)
     }
     val centers = raw?.centers.orEmpty().filterNotNull().mapNotNull { json ->
         val name = json.name?.trim()?.takeIf { it.isNotEmpty() } ?: return@mapNotNull null
@@ -75,15 +84,17 @@ fun parseBloodCenters(input: InputStream): BloodCenterList {
             type = json.type?.trim().orEmpty(),
             address = address,
             phone = json.phone?.trim().orEmpty(),
-            machines = json.machines?.let { CenterMachines(plasma = it.plasma.models(), platelet = it.platelet.models()) }
+            machines = json.machines?.let { CenterMachines(plasma = it.plasma?.models(), platelet = it.platelet.models()) },
+            hours = json.hours.trimmedOrNull(),
+            parking = json.parking.trimmedOrNull()
         )
     }
-    if (centers.isEmpty()) throw BloodCenterDataException("$BLOOD_CENTERS_ASSET contained no centers")
+    if (centers.isEmpty()) throw BloodCenterDataException("$assetName contained no centers")
     return BloodCenterList(centers, asOf = dateIn(raw?.source), machinesAsOf = dateIn(raw?.machineSource))
 }
 
-/** Reads and parses the bundled list, caching it for the process lifetime. Entirely offline. */
-class BloodCenterRepository(context: Context) {
+/** Reads and parses one bundled list, caching it for the process lifetime. Entirely offline. */
+class BloodCenterRepository(context: Context, private val assetName: String = BLOOD_CENTERS_ASSET) {
     private val appContext = context.applicationContext
 
     @Volatile
@@ -91,9 +102,9 @@ class BloodCenterRepository(context: Context) {
 
     suspend fun load(): BloodCenterList = withContext(Dispatchers.IO) {
         cached ?: try {
-            appContext.assets.open(BLOOD_CENTERS_ASSET).use(::parseBloodCenters)
+            appContext.assets.open(assetName).use { parseBloodCenters(it, assetName) }
         } catch (e: IOException) {
-            throw BloodCenterDataException("Could not read asset $BLOOD_CENTERS_ASSET", e)
+            throw BloodCenterDataException("Could not read asset $assetName", e)
         }.also { cached = it }
     }
 }

@@ -18,7 +18,7 @@
    - [2.5 State Management & Data Flow](#25-state-management--data-flow)
    - [2.6 Persistence Strategy](#26-persistence-strategy)
    - [2.7 Theming](#27-theming)
-   - [2.8 헌혈의 집 목록 (Blood Center List)](#28-헌혈의-집-목록-blood-center-list)
+   - [2.8 헌혈 장소: 헌혈의 집·헌혈카페 (Donation Places)](#28-헌혈-장소-헌혈의-집헌혈카페-donation-places)
    - [2.9 헌혈 계획 (Donation Planner)](#29-헌혈-계획-donation-planner)
 3. [Calculation Logic & Formulas](#3-calculation-logic--formulas)
    - [3.1 Domain Constants](#31-domain-constants)
@@ -101,7 +101,7 @@ com.example.myapplication
 │   ├── MedicationRecord.kt          Room @Entity: one drug intake
 │   ├── RestrictedDrug.kt            Catalog entry
 │   ├── DrugProduct.kt               Product dictionary entry + DrugRoute (먹는 약/주사/외용)
-│   ├── BloodCenter.kt               One 헌혈의 집 and its 성분헌혈 machines
+│   ├── BloodCenter.kt               One 헌혈의 집 or 헌혈카페 and its 성분헌혈 machines; DonationPlaceKind
 │   └── ThemeMode.kt                 SYSTEM / LIGHT / DARK
 ├── domain/                          Pure calculation — the rules engine
 │   ├── DonationCalculatorEngine.kt  Interval / annual count / annual volume rules
@@ -110,8 +110,8 @@ com.example.myapplication
 │   ├── DrugProductSearch.kt         상품명 search + product → catalog entry matching
 │   ├── IntegratedEligibility.kt     Merges donation + medication constraints
 │   ├── CertificateParser.kt         OCR text → structured certificate fields
-│   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈의 집
-│   ├── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈의 집
+│   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈 장소
+│   ├── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈 장소
 │   └── DonationPlan.kt              Checking a plan, filling earliest days, planned volume
 ├── data/                            Persistence + device I/O
 │   ├── DonationStateStore.kt        SharedPreferences (profile, records, theme)
@@ -121,14 +121,14 @@ com.example.myapplication
 │   ├── LocalDateConverters.kt       Room TypeConverter (ISO-8601 text)
 │   ├── ProhibitedDrugRepository.kt  Bundled JSON asset loader
 │   ├── DrugProductRepository.kt     Bundled product dictionary loader
-│   ├── BloodCenterRepository.kt     Bundled 헌혈의 집 list loader
+│   ├── BloodCenterRepository.kt     Bundled 헌혈의 집 / 헌혈카페 list loader
 │   └── CertificateTextRecognizer.kt OCR pipeline (CameraX output → ML Kit)
 └── ui/                              Compose screens + ViewModels
     ├── BloodDonationCalculatorScreen.kt  Root screen, nav, all main composables
     ├── DonationViewModel.kt
     ├── ThemeViewModel.kt
     ├── ProhibitedDrugSearchScreen.kt / ...ViewModel.kt
-    ├── BloodCenterListScreen.kt / ...ViewModel.kt  헌혈의 집 tab (province chips, search, list)
+    ├── BloodCenterListScreen.kt / ...ViewModel.kt  헌혈 장소 tab (kind toggle, province chips, search, list)
     ├── PreferredProvinceCard.kt     마이페이지's 자주 헌혈하는 지역 picker
     ├── DonationPlannerScreen.kt     헌혈 계획 page, opened from 현황's calendar
     ├── MedicationHistoryCard.kt
@@ -284,11 +284,15 @@ They read `LocalDarkTheme` rather than `isSystemInDarkTheme()` so an explicit in
 
 `ThemeMode.forDarkSelection` means flipping the switch always commits to `LIGHT` or `DARK` — never back to `SYSTEM` — so the choice survives the device later switching itself.
 
-### 2.8 헌혈의 집 목록 (Blood Center List)
+### 2.8 헌혈 장소: 헌혈의 집·헌혈카페 (Donation Places)
 
-The 📍 헌혈의 집 tab lists every 헌혈의 집 from 대한적십자사's open data, with province chips (서울, 경기, … each with its count), machine chips (혈소판 가능, Trima, Amicus, …) and a search over name, 혈액원 and address. Each row counts the center's 성분헌혈 machines ("혈장 3 · 혈소판 2"). Tapping a row expands it to show the models, the phone number, 전화하기 (`ACTION_DIAL`) and 지도에서 보기 — a `map.kakao.com/link/search/…` URL, which opens Kakao Map if installed and the mobile web otherwise. The app itself makes no network call and needs no extra permission; dialing and maps are handed to other apps.
+The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌혈카페 19], above everything else. 헌혈의 집 (the default) lists every 헌혈의 집 from 대한적십자사's open data; 헌혈카페 lists 한마음혈액원's 헌혈카페 (see below). Under the toggle, either list gets the same province chips (서울, 경기, … each with its count), machine chips (혈소판 가능, Trima, Amicus, …) and a search over name, 혈액원 and address. Each row counts the center's 성분헌혈 machines ("혈장 3 · 혈소판 2"). Tapping a row expands it to show the models, the phone number, 전화하기 (`ACTION_DIAL`) and 지도에서 보기 — a `map.kakao.com/link/search/…` URL, which opens Kakao Map if installed and the mobile web otherwise. The app itself makes no network call and needs no extra permission; dialing and maps are handed to other apps.
 
 **Data.** `tools/build_blood_centers.py` converts the CSV (`tools/data/*헌혈의집*.csv`, CP949; 공공데이터포털 [「대한적십자사_헌혈의집 정보」](https://www.data.go.kr/data/15050729/fileData.do), licensed 이용허락범위 제한 없음 and updated yearly) into `assets/blood_centers.json` (UTF-8). The date in the CSV's file name is shown under the list as "기준" date. The same script merges each center's machines from `tools/data/*mechanical*.csv`, transcribed from 헤마토필리아's post [「헌혈의집 성분채혈기기 현황」](https://gall.dcinside.com/mgallery/board/view/?id=blooddonation&no=79901) on DC Inside's 헌혈 마이너 갤러리. Its file name carries its date too, and the list credits the post with that date. The CSV has one "<model> (혈장)" or "<model> (혈소판)" column per model (its 합계 row is skipped), and each center gets `"machines": {"plasma": {...}, "platelet": {...}}` listing only the models it has. The two files name a few centers differently (고속터미널센터/고속터미널역센터, 신매센터/신매광장센터); `NAME_ALIASES` maps those. The script prints any machine row with no matching center (skipped) and any center with no machine row, which gets no `machines` and shows 기기 정보 없음. To update, drop a newer CSV into `tools/data/`, re-run the script and read its warnings.
+
+**헌혈카페.** 한마음혈액원 — a separate blood service from 대한적십자사 — runs 19 헌혈카페 in 서울, 경기, 인천 and 대전, which the 대한적십자사 dataset doesn't include. `tools/data/hanmaeum_blood_cafes_<date>.csv` is transcribed from each cafe's page under 「헌혈카페 찾기」 on [bloodnet.or.kr](https://www.bloodnet.or.kr/) (the site needs JavaScript, so it was read in a browser, not scraped), and `tools/build_blood_cafes.py` turns it into `assets/blood_cafes.json` in the same shape as `blood_centers.json`, plus `hours` (평일, 주말·공휴일 and 점심시간, one per line) and `parking`. The pages list only each cafe's 혈소판 machines (Amicus, MCS, Trima), so a cafe has `"machines": {"platelet": {...}}` and no `plasma` key; `CenterMachines.plasma` is then null, which reads 혈장 정보 없음 rather than 없음 and never matches a 혈장 model chip. The site writes the building number with a full stop ("옥정로 218. 신운정튼튼프라자"), which the script turns into a comma so `mapQueryOf` finds the road address. The CSV's date is when the pages were read, shown as "수집" since the pages themselves were last edited between 2021 and 2026. To update, read the pages again, save a newer CSV and re-run the script.
+
+**Kind toggle.** `BloodCenterListViewModel` loads both lists through two `BloodCenterRepository` instances (one per asset) and shows one at a time. A list that fails to load leaves its toggle without a count and shows its own error, while the other still works. Switching keeps the search and the province chip — "수원" means the same in both — unless the other list has nothing in that province (부산 has no 헌혈카페), and clears the machine chip and the open row. Machine chips are computed per list by `narrowingMachineCounts`, which drops any chip every place has: every 헌혈카페 has Amicus, MCS and Trima, so the 헌혈카페 list has no machine row at all. The search placeholder, the open row (a 헌혈카페 adds 🕘 hours and 🅿️ parking) and the credit under the list follow the toggle. `searchCenters` ignores "헌혈카페" as it does "헌혈의 집", since people type it in front of a name but no searched field contains it.
 
 **Province vs 혈액원.** Chips group by the province in the address (`provinceOf`), not by 혈액원, because a 혈액원 can run centers in a neighbouring province (서울중앙 runs 고양's). Long spellings (서울특별시, 경기도, …) and the 2026 merged name 전남광주 are folded into the short forms.
 

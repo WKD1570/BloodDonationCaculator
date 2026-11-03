@@ -2,6 +2,7 @@ package com.example.myapplication.data
 
 import com.example.myapplication.domain.PROVINCE_ORDER
 import com.example.myapplication.domain.provinceOf
+import com.example.myapplication.domain.roadAddressOf
 import com.example.myapplication.model.CenterMachines
 import java.io.File
 import org.junit.Assert.assertEquals
@@ -81,14 +82,58 @@ class BloodCenterRepositoryTest {
             {"centers": [
               {"name": "A센터", "address": "서울"},
               {"name": "B센터", "address": "서울", "machines": {"plasma": {}, "platelet": {}}},
-              {"name": "C센터", "address": "서울", "machines": {}}
+              {"name": "C센터", "address": "서울", "machines": {"platelet": {}}}
             ]}
             """.trimIndent()
         )
-        val none = CenterMachines(plasma = emptyMap(), platelet = emptyMap())
         assertNull(list.centers[0].machines)
-        assertEquals(none, list.centers[1].machines)
-        assertEquals(none, list.centers[2].machines)
+        assertEquals(CenterMachines(plasma = emptyMap(), platelet = emptyMap()), list.centers[1].machines)
+        // No "plasma" at all means the source doesn't say, as for 헌혈카페 - not that there are none.
+        assertEquals(CenterMachines(plasma = null, platelet = emptyMap()), list.centers[2].machines)
+    }
+
+    @Test
+    fun `parses a 헌혈카페's hours and parking, which 헌혈의 집 don't have`() {
+        val list = parse(
+            """
+            {"source": "hanmaeum_blood_cafes_20261103.csv", "centers": [{
+              "bloodBank": "한마음", "name": "홍대점", "type": "헌혈카페",
+              "address": "서울특별시 마포구 양화로 176, Y'Z Park 5층", "phone": "02-338-1104",
+              "hours": "평일 11:00~20:00\n주말·공휴일 09:00~18:00\n점심시간 13:00~14:00",
+              "parking": " 지원 가능 · 건물 내(지하) ",
+              "machines": {"platelet": {"Amicus": 1, "MCS": 2, "Trima": 1}}
+            }, {"name": "A센터", "address": "서울", "hours": " ", "parking": null}]}
+            """.trimIndent()
+        )
+        val cafe = list.centers[0]
+        assertEquals("한마음혈액원", cafe.bloodBankLabel)
+        assertEquals(null, cafe.placeLabel)
+        assertEquals(listOf("평일 11:00~20:00", "주말·공휴일 09:00~18:00", "점심시간 13:00~14:00"), cafe.hours?.lines())
+        assertEquals("지원 가능 · 건물 내(지하)", cafe.parking)
+        assertEquals(CenterMachines(plasma = null, platelet = mapOf("Amicus" to 1, "MCS" to 2, "Trima" to 1)), cafe.machines)
+        assertEquals("2026.11.03", list.asOf)
+        assertNull(list.centers[1].hours)
+        assertNull(list.centers[1].parking)
+    }
+
+    @Test
+    fun `bundled 헌혈카페 parse with hours, parking and 혈소판 machines, in known provinces`() {
+        val list = File("src/main/assets/$BLOOD_CAFES_ASSET").inputStream().use { parseBloodCenters(it, BLOOD_CAFES_ASSET) }
+        assertEquals(19, list.centers.size)
+        assertEquals(list.centers.size, list.centers.map { it.id }.toSet().size)
+        assertTrue(list.asOf != null)
+        list.centers.forEach { cafe ->
+            val label = "${cafe.name}: ${cafe.address}"
+            assertEquals(label, "한마음", cafe.bloodBank)
+            assertTrue(label, provinceOf(cafe.address) in PROVINCE_ORDER)
+            // Map search needs the building number, which every cafe's address has.
+            assertTrue(label, roadAddressOf(cafe.address) != null)
+            assertTrue(label, cafe.phone.isNotBlank())
+            assertTrue(label, cafe.hours?.startsWith("평일 ") == true)
+            assertTrue(label, cafe.parking != null)
+            assertNull(label, cafe.machines?.plasma)
+            assertTrue(label, cafe.machines?.platelet.orEmpty().isNotEmpty())
+        }
     }
 
     @Test

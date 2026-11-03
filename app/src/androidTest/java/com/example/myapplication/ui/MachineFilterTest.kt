@@ -15,7 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * The machine chips and each center's machines on the 헌혈의 집 tab. Reads the bundled
+ * The machine chips and each center's machines on the 헌혈 장소 tab (헌혈의 집 list). Reads the bundled
  * `blood_centers.json`, where 서울역센터 has PCS2 2 and Trima 1, 신도림테크노마트센터 has no 혈소판
  * machine, and 매봉센터's only 혈소판 machine is an Amicus - each the one center its search finds.
  */

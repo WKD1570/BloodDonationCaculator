@@ -101,8 +101,11 @@ fun roadAddressOf(address: String): String? {
 fun mapQueryOf(center: BloodCenter): String =
     roadAddressOf(center.address) ?: tokens(center.address.substringBefore(',')).joinToString(" ")
 
-/** The "헌혈의 집" people habitually type in front of a name is in every row, so it matches nothing. */
-private val NOISE = listOf("헌혈의 집", "헌혈의집")
+/**
+ * The "헌혈의 집" or "헌혈카페" people habitually type in front of a name applies to every row of its
+ * list, so it matches nothing.
+ */
+private val NOISE = listOf("헌혈의 집", "헌혈의집", "헌혈 카페", "헌혈카페")
 
 private fun BloodCenter.searchText(): String =
     "$name $bloodBank 혈액원 $address ${placeLabel.orEmpty()}".replace(" ", "")

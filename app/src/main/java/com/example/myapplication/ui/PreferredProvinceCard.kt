@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.sp
 import com.example.myapplication.domain.PROVINCE_ORDER
 
 /**
- * 자주 헌혈하는 지역 on 마이페이지: one province, whose centers the 헌혈의 집 tab lists first under
- * 전체 and whose chip it moves up front. Tapping the picked one again clears it.
+ * 자주 헌혈하는 지역 on 마이페이지: one province, whose 헌혈의 집 and 헌혈카페 the 헌혈 장소 tab lists
+ * first under 전체 and whose chip it moves up front. Tapping the picked one again clears it.
  */
 @Composable
 internal fun PreferredProvinceCard(
@@ -43,9 +43,9 @@ internal fun PreferredProvinceCard(
             Spacer(Modifier.height(4.dp))
             Text(
                 if (selected == null) {
-                    "고른 지역의 센터를 헌혈의 집 탭에서 먼저 보여드려요."
+                    "고른 지역의 헌혈의 집·헌혈카페를 헌혈 장소 탭에서 먼저 보여드려요."
                 } else {
-                    "헌혈의 집 탭에서 $selected 센터를 먼저 보여드려요.\n한 번 더 누르면 해제돼요."
+                    "헌혈 장소 탭에서 $selected 지역을 먼저 보여드려요.\n한 번 더 누르면 해제돼요."
                 },
                 fontSize = 11.sp,
                 color = TextTertiary,

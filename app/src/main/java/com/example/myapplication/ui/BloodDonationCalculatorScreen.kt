@@ -144,7 +144,7 @@ private enum class Screen(val label: String, val icon: String) {
     STATUS("현황", "🩸"),
     INPUT("헌혈 입력", "📝"),
     MEDICAL("의료 정보", "🩺"),
-    CENTERS("헌혈의 집", "📍"),
+    CENTERS("헌혈 장소", "📍"),
     MYPAGE("마이페이지", "🧍")
 }
 

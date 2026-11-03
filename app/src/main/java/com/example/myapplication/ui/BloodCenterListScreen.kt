@@ -27,8 +27,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -43,6 +45,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -52,6 +55,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -67,16 +71,18 @@ import com.example.myapplication.domain.modelList
 import com.example.myapplication.domain.preferredFirst
 import com.example.myapplication.domain.splitPreferred
 import com.example.myapplication.model.BloodCenter
+import com.example.myapplication.model.DonationPlaceKind
 import com.example.myapplication.model.DonationType
 
 /** List key of the 다른 지역 heading that follows the 자주 헌혈하는 지역's centers. */
 internal const val OTHERS_HEADING_KEY = "others-heading"
 
 /**
- * 헌혈의 집 목록: every center from 대한적십자사's list, narrowed by province and machine chips and
- * search. Each row counts the center's 성분헌혈 machines; tapping it opens the models, its phone
- * number, 전화하기 and 지도에서 보기, which hand off to the phone's dialer and map app - the app
- * itself makes no network calls.
+ * 헌혈 장소: a 헌혈의 집 / 헌혈카페 toggle over two lists - every 헌혈의 집 from 대한적십자사's list,
+ * or every 헌혈카페 from 한마음혈액원's site - each narrowed by province and machine chips and search.
+ * Each row counts the place's 성분헌혈 machines; tapping it opens the models, its phone number (and a
+ * 헌혈카페's hours and parking), 전화하기 and 지도에서 보기, which hand off to the phone's dialer and
+ * map app - the app itself makes no network calls.
  *
  * [preferredProvince] is 마이페이지's 자주 헌혈하는 지역. Its chip comes right after 전체, and under
  * 전체 its centers are listed first under their own heading, then 다른 지역. It's taken as a
@@ -97,6 +103,9 @@ fun BloodCenterListScreen(
     val (preferred, others) = remember(state.visible, state.province, preferredProvince) {
         splitPreferred(state.visible, state.province, preferredProvince)
     }
+    val listState = rememberLazyListState()
+    // The other kind's list starts from its top, not wherever this one was scrolled to.
+    LaunchedEffect(state.kind) { listState.scrollToItem(0) }
 
     // Back undoes the narrowing a step at a time - search, then machine, then province - before
     // it leaves the app.
@@ -112,15 +121,28 @@ fun BloodCenterListScreen(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Search and chips stay put while the list scrolls underneath.
+        // The toggle, search and chips stay put while the list scrolls underneath.
         Column(
             modifier = Modifier
                 .widthIn(max = 640.dp)
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
         ) {
+            KindToggle(
+                counts = state.kindCounts,
+                selected = state.kind,
+                onSelect = {
+                    focusManager.clearFocus()
+                    viewModel.onKindSelect(it)
+                }
+            )
+            Spacer(Modifier.height(10.dp))
             SearchField(
                 query = state.query,
+                placeholder = when (state.kind) {
+                    DonationPlaceKind.CENTER -> "센터 이름·지역 검색 (예: 강남, 서면)"
+                    DonationPlaceKind.CAFE -> "카페 이름·지역 검색 (예: 홍대, 수원)"
+                },
                 onQueryChange = viewModel::onQueryChange,
                 onSearch = { focusManager.clearFocus() }
             )
@@ -154,6 +176,7 @@ fun BloodCenterListScreen(
                 .weight(1f)
                 .widthIn(max = 640.dp)
                 .fillMaxWidth(),
+            state = listState,
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -203,15 +226,24 @@ fun BloodCenterListScreen(
                     centerRows(others)
                     item(key = "source") {
                         Text(
-                            buildString {
-                                append("헌혈의 집: 공공데이터포털 「대한적십자사_헌혈의집 정보」")
-                                state.asOf?.let { append(" (${it} 기준)") }
-                                // The machines come from a donor community's post, credited to its author.
-                                if (state.machines.isNotEmpty()) {
-                                    append("\n성분헌혈 기기: 헌혈 마이너 갤러리 헤마토필리아님의 「헌혈의집 성분채혈기기 현황」")
-                                    state.machinesAsOf?.let { append(" (${it} 기준)") }
+                            when (state.kind) {
+                                DonationPlaceKind.CENTER -> buildString {
+                                    append("헌혈의 집: 공공데이터포털 「대한적십자사_헌혈의집 정보」")
+                                    state.asOf?.let { append(" (${it} 기준)") }
+                                    // The machines come from a donor community's post, credited to its author.
+                                    if (state.machines.isNotEmpty()) {
+                                        append("\n성분헌혈 기기: 헌혈 마이너 갤러리 헤마토필리아님의 「헌혈의집 성분채혈기기 현황」")
+                                        state.machinesAsOf?.let { append(" (${it} 기준)") }
+                                    }
+                                    append("\n운영 시간·휴무일과 성분헌혈 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
                                 }
-                                append("\n운영 시간·휴무일과 성분헌혈 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
+                                // The cafes' pages were last edited years apart, so the date is when they were read.
+                                DonationPlaceKind.CAFE -> buildString {
+                                    append("헌혈카페: 한마음혈액원 홈페이지 「헌혈카페 찾기」")
+                                    state.asOf?.let { append(" (${it} 수집)") }
+                                    append("\n헌혈카페는 혈소판 채혈 기기만 공개해 혈장 기기는 정보 없음으로 표시해요.")
+                                    append("\n운영 시간·주차와 기기는 바뀔 수 있으니 방문 전에 전화로 확인해 주세요.")
+                                }
                             },
                             fontSize = 10.sp,
                             color = TextTertiary,
@@ -228,15 +260,67 @@ fun BloodCenterListScreen(
     }
 }
 
+/**
+ * 헌혈의 집 | 헌혈카페, each with how many places it has: a two-way switch above everything else,
+ * since the search and chips below apply to whichever list it picks.
+ */
 @Composable
-private fun SearchField(query: String, onQueryChange: (String) -> Unit, onSearch: () -> Unit) {
+private fun KindToggle(
+    counts: Map<DonationPlaceKind, Int>,
+    selected: DonationPlaceKind,
+    onSelect: (DonationPlaceKind) -> Unit
+) {
+    val shape = RoundedCornerShape(14.dp)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .background(CardBg)
+            .border(1.dp, CardBorder, shape)
+            .padding(4.dp)
+            .selectableGroup(),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        DonationPlaceKind.entries.forEach { kind ->
+            val active = kind == selected
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(if (active) Accent else Color.Transparent)
+                    .selectable(selected = active, onClick = { onSelect(kind) }, role = Role.Tab)
+                    .padding(vertical = 9.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    kind.label,
+                    fontSize = 14.sp,
+                    fontWeight = if (active) FontWeight.Bold else FontWeight.Medium,
+                    color = if (active) Color.White else TextPrimary
+                )
+                counts[kind]?.let { count ->
+                    Spacer(Modifier.width(5.dp))
+                    Text(
+                        count.toString(),
+                        fontSize = 12.sp,
+                        color = if (active) Color.White.copy(alpha = 0.8f) else TextTertiary
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SearchField(query: String, placeholder: String, onQueryChange: (String) -> Unit, onSearch: () -> Unit) {
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         shape = RoundedCornerShape(14.dp),
-        placeholder = { Text("센터 이름·지역 검색 (예: 강남, 서면)", fontSize = 13.sp, color = TextTertiary) },
+        placeholder = { Text(placeholder, fontSize = 13.sp, color = TextTertiary) },
         leadingIcon = { Text("🔍", fontSize = 15.sp) },
         trailingIcon = if (query.isNotEmpty()) {
             {
@@ -405,7 +489,10 @@ private fun CenterRow(
                 Spacer(Modifier.height(8.dp))
                 if (center.phone.isNotBlank()) DetailLine("☎", center.phone)
                 if (center.bloodBankLabel.isNotBlank()) DetailLine("🏥", center.bloodBankLabel)
-                center.machines?.takeIf { it.plasma.isNotEmpty() || it.platelet.isNotEmpty() }?.let { machines ->
+                center.hours?.let { DetailLine("🕘", it) }
+                center.parking?.let { DetailLine("🅿️", it) }
+                // Machine lines unless it has none at all; 헌혈카페 get a 혈장 line of 정보 없음.
+                center.machines?.takeIf { it.plasma == null || it.plasma.isNotEmpty() || it.platelet.isNotEmpty() }?.let { machines ->
                     MachineLine(DonationType.PLASMA, "혈장", machines.plasma)
                     MachineLine(DonationType.PLATELET, "혈소판", machines.platelet)
                 }
@@ -436,17 +523,18 @@ private fun CenterRow(
     }
 }
 
+/** An icon and its text, the icon level with the first line when the text runs to several (hours). */
 @Composable
 private fun DetailLine(icon: String, text: String) {
-    Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text(icon, fontSize = 12.sp, modifier = Modifier.width(22.dp))
-        Text(text, fontSize = 13.sp, color = TextPrimary)
+    Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.Top) {
+        Text(icon, fontSize = 12.sp, lineHeight = 18.sp, modifier = Modifier.width(22.dp))
+        Text(text, fontSize = 13.sp, lineHeight = 18.sp, color = TextPrimary)
     }
 }
 
-/** One kind's models in an open row, its dot in that 헌혈's color from 현황. */
+/** One kind's models in an open row, its dot in that 헌혈's color from 현황. Null [models] reads 정보 없음. */
 @Composable
-private fun MachineLine(type: DonationType, kind: String, models: Map<String, Int>) {
+private fun MachineLine(type: DonationType, kind: String, models: Map<String, Int>?) {
     Row(modifier = Modifier.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.width(22.dp)) {
             Box(
@@ -458,7 +546,7 @@ private fun MachineLine(type: DonationType, kind: String, models: Map<String, In
             )
         }
         Text(kind, fontSize = 13.sp, color = TextSecondary, modifier = Modifier.width(48.dp))
-        Text(modelList(models), fontSize = 13.sp, color = if (models.isEmpty()) TextTertiary else TextPrimary)
+        Text(modelList(models), fontSize = 13.sp, color = if (models.isNullOrEmpty()) TextTertiary else TextPrimary)
     }
 }
 

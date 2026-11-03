@@ -119,6 +119,21 @@ class BloodCenterSearchTest {
         assertEquals(centers, searchCenters(centers, ""))
         assertEquals(centers, searchCenters(centers, "  "))
         assertEquals(centers, searchCenters(centers, "헌혈의집"))
+        assertEquals(centers, searchCenters(centers, "헌혈카페"))
+    }
+
+    @Test
+    fun `헌혈카페 search ignores 헌혈카페 and finds the 한마음혈액원 and short province spellings`() {
+        val hongdae = center("홍대점", "서울특별시 마포구 양화로 176, Y'Z Park 5층", bloodBank = "한마음", type = "헌혈카페")
+        val suwon = center("수원점", "경기도 수원시 팔달구 향교로 1 (투썸플레이스 건물)", bloodBank = "한마음", type = "헌혈카페")
+        val cafes = listOf(hongdae, suwon)
+
+        assertEquals(listOf(hongdae), searchCenters(cafes, "헌혈카페 홍대"))
+        assertEquals(listOf(suwon), searchCenters(cafes, "헌혈 카페 수원점"))
+        assertEquals(cafes, searchCenters(cafes, "한마음"))
+        assertEquals(listOf(hongdae), filterCenters(cafes, "", "서울"))
+        assertEquals(listOf("서울" to 1, "경기" to 1), provinceCounts(cafes))
+        assertEquals("경기도 수원시 팔달구 향교로 1", roadAddressOf(suwon.address))
     }
 
     @Test

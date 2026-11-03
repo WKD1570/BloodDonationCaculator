@@ -78,5 +78,42 @@ class BloodCenterMachinesTest {
     fun `the open row lists each model with its count`() {
         assertEquals("Nexsys 1 · Aurora 2", modelList(mapOf("Nexsys" to 1, "Aurora" to 2)))
         assertEquals("없음", modelList(emptyMap()))
+        assertEquals("정보 없음", modelList(null))
+    }
+
+    // 헌혈카페 publish only their 혈소판 machines, so their 혈장 machines are unknown (null), not none.
+    private fun cafe(name: String, platelet: Map<String, Int>) =
+        BloodCenter("한마음", name, "헌혈카페", "서울특별시 마포구 양화로 176", "02-000-0000", CenterMachines(plasma = null, platelet = platelet))
+
+    private val hongdae = cafe("홍대점", mapOf("Amicus" to 1, "MCS" to 2, "Trima" to 1))
+    private val gupabal = cafe("구파발점", mapOf("Amicus" to 1, "MCS" to 1))
+
+    @Test
+    fun `a 혈장 kind the source doesn't report reads 정보 없음, not 없음`() {
+        assertEquals("혈장 정보 없음 · 혈소판 4", machineSummary(hongdae.machines))
+        assertEquals("혈장 정보 없음 · 혈소판 없음", machineSummary(CenterMachines(plasma = null, platelet = emptyMap())))
+    }
+
+    @Test
+    fun `unreported 혈장 adds no chips and matches no 혈장 model`() {
+        assertEquals(
+            listOf(
+                MachineFilter.AnyPlatelet to 2,
+                MachineFilter.Model("MCS") to 2, // ties with Amicus on cafes, has more machines
+                MachineFilter.Model("Amicus") to 2,
+                MachineFilter.Model("Trima") to 1
+            ),
+            machineCounts(listOf(hongdae, gupabal))
+        )
+        assertEquals(listOf(hongdae), filterCenters(listOf(hongdae, gupabal), "", null, MachineFilter.Model("Trima")))
+        assertEquals(emptyList<BloodCenter>(), filterCenters(listOf(hongdae, gupabal), "", null, MachineFilter.Model("PCS2")))
+    }
+
+    @Test
+    fun `chips every place has are left out, since they'd select everything`() {
+        assertEquals(listOf(MachineFilter.Model("Trima") to 1), narrowingMachineCounts(listOf(hongdae, gupabal)))
+        assertEquals(emptyList<Pair<MachineFilter, Int>>(), narrowingMachineCounts(listOf(hongdae)))
+        // Among 헌혈의 집 none is everywhere, so every chip stays.
+        assertEquals(machineCounts(all), narrowingMachineCounts(all))
     }
 }

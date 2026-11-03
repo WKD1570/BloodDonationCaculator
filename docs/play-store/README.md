@@ -36,7 +36,7 @@ Alternative: `연간채혈량 계산기`, the title shown inside the app. The la
 **간단한 설명** (80자 이내):
 
 ```
-헌혈 기록으로 다음 헌혈 가능일과 연간 채혈량을 계산하고, 헌혈의 집과 성분헌혈 기기를 찾아보세요.
+헌혈 기록으로 다음 헌혈 가능일과 연간 채혈량을 계산하고, 헌혈의 집·헌혈카페와 성분헌혈 기기를 찾아보세요.
 ```
 
 **자세한 설명** (4000자 이내):
@@ -59,11 +59,12 @@ Alternative: `연간채혈량 계산기`, the title shown inside the app. The la
 · 감염병 이력과 해외 방문·말라리아·vCJD 위험지역 체류를 입력하면 제한 기간을 계산합니다.
 · Google 지도 타임라인 파일에서 위험지역 체류를 찾아 줍니다.
 
-■ 헌혈의 집
-· 전국 헌혈의 집을 지역별로 찾고 검색할 수 있습니다.
+■ 헌혈 장소
+· 전국 헌혈의 집과 한마음혈액원 헌혈카페를 버튼 하나로 바꿔 가며 지역별로 찾고 검색할 수 있습니다.
 · 센터마다 성분헌혈 기기(혈장·혈소판, 기종별)를 보여주고, 혈소판 가능 여부나 기기 종류로 센터를 찾을 수 있습니다.
+· 헌혈카페는 운영 시간과 주차 안내, 혈소판 채혈 기기를 함께 보여줍니다.
 · 전화하기와 지도에서 보기(카카오맵)로 바로 연결됩니다.
-· 마이페이지에서 자주 헌혈하는 지역을 정하면 그 지역 센터가 맨 위에 나옵니다.
+· 마이페이지에서 자주 헌혈하는 지역을 정하면 그 지역 헌혈 장소가 맨 위에 나옵니다.
 
 ■ 마이페이지
 · 나이·체중·신장·성별로 헌혈 신체 기준을 확인하고 예측 혈량을 보여줍니다.
@@ -72,24 +73,25 @@ Alternative: `연간채혈량 계산기`, the title shown inside the app. The la
 입력한 정보는 모두 기기에만 저장됩니다. 회원가입도 서버도 없습니다.
 
 ■ 꼭 읽어 주세요
-· 이 앱은 개인이 만든 비공식 앱으로, 대한적십자사와 관련이 없습니다.
+· 이 앱은 개인이 만든 비공식 앱으로, 대한적십자사·한마음혈액원과 관련이 없습니다.
 · 이 앱은 의료기기가 아니며, 질병을 진단·치료·치유·예방하지 않습니다. 실제 헌혈 가능 여부는 헌혈의 집 문진과 검사로 결정되니, 건강에 관한 판단은 의사 등 의료 전문가와 상담하세요.
 · 헌혈 기준·약물·지역·기기 정보는 공개 자료를 바탕으로 정리했으며, 빠졌거나 바뀐 내용이 있을 수 있습니다.
 
-자료 출처: 대한적십자사 공개 자료, 공공데이터포털 「대한적십자사_헌혈의집 정보」(2026.07.01 기준), 디시인사이드 헌혈 마이너 갤러리 「헌혈의집 성분채혈기기 현황」(헤마토필리아, 2026.10.14 기준)
+자료 출처: 대한적십자사 공개 자료, 공공데이터포털 「대한적십자사_헌혈의집 정보」(2026.07.01 기준), 디시인사이드 헌혈 마이너 갤러리 「헌혈의집 성분채혈기기 현황」(헤마토필리아, 2026.10.14 기준), 한마음혈액원 홈페이지 「헌혈카페 찾기」(2026.11.03 수집)
 문의: p9131015@naver.com
 ```
 
 Before publishing, check the data rights:
 
 - **Machine data.** The 성분헌혈 machine counts are transcribed from 헤마토필리아's post [「헌혈의집 성분채혈기기 현황 (26.10.14. 기준)」](https://gall.dcinside.com/mgallery/board/view/?id=blooddonation&no=79901) on DC Inside's 헌혈 마이너 갤러리. The post states no reuse terms, so ask the author for permission before release, by commenting on the post or messaging them in the gallery. Keep the credit, which is already in the 자료 출처 line above and under the app's 헌혈의 집 list. If they decline, take the machine data out of the app before releasing.
+- **Cafe list.** The 19 헌혈카페 — address, phone, hours, parking and 혈소판 machines — are transcribed from each cafe's page under 「헌혈카페 찾기」 on 한마음혈액원's site ([bloodnet.or.kr](https://www.bloodnet.or.kr/)), which isn't an open-data release. Check the site's terms, or ask 한마음혈액원 (by phone or its 고객의 소리) whether listing them in the app is fine. Keep the credit, which is in the 자료 출처 line above and under the app's 헌혈카페 list. If they object, take the cafes out before releasing: removing only `blood_cafes.json` would leave a 헌혈카페 button that shows a load error.
 - **Center list.** The 공공데이터포털 dataset [「대한적십자사_헌혈의집 정보」](https://www.data.go.kr/data/15050729/fileData.do) is licensed 이용허락범위 제한 없음 (no restrictions). Attribution isn't required, but the app, this listing and the README cite it anyway.
 - **Dates.** The machine data (2026.10.14) is newer than the center list (2026.07.01). 화곡역센터, 가산센터 and 정읍가두 have machine data but aren't in the July list, and they're probably new. The portal updates the dataset once a year, and its current file is still the 2026.07.01 one. To list newer centers before the next update, they'd have to be added by hand.
 
 **첫 출시 출시 노트:**
 
 ```
-첫 출시: 헌혈 기록·다음 헌혈 가능일·연간 채혈량, 헌혈 제한 약물과 감염병·체류 이력, 전국 헌혈의 집과 성분헌혈 기기 찾기
+첫 출시: 헌혈 기록·다음 헌혈 가능일·연간 채혈량, 헌혈 제한 약물과 감염병·체류 이력, 전국 헌혈의 집·헌혈카페와 성분헌혈 기기 찾기
 ```
 
 ## App content answers
