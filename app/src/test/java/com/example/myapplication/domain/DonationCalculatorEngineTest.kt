@@ -228,6 +228,39 @@ class DonationCalculatorEngineTest {
         assertEquals(LocalDate.of(2026, 11, 2), eligibleDate)
     }
 
+    // Platelet donations recorded at 50mL each, so 30 of them (1,500mL) stay under the 2,160mL cap
+    // and only the yearly limit of 24 can bind: 6 from 2024, long expired, then 24 every 14 days
+    // from 2025-06-02 to 2026-04-20.
+    private fun platelets(first: LocalDate, count: Int, everyDays: Long, idFrom: Long) = (0 until count).map { i ->
+        DonationRecord(id = idFrom + i, type = DonationType.PLATELET, date = first.plusDays(everyDays * i), donatedVolumeMl = 50)
+    }
+
+    private val expiredPlatelets = platelets(LocalDate.of(2024, 1, 10), 6, 30, idFrom = 100)
+    private val pastYearPlatelets = platelets(LocalDate.of(2025, 6, 2), 24, 14, idFrom = 1)
+
+    @Test
+    fun `the yearly count limit binds even after older donations have expired`() {
+        // The 24th donation back (2025-06-02) expires 366 days on, which is later than the 14-day
+        // interval after the last one (2026-05-04). Taking the 2024 records for the oldest would
+        // see them expired and let a 25th platelet donation in the same year through.
+        val result = calcNext(DonationType.PLATELET, expiredPlatelets + pastYearPlatelets, LocalDate.of(2026, 5, 1))
+        assertEquals(LocalDate.of(2026, 6, 3), result.nextDate)
+        assertTrue(result.reasons.any { "연간 24회" in it.text })
+    }
+
+    @Test
+    fun `the yearly count limit doesn't bind with one donation fewer in the past year`() {
+        val result = calcNext(DonationType.PLATELET, expiredPlatelets + pastYearPlatelets.drop(1), LocalDate.of(2026, 5, 1))
+        assertEquals(LocalDate.of(2026, 5, 4), result.nextDate)
+        assertFalse(result.reasons.any { "연간 24회" in it.text })
+    }
+
+    @Test
+    fun `earliestEligibleDate blocks a 25th platelet donation within a year despite older history`() {
+        val eligibleDate = earliestEligibleDate(DonationType.PLATELET, expiredPlatelets + pastYearPlatelets, LocalDate.of(2026, 5, 10))
+        assertEquals(LocalDate.of(2026, 6, 3), eligibleDate)
+    }
+
     @Test
     fun `recording a stem cell donation is never blocked by blood donation limits`() {
         // 9 days after a whole blood donation, which blocks other blood donations for 56 days.

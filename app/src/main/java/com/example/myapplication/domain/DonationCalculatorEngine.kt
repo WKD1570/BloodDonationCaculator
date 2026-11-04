@@ -165,10 +165,13 @@ fun calcNext(
         }
     }
 
-    // Annual count-limit rule
+    // Annual count-limit rule: the donation [yearMax] back from the latest one of this type decides.
+    // Until it expires, the past year holds [yearMax] of them; once it has, at most [yearMax] - 1.
+    // The very first record would be the wrong one in a history longer than a year: it expired long
+    // ago, and the limit would never bind however many donations the past year holds.
     val yearMax = info.yearMax
     if (yearMax != null && ofType.size >= yearMax) {
-        val oldest = ofType.first()
+        val oldest = ofType[ofType.size - yearMax]
         val expDate = oldest.date.plusDays(366)
         if (expDate.isAfter(today)) {
             if (expDate.isAfter(nextDate)) nextDate = expDate

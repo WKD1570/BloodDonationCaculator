@@ -655,12 +655,9 @@ Born 2010-03-01, donating whole blood on 2026-09-01 → age at donation 16 → `
 
 These are current, verified behaviors of the implementation — documented so they are not mistaken for bugs in reading, and so they can be prioritized.
 
-1. **The annual count rule only inspects the single oldest record of a type.**
-   `calcNext` tests `ofType.size >= yearMax` against the *entire* history and then evaluates only `ofType.first()`. A donor with, say, ten lifetime whole-blood donations — five of them inside the last 12 months — will have `ofType.first()` point at a long-expired record, so `expDate.isAfter(today)` is false and **no constraint is applied**, even though the annual limit is genuinely exhausted. A correct implementation would count only records within the trailing 366 days and expire the oldest *of those*.
-   *(Rule 3 does not have this problem: its oldest-first walk continues past expired records until enough capacity is freed, so the record it lands on is the right one.)*
+1. ~~**The annual count rule only inspects the single oldest record of a type.**~~ Fixed 2026-11-03: `calcNext` now takes the donation `yearMax` back from the latest of that type (`ofType[ofType.size - yearMax]`). Until it expires the past year holds `yearMax` of them, and once it has, at most `yearMax - 1`, so a long history no longer hides an exhausted limit. Before, `ofType.first()` pointed at a long-expired record in any history over a year old. For whole blood the volume rule landed on the same date (5 × 430 mL already fills 2,160 mL), so the error showed mainly where a type's recorded volumes are small — covered by the platelet tests in `DonationCalculatorEngineTest`.
 
-2. **The cumulative-volume gauge shows a lifetime total, not a rolling year.**
-   `CumulativeVolumeGauge` and `VolumeProgressBar` compute `records.sumOf { it.volumeMl() }` over all stored records with no date window, then display it against the 2,160 mL *annual* limit. A donor with several years of history will read as 초과 (over limit) while actually being eligible.
+2. ~~**The cumulative-volume gauge shows a lifetime total.**~~ Fixed: `CumulativeVolumeGauge` sums `withinAnnualWindow(today)`, the past 366 days only.
 
 3. **Manually entered records carry no birth date.**
    `RecordFormDialog` does not collect one and passes `null` for age, so the 16–17-year-old reduced-volume rule cannot apply to hand-entered records. Scanned certificates are unaffected — `donatedVolumeMl` overrides the age path entirely.
