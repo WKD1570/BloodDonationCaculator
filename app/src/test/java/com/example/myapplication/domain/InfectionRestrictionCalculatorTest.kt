@@ -33,6 +33,31 @@ class InfectionRestrictionCalculatorTest {
     // ---- 감염병 ----
 
     @Test
+    fun `a procedure counts from its date and says what it is`() {
+        val r = diseaseRestriction(disease("내시경(위·대장)", LocalDate.of(2026, 10, 31)), rules)!!
+        assertEquals(LocalDate.of(2026, 11, 30), r.eligibleFrom)
+        assertEquals("시술·수술 · 1개월", r.detail)
+        assertEquals("내시경(위·대장) · 시술 후 1개월 제한 (10월 31일)", r.reasonText)
+    }
+
+    @Test
+    fun `a 24-hour vaccine and a same-day test are clear the next day`() {
+        val flu = diseaseRestriction(disease("독감(인플루엔자) 예방접종(주사)", LocalDate.of(2026, 11, 3)), rules)!!
+        assertEquals(LocalDate.of(2026, 11, 4), flu.eligibleFrom)
+        val pet = diseaseRestriction(disease("PET 등 핵의학검사", LocalDate.of(2026, 11, 3)), rules)!!
+        assertEquals(LocalDate.of(2026, 11, 4), pet.eligibleFrom)
+        val zoster = diseaseRestriction(disease("대상포진 예방접종", LocalDate.of(2026, 11, 3)), rules)!!
+        assertEquals(LocalDate.of(2026, 12, 1), zoster.eligibleFrom)
+    }
+
+    @Test
+    fun `a permanent surgery is a lifetime ban`() {
+        val r = diseaseRestriction(disease("심장수술(심혈관 질환)", LocalDate.of(2020, 5, 1)), rules)!!
+        assertTrue(r.isPermanent)
+        assertEquals("심장수술(심혈관 질환) → 영구 헌혈 금지", r.reasonText)
+    }
+
+    @Test
     fun `a fixed deferral counts from the treatment end date and blocks every type`() {
         val r = diseaseRestriction(disease("말라리아", LocalDate.of(2025, 2, 10)), rules)!!
         assertEquals(LocalDate.of(2028, 2, 10), r.eligibleFrom)

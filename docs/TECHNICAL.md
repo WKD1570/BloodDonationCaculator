@@ -32,6 +32,7 @@
    - [3.7 Derived Display Values](#37-derived-display-values)
    - [3.8 Worked Examples](#38-worked-examples)
    - [3.9 Known Limitations](#39-known-limitations)
+   - [3.10 판정기준 7차 개정판 반영](#310-판정기준-7차-개정판-반영)
 4. [OCR Implementation](#4-ocr-implementation)
    - [4.1 Pipeline Overview](#41-pipeline-overview)
    - [4.2 Image Acquisition](#42-image-acquisition)
@@ -266,8 +267,8 @@ Storage is split by shape, not by convenience:
 | Starred 헌혈 장소 | SharedPreferences (`favorite_places`) | One `혈액원/이름` id per line | A handful of ids; read once into `FavoritePlaceStore` |
 | 헌혈 알림 state | SharedPreferences (`donation_reminders`) | On/off, next check time, last check's eligible types and reminded plan day | Device-local; not in the backup file |
 | Medication history | Room (`donation.db`) | `medication_history` table | Needs reactive queries + ordering |
-| Drug catalog | `assets/prohibited_drugs.json` | JSON array (14 entries) | Read-only reference data, updatable without code changes |
-| Product dictionary | `assets/drug_products.json` | JSON object (226 products) | Read-only; links product names to ingredients for search, carries no restrictions |
+| Drug catalog | `assets/prohibited_drugs.json` | JSON array (50 entries) | Read-only reference data, updatable without code changes |
+| Product dictionary | `assets/drug_products.json` | JSON object (901 products) | Read-only; links product names to ingredients for search, carries no restrictions |
 
 **Donation record encoding.** One record per line, fields joined with `|`, free text URL-encoded so it can never contain a delimiter:
 
@@ -323,7 +324,7 @@ The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌
 
 더보기 under 현황's calendar opens 헌혈 계획, a page of its own (the bottom tabs hide while it's open, and back returns). Pick 전혈, 혈장 or 혈소판, then tap a day from today on to plan that type there; tapping a planned day takes it off. 가능한 날짜로 채우기 adds the chosen type on every earliest day it fits from today through 1, 3, 6 or 12 months. Below, each planned donation shows ✓ 가능 or ✗ with its first allowed day and the reason, under a summary of counts and the 1-year volume as of the last planned day (`plannedAnnualVolume`).
 
-**Checking a plan.** `checkPlan` walks the plan in date order and calls `integratedNextEligible` with the planned day standing in for "today", so a planned donation meets exactly the rules 현황 applies to the next one: intervals, yearly counts and the 2,160 mL limit from the records, medications, and 감염병·체류 restrictions. Records and planned donations after it can't bind it, because `calcNext` only looks at what's on or before its "today". An allowed planned donation is assumed to happen and joins the history for the ones after it; one that isn't allowed can't happen as planned, so it binds nothing.
+**Checking a plan.** `checkPlan` walks the plan in date order and calls `integratedNextEligible` with the planned day standing in for "today", so a planned donation meets exactly the rules 현황 applies to the next one: intervals, yearly counts and the 2,160 mL limit from the records, medications, and 질환·시술·접종·체류 restrictions. Records and planned donations after it can't bind it, because `calcNext` only looks at what's on or before its "today". An allowed planned donation is assumed to happen and joins the history for the ones after it; one that isn't allowed can't happen as planned, so it binds nothing.
 
 **Filling.** `fillPlan` steps through the days greedily. A day that already holds a planned donation is skipped; when the type isn't allowed yet, it jumps straight to the first allowed day, since nothing before then can change; and it never takes a day that would stop an already allowed planned donation from happening. A lifetime ban ends the fill.
 
@@ -333,7 +334,7 @@ The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌
 
 마이페이지's 백업·복원 card writes everything the donor entered to one file and restores it, so the records survive a new phone without a server. 파일로 내보내기 opens the system "create document" picker (`ActivityResultContracts.CreateDocument`), suggesting `헌혈기록_백업_YYYYMMDD.json`; the donor can save to the phone, a memory card or a cloud drive app. 파일에서 불러오기 opens the document picker, reads the file and asks before replacing anything. Neither needs a storage permission, and the app itself sends nothing anywhere.
 
-**Contents.** `AppBackup`: 마이페이지 (`DonorProfile`, including 자주 헌혈하는 지역), 헌혈 기록, 헌혈 계획, the 약·감염병·체류 이력 and the starred places. The theme and 헌혈 알림 are per-device settings and stay out. The file is indented UTF-8 JSON with ISO dates, `"format": "bdcalculator-backup"` and `"version": 1`. It isn't encrypted, and the card says what's in it.
+**Contents.** `AppBackup`: 마이페이지 (`DonorProfile`, including 자주 헌혈하는 지역), 헌혈 기록, 헌혈 계획, the 약·질환·시술·접종·체류 이력 and the starred places. The theme and 헌혈 알림 are per-device settings and stay out. The file is indented UTF-8 JSON with ISO dates, `"format": "bdcalculator-backup"` and `"version": 1`. It isn't encrypted, and the card says what's in it.
 
 **Reading.** `decodeBackup` refuses a file that isn't JSON, has another `format`, or a `version` newer than this app knows, each with a message the donor can act on; a file over 5 MB isn't read at all. Within a good file, an entry that can't be read (missing date, unknown type, a stay that ends before it starts) is skipped and counted, as are a repeated id and a second planned donation on one day. The confirmation dialog shows when the file was made, what it holds (`backupSummary`) and how many entries it skips.
 
@@ -345,7 +346,7 @@ The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌
 
 마이페이지's 헌혈 알림 switch turns on a morning check, around 9:00, that notifies when 전혈, 혈장 or 혈소판 has become possible again, and the day before a planned donation — including when that planned donation is no longer allowed. It's off until the donor turns it on.
 
-**The check.** `DonationReminders.runCheck` loads what's saved and works out `nextEligibleByType` and `checkPlan` the way 현황 does, so the dates take the 헌혈 간격, yearly limits and the 약·감염병·체류 restrictions together (rules that fail to load leave out the 감염병·체류 part, as on 현황). `checkReminders` (pure, in `domain/`) compares with the previous check's eligible types: a type is reminded about when it turns possible, so a check missed while the phone was off still reminds the next morning, and a type that has long been possible doesn't remind daily. Turning reminders on runs a silent check that only records how things stand. Tomorrow's planned donations are reminded about once, remembered by date.
+**The check.** `DonationReminders.runCheck` loads what's saved and works out `nextEligibleByType` and `checkPlan` the way 현황 does, so the dates take the 헌혈 간격, yearly limits and the 약·질환·시술·접종·체류 restrictions together (rules that fail to load leave out the 질환·시술·접종·체류 part, as on 현황). `checkReminders` (pure, in `domain/`) compares with the previous check's eligible types: a type is reminded about when it turns possible, so a check missed while the phone was off still reminds the next morning, and a type that has long been possible doesn't remind daily. Turning reminders on runs a silent check that only records how things stand. Tomorrow's planned donations are reminded about once, remembered by date.
 
 **Scheduling.** A one-off `AlarmManager.setWindow` alarm (30-minute window, no exact-alarm permission) is set again after each check; a repeating inexact alarm was avoided because Android may hold back its first run for most of a day. The next check time is saved, and `ensureScheduled` — called from `MainActivity.onCreate` and `ReminderReceiver` on `BOOT_COMPLETED` and `MY_PACKAGE_REPLACED` — puts that same alarm back, which runs a check whose time has passed right away instead of skipping a day. The receiver uses `goAsync` and catches failures, so a bad check never crashes the app in the background and tomorrow's is still set.
 
@@ -364,7 +365,7 @@ All logic in this section lives in `domain/` and is pure: same inputs → same o
 |---|---|---|---|
 | `WHOLE_BLOOD` (전혈) | 430 | 56 | 5 |
 | `PLASMA` (혈장성분) | 45 | 14 | none |
-| `PLATELET` (혈소판성분) | 90 | 14 | 24 |
+| `PLATELET` (혈소판성분) | 90 | 14 | 24, counting every 성분헌혈 |
 
 > `defaultVolumeMl` for the apheresis types is the volume counted toward the **annual cumulative-volume limit**, not the total fluid processed during the procedure.
 
@@ -374,7 +375,7 @@ All logic in this section lives in `domain/` and is pure: same inputs → same o
 |---|---|---|
 | `ANNUAL_LIMIT_ML` | 2160 | Annual cumulative draw ceiling |
 | `WHOLE_BLOOD_ANNUAL_LIMIT` | 5 | Max whole-blood donations per year |
-| `PLATELET_ANNUAL_LIMIT` | 24 | Max platelet donations per year |
+| `PLATELET_ANNUAL_LIMIT` | 24 | Max 성분헌혈 (혈장·혈소판·백혈구 together, `APHERESIS_TYPES`) in the past year before a 혈소판성분헌혈 |
 | `WHOLE_BLOOD_DIAGNOSTIC_DRAW_ML` | 30 | Extra draw for diagnostic testing (whole blood only) |
 | `MIN_BLOOD_VOLUME_FOR_APHERESIS_ML` | 4000.0 | Minimum estimated blood volume for 성분헌혈 |
 | Record expiry window | 366 days | Days after which a record releases its annual capacity |
@@ -481,17 +482,18 @@ $$
 
 #### Rule 2 — Annual count limit
 
-Applies to whole blood (5/yr) and platelet (24/yr); plasma has no count limit (`yearMax == null`).
+Applies to whole blood (5/yr) and platelet (24/yr); plasma has no count limit (`yearMax == null`). What is counted is `TypeInfo.yearCountedTypes`: 전혈 counts only 전혈, but 혈소판 counts **every 성분헌혈** — 혈액관리법 시행규칙 별표 1의2 bars 혈소판 성분채혈 after 24 성분채혈 of any kind in the past year, so 혈장 and 백혈구 donations use up the same 24.
 
 ```kotlin
-if (yearMax != null && ofType.size >= yearMax) {
-    val oldest = ofType.first()                    // records are date-ascending
+val counted = items.filter { it.type in info.yearCountedTypes }   // date-ascending
+if (yearMax != null && counted.size >= yearMax) {
+    val oldest = counted[counted.size - yearMax]   // the yearMax-th back from the latest
     val expDate = oldest.date.plusDays(366)
     if (expDate.isAfter(today)) nextDate = maxOf(nextDate, expDate)
 }
 ```
 
-The model is that the oldest donation "expires" 366 days after it happened, freeing one slot.
+The model is that a donation "expires" 366 days after it happened, freeing one slot. The reason reads "연간 성분헌혈 24회 한도" / "연간 전혈헌혈 5회 한도", and the type subtitle "성분헌혈 합산 연 24회".
 
 #### Rule 3 — Annual cumulative volume
 
@@ -549,7 +551,7 @@ $$
 \text{eligibleFrom} = \text{intakeDate} + \text{restrictionDays}
 $$
 
-Catalog entries range from 3 days (아스피린) to permanent (에트레티네이트, 사람뇌하수체 유래 성장호르몬).
+Catalog entries range from 1 day (당일 — 감기약·두통약, 해열진통소염제: donating is possible again the next day) to permanent (에트레티네이트, 사람뇌하수체 유래 성장호르몬, 치료 목적 항응고제 …). Where the period depends on why a drug was taken, the catalog has one entry per purpose under the same `ingredientName` (메토트렉세이트: 건선 4주 / 암·자가면역질환 영구; 와파린/헤파린/히루딘: 예방 7일 / 치료 영구) — see [3.10](#310-판정기준-7차-개정판-반영).
 
 **Snapshot semantics.** `restrictionDays` is **copied into the `MedicationRecord` at save time**, not looked up on read. A later edit to `prohibited_drugs.json` therefore cannot silently move a date the user has already been shown.
 
@@ -566,7 +568,9 @@ The binding entry is the one whose window *ends* last, deliberately **not** the 
 **상품명 search.** The catalog names ingredients, but people know their medicine by product name. `assets/drug_products.json` is a product → ingredient dictionary (built by `tools/build_drug_products.py` from `tools/data/drug_products_*.csv`, a 226-product drug list dated 2026.07.20 whose columns are 약품한글명, 약품영문명, 성분한글명 and 주성분코드). It carries **no restriction data**: search (`searchProducts`, 2+ characters, spaces and case ignored) finds products by name, English name or ingredient, and `restrictionsFor` checks each product's ingredient against the catalog:
 
 - A plain catalog ingredient matches wherever it appears in the product's ingredient, so salts and hydrates count (클로피도그렐황산수소염 → 클로피도그렐). Product-data spellings are folded first (피나스테리드 → 피나스테라이드, 두타스테리드 → 두타스테라이드, 아세틸살리실산 → 아스피린), including the English names 식약처 data uses (Aspirin Enteric Granules → 아스피린, Clostridium Botulinum Toxin Type A → 보툴리눔).
-- The class words in "항생제/스테로이드/보톡스/클로피도그렐" and "태반주사제/혈액응고인자" apply **only to injections** (주성분코드 7th character `B`), as the catalog says: systemic steroids and botulinum toxin by ingredient name, 태반·혈액응고 by keyword. Oral and topical steroids do not match.
+- Class words go through `DRUG_CLASSES`, each with the ingredients that show it and the routes it applies to. The ones in "항생제/스테로이드/보톡스/클로피도그렐" and "태반주사제/혈액응고인자" apply **only to injections** (주성분코드 7th character `B`), as the catalog says; "스테로이드제(먹는 약)" matches the same steroid ingredients as tablets (`ORAL`); "해열진통소염제" matches a short list of common pain relievers (아세트아미노펜, 이부프로펜, 덱시부프로펜, 나프록센 …) on any route. Other class words (근육이완제, 항진균제 …) never match a product.
+- **Topical products match nothing** (`isTopical`): 판정기준 표1-1 lets creams, eye drops and sprays through, so a 외용 product (7th character `C`) restricts nothing — unless its name says 좌약/좌제, since a suppository acts on the whole body.
+- **Purpose-dependent entries** (`ProductMatch.purposeChoices`): when a product falls under two entries with the same `ingredientName` but different periods (메토트렉세이트, 와파린), the row says "복용 목적에 따라 제한 기간이 달라요" and tapping it searches that ingredient so the donor picks the entry that fits, rather than being given the strictest.
 - Antibiotics have too many names to recognise reliably and are never guessed. Instead, any unmatched injection carries a note that antibiotic, steroid and botulinum injections restrict for a week (`mayBeRestrictedInjection`).
 
 **식약처 products for the catalog's ingredients.** The drug list above barely touches the catalog (only 아스피린 and a 덱사메타손 injection), so `tools/fetch_restricted_products.py` fills that gap from 식약처 「의약품 제품 허가정보」 (공공데이터포털 15095677, `DrugPrdtPrmsnInfoService08/getDrugPrdtPrmsnInq08`, 이용허락범위 제한 없음). For each catalog ingredient it queries `item_ingr_name` with the English name (`QUERIES`: Aspirin, Finasteride, Botulinum …), because `ITEM_INGR_NAME` is English and the filter is a case-sensitive partial match (`Aspirin` finds 120 products, `aspirin` and `아스피린` none; each term is also tried in lower case). It pages through the results, drops cancelled items (`CANCEL_NAME` other than 정상) and anything whose `ITEM_INGR_NAME` doesn't actually contain the ingredient, and writes `tools/data/mfds_restricted_products_<date>.json`, which is committed. `build_drug_products.py` merges it after the CSV (deduplicated by name and ingredient) and records both sources with their dates in `sourceNote`, shown under the results. These products carry no 주성분코드, so `route` is written out where it matters (`"injection"` for 보툴리눔, which the catalog restricts only as an injection) and is otherwise unknown. The script needs network access to `apis.data.go.kr` and a 공공데이터포털 key approved for that API, read from `DATA_GO_KR_SERVICE_KEY` or `dataGoKrServiceKey=` in `local.properties`; it never takes the key as an argument or writes it anywhere. `--probe` prints one raw page so a changed response format can be spotted. Entries that name kinds of drug (태반주사제/혈액응고인자, 성장호르몬 등) aren't searched; a catalog entry with neither search terms nor a place in `NOT_SEARCHABLE` is reported when the script runs.
@@ -655,7 +659,7 @@ Born 2010-03-01, donating whole blood on 2026-09-01 → age at donation 16 → `
 
 These are current, verified behaviors of the implementation — documented so they are not mistaken for bugs in reading, and so they can be prioritized.
 
-1. ~~**The annual count rule only inspects the single oldest record of a type.**~~ Fixed 2026-11-03: `calcNext` now takes the donation `yearMax` back from the latest of that type (`ofType[ofType.size - yearMax]`). Until it expires the past year holds `yearMax` of them, and once it has, at most `yearMax - 1`, so a long history no longer hides an exhausted limit. Before, `ofType.first()` pointed at a long-expired record in any history over a year old. For whole blood the volume rule landed on the same date (5 × 430 mL already fills 2,160 mL), so the error showed mainly where a type's recorded volumes are small — covered by the platelet tests in `DonationCalculatorEngineTest`.
+1. ~~**The annual count rule only inspects the single oldest record of a type.**~~ Fixed 2026-11-03 (and since then the 혈소판 limit counts every 성분헌혈, see Rule 2): `calcNext` now takes the donation `yearMax` back from the latest of that type (`ofType[ofType.size - yearMax]`). Until it expires the past year holds `yearMax` of them, and once it has, at most `yearMax - 1`, so a long history no longer hides an exhausted limit. Before, `ofType.first()` pointed at a long-expired record in any history over a year old. For whole blood the volume rule landed on the same date (5 × 430 mL already fills 2,160 mL), so the error showed mainly where a type's recorded volumes are small — covered by the platelet tests in `DonationCalculatorEngineTest`.
 
 2. ~~**The cumulative-volume gauge shows a lifetime total.**~~ Fixed: `CumulativeVolumeGauge` sums `withinAnnualWindow(today)`, the past 366 days only.
 
@@ -665,6 +669,33 @@ These are current, verified behaviors of the implementation — documented so th
 4. **Expiry uses 366 days, not a calendar year.** This is intentionally conservative (one extra day) and consistent across rules 2 and 3.
 
 5. **`checkPhysicalEligibility` is not part of the integrated calculation.** It is evaluated by the profile UI and reported separately; `integratedNextEligible` considers only donation and medication history.
+
+### 3.10 판정기준 7차 개정판 반영
+
+**Source.** 보건복지부·대한적십자사 「헌혈기록카드 문진항목 판정기준」 7차 개정판 (2021.12). The app's rules were compared with its tables and what was missing was added. The book reserves its 대한적십자사 content against copying, so the app holds the **criteria** (names, periods, what counts from when) in its own short wording, not the book's text.
+
+**What was added.**
+
+| Where | Added |
+|---|---|
+| `blood_donation_rules.xml` `<InfectiousDiseases>` | HTLV 감염증 (영구), E형간염 (1년), 코로나19 (4주), MERS·리프트밸리열·크리미안콩고출혈열·남아메리카출혈열 (1개월), HPV 감염증 (치료 종료 시까지) — from 표5 |
+| `blood_donation_rules.xml` `<OtherHistory>` (new) | 질환 32, 시술·수술 37, 예방접종 34, 기타 2 — from 표2·표3·표4·표6. Each `<Category>` and `<Item>` may say what the period counts from (`countedFrom`: 치료 종료, 시술, 접종, 수혈, 증상 소실, 분만·유산 …); 당일 and 24시간 are one day |
+| `prohibited_drugs.json` + `PROHIBITED_DRUGS` | 36 drug entries from 표1-1·표1-2 (감기약·해열진통소염제·근육이완제 당일, 디피리다몰·인도메타신·피록시캄 3일, 먹는 항생제·스테로이드 7일, 연골·인대강화·지방분해·줄기세포 주사, 삭센다, 항진균제, 메토트렉세이트, 항응고제, 데노수맙, 임상시험, 항갑상선제 …) |
+| `calcNext` | 혈소판 24회 counts every 성분헌혈 (부록 1-2, 혈액관리법 시행규칙 별표 1의2) |
+
+`InfectionRuleRepository` reads all of these into `InfectionRules.diseases` (`DiseaseRule.category`, `countedFrom`, `periodLabel`, `dateLabel`), so the 이력 card, the restriction calculator, 현황, 계획 and 알림 treat them as before. Names must be unique across categories, since saved history is looked up by name; the parser rejects a duplicate.
+
+**Differences left as they are.** Where the book and the app disagree, the app keeps its newer or more specific source, or is deliberately stricter; these are noted rather than changed:
+
+- 인플루엔자: book 1개월, app 치료 종료 시까지 (from the newer 감염병 list).
+- vCJD 지역: the book's 2021 list is stricter than the newer rule the app follows.
+- 말라리아 지역: the app's 2025 lists are newer than the book's.
+- 아스피린·디피리다몰·인도메타신·피록시캄: the book still allows 혈장 and 이중백 전혈 within the 3 days; the app blocks every type.
+- 백혈구성분헌혈 interval: 72시간 in the law, 14일 in the app; 1-unit 혈소판 72시간 and 2-unit 적혈구 (4개월) aren't modeled.
+- 조혈모세포: 말초혈 14일 / 골수 8주 in the book, 6개월 in the app.
+- 400 mL 전혈's 17세·50 kg condition isn't checked separately.
+
+**Left out on purpose.** Items that need a doctor's judgment with no fixed period (갑상선질환, 천식, 통풍, 강심제, 항부정맥제, 알레르기 면역요법, 근육강화제 주사 …), open-ended ones (만성피로증후군), and sensitive lifestyle or legal history (성접촉, 수감, 약물·알코올 중독), which the app does not ask about.
 
 ---
 
@@ -932,25 +963,31 @@ Camera permission is requested at the point of use via `ActivityResultContracts.
 
 ## 5. Testing
 
-**Current status: 69 JVM unit tests, 0 failures** (`./gradlew testDebugUnitTest`).
+**Current status: 268 JVM unit tests** (`./gradlew testDebugUnitTest`), 267 in the suites below plus the generated `ExampleUnitTest`.
 
 | Suite | Tests | Covers |
 |---|---|---|
-| `CertificateParserTest` | 18 | All five regexes, volume/diagnostic-draw math, type→enum mapping, the name/birth-date exclusion contract, empty and unrecognized input |
-| `IntegratedEligibilityTest` | 13 | Constraint reduction, binding-entry selection, permanent bans, donation-vs-medication precedence, reason surfacing |
-| `DrugRestrictionCalculatorTest` | 11 | Calendar arithmetic across month/leap boundaries, permanent sentinel, search matching, catalog duplicate check |
-| `ProhibitedDrugRepositoryTest` | 9 | JSON parsing, malformed-entry tolerance, error cases, bundled-asset integrity vs the compiled-in fallback |
-| `DonationCalculatorEngineTest` | 8 | Volume resolution priority, `asOfDate` filtering for back-dated inserts |
-| `PhysicalEligibilityCalculatorTest` | 5 | Senior (65+) rule, age-range interaction |
-| `ThemeModeTest` | 4 | Mode resolution and toggle semantics |
-
-The seven suites above account for 68 tests; the 69th is the generated `ExampleUnitTest` placeholder.
+| `InfectionRestrictionCalculatorTest` | 28 | 감염병·질환·시술·접종 periods and what they count from, 말라리아·vCJD·해외 체류 rules, reason texts |
+| `DonationCalculatorEngineTest` | 27 | Volume resolution, `asOfDate`, intervals, the yearly count limits (혈소판 counting every 성분헌혈) and the 2,160 mL limit |
+| `BloodCenterSearchTest` | 22 | 헌혈의 집·카페 search, sections and favorites |
+| `DrugProductSearchTest` | 20 | Product → catalog matching: spellings, class words by route, topical products, purpose choices |
+| `IntegratedEligibilityTest` | 18 | Donation, medication and health restrictions combined |
+| `CertificateParserTest` | 18 | 헌혈증서 OCR field extraction |
+| `DonationPlanTest` | 14 | Checking a 헌혈 계획 in date order |
+| `DrugRestrictionCalculatorTest` | 13 | Calendar arithmetic, permanent sentinel, search (incl. category), the 판정기준 entries |
+| `BloodCenterRepositoryTest` | 12 | Bundled 헌혈의 집·카페 data |
+| `InfectionRuleParserTest` | 11 | `blood_donation_rules.xml` parsing, categories, `countedFrom`, duplicate names |
+| `BloodCenterMachinesTest` | 10 | 성분채혈 기기 data |
+| `ProhibitedDrugRepositoryTest` | 9 | Catalog JSON parsing; the asset agrees with the compiled-in fallback |
+| `DonationRemindersTest`, `AppBackupTest` | 8 + 8 | Reminder decisions and text; backup encode/decode |
+| `PredictedBloodVolumeTest`, `TimelineParserTest`, `RegionLocatorTest`, `DrugProductRepositoryTest` | 7 each | Blood volume, Google 타임라인 import, region lookup, product dictionary |
+| `PhysicalEligibilityCalculatorTest`, `DateDigitsTest`, `ThemeModeTest`, `TimelineStayExtractorTest`, `PlanEncodingTest` | 5, 5, 4, 4, 3 | Physical criteria, date input, theme, stays from the timeline, plan storage |
 
 Instrumented tests: `ProfileNameInputTest` (Compose UI).
 
 Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_drugs.json` agrees with the compiled-in `PROHIBITED_DRUGS` fallback on the calculation fields**, so the two data sources cannot silently diverge.
 
-**Coverage gaps:** the annual count/volume rules in `calcNext` (see [3.9](#39-known-limitations) item 1), and the entire image pipeline in `CertificateTextRecognizer`.
+**Coverage gaps:** the Compose UI and the image pipeline in `CertificateTextRecognizer` have no JVM tests.
 
 **Commands**
 
@@ -1008,6 +1045,6 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `ui/ProhibitedDrugSearchScreen.kt` / `...ViewModel.kt` | Drug search + intake recording |
 | `ui/MedicationHistoryCard.kt` | Saved medication list |
 | `ui/theme/` | `LocalDarkTheme`, Material color schemes, typography |
-| `assets/prohibited_drugs.json` | 14-entry drug catalog |
+| `assets/prohibited_drugs.json` | 50-entry drug catalog |
 | `assets/drug_products.json` | Product → ingredient dictionary for search |
 | `res/xml/file_paths.xml` | FileProvider scope for certificate photos |

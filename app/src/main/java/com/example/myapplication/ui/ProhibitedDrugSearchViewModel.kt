@@ -125,9 +125,15 @@ class ProhibitedDrugSearchViewModel(
         }
     }
 
-    /** A restricted product leads to its official entry, with the same 복용일 flow as searching it. */
+    /**
+     * A restricted product leads to its official entry, with the same 복용일 flow as searching it.
+     * When the entry depends on why it was taken, the search shows that ingredient's entries
+     * instead, so the donor picks the one that fits.
+     */
     fun onProductSelected(match: ProductMatch) {
-        match.strictestRestriction?.let(::onDrugSelected)
+        val choices = match.purposeChoices
+        if (choices.isNotEmpty()) onQueryChange(choices.first().ingredientName)
+        else match.strictestRestriction?.let(::onDrugSelected)
     }
 
     /** Selecting a drug clears any previously entered date so a stale result is never shown. */

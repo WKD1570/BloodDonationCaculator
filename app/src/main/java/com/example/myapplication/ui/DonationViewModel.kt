@@ -171,7 +171,7 @@ class DonationViewModel(
             try {
                 rules.value = ruleRepository.loadRules()
             } catch (e: InfectionRuleDataException) {
-                rulesWarning.value = "감염병·체류 기준을 불러오지 못해 다음 헌혈 가능일에 반영하지 못했어요."
+                rulesWarning.value = "질환·시술·접종·체류 기준을 불러오지 못해 다음 헌혈 가능일에 반영하지 못했어요."
             }
         }
         viewModelScope.launch {

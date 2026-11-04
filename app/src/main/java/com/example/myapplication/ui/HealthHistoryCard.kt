@@ -105,11 +105,11 @@ internal fun HealthHistoryCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(Modifier.padding(20.dp)) {
-            Text("🦠 감염병·체류 이력", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+            Text("🦠 질환·시술·접종·체류 이력", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             Spacer(Modifier.height(4.dp))
             Text(
-                "앓았던 감염병이나 해외 방문·말라리아·vCJD 위험지역 체류를 입력하면 헌혈 제한기간과 가능한 헌혈 종류를 " +
-                    "계산해 다음 헌혈 가능일에 반영해요.",
+                "앓았던 감염병·질환, 받은 시술·수술·예방접종, 해외 방문·말라리아·vCJD 위험지역 체류를 입력하면 " +
+                    "헌혈 제한기간과 가능한 헌혈 종류를 계산해 다음 헌혈 가능일에 반영해요.",
                 fontSize = 11.sp,
                 color = TextTertiary,
                 lineHeight = 16.sp
@@ -129,13 +129,14 @@ internal fun HealthHistoryCard(
             }
 
             Spacer(Modifier.height(14.dp))
-            HistorySectionHeader("감염병 이력", onAdd = { dialog = HealthDialog.DISEASE })
-            if (health.diseases.isEmpty()) EmptyHistoryText("저장된 감염병 이력이 없어요.")
+            HistorySectionHeader("질환·시술·접종 이력", onAdd = { dialog = HealthDialog.DISEASE })
+            if (health.diseases.isEmpty()) EmptyHistoryText("저장된 질환·시술·접종 이력이 없어요.")
             health.diseases.forEachIndexed { index, record ->
+                val rule = rules.diseases.firstOrNull { it.name == record.diseaseName }
                 HistoryRow(
                     title = record.diseaseName,
-                    subtitle = "치료 종료일 ${fmt(record.treatmentEndDate)}",
-                    known = rules.diseases.any { it.name == record.diseaseName },
+                    subtitle = "${rule?.dateLabel ?: "치료 종료일"} ${fmt(record.treatmentEndDate)}",
+                    known = rule != null,
                     restrictions = health.restrictions.filter { HistorySource.Disease(record.id) in it.sources },
                     today = today,
                     onDelete = { onDeleteDisease(record) }
@@ -310,7 +311,7 @@ internal fun HealthRestrictionsCard(restrictions: List<HealthRestriction>, today
     val active = restrictions.filter { it.isActive(today) }.sortedBy { it.eligibleFrom ?: LocalDate.MAX }
     if (active.isEmpty()) return
 
-    Text("🦠 감염병·체류 제한", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+    Text("🦠 질환·시술·접종·체류 제한", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
     Spacer(Modifier.height(10.dp))
     Card(
         shape = CardShape,
@@ -437,11 +438,10 @@ private fun RestrictionPreview(restrictions: List<HealthRestriction>, today: Loc
 }
 
 private val DiseaseRule.periodDescription: String
-    get() = when (deferral) {
-        DeferralPeriod.Permanent -> "영구 헌혈 금지"
-        DeferralPeriod.UntilTreatmentEnds -> "치료 종료 시까지 헌혈 금지"
-        is DeferralPeriod.After -> "치료 종료 후 $periodText 헌혈 금지"
-    }
+    get() = if (deferral == DeferralPeriod.Permanent) "영구 헌혈 금지" else "$periodLabel 헌혈 금지"
+
+/** What a search result says under its name: the category, then the restriction. */
+private val DiseaseRule.pickDescription: String get() = "$category · $periodDescription"
 
 @Composable
 internal fun DiseaseHistoryDialog(
@@ -456,7 +456,7 @@ internal fun DiseaseHistoryDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("감염병 이력 추가", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = TextSecondary) },
+        title = { Text("질환·시술·접종 이력 추가", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = TextSecondary) },
         text = {
             val rule = selected
             if (rule == null) {
@@ -466,17 +466,17 @@ internal fun DiseaseHistoryDialog(
                         onValueChange = { query = it },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
-                        placeholder = { Text("감염병명을 검색하세요 (예: 말라리아)", fontSize = 12.sp, color = TextTertiary) }
+                        placeholder = { Text("검색하세요 (예: 말라리아, 내시경, 독감 예방접종)", fontSize = 12.sp, color = TextTertiary) }
                     )
                     val matches = rules.diseases.filter { it.name.contains(query.trim(), ignoreCase = true) }
                     PickList(matches, key = { it.name }) { disease ->
-                        SelectableRow(disease.name, disease.periodDescription, onClick = { selected = disease })
+                        SelectableRow(disease.name, disease.pickDescription, onClick = { selected = disease })
                     }
                 }
             } else {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
-                    SelectedHeader(rule.name, rule.periodDescription, onChange = { selected = null })
-                    DialogFieldLabel("치료 종료일")
+                    SelectedHeader(rule.name, rule.pickDescription, onChange = { selected = null })
+                    DialogFieldLabel(rule.dateLabel)
                     DateInputField(date = endDate, onDateChange = { endDate = it })
                     endDate?.let { end ->
                         RestrictionPreview(

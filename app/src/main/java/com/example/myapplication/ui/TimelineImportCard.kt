@@ -276,7 +276,7 @@ private fun TimelineResult(
         }
     }
     Text(
-        "헌혈 기록·약물·감염병·저장된 체류 이력을 모두 반영한 날짜예요.",
+        "헌혈 기록·약물·질환·시술·접종·저장된 체류 이력을 모두 반영한 날짜예요.",
         fontSize = 10.sp,
         color = TextTertiary,
         modifier = Modifier.padding(top = 4.dp)

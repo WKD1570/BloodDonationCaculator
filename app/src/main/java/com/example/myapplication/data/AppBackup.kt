@@ -52,7 +52,7 @@ fun backupSummary(backup: AppBackup): String =
         "헌혈 기록" to backup.donations.size,
         "헌혈 계획" to backup.plan.size,
         "약 복용" to backup.medications.size,
-        "감염병" to backup.diseases.size,
+        "질환·시술·접종" to backup.diseases.size,
         "체류" to backup.stays.size
     ).filter { it.second > 0 }.map { (label, count) -> "$label ${count}건" }
         .plus(listOfNotNull(backup.favoritePlaces.size.takeIf { it > 0 }?.let { "즐겨찾기 ${it}곳" }))

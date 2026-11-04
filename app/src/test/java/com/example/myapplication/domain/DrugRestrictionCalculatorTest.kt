@@ -82,6 +82,32 @@ class DrugRestrictionCalculatorTest {
     }
 
     @Test
+    fun `searchDrugs matches by category`() {
+        assertEquals(listOf(etretinate), searchDrugs("건선", listOf(aspirin, etretinate)))
+        assertEquals(
+            listOf(7, -1),
+            searchDrugs("항응고제").map { it.restrictionDays }
+        )
+    }
+
+    @Test
+    fun `the 판정기준 drugs are listed with their periods`() {
+        fun days(name: String) = PROHIBITED_DRUGS.filter { it.ingredientName == name }.map { it.restrictionDays }
+        assertEquals(listOf(1), days("감기약·두통약"))
+        assertEquals(listOf(3), days("디피리다몰"))
+        assertEquals(listOf(3), days("항생제(감기 치료 목적)"))
+        assertEquals(listOf(7), days("항생제(먹는 약)"))
+        assertEquals(listOf(28, -1), days("메토트렉세이트"))
+        assertEquals(listOf(7, -1), days("와파린/헤파린/히루딘"))
+        assertEquals(listOf(56), days("생물학적 동등성 시험(성분을 아는 경우)"))
+        assertEquals(listOf(180), days("데노수맙"))
+        assertEquals(listOf(730), days("프로필티오우라실/메티마졸"))
+        // 당일: possible again the next day.
+        val coldMedicine = PROHIBITED_DRUGS.first { it.ingredientName == "감기약·두통약" }
+        assertEquals(LocalDate.of(2026, 11, 4), nextEligibleDonationDate(coldMedicine, LocalDate.of(2026, 11, 3)))
+    }
+
+    @Test
     fun `searchDrugs returns nothing for a blank query`() {
         val results = searchDrugs("", listOf(aspirin, etretinate))
         assertTrue(results.isEmpty())

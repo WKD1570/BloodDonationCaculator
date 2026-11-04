@@ -147,19 +147,23 @@ fun searchStayRegions(query: String, regions: List<StayRegion>): List<StayRegion
     }
 }
 
-/** The restriction a 감염병 places on donation, or null when [rules] don't list it. */
+/**
+ * The restriction a 감염병, 질환, 시술·수술, 예방접종 or 기타 사유 places on donation, or null when
+ * [rules] don't list it.
+ */
 fun diseaseRestriction(record: DiseaseRecord, rules: InfectionRules): HealthRestriction? {
     val rule = rules.diseases.firstOrNull { it.name == record.diseaseName } ?: return null
+    // treatmentEndDate is whatever the rule counts from: 치료 종료일, 시술일, 접종일 and so on.
     val end = record.treatmentEndDate
-    val (eligibleFrom, periodLabel) = when (val deferral = rule.deferral) {
-        DeferralPeriod.Permanent -> null to "영구"
-        DeferralPeriod.UntilTreatmentEnds -> end.plusDays(1) to "치료 종료 시까지"
-        is DeferralPeriod.After -> end.plus(deferral.period) to "치료 종료 후 ${deferral.period.label()}"
+    val eligibleFrom = when (val deferral = rule.deferral) {
+        DeferralPeriod.Permanent -> null
+        DeferralPeriod.UntilTreatmentEnds -> end.plusDays(1)
+        is DeferralPeriod.After -> end.plus(deferral.period)
     }
     return HealthRestriction(
         title = record.diseaseName,
-        periodLabel = periodLabel,
-        detail = "감염병 · ${rule.periodText}",
+        periodLabel = rule.periodLabel,
+        detail = "${rule.category} · ${rule.periodText}",
         countedFrom = end,
         eligibleFrom = eligibleFrom,
         allowedTypes = emptySet(),

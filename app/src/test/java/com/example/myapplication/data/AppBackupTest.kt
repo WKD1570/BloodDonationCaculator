@@ -56,7 +56,7 @@ class AppBackupTest {
 
     @Test
     fun `the summary counts what there is`() {
-        assertEquals("헌혈 기록 2건 · 헌혈 계획 1건 · 약 복용 1건 · 감염병 1건 · 체류 1건 · 즐겨찾기 2곳", backupSummary(full))
+        assertEquals("헌혈 기록 2건 · 헌혈 계획 1건 · 약 복용 1건 · 질환·시술·접종 1건 · 체류 1건 · 즐겨찾기 2곳", backupSummary(full))
         assertEquals("헌혈 기록 2건", backupSummary(full.copy(plan = emptyList(), medications = emptyList(), diseases = emptyList(), stays = emptyList(), favoritePlaces = emptySet())))
     }
 

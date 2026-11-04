@@ -6,6 +6,9 @@ import java.time.Period
 /**
  * The 감염병·vCJD·말라리아 헌혈 제한 기준 bundled as `blood_donation_rules.xml`, parsed by
  * [com.example.myapplication.data.parseInfectionRules].
+ *
+ * [diseases] holds every history entry one date restricts: the 감염병 and, after them, the 질환,
+ * 시술·수술, 예방접종 and 기타 사유 of `<OtherHistory>`, told apart by [DiseaseRule.category].
  */
 data class InfectionRules(
     val diseases: List<DiseaseRule>,
@@ -21,15 +24,46 @@ sealed interface DeferralPeriod {
     /** 영구배제: no amount of waiting makes the donor eligible again. */
     data object Permanent : DeferralPeriod
 
-    /** 치료종료 시까지: eligible again from the day after treatment ends. */
+    /** 치료종료 시까지 (or 증상 소실 시까지): eligible again from the day after the date it's counted from. */
     data object UntilTreatmentEnds : DeferralPeriod
 
-    /** Eligible again [period] after the date it's counted from - e.g. 3년 after treatment ends. */
+    /**
+     * Eligible again [period] after the date it's counted from - e.g. 3년 after treatment ends. 당일
+     * and 24시간 are one day: that day is out, the next one is fine.
+     */
     data class After(val period: Period) : DeferralPeriod
 }
 
-/** One `<Disease>` of 일반 감염병, deferred for [deferral] after treatment ends. */
-data class DiseaseRule(val name: String, val deferral: DeferralPeriod, val periodText: String)
+/**
+ * One history entry a date restricts: a `<Disease>` of 일반 감염병, or an `<Item>` of 질환·시술·
+ * 예방접종·기타, deferred for [deferral] from [countedFrom].
+ *
+ * @param periodText The period as written ("3년", "4주", "당일").
+ * @param category 감염병, 질환, 시술·수술, 예방접종 or 기타.
+ * @param countedFrom What the date is ("치료 종료", "시술", "접종"); "${countedFrom}일" labels it.
+ */
+data class DiseaseRule(
+    val name: String,
+    val deferral: DeferralPeriod,
+    val periodText: String,
+    val category: String = INFECTIOUS_DISEASE_CATEGORY,
+    val countedFrom: String = TREATMENT_END
+) {
+    /** "치료 종료 후 3년", "시술 당일", "증상 소실 시까지", or 영구. */
+    val periodLabel: String
+        get() = when (deferral) {
+            DeferralPeriod.Permanent -> "영구"
+            DeferralPeriod.UntilTreatmentEnds -> "$countedFrom 시까지"
+            is DeferralPeriod.After -> if (periodText == SAME_DAY) "$countedFrom $SAME_DAY" else "$countedFrom 후 $periodText"
+        }
+
+    /** The date field's label: 치료 종료일, 시술일, 접종일, 분만·유산일. */
+    val dateLabel: String get() = "${countedFrom}일"
+}
+
+const val INFECTIOUS_DISEASE_CATEGORY = "감염병"
+const val TREATMENT_END = "치료 종료"
+private const val SAME_DAY = "당일"
 
 /**
  * One vCJD `<Region>`: staying in any of [countries] for a combined [minStay] or more between

@@ -1,6 +1,6 @@
 # 개인정보처리방침 — 연간채혈량 계산기 (BDCalculator)
 
-시행일: 2026년 11월 3일
+시행일: 2026년 11월 4일
 
 연간채혈량 계산기(이하 "앱")는 개인 개발자 WKD1570이 비공식으로 만든 앱이며, 대한적십자사와 관련이 없습니다. 앱에는 회원가입도 서버도 없습니다. 앱에 입력한 정보는 사용자의 기기에만 저장되고, 개발자는 이 정보를 받거나 볼 수 없습니다.
 
@@ -10,7 +10,7 @@
 
 - 프로필: 이름(선택), 생년월일, 성별, 체중·신장, 60~64세 헌혈 경험 여부, 자주 헌혈하는 지역
 - 헌혈 기록: 헌혈 종류, 헌혈일, 채혈량, 헌혈증서 번호, 헌혈 장소
-- 의료 정보: 헌혈 제한 약물과 복용일, 감염병 이력, 해외·위험지역 체류 이력
+- 의료 정보: 헌혈 제한 약물과 복용일, 질환·시술·예방접종·감염병 이력, 해외·위험지역 체류 이력
 - 헌혈 계획: 계획한 헌혈의 종류와 날짜
 - 헌혈 장소 즐겨찾기: 즐겨찾기한 헌혈의 집·헌혈카페
 - 앱 설정: 화면 테마, 헌혈 알림 사용 여부
@@ -31,7 +31,7 @@
 
 ## 5. 백업 파일
 
-마이페이지의 "파일로 내보내기"를 누르면 프로필, 헌혈 기록, 헌혈 계획, 약·감염병·체류 기록, 즐겨찾기가 사용자가 고른 위치에 파일 하나로 저장됩니다. 이 파일은 암호화되지 않으며, 저장 위치(기기, 메모리 카드, 클라우드 드라이브 앱 등)는 사용자가 정합니다. 클라우드 드라이브에 저장하면 그 서비스의 방침이 적용됩니다. 앱이나 개발자는 이 파일을 어디로도 보내지 않습니다. "파일에서 불러오기"는 사용자가 고른 파일만 읽습니다.
+마이페이지의 "파일로 내보내기"를 누르면 프로필, 헌혈 기록, 헌혈 계획, 약·질환·시술·접종·체류 기록, 즐겨찾기가 사용자가 고른 위치에 파일 하나로 저장됩니다. 이 파일은 암호화되지 않으며, 저장 위치(기기, 메모리 카드, 클라우드 드라이브 앱 등)는 사용자가 정합니다. 클라우드 드라이브에 저장하면 그 서비스의 방침이 적용됩니다. 앱이나 개발자는 이 파일을 어디로도 보내지 않습니다. "파일에서 불러오기"는 사용자가 고른 파일만 읽습니다.
 
 ## 6. 기기 밖으로 전달되는 정보
 
@@ -61,11 +61,11 @@
 
 # Privacy Policy — BDCalculator (연간채혈량 계산기)
 
-Effective: November 3, 2026
+Effective: November 4, 2026
 
 BDCalculator ("the app") is an unofficial app made by the independent developer WKD1570 and is not affiliated with the Korean Red Cross. The app has no accounts and no server. What you enter stays on your device; the developer never receives or sees it.
 
-**Stored on your device only**, when you enter it, and used only to calculate your next eligible donation dates, annual donation volume and eligibility: your profile (optional name, birth date, sex, weight and height, whether you donated at 60–64, your usual donation region), donation records (type, date, volume, certificate number, place), medical information (restricted medications and dates, infectious disease history, travel and stays in risk areas), planned donations (type and date), starred donation places, and the theme and reminder settings.
+**Stored on your device only**, when you enter it, and used only to calculate your next eligible donation dates, annual donation volume and eligibility: your profile (optional name, birth date, sex, weight and height, whether you donated at 60–64, your usual donation region), donation records (type, date, volume, certificate number, place), medical information (restricted medications and dates, history of illnesses, procedures, vaccinations and infectious diseases, travel and stays in risk areas), planned donations (type and date), starred donation places, and the theme and reminder settings.
 
 **Camera and photos.** The camera or a photo is used only when you tap "사진으로 채우기" (fill from photo). Text recognition runs on the device and photos are never sent off it. Photos taken with the in-app camera may remain in the app's cache until you clear the app's data or uninstall it. Photos from your gallery are chosen through Android's photo picker, so the app reads only the photo you pick.
 
@@ -73,7 +73,7 @@ BDCalculator ("the app") is an unofficial app made by the independent developer 
 
 **Reminders.** If you turn on 헌혈 알림 (reminders), the app checks once each morning, on the device, when you can donate again and what you've planned, and shows a notification. Nothing is sent anywhere. It uses the notification permission (Android 13 and later) and the boot-completed permission to restore the reminder after a restart. You can turn reminders off in the app or in your device settings.
 
-**Backup file.** "Export to file" saves your profile, donation records, plan, medication, disease and stay history and starred places as one unencrypted file in a location you choose (the device, a memory card or a cloud drive app, whose own policy then applies). Neither the app nor the developer sends the file anywhere. "Import from file" reads only the file you pick.
+**Backup file.** "Export to file" saves your profile, donation records, plan, medication, illness, procedure, vaccination and stay history and starred places as one unencrypted file in a location you choose (the device, a memory card or a cloud drive app, whose own policy then applies). Neither the app nor the developer sends the file anywhere. "Import from file" reads only the file you pick.
 
 **What leaves the device.**
 - Google ML Kit, used for text recognition, sends device information (manufacturer, model, OS version and similar), the app's package name and version to Google for diagnostics and usage statistics, encrypted over HTTPS. It does not include anything you enter or your photos. See [ML Kit's data disclosure](https://developers.google.com/ml-kit/android-data-disclosure).

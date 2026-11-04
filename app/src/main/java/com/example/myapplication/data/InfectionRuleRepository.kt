@@ -42,22 +42,25 @@ private fun Element.texts(tag: String): List<String> =
 private fun Element.attr(name: String): String =
     getAttribute(name).trim().takeIf { it.isNotEmpty() } ?: fail("<$tagName> has no $name")
 
-private val PERIOD_PATTERN = Regex("""(\d+)\s*(년|개월|일)""")
+private val PERIOD_PATTERN = Regex("""(\d+)\s*(년|개월|주|일)""")
 
-/** "3년" / "6개월" / "0일", wherever they appear in the text - so "연중 6개월 이상" reads as 6 months. */
+/** "3년" / "6개월" / "4주" / "0일", wherever they appear in the text - so "연중 6개월 이상" reads as 6 months. */
 internal fun parsePeriod(text: String): Period? {
     val match = PERIOD_PATTERN.find(text) ?: return null
     val amount = match.groupValues[1].toInt()
     return when (match.groupValues[2]) {
         "년" -> Period.ofYears(amount)
         "개월" -> Period.ofMonths(amount)
+        "주" -> Period.ofWeeks(amount)
         else -> Period.ofDays(amount)
     }
 }
 
 internal fun parseDeferral(text: String): DeferralPeriod = when {
     "영구" in text -> DeferralPeriod.Permanent
-    "치료종료" in text.replace(" ", "") -> DeferralPeriod.UntilTreatmentEnds
+    "치료종료" in text.replace(" ", "") || text.trim().endsWith("까지") -> DeferralPeriod.UntilTreatmentEnds
+    // 당일 or 24시간: only that day is out.
+    text.trim() == "당일" || text.trim() == "24시간" -> DeferralPeriod.After(Period.ofDays(1))
     else -> DeferralPeriod.After(parsePeriod(text) ?: fail("unknown deferral period \"$text\""))
 }
 
@@ -85,6 +88,27 @@ private fun parseDiseases(root: Element): List<DiseaseRule> =
         val periodText = deferral.attr("period")
         val period = parseDeferral(periodText)
         deferral.texts("Disease").map { DiseaseRule(it, period, periodText) }
+    }
+
+private fun Element.optionalAttr(name: String): String? = getAttribute(name).trim().takeIf { it.isNotEmpty() }
+
+/**
+ * `<OtherHistory>`'s 질환·시술·예방접종·기타, each `<Item>` counted from its own `countedFrom`, else
+ * its `<Deferral>`'s, else its `<Category>`'s. Optional, so older rule files still read.
+ */
+private fun parseOtherHistory(root: Element): List<DiseaseRule> =
+    root.children("OtherHistory").flatMap { it.children("Category") }.flatMap { category ->
+        val name = category.attr("name")
+        val categoryCountedFrom = category.attr("countedFrom")
+        category.children("Deferral").flatMap { deferral ->
+            val periodText = deferral.attr("period")
+            val period = parseDeferral(periodText)
+            val deferralCountedFrom = deferral.optionalAttr("countedFrom") ?: categoryCountedFrom
+            deferral.children("Item").mapNotNull { item ->
+                val itemName = item.textContent.trim().takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                DiseaseRule(itemName, period, periodText, name, item.optionalAttr("countedFrom") ?: deferralCountedFrom)
+            }
+        }
     }
 
 private fun parseVcjd(root: Element): List<VcjdRule> =
@@ -178,13 +202,16 @@ fun parseInfectionRules(input: InputStream): InfectionRules {
         throw InfectionRuleDataException("$INFECTION_RULES_ASSET is not valid XML", e)
     }
     val rules = InfectionRules(
-        diseases = parseDiseases(root),
+        diseases = parseDiseases(root) + parseOtherHistory(root),
         vcjdRules = parseVcjd(root),
         domesticMalaria = parseDomestic(root),
         internationalMalaria = parseInternational(root),
         overseasTravel = parseOverseasTravel(root)
     )
     if (rules.diseases.isEmpty()) fail("contained no diseases")
+    rules.diseases.groupBy { it.name }.filterValues { it.size > 1 }.keys.firstOrNull()?.let {
+        fail("\"$it\" is listed twice; history is looked up by name")
+    }
     return rules
 }
 

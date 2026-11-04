@@ -13,6 +13,7 @@
             <Disease>C형간염</Disease>
             <Disease>만성B형간염</Disease>
             <Disease>톡소포자충증</Disease>
+            <Disease>사람T세포림프친화바이러스(HTLV) 감염증</Disease>
         </Deferral>
         <Deferral period="3년">
             <Disease>말라리아</Disease>
@@ -24,6 +25,7 @@
             <Disease>성병(매독, 성기 단순포진, 연성하감, 임질, 첨규콘딜롬, 클라미디아)</Disease>
             <Disease>급성B형간염</Disease>
             <Disease>A형간염</Disease>
+            <Disease>E형간염</Disease>
         </Deferral>
         <Deferral period="6개월">
             <Disease>뎅기열</Disease>
@@ -43,6 +45,9 @@
         </Deferral>
         <Deferral period="2개월">
             <Disease>광동주혈선충증</Disease>
+        </Deferral>
+        <Deferral period="4주">
+            <Disease>코로나바이러스감염증-19(코로나19)</Disease>
         </Deferral>
         <Deferral period="1개월">
             <Disease>결핵</Disease>
@@ -89,6 +94,10 @@
             <Disease>풍진</Disease>
             <Disease>홍역</Disease>
             <Disease>황열</Disease>
+            <Disease>중동호흡기증후군(MERS)</Disease>
+            <Disease>리프트밸리열</Disease>
+            <Disease>크리미안콩고출혈열</Disease>
+            <Disease>남아메리카출혈열</Disease>
         </Deferral>
         <Deferral period="치료종료 시까지">
             <Disease>간흡충증</Disease>
@@ -107,8 +116,185 @@
             <Disease>편충증</Disease>
             <Disease>폐흡충증</Disease>
             <Disease>회충증</Disease>
+            <Disease>사람유두종바이러스(HPV) 감염증</Disease>
         </Deferral>
     </InfectiousDiseases>
+
+    <!--
+        1-2. 감염병 외 질환·시술·예방접종·기타 헌혈 보류 기준
+        출처: 헌혈기록카드 문진항목 판정기준 7차 개정판(2021.12) 표 2·3·4·6과 부록 1-1.
+        기간은 countedFrom(치료 종료, 시술, 접종 등)부터 센다. Item·Deferral의 countedFrom이 Category의 것보다 우선한다.
+        "당일"·"24시간"은 그날만 금지(다음 날부터 가능), "~ 시까지"는 그날까지 금지다.
+        판정기준표에서 혈액원 의사가 판단한다고만 한 항목(갑상선질환, 천식, 통풍 등)은 날짜를 셀 수 없어 넣지 않았다.
+    -->
+    <OtherHistory>
+        <Category name="질환" countedFrom="치료 종료">
+            <Deferral period="영구배제">
+                <Item>뇌혈관질환(뇌경색·뇌출혈·모야모야병 등)</Item>
+                <Item>뇌종양(뇌하수체 종양 포함)</Item>
+                <Item>뇌전증(간질)</Item>
+                <Item>퇴행성 뇌질환(알츠하이머병·파킨슨병 등)</Item>
+                <Item>전신 경련을 동반한 의식소실</Item>
+                <Item>심장질환(심혈관 질환)</Item>
+                <Item>만성 신장질환(만성 신부전·만성 사구체신염 등)</Item>
+                <Item>자가면역질환(류마티스 관절염·루푸스·강직성 척추염 등)</Item>
+                <Item>염증성 장질환(크론병·궤양성대장염)</Item>
+                <Item>악성종양(암)</Item>
+                <Item>혈액질환(백혈병·림프종·혈우병 등)</Item>
+                <Item>원인불명의 황달·간경화</Item>
+                <Item>당뇨병(인슐린 지속 투여)</Item>
+                <Item>신경섬유종(악성 변화)</Item>
+            </Deferral>
+            <Deferral period="5년">
+                <Item>가와사키병</Item>
+                <Item>특발성 혈소판 감소증</Item>
+                <Item>국소 피부암·상피내암(자궁경부)</Item>
+            </Deferral>
+            <Deferral period="3년">
+                <Item>골수염</Item>
+            </Deferral>
+            <Deferral period="1년">
+                <Item>원인불명 간염</Item>
+            </Deferral>
+            <Deferral period="6개월">
+                <Item>방사성 요오드 치료(갑상선)</Item>
+            </Deferral>
+            <Deferral period="4주">
+                <Item>뇌막염 등 뇌 감염성 질환</Item>
+                <Item>감염성 눈병(유행성 결막염·각막염)</Item>
+                <Item>옴</Item>
+            </Deferral>
+            <Deferral period="7일">
+                <Item>헬리코박터 제균 치료</Item>
+            </Deferral>
+            <Deferral period="3일">
+                <Item>식중독</Item>
+                <Item countedFrom="증상 소실">설사(하루 3회 이상 묽은 변)</Item>
+                <Item countedFrom="증상 소실">발열·인후통 등 급성 감염 의심 증상</Item>
+            </Deferral>
+            <Deferral period="치료종료 시까지">
+                <Item>골절</Item>
+            </Deferral>
+            <Deferral period="증상 소실 시까지" countedFrom="증상 소실">
+                <Item>단순포진(입술 등, 성기 제외)</Item>
+                <Item>위염·위궤양·역류성 식도염</Item>
+                <Item>어지럼증</Item>
+                <Item>기타 눈질환(알레르기성 결막염·다래끼 등)</Item>
+            </Deferral>
+        </Category>
+
+        <Category name="시술·수술" countedFrom="시술">
+            <Deferral period="영구배제">
+                <Item>뇌수술</Item>
+                <Item>심장수술(심혈관 질환)</Item>
+                <Item>비장 적출술</Item>
+                <Item>각막·경막 이식</Item>
+                <Item>이종이식(동물 장기·세포)</Item>
+            </Deferral>
+            <Deferral period="1년">
+                <Item countedFrom="수혈">수혈</Item>
+                <Item countedFrom="이식">동종 장기이식</Item>
+                <Item>치과 뼈이식(동종골)</Item>
+                <Item>태반 약침</Item>
+                <Item countedFrom="사고">타인이 쓴 주사침·날카로운 기구에 찔림</Item>
+                <Item countedFrom="사고">사람에게 물려 피부가 손상됨</Item>
+                <Item countedFrom="사고">손상된 피부·점막에 타인의 혈액이 닿음</Item>
+            </Deferral>
+            <Deferral period="6개월">
+                <Item>대수술(전신마취, 수혈 없음)</Item>
+                <Item>안면윤곽술·양악수술</Item>
+                <Item>문신·반영구 화장(의료기관 외)</Item>
+                <Item>귀·피어싱 뚫음(1회용 도구 아님·불확실)</Item>
+                <Item>레이저·미용 시술(의료기관 외)</Item>
+                <Item>침·부항(1회용 도구 아님)</Item>
+            </Deferral>
+            <Deferral period="1개월">
+                <Item>내시경(위·대장)</Item>
+                <Item>소수술(국소·수면마취)</Item>
+                <Item>미용(성형) 수술</Item>
+                <Item>문신·반영구 화장(의료기관)</Item>
+                <Item>귀·피어싱 뚫음(1회용 도구)</Item>
+                <Item>치과 임플란트(드릴링)</Item>
+                <Item>치과 교정 스크루</Item>
+                <Item>치과 뼈이식(자가골·합성골·이종골)</Item>
+            </Deferral>
+            <Deferral period="7일">
+                <Item>레이저·미용 시술(의료기관)</Item>
+                <Item>필러·PRP·지방이식 등 미용 시술</Item>
+                <Item>상처 봉합</Item>
+                <Item>체외충격파 시술</Item>
+                <Item>치과 발치 후 봉합</Item>
+                <Item>약침(1회용 도구)</Item>
+            </Deferral>
+            <Deferral period="3일">
+                <Item>치과 출혈 치료(발치·스케일링·치주·신경치료)</Item>
+                <Item>침·부항(1회용 도구)</Item>
+            </Deferral>
+            <Deferral period="당일">
+                <Item>위장관 조영술·조영제</Item>
+                <Item>PET 등 핵의학검사</Item>
+                <Item>벌침</Item>
+            </Deferral>
+        </Category>
+
+        <Category name="예방접종" countedFrom="접종">
+            <Deferral period="1년">
+                <Item>광견병 예방접종(동물에게 물린 뒤)</Item>
+                <Item>국내 미허가 예방접종(Q열 등)</Item>
+            </Deferral>
+            <Deferral period="2개월">
+                <Item>천연두 예방접종</Item>
+            </Deferral>
+            <Deferral period="4주">
+                <Item>대상포진 예방접종</Item>
+                <Item>수두 예방접종</Item>
+                <Item>MMR(홍역·볼거리·풍진) 예방접종</Item>
+                <Item>풍진 예방접종</Item>
+                <Item>독감(인플루엔자) 예방접종(코 분무 생백신)</Item>
+                <Item>일본뇌염 예방접종(생백신)</Item>
+                <Item>BCG(결핵) 예방접종</Item>
+                <Item>파상풍 예방접종(상처·못에 찔린 뒤)</Item>
+            </Deferral>
+            <Deferral period="2주">
+                <Item>B형간염 예방접종</Item>
+                <Item>황열 예방접종</Item>
+                <Item>소아마비 예방접종(먹는 백신)</Item>
+                <Item>장티푸스 예방접종(먹는 백신)</Item>
+            </Deferral>
+            <Deferral period="7일">
+                <Item>코로나19 예방접종</Item>
+            </Deferral>
+            <Deferral period="24시간">
+                <Item>독감(인플루엔자) 예방접종(주사)</Item>
+                <Item>A형간염 예방접종</Item>
+                <Item>자궁경부암(HPV) 예방접종</Item>
+                <Item>폐렴구균 예방접종</Item>
+                <Item>뇌수막염(수막구균) 예방접종</Item>
+                <Item>일본뇌염 예방접종(사백신)</Item>
+                <Item>파상풍 예방접종</Item>
+                <Item>디프테리아 예방접종</Item>
+                <Item>백일해 예방접종</Item>
+                <Item>장티푸스 예방접종(주사)</Item>
+                <Item>소아마비 예방접종(주사)</Item>
+                <Item>신증후군출혈열(유행성출혈열) 예방접종</Item>
+                <Item>광견병 예방접종(예방 목적)</Item>
+                <Item>콜레라 예방접종</Item>
+                <Item>발진티푸스 예방접종</Item>
+                <Item>파라티푸스 예방접종</Item>
+                <Item>탄저 예방접종</Item>
+                <Item>페스트 예방접종</Item>
+            </Deferral>
+        </Category>
+
+        <Category name="기타" countedFrom="해당일">
+            <Deferral period="6개월">
+                <Item countedFrom="분만·유산">분만·유산</Item>
+            </Deferral>
+            <Deferral period="2주">
+                <Item countedFrom="마지막 노출">조류인플루엔자 발생지역 노출(가금류 농장·살처분·방역)</Item>
+            </Deferral>
+        </Category>
+    </OtherHistory>
 
     <!-- 2. 변종 크로이츠펠트-야콥병(vCJD) 헌혈금지지역 -->
     <vCJD_Regions>

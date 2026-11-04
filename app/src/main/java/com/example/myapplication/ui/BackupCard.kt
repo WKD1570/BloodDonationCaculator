@@ -67,7 +67,7 @@ internal fun BackupCard(
             Text("💾 백업·복원", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             Spacer(Modifier.height(4.dp))
             Text(
-                "헌혈·약·감염병·체류 기록과 헌혈 계획, 마이페이지 정보, 즐겨찾기를 파일 하나로 저장해요. " +
+                "헌혈·약·질환·시술·접종·체류 기록과 헌혈 계획, 마이페이지 정보, 즐겨찾기를 파일 하나로 저장해요. " +
                     "폰을 바꿀 때 새 폰에서 불러오면 그대로 이어서 쓸 수 있어요.",
                 fontSize = 11.sp,
                 color = TextTertiary,
@@ -93,7 +93,7 @@ internal fun BackupCard(
             }
             Spacer(Modifier.height(10.dp))
             Text(
-                "⚠️ 백업 파일에는 이름·생년월일·헌혈증 번호와 약·감염병·체류 기록이 암호화되지 않은 채 들어 있어요. " +
+                "⚠️ 백업 파일에는 이름·생년월일·헌혈증 번호와 약·질환·시술·접종·체류 기록이 암호화되지 않은 채 들어 있어요. " +
                     "믿을 수 있는 곳에만 보관하고, 다른 사람에게 보내지 마세요.",
                 fontSize = 10.sp,
                 color = TextTertiary,

@@ -100,7 +100,7 @@ internal fun DonationPlannerScreen(
         }
         Spacer(Modifier.height(6.dp))
         Text(
-            "날짜를 누르면 고른 종류로 계획하고, 한 번 더 누르면 지워요. 헌혈 기록과 약물·감염병·체류 이력을 " +
+            "날짜를 누르면 고른 종류로 계획하고, 한 번 더 누르면 지워요. 헌혈 기록과 약물·질환·시술·접종·체류 이력을 " +
                 "반영해 가능한지 알려드려요.",
             fontSize = 11.sp,
             color = TextTertiary,

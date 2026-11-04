@@ -94,7 +94,7 @@ class DonationRemindersTest {
         assertEquals(
             ReminderText(
                 "이제 전혈헌혈·혈장성분헌혈을 할 수 있어요",
-                "헌혈 간격과 약·감염병·체류 제한이 모두 지났어요. 헌혈 장소 탭에서 가까운 곳을 찾아보세요."
+                "헌혈 간격과 약·질환·시술·접종·체류 제한이 모두 지났어요. 헌혈 장소 탭에서 가까운 곳을 찾아보세요."
             ),
             reminderText(Reminder.NowEligible(listOf(WHOLE_BLOOD, PLASMA)), label)
         )

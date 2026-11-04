@@ -18,6 +18,10 @@ const val ANNUAL_LIMIT_ML = 2160
  */
 const val ANNUAL_WINDOW_DAYS = 366L
 
+/** 성분채혈: every kind of apheresis donation, which the 혈소판 annual limit counts together. */
+val APHERESIS_TYPES: Set<DonationType> =
+    setOf(DonationType.PLASMA, DonationType.PLATELET, DonationType.WHITE_BLOOD_CELL)
+
 data class TypeInfo(
     val type: DonationType,
     val label: String,
@@ -42,6 +46,18 @@ data class TypeInfo(
             DonationType.PLATELET -> PLATELET_ANNUAL_LIMIT
             DonationType.PLASMA, DonationType.WHITE_BLOOD_CELL, DonationType.STEM_CELL -> null
         }
+
+    /**
+     * The donations [yearMax] counts. 혈소판 성분채혈 is barred after 24 성분채혈 of any kind in the
+     * past year (혈액관리법 시행규칙 별표 1의2), so 혈장 and 백혈구 donations count toward it too;
+     * 전혈's 5 count only 전혈.
+     */
+    val yearCountedTypes: Set<DonationType>
+        get() = if (type == DonationType.PLATELET) APHERESIS_TYPES else setOf(type)
+
+    /** What [yearMax] counts, as the reasons word it: "전혈헌혈", or "성분헌혈" for 혈소판. */
+    val yearCountLabel: String
+        get() = if (yearCountedTypes.size > 1) "성분헌혈" else label
 }
 
 val TYPE_INFO: Map<DonationType, TypeInfo> = mapOf(
@@ -57,7 +73,8 @@ val TYPE_INFO: Map<DonationType, TypeInfo> = mapOf(
 fun typeSubtitle(type: DonationType): String {
     val info = TYPE_INFO.getValue(type)
     val interval = if (info.interval.months > 0) info.intervalText else "${info.interval.days / 7}주"
-    val yearText = info.yearMax?.let { "연 ${it}회" } ?: "횟수제한 없음"
+    val yearText = info.yearMax?.let { if (info.yearCountedTypes.size > 1) "성분헌혈 합산 연 ${it}회" else "연 ${it}회" }
+        ?: "횟수제한 없음"
     return "1회 ${info.volumeMl}mL · 간격 $interval · $yearText"
 }
 
@@ -140,7 +157,7 @@ fun calcNext(
 ): NextResult {
     val info = TYPE_INFO.getValue(type)
     val items = sortedByDate(records).filter { !it.date.isAfter(asOfDate) }
-    val ofType = items.filter { it.type == type }
+    val counted = items.filter { it.type in info.yearCountedTypes }
     val totalVol = items.sumOf { it.volumeMl() }
     val nextVolumeMl = info.volumeMl
 
@@ -165,19 +182,20 @@ fun calcNext(
         }
     }
 
-    // Annual count-limit rule: the donation [yearMax] back from the latest one of this type decides.
-    // Until it expires, the past year holds [yearMax] of them; once it has, at most [yearMax] - 1.
-    // The very first record would be the wrong one in a history longer than a year: it expired long
-    // ago, and the limit would never bind however many donations the past year holds.
+    // Annual count-limit rule: the donation [yearMax] back from the latest one counted decides - of
+    // this type for 전혈, of any 성분헌혈 for 혈소판 ([TypeInfo.yearCountedTypes]). Until it expires,
+    // the past year holds [yearMax] of them; once it has, at most [yearMax] - 1. The very first
+    // record would be the wrong one in a history longer than a year: it expired long ago, and the
+    // limit would never bind however many donations the past year holds.
     val yearMax = info.yearMax
-    if (yearMax != null && ofType.size >= yearMax) {
-        val oldest = ofType[ofType.size - yearMax]
+    if (yearMax != null && counted.size >= yearMax) {
+        val oldest = counted[counted.size - yearMax]
         val expDate = oldest.date.plusDays(366)
         if (expDate.isAfter(today)) {
             if (expDate.isAfter(nextDate)) nextDate = expDate
             reasons.add(
                 Reason(
-                    "연간 ${yearMax}회 한도 → 가장 오래된 헌혈 만료 후 가능 (${fmtShort(oldest.date)} → +365일)",
+                    "연간 ${info.yearCountLabel} ${yearMax}회 한도 → 가장 오래된 ${info.yearCountLabel} 만료 후 가능 (${fmtShort(oldest.date)} → +365일)",
                     Color(0xFF64748B)
                 )
             )

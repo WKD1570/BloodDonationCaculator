@@ -245,14 +245,50 @@ class DonationCalculatorEngineTest {
         // see them expired and let a 25th platelet donation in the same year through.
         val result = calcNext(DonationType.PLATELET, expiredPlatelets + pastYearPlatelets, LocalDate.of(2026, 5, 1))
         assertEquals(LocalDate.of(2026, 6, 3), result.nextDate)
-        assertTrue(result.reasons.any { "연간 24회" in it.text })
+        assertTrue(result.reasons.any { "연간 성분헌혈 24회" in it.text })
     }
 
     @Test
     fun `the yearly count limit doesn't bind with one donation fewer in the past year`() {
         val result = calcNext(DonationType.PLATELET, expiredPlatelets + pastYearPlatelets.drop(1), LocalDate.of(2026, 5, 1))
         assertEquals(LocalDate.of(2026, 5, 4), result.nextDate)
-        assertFalse(result.reasons.any { "연간 24회" in it.text })
+        assertFalse(result.reasons.any { "24회" in it.text })
+    }
+
+    @Test
+    fun `plasma and white blood cell donations count toward the platelet limit of 24`() {
+        // The same 24 in the past year, every other one a 혈장 and the last a 백혈구 donation.
+        val mixed = pastYearPlatelets.mapIndexed { i, record ->
+            when {
+                i == pastYearPlatelets.lastIndex -> record.copy(type = DonationType.WHITE_BLOOD_CELL)
+                i % 2 == 0 -> record.copy(type = DonationType.PLASMA)
+                else -> record
+            }
+        }
+        val platelet = calcNext(DonationType.PLATELET, mixed, LocalDate.of(2026, 5, 1))
+        assertEquals(LocalDate.of(2026, 6, 3), platelet.nextDate)
+        assertTrue(platelet.reasons.any { "연간 성분헌혈 24회 한도" in it.text })
+
+        // 혈장 itself has no yearly count limit.
+        val plasma = calcNext(DonationType.PLASMA, mixed, LocalDate.of(2026, 5, 1))
+        assertEquals(LocalDate.of(2026, 5, 4), plasma.nextDate)
+        assertFalse(plasma.reasons.any { "24회" in it.text })
+    }
+
+    @Test
+    fun `whole blood donations don't count toward the platelet limit`() {
+        val wholeBlood = (0 until 5).map { i ->
+            DonationRecord(id = 200L + i, type = DonationType.WHOLE_BLOOD, date = LocalDate.of(2025, 6, 2).plusDays(60L * i))
+        }
+        val result = calcNext(DonationType.PLATELET, wholeBlood + pastYearPlatelets.drop(1), LocalDate.of(2026, 5, 1))
+        assertFalse(result.reasons.any { "24회" in it.text })
+    }
+
+    @Test
+    fun `the yearly limits read as what they count`() {
+        assertEquals("1회 430mL · 간격 8주 · 연 5회", typeSubtitle(DonationType.WHOLE_BLOOD))
+        assertEquals("1회 90mL · 간격 2주 · 성분헌혈 합산 연 24회", typeSubtitle(DonationType.PLATELET))
+        assertEquals("1회 45mL · 간격 2주 · 횟수제한 없음", typeSubtitle(DonationType.PLASMA))
     }
 
     @Test

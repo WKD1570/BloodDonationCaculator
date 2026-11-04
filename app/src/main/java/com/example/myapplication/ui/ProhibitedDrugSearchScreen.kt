@@ -173,7 +173,7 @@ private fun SearchSection(
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         placeholder = {
-            Text("약 이름·성분을 검색하세요 (예: 아스피린, 소론도)", fontSize = 12.sp, color = TextTertiary)
+            Text("약 이름·성분·종류를 검색하세요 (예: 아스피린, 소론도, 항생제)", fontSize = 12.sp, color = TextTertiary)
         }
     )
 
@@ -285,14 +285,16 @@ private fun ProductRow(match: ProductMatch, onClick: (() -> Unit)?) {
         }
         Text("성분: ${match.product.ingredient}", fontSize = 11.sp, color = TextTertiary)
         if (restriction != null) {
+            val byPurpose = match.purposeChoices.isNotEmpty()
             Text(
-                "⚠ 헌혈 제한 약물 · ${restriction.restrictionText}",
+                if (byPurpose) "⚠ 헌혈 제한 약물 · 복용 목적에 따라 제한 기간이 달라요"
+                else "⚠ 헌혈 제한 약물 · ${restriction.restrictionText}",
                 fontSize = 11.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = ErrorText,
                 lineHeight = 16.sp
             )
-            Text("눌러서 복용일 입력", fontSize = 10.sp, color = Accent)
+            Text(if (byPurpose) "눌러서 복용 목적 고르기" else "눌러서 복용일 입력", fontSize = 10.sp, color = Accent)
         } else {
             Text(
                 if (mayBeRestrictedInjection(match)) {

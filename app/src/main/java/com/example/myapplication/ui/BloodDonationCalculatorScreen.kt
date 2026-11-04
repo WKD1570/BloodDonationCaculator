@@ -2080,6 +2080,12 @@ internal fun LegendCard() {
                 color = TextTertiary,
                 lineHeight = 17.sp
             )
+            Text(
+                "※ 혈소판성분헌혈의 연 24회에는 혈장·백혈구 성분헌혈도 함께 셉니다.",
+                fontSize = 11.sp,
+                color = TextTertiary,
+                lineHeight = 17.sp
+            )
         }
     }
 }

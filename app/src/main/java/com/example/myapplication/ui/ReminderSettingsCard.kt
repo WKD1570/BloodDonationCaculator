@@ -127,7 +127,7 @@ internal fun ReminderSettingsCard(modifier: Modifier = Modifier) {
             } else if (enabled) {
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    "다음 헌혈 가능일에는 헌혈 간격과 약·감염병·체류 제한이 모두 반영돼요. 계획한 날 헌혈을 할 수 없게 되면 그것도 알려 드려요.",
+                    "다음 헌혈 가능일에는 헌혈 간격과 약·질환·시술·접종·체류 제한이 모두 반영돼요. 계획한 날 헌혈을 할 수 없게 되면 그것도 알려 드려요.",
                     fontSize = 10.sp,
                     color = TextTertiary,
                     lineHeight = 15.sp

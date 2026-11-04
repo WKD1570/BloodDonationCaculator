@@ -2,6 +2,7 @@ package com.example.myapplication.domain
 
 import com.example.myapplication.model.DrugProduct
 import com.example.myapplication.model.DrugRoute
+import com.example.myapplication.model.RestrictedDrug
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -109,10 +110,63 @@ class DrugProductSearchTest {
     }
 
     @Test
-    fun `steroids count only as injections`() {
+    fun `steroids count as injections and tablets, each by its own entry, but not as creams`() {
         assertEquals(listOf("항생제/스테로이드/보톡스/클로피도그렐"), restrictionNames(dexamethasoneShot))
-        assertEquals(emptyList<String>(), restrictionNames(product("소론도정(프레드니솔론)", "프레드니솔론")))
+        assertEquals(listOf("스테로이드제(먹는 약)"), restrictionNames(product("소론도정(프레드니솔론)", "프레드니솔론")))
+        assertEquals(listOf("스테로이드제(먹는 약)"), restrictionNames(product("메드롤정", "메틸프레드니솔론")))
+        assertEquals(emptyList<String>(), restrictionNames(product("어떤덱사정", "덱사메타손", DrugRoute.UNKNOWN)))
         assertEquals(emptyList<String>(), restrictionNames(product("실크론지크림", "베타메타손디프로피오네이트", DrugRoute.EXTERNAL)))
+    }
+
+    @Test
+    fun `topical products restrict nothing, but a suppository counts`() {
+        assertEquals(emptyList<String>(), restrictionNames(product("어떤피록시캄패취", "피록시캄", DrugRoute.EXTERNAL)))
+        assertEquals(emptyList<String>(), restrictionNames(product("케토크린플라스타(케토프로펜)", "케토프로펜", DrugRoute.EXTERNAL)))
+        assertEquals(listOf("인도메타신"), restrictionNames(product("어떤인도메타신좌약", "인도메타신", DrugRoute.EXTERNAL)))
+        assertEquals(listOf("해열진통소염제"), restrictionNames(product("어떤디클로페낙좌제", "디클로페낙나트륨", DrugRoute.EXTERNAL)))
+    }
+
+    @Test
+    fun `the 판정기준 drugs match by ingredient, in Korean or English`() {
+        assertEquals(listOf("디피리다몰"), restrictionNames(product("페르산틴정", "디피리다몰")))
+        assertEquals(listOf("디피리다몰"), restrictionNames(product("페르산틴정", "Dipyridamole", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("피록시캄"), restrictionNames(product("어떤캄캡슐", "Piroxicam", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("인도메타신"), restrictionNames(product("인테반캡슐", "Indometacin", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("펜터민/펜디메트라진"), restrictionNames(product("어떤민정", "펜터민염산염")))
+        assertEquals(listOf("펜터민/펜디메트라진"), restrictionNames(product("어떤진정", "Phendimetrazine Tartrate", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("리라글루티드"), restrictionNames(product("삭센다펜주", "리라글루티드", DrugRoute.INJECTION)))
+        assertEquals(listOf("트라닐라스트"), restrictionNames(product("리자벤캡슐", "Tranilast", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("구충제(치료 목적)/프라지콴텔"), restrictionNames(product("디스토시드정", "프라지콴텔")))
+        assertEquals(listOf("데노수맙"), restrictionNames(product("프롤리아프리필드시린지", "Denosumab", DrugRoute.INJECTION)))
+        assertEquals(listOf("프로필티오우라실/메티마졸"), restrictionNames(product("어떤정", "Thiamazole", DrugRoute.UNKNOWN)))
+        assertEquals(emptyList<String>(), restrictionNames(product("어떤헤파리노이드크림", "Heparinoid", DrugRoute.UNKNOWN)))
+    }
+
+    @Test
+    fun `common pain relievers count as 해열진통소염제`() {
+        assertEquals(listOf("해열진통소염제"), restrictionNames(product("삼남아세트아미노펜정500mg", "아세트아미노펜")))
+        assertEquals(listOf("해열진통소염제"), restrictionNames(product("어떤덱시부프로펜정", "덱시부프로펜", DrugRoute.UNKNOWN)))
+        assertEquals(listOf("해열진통소염제"), restrictionNames(product("비씨디클로페낙나트륨주사", "디클로페낙나트륨", DrugRoute.INJECTION)))
+        assertEquals(listOf("해열진통소염제"), restrictionNames(product("어떤펜정", "Ibuprofen", DrugRoute.UNKNOWN)))
+    }
+
+    @Test
+    fun `an ingredient restricted by purpose asks which purpose, not the strictest`() {
+        val methotrexate = product("어떤메토트렉세이트정", "메토트렉세이트")
+        val match = ProductMatch(methotrexate, restrictionsFor(methotrexate, PROHIBITED_DRUGS))
+        assertEquals(listOf(28, -1), match.purposeChoices.map { it.restrictionDays })
+        assertEquals(-1, match.strictestRestriction?.restrictionDays)
+
+        val warfarin = product("쿠마딘정", "Warfarin Sodium", DrugRoute.UNKNOWN)
+        assertEquals(
+            listOf(7, -1),
+            ProductMatch(warfarin, restrictionsFor(warfarin, PROHIBITED_DRUGS)).purposeChoices.map { it.restrictionDays }
+        )
+        // The same ingredient under two names with one period, or two ingredients, isn't a choice.
+        val finasteride = product("프로페시아정", "피나스테리드")
+        assertEquals(emptyList<RestrictedDrug>(), ProductMatch(finasteride, restrictionsFor(finasteride, PROHIBITED_DRUGS)).purposeChoices)
+        val combo = product("플라빅스에이정", "Aspirin Enteric Pellets/Clopidogrel Bisulfate", DrugRoute.UNKNOWN)
+        assertEquals(emptyList<RestrictedDrug>(), ProductMatch(combo, restrictionsFor(combo, PROHIBITED_DRUGS)).purposeChoices)
     }
 
     @Test

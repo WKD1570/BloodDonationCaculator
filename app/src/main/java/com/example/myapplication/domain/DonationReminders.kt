@@ -84,7 +84,7 @@ private val shortDate = DateTimeFormatter.ofPattern("M월 d일")
 fun reminderText(reminder: Reminder, label: (DonationType) -> String): ReminderText = when (reminder) {
     is Reminder.NowEligible -> ReminderText(
         title = "이제 ${reminder.types.joinToString("·") { label(it) }}을 할 수 있어요",
-        body = "헌혈 간격과 약·감염병·체류 제한이 모두 지났어요. 헌혈 장소 탭에서 가까운 곳을 찾아보세요."
+        body = "헌혈 간격과 약·질환·시술·접종·체류 제한이 모두 지났어요. 헌혈 장소 탭에서 가까운 곳을 찾아보세요."
     )
     is Reminder.PlanTomorrow -> {
         val plan = reminder.plan
