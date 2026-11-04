@@ -48,6 +48,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.domain.PRODUCT_RESULT_LIMIT
 import com.example.myapplication.domain.ProductMatch
 import com.example.myapplication.domain.fmt
+import com.example.myapplication.domain.isTopical
 import com.example.myapplication.domain.mayBeRestrictedInjection
 import com.example.myapplication.model.RestrictedDrug
 import java.time.LocalDate
@@ -297,10 +298,11 @@ private fun ProductRow(match: ProductMatch, onClick: (() -> Unit)?) {
             Text(if (byPurpose) "눌러서 복용 목적 고르기" else "눌러서 복용일 입력", fontSize = 10.sp, color = Accent)
         } else {
             Text(
-                if (mayBeRestrictedInjection(match)) {
-                    "헌혈 제한 약물 목록에 없는 성분이에요. 참고로 항생제·스테로이드·보톡스 주사는 투여 후 1주간 헌혈이 제한돼요."
-                } else {
-                    "헌혈 제한 약물 목록에 없는 성분이에요."
+                when {
+                    isTopical(match.product) -> "연고·파스·점안액 같은 외용제는 헌혈이 제한되지 않아요."
+                    mayBeRestrictedInjection(match) ->
+                        "헌혈 제한 약물 목록에 없는 성분이에요. 참고로 항생제·스테로이드·보톡스 주사는 투여 후 1주간 헌혈이 제한돼요."
+                    else -> "헌혈 제한 약물 목록에 없는 성분이에요."
                 },
                 fontSize = 11.sp,
                 color = TextSecondary,

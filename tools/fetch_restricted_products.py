@@ -66,13 +66,80 @@ QUERIES = {
     "비스모데깁": ["Vismodegib"],
     "아시트레틴": ["Acitretin"],
     "에트레티네이트": ["Etretinate"],
+    # Added from 「헌혈기록카드 문진항목 판정기준」 표1-1·1-2 (2021.12). 식약처 writes
+    # indometacin the INN way; "Indomethacin" found nothing (checked 2026-11-04).
+    "디피리다몰": ["Dipyridamole"],
+    "인도메타신": ["Indometacin", "Indomethacin"],
+    "피록시캄": ["Piroxicam"],
+    "펜터민/펜디메트라진": ["Phentermine", "Phendimetrazine"],
+    "리라글루티드": ["Liraglutide"],
+    "트라닐라스트": ["Tranilast"],
+    "구충제(치료 목적)/프라지콴텔": ["Praziquantel"],
+    "메토트렉세이트": ["Methotrexate"],
+    "와파린/헤파린/히루딘": ["Warfarin", "Heparin", "Hirudin"],
+    "데노수맙": ["Denosumab"],
+    "프로필티오우라실/메티마졸": ["Propylthiouracil", "Methimazole", "Thiamazole"],
+    # Class entries the app recognises by ingredient (DRUG_CLASSES in DrugProductSearch.kt).
+    "해열진통소염제": [
+        "Acetaminophen", "Ibuprofen", "Dexibuprofen", "Naproxen", "Loxoprofen", "Diclofenac",
+        "Aceclofenac", "Meloxicam", "Celecoxib", "Ketoprofen", "Ketorolac", "Etodolac",
+        "Pelubiprofen", "Flurbiprofen",
+    ],
+    "스테로이드제(먹는 약)": [
+        "Prednisolone", "Methylprednisolone", "Dexamethasone", "Hydrocortisone", "Triamcinolone",
+        "Betamethasone", "Deflazacort",
+    ],
 }
-# Entries that name kinds of drug rather than ingredients, so there's nothing to search for.
-# (항생제 and 스테로이드 injections are handled by the app's injection rule instead.)
-NOT_SEARCHABLE = {"태반주사제/혈액응고인자", "사람뇌하수체 유래 성장호르몬 등"}
+# Entries that name kinds of drug, or things that aren't products, so there's nothing to search
+# for. (항생제 and 스테로이드 injections are handled by the app's injection rule instead.)
+NOT_SEARCHABLE = {
+    "태반주사제/혈액응고인자", "사람뇌하수체 유래 성장호르몬 등",
+    "감기약·두통약", "근육이완제", "구충제(예방 목적)", "동공확장제", "말라리아 예방약",
+    "항생제(감기 치료 목적)", "항생제(먹는 약)", "연골주사", "인대강화주사", "지방분해주사",
+    "항진균제(표재성 감염)", "항진균제(전신·심재성 감염)", "줄기세포 주사(자가)",
+    "줄기세포 주사(관절경)", "줄기세포 주사(자가 여부 모름)", "항결핵제(잠복결핵)",
+    "생물학적 동등성 시험(성분을 아는 경우)", "생물학적 동등성 시험(성분을 모르는 경우)",
+    "임상시험", "B형간염 면역글로불린", "vCJD 위험지역 혈액 유래 진단시약",
+}
+# Ingredients whose names contain a search term without being it: "Heparin" also finds
+# heparinoid creams, which aren't heparin.
+LOOKALIKES = {"heparin": ["heparinoid"]}
 # Queries whose every product is an injection. The app only applies "보톡스(주사)" to injections,
 # and these products have no 주성분코드 to read the route from, so the route is written out.
 INJECTION_ONLY = {"botulinum"}
+
+# 식약처 products carry no 주성분코드, so the route is read off the dosage form in the product
+# name - "트라스트패취(피록시캄)", "보톡스주100단위", "프로스카정(피나스테리드)". The app needs it:
+# creams, patches and eye drops restrict nothing (판정기준 표1-1), and a steroid counts only as
+# a tablet or a shot. Checked in this order, on the name without its bracketed part; a
+# suppository is written as external, and the app treats 좌약/좌제 as acting on the whole body.
+INJECTION_FORMS = re.compile(r"주사|주(?=\d|$)|프리필드|시린지|펜주|바이알|앰플")
+EXTERNAL_FORMS = re.compile(
+    r"크림|연고|로션|패취|패치|플라스타|플라스터|카타플라스마|파프|첩부|페이스트|파스타|점안|점이|점비|"
+    r"스프레이|외용|질정|좌제|좌약|에어로[솔졸]|[겔젤폼](?=\d|$)"  # not 엔젤 in a brand name
+)
+ORAL_FORMS = re.compile(
+    r"정(?=\d|$)|캡슐|캅셀|시럽|과립|현탁|츄어블|트로키|드롭스?|산제|산(?=\d|$)|액(?=\d|$)|환(?=\d|$)"
+)
+ENGLISH_FORMS = [
+    ("injection", re.compile(r"\binj|injection|prefilled|syringe|vial|ampoule", re.I)),
+    ("external", re.compile(r"cream|oint|\bgel\b|lotion|patch|plaster|cataplasm|eye|ophthalmic|nasal|spray|"
+                            r"supp|vaginal|topical|external|foam", re.I)),
+    ("oral", re.compile(r"\btab|\bcap|syr|granule|powder|suspension|\boral|chewable|troche", re.I)),
+]
+
+
+def route_from_name(name, english_name):
+    """"injection", "external" or "oral" from the dosage form a product's name spells out; "" when
+    the name doesn't say."""
+    base = re.sub(r"\([^)]*\)|\[[^\]]*\]", "", name or "").replace(" ", "")
+    for route, forms in (("injection", INJECTION_FORMS), ("external", EXTERNAL_FORMS), ("oral", ORAL_FORMS)):
+        if forms.search(base):
+            return route
+    for route, forms in ENGLISH_FORMS:
+        if forms.search(english_name or ""):
+            return route
+    return ""
 
 
 class ApiError(Exception):
@@ -185,7 +252,7 @@ def is_cancelled(item):
 
 def fetch_ingredient(key, ingredient):
     """All marketed products whose 주성분 contains [ingredient], plus counts for the report."""
-    products, page, total, skipped = [], 1, None, {"cancelled": 0, "other ingredient": 0}
+    products, page, total, skipped = [], 1, None, {"cancelled": 0, "other ingredient": 0, "export only": 0}
     while True:
         items, total = items_and_total(fetch_page(key, ingredient, page))
         if total > MAX_PER_QUERY:
@@ -199,11 +266,18 @@ def fetch_ingredient(key, ingredient):
                 skipped["cancelled"] += 1
                 continue
             # Guard against a partial-match filter returning look-alikes.
-            if squash(ingredient) not in squash(ingredients):
+            listed = squash(ingredients)
+            for lookalike in LOOKALIKES.get(ingredient.lower(), []):
+                listed = listed.replace(lookalike, "")
+            if squash(ingredient) not in listed:
                 skipped["other ingredient"] += 1
                 continue
             name = field(item, "ITEM_NAME")
             if not name:
+                continue
+            # Made only for export ("…크림(수출용)"): not something anyone here takes.
+            if "수출용" in name:
+                skipped["export only"] += 1
                 continue
             product = {
                 "name": " ".join(name.split()),
@@ -212,8 +286,9 @@ def fetch_ingredient(key, ingredient):
                 "ingredient": ingredients,
                 "itemSeq": field(item, "ITEM_SEQ"),
             }
-            if ingredient.lower() in INJECTION_ONLY:
-                product["route"] = "injection"
+            route = "injection" if ingredient.lower() in INJECTION_ONLY else route_from_name(name, product["englishName"])
+            if route:
+                product["route"] = route
             products.append(product)
         if not items or page * PAGE_SIZE >= total:
             break
@@ -280,8 +355,8 @@ def main():
                 seen.add(identity)
                 products.append(product)
                 added += 1
-            print(f"{ingredient}: {total} listed, {added} kept "
-                  f"(skipped {skipped['cancelled']} cancelled, {skipped['other ingredient']} other ingredient)")
+            print(f"{ingredient}: {total} listed, {added} kept (skipped {skipped['cancelled']} cancelled, "
+                  f"{skipped['export only']} export only, {skipped['other ingredient']} other ingredient)")
 
     if not products:
         sys.exit("Nothing fetched - nothing written.")

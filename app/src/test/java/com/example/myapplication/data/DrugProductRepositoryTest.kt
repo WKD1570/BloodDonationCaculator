@@ -1,6 +1,8 @@
 package com.example.myapplication.data
 
+import com.example.myapplication.domain.ProductIndex
 import com.example.myapplication.domain.restrictionsFor
+import com.example.myapplication.domain.searchProducts
 import com.example.myapplication.model.DrugRoute
 import java.io.File
 import org.junit.Assert.assertEquals
@@ -91,5 +93,32 @@ class DrugProductRepositoryTest {
             listOf("항생제/스테로이드/보톡스/클로피도그렐"),
             restrictionsFor(dexamethasone, bundledDrugs).map { it.ingredientName }
         )
+    }
+
+    @Test
+    fun `the search index finds what searchProducts finds`() {
+        val index = ProductIndex(bundled.products, bundledDrugs)
+        for (query in listOf("타이레놀", "아세", "케토", "프레드니", "와파린", "Tab", "정", " ")) {
+            assertEquals(query, searchProducts(query, bundled.products, bundledDrugs), index.search(query))
+        }
+        assertEquals(emptyList<Any>(), ProductIndex.EMPTY.search("타이레놀"))
+    }
+
+    private fun restrictedAs(namePrefix: String) =
+        restrictionsFor(bundled.products.first { it.name.startsWith(namePrefix) }, bundledDrugs).map { it.ingredientName }
+
+    @Test
+    fun `식약처 products for the 판정기준 drugs carry a route read off their names`() {
+        assertEquals(listOf("해열진통소염제"), restrictedAs("타이레놀정500"))
+        assertEquals(listOf("리라글루티드"), restrictedAs("삭센다펜주"))
+        assertEquals(listOf("데노수맙"), restrictedAs("프롤리아프리필드시린지"))
+        assertEquals(listOf("와파린/헤파린/히루딘", "와파린/헤파린/히루딘"), restrictedAs("쿠파린정5"))
+        // A patch or gel restricts nothing, whatever it contains.
+        val patch = bundled.products.first { it.name.startsWith("케토톱플라스타") }
+        assertEquals(DrugRoute.EXTERNAL, patch.route)
+        assertEquals(emptyList<String>(), restrictionsFor(patch, bundledDrugs))
+        // 식약처's prednisolone tablet is read as a tablet, so it meets 스테로이드제(먹는 약).
+        val tablet = bundled.products.first { it.name.startsWith("소론도정") && it.route == DrugRoute.ORAL }
+        assertEquals(listOf("스테로이드제(먹는 약)"), restrictionsFor(tablet, bundledDrugs).map { it.ingredientName })
     }
 }

@@ -9,19 +9,20 @@ import com.example.myapplication.data.DrugProductRepository
 import com.example.myapplication.data.MedicationHistoryRepository
 import com.example.myapplication.data.ProhibitedDrugRepository
 import com.example.myapplication.domain.PROHIBITED_DRUGS
+import com.example.myapplication.domain.ProductIndex
 import com.example.myapplication.domain.ProductMatch
 import com.example.myapplication.domain.nextEligibleDonationDate
 import com.example.myapplication.domain.searchDrugs
-import com.example.myapplication.domain.searchProducts
-import com.example.myapplication.model.DrugProduct
 import com.example.myapplication.model.RestrictedDrug
 import com.example.myapplication.model.toMedicationRecord
 import java.time.LocalDate
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** The outcome of applying a drug's restriction period to the date it was taken. */
 sealed interface DonationEligibility {
@@ -69,7 +70,8 @@ class ProhibitedDrugSearchViewModel(
     val uiState: StateFlow<ProhibitedDrugSearchUiState> = _uiState.asStateFlow()
 
     private var allDrugs: List<RestrictedDrug> = emptyList()
-    private var allProducts: List<DrugProduct> = emptyList()
+    /** The product dictionary, checked against the list once (it holds a few thousand products). */
+    private var productIndex: ProductIndex = ProductIndex.EMPTY
 
     /**
      * Row id of the history entry saved for the current selection, or 0 when nothing is saved yet.
@@ -99,13 +101,13 @@ class ProhibitedDrugSearchViewModel(
                 null
             }
             allDrugs = drugs
-            allProducts = productList?.products.orEmpty()
+            productIndex = withContext(Dispatchers.Default) { ProductIndex(productList?.products.orEmpty(), drugs) }
             _uiState.update { state ->
                 state.copy(
                     isLoading = false,
                     dataWarning = warning,
                     results = searchDrugs(state.query, drugs),
-                    productResults = searchProducts(state.query, allProducts, drugs),
+                    productResults = productIndex.search(state.query),
                     productSource = productList?.let { list ->
                         "의약품 ${list.products.size}종" +
                             (list.sourceNote?.let { " · $it" } ?: list.asOf?.let { " ($it 자료)" } ?: "")
@@ -120,7 +122,7 @@ class ProhibitedDrugSearchViewModel(
             it.copy(
                 query = query,
                 results = searchDrugs(query, allDrugs),
-                productResults = searchProducts(query, allProducts, allDrugs)
+                productResults = productIndex.search(query)
             )
         }
     }

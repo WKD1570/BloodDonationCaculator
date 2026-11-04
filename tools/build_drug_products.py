@@ -61,13 +61,13 @@ def clean(text):
 # Either bracket style, one level of nested parentheses inside, and a closing bracket the source
 # sometimes leaves off at the end of the name.
 EXPORT_NAMES = [
-    re.compile(r"\s*\[수출명\s*:[^\]]*(?:\]|$)"),
-    re.compile(r"\s*\(수출명\s*:(?:[^()]|\([^()]*\))*(?:\)|$)"),
+    re.compile(r"\s*\[[^\]:]*수출명\s*:[^\]]*(?:\]|$)"),
+    re.compile(r"\s*\([^():]*수출명\s*:(?:[^()]|\([^()]*\))*(?:\)|$)"),
 ]
 
 
 def without_export_names(name):
-    """Drops '[수출명:뉴로녹스주…, 시악스주…]' and '(수출명:클로진정100mg)': names the product is
+    """Drops '[수출명:뉴로녹스주…, 시악스주…]', '(수출명:클로진정100mg)' and '(싱가폴수출명 : …)': names the product is
     exported under, which no one here buys it by, and which run some names past 200 characters."""
     for pattern in EXPORT_NAMES:
         name = pattern.sub("", name)

@@ -126,10 +126,10 @@ private val DRUG_CLASSES: Map<String, DrugClass> = mapOf(
 private val SUPPOSITORY_WORDS = listOf("좌약", "좌제")
 
 /**
- * Creams, eye drops, sprays and other 외용 products don't restrict donation (판정기준 표1-1);
- * suppositories are the exception.
+ * Creams, patches, eye drops, sprays and other 외용 products don't restrict donation (판정기준
+ * 표1-1); suppositories are the exception. The search says so for such a product.
  */
-private fun isTopical(product: DrugProduct): Boolean =
+fun isTopical(product: DrugProduct): Boolean =
     product.route == DrugRoute.EXTERNAL && SUPPOSITORY_WORDS.none { it in product.name }
 
 private fun String.squash(): String = replace(" ", "").lowercase()
@@ -149,12 +149,20 @@ private fun normalizedIngredient(product: DrugProduct): String {
  * Antibiotics have too many names to recognise reliably, so an unmatched injection is flagged
  * in the UI instead (see [mayBeRestrictedInjection]).
  */
-fun restrictionsFor(product: DrugProduct, drugs: List<RestrictedDrug>): List<RestrictedDrug> {
+fun restrictionsFor(product: DrugProduct, drugs: List<RestrictedDrug>): List<RestrictedDrug> =
+    listedRestrictions(product, drugs.map(::ListedDrug))
+
+/** A list entry with its ingredient words [squash]ed, worked out once when many products are checked. */
+private class ListedDrug(val drug: RestrictedDrug) {
+    val words = drug.ingredientName.split('/').map { it.squash() }.filter { it.isNotEmpty() }
+}
+
+private fun listedRestrictions(product: DrugProduct, listed: List<ListedDrug>): List<RestrictedDrug> {
     if (isTopical(product)) return emptyList()
     val ingredient = normalizedIngredient(product)
     if (ingredient.isEmpty()) return emptyList()
-    return drugs.filter { drug ->
-        drug.ingredientName.split('/').map { it.squash() }.filter { it.isNotEmpty() }.any { word ->
+    return listed.filter { entry ->
+        entry.words.any { word ->
             val drugClass = DRUG_CLASSES[word]
             when {
                 word == ANTIBIOTIC_CLASS -> false
@@ -162,6 +170,42 @@ fun restrictionsFor(product: DrugProduct, drugs: List<RestrictedDrug>): List<Res
                 else -> word in ingredient
             }
         }
+    }.map { it.drug }
+}
+
+/**
+ * [products] with what search needs worked out once - the text it matches against, without spaces
+ * and in lower case, and each product's restrictions - so that searching as the donor types is a
+ * plain filter over a few thousand products instead of checking each one against the list again.
+ * Building it is the slow part: do it off the main thread.
+ */
+class ProductIndex(products: List<DrugProduct>, drugs: List<RestrictedDrug>) {
+    private class Entry(val match: ProductMatch, val name: String, val ingredient: String, val englishName: String)
+
+    private val entries = drugs.map(::ListedDrug).let { listed ->
+        products.map { product ->
+            Entry(
+                ProductMatch(product, listedRestrictions(product, listed)),
+                product.name.squash(),
+                product.ingredient.squash(),
+                product.englishName.squash()
+            )
+        }
+    }
+
+    /** The same as [searchProducts] over the products and list this index was built from. */
+    fun search(query: String, limit: Int = PRODUCT_RESULT_LIMIT): List<ProductMatch> {
+        val needle = query.squash()
+        if (needle.length < MIN_PRODUCT_QUERY_LENGTH) return emptyList()
+        return entries
+            .filter { needle in it.name || needle in it.ingredient || needle in it.englishName }
+            .map { it.match }
+            .sortedBy { if (it.isRestricted) 0 else 1 }
+            .take(limit)
+    }
+
+    companion object {
+        val EMPTY = ProductIndex(emptyList(), emptyList())
     }
 }
 
@@ -185,9 +229,10 @@ fun searchProducts(
 ): List<ProductMatch> {
     val needle = query.squash()
     if (needle.length < MIN_PRODUCT_QUERY_LENGTH) return emptyList()
+    val listed = drugs.map(::ListedDrug)
     return products
         .filter { needle in it.name.squash() || needle in it.ingredient.squash() || needle in it.englishName.squash() }
-        .map { ProductMatch(it, restrictionsFor(it, drugs)) }
+        .map { ProductMatch(it, listedRestrictions(it, listed)) }
         .sortedBy { if (it.isRestricted) 0 else 1 }
         .take(limit)
 }
