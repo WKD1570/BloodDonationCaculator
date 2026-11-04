@@ -31,6 +31,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -56,6 +57,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -69,13 +73,16 @@ import com.example.myapplication.domain.machineSummary
 import com.example.myapplication.domain.mapQueryOf
 import com.example.myapplication.domain.modelList
 import com.example.myapplication.domain.preferredFirst
-import com.example.myapplication.domain.splitPreferred
+import com.example.myapplication.domain.sectionPlaces
 import com.example.myapplication.model.BloodCenter
 import com.example.myapplication.model.DonationPlaceKind
 import com.example.myapplication.model.DonationType
 
 /** List key of the 다른 지역 heading that follows the 자주 헌혈하는 지역's centers. */
 internal const val OTHERS_HEADING_KEY = "others-heading"
+
+/** List key of the 즐겨찾기 heading over the starred places. */
+internal const val FAVORITES_HEADING_KEY = "favorites-heading"
 
 /**
  * 헌혈 장소: a 헌혈의 집 / 헌혈카페 toggle over two lists - every 헌혈의 집 from 대한적십자사's list,
@@ -84,8 +91,11 @@ internal const val OTHERS_HEADING_KEY = "others-heading"
  * 헌혈카페's hours and parking), 전화하기 and 지도에서 보기, which hand off to the phone's dialer and
  * map app - the app itself makes no network calls.
  *
+ * The ☆ on a row stars the place. Starred places that match the chips and search come first, under
+ * 즐겨찾기, in either list and whatever province is picked.
+ *
  * [preferredProvince] is 마이페이지's 자주 헌혈하는 지역. Its chip comes right after 전체, and under
- * 전체 its centers are listed first under their own heading, then 다른 지역. It's taken as a
+ * 전체 its centers are listed next under their own heading, then 다른 지역. It's taken as a
  * parameter rather than held in [viewModel], so a change on 마이페이지 shows from the first frame.
  *
  * The list is lazy and scrolls on its own, so the root screen hosts it outside its page scroll.
@@ -100,8 +110,8 @@ fun BloodCenterListScreen(
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val chips = remember(state.provinces, preferredProvince) { preferredFirst(state.provinces, preferredProvince) }
-    val (preferred, others) = remember(state.visible, state.province, preferredProvince) {
-        splitPreferred(state.visible, state.province, preferredProvince)
+    val sections = remember(state.visible, state.province, preferredProvince, state.favorites) {
+        sectionPlaces(state.visible, state.province, preferredProvince, state.favorites)
     }
     val listState = rememberLazyListState()
     // The other kind's list starts from its top, not wherever this one was scrolled to.
@@ -184,10 +194,12 @@ fun BloodCenterListScreen(
                 CenterRow(
                     center = center,
                     expanded = center.id == state.expandedId,
+                    favorite = center.id in state.favorites,
                     onClick = {
                         focusManager.clearFocus()
                         viewModel.onCenterClick(center)
                     },
+                    onFavoriteToggle = { viewModel.onFavoriteToggle(center) },
                     onCall = { dial(context, center.phone) },
                     onShowOnMap = { showOnMap(context, center) }
                 )
@@ -218,12 +230,18 @@ fun BloodCenterListScreen(
                             modifier = Modifier.padding(start = 4.dp)
                         )
                     }
-                    if (preferred.isNotEmpty()) {
-                        item(key = "preferred-heading") { SectionHeading("$preferredProvince (자주 헌혈하는 지역)") }
-                        centerRows(preferred)
-                        if (others.isNotEmpty()) item(key = OTHERS_HEADING_KEY) { SectionHeading("다른 지역") }
+                    if (sections.favorites.isNotEmpty()) {
+                        item(key = FAVORITES_HEADING_KEY) { SectionHeading("★ 즐겨찾기") }
+                        centerRows(sections.favorites)
                     }
-                    centerRows(others)
+                    if (sections.preferred.isNotEmpty()) {
+                        item(key = "preferred-heading") { SectionHeading("$preferredProvince (자주 헌혈하는 지역)") }
+                        centerRows(sections.preferred)
+                        if (sections.others.isNotEmpty()) item(key = OTHERS_HEADING_KEY) { SectionHeading("다른 지역") }
+                    } else if (sections.favorites.isNotEmpty() && sections.others.isNotEmpty()) {
+                        item(key = "rest-heading") { SectionHeading("다른 장소") }
+                    }
+                    centerRows(sections.others)
                     item(key = "source") {
                         Text(
                             when (state.kind) {
@@ -427,7 +445,9 @@ internal fun ChoiceChip(label: String, active: Boolean, onClick: () -> Unit, cou
 private fun CenterRow(
     center: BloodCenter,
     expanded: Boolean,
+    favorite: Boolean,
     onClick: () -> Unit,
+    onFavoriteToggle: () -> Unit,
     onCall: () -> Unit,
     onShowOnMap: () -> Unit
 ) {
@@ -443,7 +463,8 @@ private fun CenterRow(
                 .fillMaxWidth()
                 .clickable(onClick = onClick)
                 .animateContentSize()
-                .padding(horizontal = 16.dp, vertical = 12.dp)
+                // 10 rather than 12 top and bottom: the star's touch target makes the first line taller.
+                .padding(horizontal = 16.dp, vertical = 10.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
@@ -470,10 +491,12 @@ private fun CenterRow(
                         )
                     }
                 }
-                Spacer(Modifier.width(8.dp))
+                Spacer(Modifier.width(4.dp))
+                FavoriteStar(name = center.name, favorite = favorite, onToggle = onFavoriteToggle)
+                Spacer(Modifier.width(2.dp))
                 Text(if (expanded) "▴" else "▾", fontSize = 12.sp, color = TextTertiary)
             }
-            Spacer(Modifier.height(3.dp))
+            Spacer(Modifier.height(1.dp))
             Text(
                 center.address,
                 fontSize = 12.sp,
@@ -522,6 +545,32 @@ private fun CenterRow(
         }
     }
 }
+
+/**
+ * ★ or ☆ beside a place's name: a tap stars it without opening the row. Read out as a checkbox
+ * named after the place, so a screen reader says what's being starred.
+ */
+@Composable
+private fun FavoriteStar(name: String, favorite: Boolean, onToggle: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .size(32.dp)
+            .clip(CircleShape)
+            .toggleable(value = favorite, role = Role.Checkbox, onValueChange = { onToggle() })
+            .semantics { contentDescription = "$name 즐겨찾기" },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            if (favorite) "★" else "☆",
+            fontSize = 18.sp,
+            color = if (favorite) FavoriteColor else TextTertiary,
+            modifier = Modifier.clearAndSetSemantics {}
+        )
+    }
+}
+
+/** Amber, the color people expect of a filled star; legible on both the light and dark card. */
+private val FavoriteColor = Color(0xFFF59E0B)
 
 /** An icon and its text, the icon level with the first line when the text runs to several (hours). */
 @Composable

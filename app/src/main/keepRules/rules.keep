@@ -1,5 +1,6 @@
-# Gson fills these in by reflection from the bundled assets (blood_centers.json,
-# prohibited_drugs.json, restricted_region_shapes.json), matching each JSON key to a field name.
+# Gson fills these in by reflection from the bundled assets (blood_centers.json, blood_cafes.json,
+# prohibited_drugs.json, restricted_region_shapes.json), and reads and writes the backup file with
+# the ones in AppBackup.kt, matching each JSON key to a field name - for the backup, across versions.
 # Keep the field names, and the no-argument constructor Kotlin generates when every parameter has
 # a default, or R8 renames the fields and every list loads empty.
 -keep class com.example.myapplication.data.*Json {

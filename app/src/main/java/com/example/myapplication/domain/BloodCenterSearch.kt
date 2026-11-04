@@ -156,6 +156,29 @@ fun splitPreferred(
     if (province != null || preferred == null) emptyList<BloodCenter>() to visible
     else visible.partition { provinceOf(it.address) == preferred }
 
+/** The list in its sections, each in [visible]'s order: 즐겨찾기, then 자주 헌혈하는 지역, then the rest. */
+data class PlaceSections(
+    val favorites: List<BloodCenter>,
+    val preferred: List<BloodCenter>,
+    val others: List<BloodCenter>
+)
+
+/**
+ * [visible] as the list shows it: the starred places ([favoriteIds]) first, whatever province is
+ * picked, then the rest split by [splitPreferred]. A starred place is only ever in 즐겨찾기, and it
+ * still has to match the chips and search to be there.
+ */
+fun sectionPlaces(
+    visible: List<BloodCenter>,
+    province: String?,
+    preferred: String?,
+    favoriteIds: Set<String>
+): PlaceSections {
+    val (favorites, rest) = visible.partition { it.id in favoriteIds }
+    val (preferredPart, others) = splitPreferred(rest, province, preferred)
+    return PlaceSections(favorites, preferredPart, others)
+}
+
 /** Province chips with [preferred]'s moved to the front, right after 전체; the rest keep their order. */
 fun preferredFirst(counts: List<Pair<String, Int>>, preferred: String?): List<Pair<String, Int>> =
     counts.sortedBy { it.first != preferred }

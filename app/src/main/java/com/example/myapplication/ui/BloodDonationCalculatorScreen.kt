@@ -226,6 +226,7 @@ fun BloodDonationCalculatorScreen(
     viewModel: DonationViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
+    val backupState by viewModel.backupState.collectAsState()
     val profile = state.profile
     val records = state.records
     val today = state.today
@@ -303,6 +304,16 @@ fun BloodDonationCalculatorScreen(
                             PreferredProvinceCard(
                                 selected = profile.preferredProvince,
                                 onSelect = { viewModel.updateProfile(profile.copy(preferredProvince = it)) }
+                            )
+                            Spacer(Modifier.height(14.dp))
+                            ReminderSettingsCard()
+                            Spacer(Modifier.height(14.dp))
+                            BackupCard(
+                                state = backupState,
+                                onExport = viewModel::exportBackup,
+                                onImport = viewModel::readBackup,
+                                onConfirmRestore = viewModel::confirmRestore,
+                                onCancelRestore = viewModel::cancelRestore
                             )
                         }
                     }

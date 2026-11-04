@@ -1,12 +1,20 @@
 package com.example.myapplication.ui
 
 import android.app.Application
+import android.database.SQLException
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.data.AppBackup
+import com.example.myapplication.data.BackupFile
+import com.example.myapplication.data.BackupFormatException
+import com.example.myapplication.data.BackupRepository
+import com.example.myapplication.data.FavoritePlaceStore
 import com.example.myapplication.data.HealthHistoryRepository
 import com.example.myapplication.data.InfectionRuleDataException
 import com.example.myapplication.data.InfectionRuleRepository
 import com.example.myapplication.data.MedicationHistoryRepository
+import com.example.myapplication.data.backupSummary
 import com.example.myapplication.data.loadDonationRecords
 import com.example.myapplication.data.loadDonorProfile
 import com.example.myapplication.data.loadPlannedDonations
@@ -30,12 +38,16 @@ import com.example.myapplication.model.InfectionRules
 import com.example.myapplication.model.MedicationRecord
 import com.example.myapplication.model.PlannedDonation
 import com.example.myapplication.model.StayRecord
+import java.io.IOException
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -65,9 +77,21 @@ data class HealthHistoryState(
     val restrictions: List<HealthRestriction> = emptyList()
 )
 
+/** The 백업·복원 card on 마이페이지. */
+data class BackupUiState(
+    /** A file is being written or read; the buttons wait. */
+    val busy: Boolean = false,
+    /** What the last export or restore came to, shown under the buttons. */
+    val message: String? = null,
+    val isError: Boolean = false,
+    /** A file read and waiting for the donor to confirm replacing everything with it. */
+    val pending: BackupFile? = null
+)
+
 /**
  * Owns the donor profile, the donation history, the medication history and the 감염병·체류
- * history, and derives the integrated next-eligible-date from all of them.
+ * history, and derives the integrated next-eligible-date from all of them. It also writes and
+ * restores the backup file, since restoring replaces what it holds.
  *
  * Profile and donation records still live in [com.example.myapplication.data.DonationStateStore]
  * (SharedPreferences); medication and 감염병·체류 history live in Room. Because the Room DAO exposes a Flow, a
@@ -78,7 +102,8 @@ class DonationViewModel(
     application: Application,
     private val medicationRepository: MedicationHistoryRepository,
     private val healthRepository: HealthHistoryRepository = HealthHistoryRepository(application),
-    private val ruleRepository: InfectionRuleRepository = InfectionRuleRepository(application)
+    private val ruleRepository: InfectionRuleRepository = InfectionRuleRepository(application),
+    private val backupRepository: BackupRepository = BackupRepository(application)
 ) : AndroidViewModel(application) {
 
     // AndroidViewModelFactory resolves the (Application) constructor; the two-arg one is for tests.
@@ -94,6 +119,9 @@ class DonationViewModel(
     private val isLoading = MutableStateFlow(true)
     private val rules = MutableStateFlow<InfectionRules?>(null)
     private val rulesWarning = MutableStateFlow<String?>(null)
+
+    private val _backupState = MutableStateFlow(BackupUiState())
+    val backupState: StateFlow<BackupUiState> = _backupState.asStateFlow()
 
     /** Captured once so the calendar and D-day labels do not shift mid-session. */
     private val today: LocalDate = LocalDate.now()
@@ -247,5 +275,82 @@ class DonationViewModel(
 
     fun deleteStay(record: StayRecord) {
         viewModelScope.launch { healthRepository.deleteStay(record) }
+    }
+
+    /**
+     * Writes everything the donor entered to [uri], a file they just created with the system picker.
+     * Waits for the first load, so an export tapped right at launch can't come out empty.
+     */
+    fun exportBackup(uri: Uri) {
+        if (_backupState.value.busy) return
+        _backupState.value = BackupUiState(busy = true)
+        viewModelScope.launch {
+            isLoading.first { loading -> !loading }
+            _backupState.value = try {
+                val backup = AppBackup(
+                    profile = profile.value,
+                    donations = records.value,
+                    plan = plan.value,
+                    medications = medicationRepository.getAll(),
+                    diseases = healthRepository.getAllDiseases(),
+                    stays = healthRepository.getAllStays(),
+                    favoritePlaces = FavoritePlaceStore.get(context).ids.value
+                )
+                backupRepository.write(uri, backup, LocalDateTime.now())
+                BackupUiState(message = "백업 파일을 저장했어요. ${backupSummary(backup)}")
+            } catch (e: IOException) {
+                BackupUiState(message = "파일을 저장하지 못했어요. 다른 위치를 골라 다시 해 보세요.", isError = true)
+            } catch (e: SecurityException) {
+                BackupUiState(message = "파일을 저장하지 못했어요. 다른 위치를 골라 다시 해 보세요.", isError = true)
+            }
+        }
+    }
+
+    /** Reads [uri] and, when it's a backup, holds it in [BackupUiState.pending] for the donor to confirm. */
+    fun readBackup(uri: Uri) {
+        if (_backupState.value.busy) return
+        _backupState.value = BackupUiState(busy = true)
+        viewModelScope.launch {
+            _backupState.value = try {
+                BackupUiState(pending = backupRepository.read(uri))
+            } catch (e: BackupFormatException) {
+                BackupUiState(message = e.message, isError = true)
+            } catch (e: IOException) {
+                BackupUiState(message = "파일을 열지 못했어요.", isError = true)
+            } catch (e: SecurityException) {
+                BackupUiState(message = "파일을 열지 못했어요.", isError = true)
+            }
+        }
+    }
+
+    fun cancelRestore() {
+        _backupState.value = BackupUiState()
+    }
+
+    /**
+     * Replaces everything with the pending backup: the Room history first, in one transaction, so a
+     * failure there leaves the app as it was; then 마이페이지, 헌혈 기록 and 헌혈 계획.
+     */
+    fun confirmRestore() {
+        val file = _backupState.value.pending ?: return
+        _backupState.value = BackupUiState(busy = true)
+        viewModelScope.launch {
+            isLoading.first { loading -> !loading }
+            val backup = file.backup
+            _backupState.value = try {
+                backupRepository.replaceHistory(backup)
+                withContext(Dispatchers.IO) {
+                    saveDonorProfile(context, backup.profile)
+                    saveDonationRecords(context, backup.donations)
+                }
+                profile.value = backup.profile
+                records.value = backup.donations
+                lastPlanId = maxOf(lastPlanId, backup.plan.maxOfOrNull { it.id } ?: 0L)
+                persistPlan(upcomingPlan(backup.plan, today))
+                BackupUiState(message = "백업을 불러왔어요. ${backupSummary(backup)}")
+            } catch (e: SQLException) {
+                BackupUiState(message = "백업을 불러오지 못했어요. 지금 기록은 그대로예요.", isError = true)
+            }
+        }
     }
 }

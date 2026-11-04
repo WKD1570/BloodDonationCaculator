@@ -2,6 +2,8 @@ package com.example.myapplication.data
 
 import androidx.room.Dao
 import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.myapplication.model.DiseaseRecord
@@ -35,4 +37,26 @@ interface HealthHistoryDao {
 
     @Delete
     suspend fun deleteStay(record: StayRecord)
+
+    // One-shot reads for the backup file and the morning reminder check, which don't observe.
+
+    @Query("SELECT * FROM disease_history ORDER BY treatmentEndDate DESC, id DESC")
+    suspend fun getAllDiseases(): List<DiseaseRecord>
+
+    @Query("SELECT * FROM stay_history ORDER BY endDate DESC, id DESC")
+    suspend fun getAllStays(): List<StayRecord>
+
+    // Restoring a backup: the rows keep their ids, so the inserts run on emptied tables.
+
+    @Query("DELETE FROM disease_history")
+    suspend fun clearDiseases()
+
+    @Query("DELETE FROM stay_history")
+    suspend fun clearStays()
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertDiseases(records: List<DiseaseRecord>)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertStays(records: List<StayRecord>)
 }

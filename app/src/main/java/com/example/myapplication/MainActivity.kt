@@ -11,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.reminder.DonationReminders
 import com.example.myapplication.ui.BloodDonationCalculatorScreen
 import com.example.myapplication.ui.ThemeViewModel
 import com.example.myapplication.ui.theme.MyApplicationTheme
@@ -18,6 +19,8 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Puts the 헌혈 알림 check back if Android dropped it, e.g. after the app was force-stopped.
+        DonationReminders.ensureScheduled(this)
         enableEdgeToEdge()
         setContent {
             val themeViewModel: ThemeViewModel = viewModel()

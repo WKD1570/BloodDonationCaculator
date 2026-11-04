@@ -189,6 +189,35 @@ class BloodCenterSearchTest {
     }
 
     @Test
+    fun `starred places come first in any province, then 자주 헌혈하는 지역, then the rest`() {
+        val busan = center("서면센터", "부산 부산진구 중앙대로 698", bloodBank = "부산")
+        val station = center("서울역센터", "서울 중구 한강대로 405")
+        val ilsan = center("일산센터", "경기 고양시 일산동구 중앙로 1261번길 55")
+        val jongno = center("광화문센터", "서울특별시 종로구 새문안로 9")
+        val visible = listOf(busan, station, ilsan, jongno)
+        val starred = setOf(ilsan.id, jongno.id)
+
+        assertEquals(
+            PlaceSections(favorites = listOf(ilsan, jongno), preferred = listOf(station), others = listOf(busan)),
+            sectionPlaces(visible, null, "서울", starred)
+        )
+        // With a province picked there's no 자주 헌혈하는 지역 section, but 즐겨찾기 stays.
+        assertEquals(
+            PlaceSections(favorites = listOf(jongno), preferred = emptyList(), others = listOf(station)),
+            sectionPlaces(listOf(station, jongno), "서울", "서울", starred)
+        )
+        // A starred place the chips or search left out isn't brought back.
+        assertEquals(
+            PlaceSections(favorites = emptyList(), preferred = emptyList(), others = listOf(busan)),
+            sectionPlaces(listOf(busan), null, null, starred)
+        )
+        assertEquals(
+            PlaceSections(favorites = emptyList(), preferred = listOf(station, jongno), others = listOf(busan, ilsan)),
+            sectionPlaces(visible, null, "서울", emptySet())
+        )
+    }
+
+    @Test
     fun `the preferred province's chip comes first, the rest keeping their order`() {
         val counts = listOf("서울" to 34, "경기" to 27, "부산" to 14, "제주" to 4)
 

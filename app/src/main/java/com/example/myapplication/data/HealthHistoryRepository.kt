@@ -14,6 +14,10 @@ class HealthHistoryRepository(private val dao: HealthHistoryDao) {
 
     val stays: Flow<List<StayRecord>> = dao.observeStays()
 
+    suspend fun getAllDiseases(): List<DiseaseRecord> = dao.getAllDiseases()
+
+    suspend fun getAllStays(): List<StayRecord> = dao.getAllStays()
+
     suspend fun saveDisease(record: DiseaseRecord): Long = dao.upsertDisease(record)
 
     suspend fun saveStay(record: StayRecord): Long = dao.upsertStay(record)

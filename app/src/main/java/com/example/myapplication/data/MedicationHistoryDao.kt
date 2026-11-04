@@ -34,4 +34,8 @@ interface MedicationHistoryDao {
 
     @Query("DELETE FROM medication_history")
     suspend fun clear()
+
+    /** Restoring a backup: the rows keep their ids, so this runs on an emptied table. */
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertAll(records: List<MedicationRecord>)
 }

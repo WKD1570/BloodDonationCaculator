@@ -8,6 +8,7 @@ import com.example.myapplication.data.BLOOD_CENTERS_ASSET
 import com.example.myapplication.data.BloodCenterDataException
 import com.example.myapplication.data.BloodCenterList
 import com.example.myapplication.data.BloodCenterRepository
+import com.example.myapplication.data.FavoritePlaceStore
 import com.example.myapplication.domain.MachineFilter
 import com.example.myapplication.domain.filterCenters
 import com.example.myapplication.domain.narrowingMachineCounts
@@ -44,7 +45,9 @@ data class BloodCenterListUiState(
     val machine: MachineFilter? = null,
     val expandedId: String? = null,
     /** [centers] narrowed by [province], [machine] and [query]. */
-    val visible: List<BloodCenter> = emptyList()
+    val visible: List<BloodCenter> = emptyList(),
+    /** Ids of the starred places, of either kind; listed first under 즐겨찾기. */
+    val favorites: Set<String> = emptySet()
 )
 
 /**
@@ -53,6 +56,8 @@ data class BloodCenterListUiState(
  * row survive switching tabs.
  */
 class BloodCenterListViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val favoriteStore = FavoritePlaceStore.get(application)
 
     private val repositories = mapOf(
         DonationPlaceKind.CENTER to BloodCenterRepository(application, BLOOD_CENTERS_ASSET),
@@ -66,6 +71,10 @@ class BloodCenterListViewModel(application: Application) : AndroidViewModel(appl
     val uiState: StateFlow<BloodCenterListUiState> = _uiState.asStateFlow()
 
     init {
+        // A restored backup replaces the stars too, so they're followed rather than read once.
+        viewModelScope.launch {
+            favoriteStore.ids.collect { ids -> _uiState.update { it.copy(favorites = ids) } }
+        }
         viewModelScope.launch {
             val loaded = mutableMapOf<DonationPlaceKind, BloodCenterList>()
             repositories.forEach { (kind, repository) ->
@@ -109,6 +118,9 @@ class BloodCenterListViewModel(application: Application) : AndroidViewModel(appl
     fun onCenterClick(center: BloodCenter) {
         _uiState.update { it.copy(expandedId = if (it.expandedId == center.id) null else center.id) }
     }
+
+    /** Stars [center], or unstars it. Saved right away; the list follows through [favoriteStore]. */
+    fun onFavoriteToggle(center: BloodCenter) = favoriteStore.toggle(center.id)
 
     /** This state switched to [kind]'s list. While the lists are still loading, only the kind changes. */
     private fun BloodCenterListUiState.showing(kind: DonationPlaceKind): BloodCenterListUiState {

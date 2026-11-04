@@ -3,7 +3,7 @@
 **Package:** `com.example.myapplication`
 **Version:** 1.0 (versionCode 1)
 **Platform:** Android (minSdk 24 / targetSdk 36 / compileSdk 36.1)
-**Last updated:** 2026-09-21
+**Last updated:** 2026-11-03
 
 ---
 
@@ -20,6 +20,8 @@
    - [2.7 Theming](#27-theming)
    - [2.8 헌혈 장소: 헌혈의 집·헌혈카페 (Donation Places)](#28-헌혈-장소-헌혈의-집헌혈카페-donation-places)
    - [2.9 헌혈 계획 (Donation Planner)](#29-헌혈-계획-donation-planner)
+   - [2.10 백업·복원 (Backup File)](#210-백업복원-backup-file)
+   - [2.11 헌혈 알림 (Reminders)](#211-헌혈-알림-reminders)
 3. [Calculation Logic & Formulas](#3-calculation-logic--formulas)
    - [3.1 Domain Constants](#31-domain-constants)
    - [3.2 Physical Eligibility (Nadler's Formula)](#32-physical-eligibility-nadlers-formula)
@@ -112,7 +114,8 @@ com.example.myapplication
 │   ├── CertificateParser.kt         OCR text → structured certificate fields
 │   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈 장소
 │   ├── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈 장소
-│   └── DonationPlan.kt              Checking a plan, filling earliest days, planned volume
+│   ├── DonationPlan.kt              Checking a plan, filling earliest days, planned volume
+│   └── DonationReminders.kt         Which reminders a morning check sends, and their text
 ├── data/                            Persistence + device I/O
 │   ├── DonationStateStore.kt        SharedPreferences (profile, records, theme)
 │   ├── AppDatabase.kt               Room database singleton
@@ -122,7 +125,12 @@ com.example.myapplication
 │   ├── ProhibitedDrugRepository.kt  Bundled JSON asset loader
 │   ├── DrugProductRepository.kt     Bundled product dictionary loader
 │   ├── BloodCenterRepository.kt     Bundled 헌혈의 집 / 헌혈카페 list loader
+│   ├── FavoritePlaceStore.kt        Starred 헌혈 장소 (SharedPreferences, one process-wide flow)
+│   ├── AppBackup.kt                 Backup file format: encode, decode, validate
+│   ├── BackupRepository.kt          Backup file I/O (system file picker) and restore transaction
 │   └── CertificateTextRecognizer.kt OCR pipeline (CameraX output → ML Kit)
+├── reminder/
+│   └── DonationReminderScheduler.kt 헌혈 알림: daily alarm, check, notifications, ReminderReceiver
 └── ui/                              Compose screens + ViewModels
     ├── BloodDonationCalculatorScreen.kt  Root screen, nav, all main composables
     ├── DonationViewModel.kt
@@ -130,6 +138,8 @@ com.example.myapplication
     ├── ProhibitedDrugSearchScreen.kt / ...ViewModel.kt
     ├── BloodCenterListScreen.kt / ...ViewModel.kt  헌혈 장소 tab (kind toggle, province chips, search, list)
     ├── PreferredProvinceCard.kt     마이페이지's 자주 헌혈하는 지역 picker
+    ├── ReminderSettingsCard.kt      마이페이지's 헌혈 알림 switch and permission flow
+    ├── BackupCard.kt                마이페이지's 백업·복원 card and restore confirmation
     ├── DonationPlannerScreen.kt     헌혈 계획 page, opened from 현황's calendar
     ├── MedicationHistoryCard.kt
     └── theme/                       Theme.kt, Color.kt, Type.kt
@@ -253,6 +263,8 @@ Storage is split by shape, not by convenience:
 | Donation records | SharedPreferences | Custom line/pipe-delimited text | Small list; predates Room in this codebase |
 | Planned donations | SharedPreferences | Line/pipe-delimited id, type and date | Small list kept beside the records it's checked against |
 | Theme mode | SharedPreferences | Enum name | Must be readable **synchronously** on the first frame to avoid a launch flash |
+| Starred 헌혈 장소 | SharedPreferences (`favorite_places`) | One `혈액원/이름` id per line | A handful of ids; read once into `FavoritePlaceStore` |
+| 헌혈 알림 state | SharedPreferences (`donation_reminders`) | On/off, next check time, last check's eligible types and reminded plan day | Device-local; not in the backup file |
 | Medication history | Room (`donation.db`) | `medication_history` table | Needs reactive queries + ordering |
 | Drug catalog | `assets/prohibited_drugs.json` | JSON array (14 entries) | Read-only reference data, updatable without code changes |
 | Product dictionary | `assets/drug_products.json` | JSON object (226 products) | Read-only; links product names to ingredients for search, carries no restrictions |
@@ -300,6 +312,8 @@ The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌
 
 **성분헌혈 기기.** The second chip row (`machineCounts`) starts with 혈소판 가능 — the filter most donors need, since about one center in seven has no 혈소판 machine — then the 혈소판 models, then the 혈장 ones, each kind with the model most centers have first (ties go to the one with more machines). There is no 혈장 가능 chip, as nearly every center has one. A machine chip narrows the list together with the province chip and search (`filterCenters`); tapping it again clears it, and the count line reads "전국 130곳 · 혈소판 가능". A center with no machine data never matches a machine chip. Back undoes search, then the machine chip, then the province chip before it leaves the app.
 
+**즐겨찾기.** The ☆ beside each place's name stars it (`FavoriteStar`, a toggleable read out as "<이름> 즐겨찾기" so the row's own click semantics stay intact). Starred ids live in `FavoritePlaceStore` — one instance per process holding a `StateFlow`, so the list and a restored backup share it — under `favorite_places` in `donation_state`. `sectionPlaces` takes the starred places that match the chips and search out of the list first, under "★ 즐겨찾기", in either list and whatever province is picked; the rest are split by `splitPreferred` as before, and with no 자주 헌혈하는 지역 section they go under "다른 장소". Ids are `혈액원/이름`, so a star survives a data update unless the place is renamed.
+
 **Map link.** `mapQueryOf` searches the map app for the road address cut after the building number ("서울 중구 한강대로 405" out of "… 서울역사 지하1층 B05호"), which map search resolves far more reliably than the full address with floor and unit.
 
 **Why no in-app map.** An embedded map (osmdroid/OpenStreetMap) was tried and dropped: it added a library, network and location permissions, and on-device geocoding for an app that is otherwise fully offline, and OpenStreetMap's tile servers require a distinct app User-Agent (they block `com.example.*` IDs). Handing off to the phone's map app covers the same need.
@@ -314,6 +328,28 @@ The 📍 헌혈 장소 tab opens with a two-way toggle, [헌혈의 집 154 | 헌
 **Filling.** `fillPlan` steps through the days greedily. A day that already holds a planned donation is skipped; when the type isn't allowed yet, it jumps straight to the first allowed day, since nothing before then can change; and it never takes a day that would stop an already allowed planned donation from happening. A lifetime ban ends the fill.
 
 **State and storage.** The plan belongs to `DonationViewModel`, which checks it into `DonationUiState.plan`; `DonationPlannerScreen` is stateless. It's saved under `planned_donations` in `donation_state`, one `id|TYPE|date` line per planned donation, and malformed lines are dropped on read (`decodePlan`). Planned days that have passed are dropped when the app starts (`upcomingPlan`), and saving a real record takes off the planned donation for its day and type (`planWithout`). 현황's calendar shares its grid with the planner (`CalendarMonthGrid`) and marks planned days with a hollow dot in the type's color, or a red × when the planned donation wouldn't be allowed.
+
+### 2.10 백업·복원 (Backup File)
+
+마이페이지's 백업·복원 card writes everything the donor entered to one file and restores it, so the records survive a new phone without a server. 파일로 내보내기 opens the system "create document" picker (`ActivityResultContracts.CreateDocument`), suggesting `헌혈기록_백업_YYYYMMDD.json`; the donor can save to the phone, a memory card or a cloud drive app. 파일에서 불러오기 opens the document picker, reads the file and asks before replacing anything. Neither needs a storage permission, and the app itself sends nothing anywhere.
+
+**Contents.** `AppBackup`: 마이페이지 (`DonorProfile`, including 자주 헌혈하는 지역), 헌혈 기록, 헌혈 계획, the 약·감염병·체류 이력 and the starred places. The theme and 헌혈 알림 are per-device settings and stay out. The file is indented UTF-8 JSON with ISO dates, `"format": "bdcalculator-backup"` and `"version": 1`. It isn't encrypted, and the card says what's in it.
+
+**Reading.** `decodeBackup` refuses a file that isn't JSON, has another `format`, or a `version` newer than this app knows, each with a message the donor can act on; a file over 5 MB isn't read at all. Within a good file, an entry that can't be read (missing date, unknown type, a stay that ends before it starts) is skipped and counted, as are a repeated id and a second planned donation on one day. The confirmation dialog shows when the file was made, what it holds (`backupSummary`) and how many entries it skips.
+
+**Restoring.** Replace, not merge: `BackupRepository.replaceHistory` empties and refills the three Room tables in one `withTransaction`, so a failure leaves the app as it was; then `DonationViewModel` saves 마이페이지 and 헌혈 기록 and sets its in-memory state, keeps planned days from today on, and `FavoritePlaceStore` takes the stars, which the open 헌혈 장소 list follows. Export and restore both wait for the ViewModel's first load, so a tap right at launch can't write an empty file or be overwritten by the load.
+
+**Format stability.** The file's keys are the field names of the `*Json` classes in `AppBackup.kt`, which `rules.keep` keeps through R8 — renaming a field changes the format. Add fields rather than rename them; bump `BACKUP_VERSION` only when an older app would misread the file.
+
+### 2.11 헌혈 알림 (Reminders)
+
+마이페이지's 헌혈 알림 switch turns on a morning check, around 9:00, that notifies when 전혈, 혈장 or 혈소판 has become possible again, and the day before a planned donation — including when that planned donation is no longer allowed. It's off until the donor turns it on.
+
+**The check.** `DonationReminders.runCheck` loads what's saved and works out `nextEligibleByType` and `checkPlan` the way 현황 does, so the dates take the 헌혈 간격, yearly limits and the 약·감염병·체류 restrictions together (rules that fail to load leave out the 감염병·체류 part, as on 현황). `checkReminders` (pure, in `domain/`) compares with the previous check's eligible types: a type is reminded about when it turns possible, so a check missed while the phone was off still reminds the next morning, and a type that has long been possible doesn't remind daily. Turning reminders on runs a silent check that only records how things stand. Tomorrow's planned donations are reminded about once, remembered by date.
+
+**Scheduling.** A one-off `AlarmManager.setWindow` alarm (30-minute window, no exact-alarm permission) is set again after each check; a repeating inexact alarm was avoided because Android may hold back its first run for most of a day. The next check time is saved, and `ensureScheduled` — called from `MainActivity.onCreate` and `ReminderReceiver` on `BOOT_COMPLETED` and `MY_PACKAGE_REPLACED` — puts that same alarm back, which runs a check whose time has passed right away instead of skipping a day. The receiver uses `goAsync` and catches failures, so a bad check never crashes the app in the background and tomorrow's is still set.
+
+**Permissions.** `POST_NOTIFICATIONS` is asked for when the switch is turned on (Android 13+); `RECEIVE_BOOT_COMPLETED` is a normal permission. If notifications are refused or turned off for the app, the card says so and opens the app's notification settings, and turns reminders on when the donor comes back having allowed them. Notifications use one channel, 헌혈 알림, and `ic_stat_donation`; tapping one opens the app.
 ---
 
 ## 3. Calculation Logic & Formulas
@@ -934,7 +970,7 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 - **Version catalog.** All dependency coordinates live in `gradle/libs.versions.toml`; no hardcoded versions in build files.
 - **KSP** (not KAPT) generates Room code.
 - **Core library desugaring** is required — `java.time` is used throughout and `minSdk` is 24.
-- **Release build.** `optimization { enable = true }`: R8 shrinks code and resources. Gson fills the `*Json` classes in `data/` by reflection, so `app/src/main/keepRules/rules.keep` keeps their field names and no-argument constructors. A new Gson-parsed class must follow that naming or get its own rule; otherwise its fields come back null in release builds only, while debug builds and tests keep passing. Room, ML Kit, CameraX and lifecycle ship their own rules.
+- **Release build.** `optimization { enable = true }`: R8 shrinks code and resources. Gson fills the `*Json` classes in `data/` by reflection — including the backup file's in `AppBackup.kt`, whose field names are its format — so `app/src/main/keepRules/rules.keep` keeps their field names and no-argument constructors. A new Gson-parsed class must follow that naming or get its own rule; otherwise its fields come back null in release builds only, while debug builds and tests keep passing. Room, ML Kit, CameraX and lifecycle ship their own rules.
 - **App ID and signing.** `applicationId` is `io.github.wkd1570.bdcalculator`, the Play Store ID, which can't change after the first upload. The Kotlin `namespace` stays `com.example.myapplication`. Release signing reads the upload key from the gitignored `keystore.properties` (see `keystore.properties.example`); without it, release builds come out unsigned. Publishing steps are in `docs/play-store/README.md`.
 - **Launcher icon.** The adaptive icon is vector (`res/drawable/ic_launcher_*.xml`), and its foreground doubles as the monochrome layer. `tools/render_icons.py` (needs Pillow) draws the API 24–25 bitmaps and the 512px Play icon from the same shapes.
 - **`exportSchema = false`** on the Room database. Schema export should be enabled before shipping a version 2 migration.
@@ -964,6 +1000,10 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `data/LocalDateConverters.kt` | `LocalDate` ↔ ISO-8601 text |
 | `data/ProhibitedDrugRepository.kt` | Asset JSON loading, validation, caching |
 | `data/DrugProductRepository.kt` | Product dictionary loading |
+| `data/FavoritePlaceStore.kt` | Starred 헌혈 장소 |
+| `data/AppBackup.kt` / `data/BackupRepository.kt` | Backup file format; file I/O and restore |
+| `domain/DonationReminders.kt` | Reminder decisions and text |
+| `reminder/DonationReminderScheduler.kt` | Daily reminder alarm, check and notifications |
 | `domain/DrugProductSearch.kt` | 상품명 search, product → catalog matching |
 | `data/CertificateTextRecognizer.kt` | EXIF/crop/preprocess + ML Kit invocation |
 | `ui/BloodDonationCalculatorScreen.kt` | Root screen, navigation, design tokens, all main composables, camera screen |

@@ -65,9 +65,12 @@ Alternative: `연간채혈량 계산기`, the title shown inside the app. The la
 · 헌혈카페는 운영 시간과 주차 안내, 혈소판 채혈 기기를 함께 보여줍니다.
 · 전화하기와 지도에서 보기(카카오맵)로 바로 연결됩니다.
 · 마이페이지에서 자주 헌혈하는 지역을 정하면 그 지역 헌혈 장소가 맨 위에 나옵니다.
+· 자주 가는 곳은 즐겨찾기해 두면 목록 맨 위에 나옵니다.
 
 ■ 마이페이지
 · 나이·체중·신장·성별로 헌혈 신체 기준을 확인하고 예측 혈량을 보여줍니다.
+· 헌혈 알림을 켜면 다시 헌혈할 수 있게 된 날과 헌혈 계획 전날 아침에 알려 드립니다.
+· 모든 기록을 파일 하나로 백업하고, 폰을 바꿨을 때 그대로 불러올 수 있습니다.
 
 ■ 개인정보
 입력한 정보는 모두 기기에만 저장됩니다. 회원가입도 서버도 없습니다.
@@ -109,7 +112,7 @@ Before publishing, check the data rights:
 
 ## Data safety form
 
-Play counts data as *collected* only when it leaves the device. Everything the user enters (profile, records, medications, diseases, stays, photos, timeline files) stays on the phone, so none of it is collected. The one thing that does leave is from Google ML Kit, the certificate text recognition library ([ML Kit data disclosure](https://developers.google.com/ml-kit/android-data-disclosure)):
+Play counts data as *collected* only when it leaves the device. Everything the user enters (profile, records, medications, diseases, stays, photos, timeline files) stays on the phone, so none of it is collected. Reminders are computed on the phone, and a backup file goes only where the user saves it with the system file picker, which Play doesn't count as collection. The one thing that does leave is from Google ML Kit, the certificate text recognition library ([ML Kit data disclosure](https://developers.google.com/ml-kit/android-data-disclosure)):
 
 | Question | Answer |
 |---|---|
@@ -126,6 +129,8 @@ Play counts data as *collected* only when it leaves the device. Everything the u
 | Permission | Why |
 |---|---|
 | `CAMERA` | Photographing a donation certificate. Only asked for when the user taps the camera option. |
+| `POST_NOTIFICATIONS` | 헌혈 알림. Only asked for (Android 13+) when the user turns reminders on in 마이페이지. |
+| `RECEIVE_BOOT_COMPLETED` | Restores the morning reminder check after a restart. Normal permission, not shown as a prompt. |
 | `INTERNET`, `ACCESS_NETWORK_STATE` | Added by ML Kit for its diagnostics. The app's own features work offline. |
 
 On Android 17, App info lists "Nearby devices" (local network access) for any app with `INTERNET`. The app doesn't request it.
