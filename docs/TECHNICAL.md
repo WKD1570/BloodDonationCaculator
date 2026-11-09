@@ -3,7 +3,7 @@
 **Package:** `com.example.myapplication`
 **Version:** 1.0 (versionCode 1)
 **Platform:** Android (minSdk 24 / targetSdk 36 / compileSdk 36.1)
-**Last updated:** 2026-11-03
+**Last updated:** 2026-11-09
 
 ---
 
@@ -24,11 +24,11 @@
    - [2.11 헌혈 알림 (Reminders)](#211-헌혈-알림-reminders)
 3. [Calculation Logic & Formulas](#3-calculation-logic--formulas)
    - [3.1 Domain Constants](#31-domain-constants)
-   - [3.2 Physical Eligibility (Nadler's Formula)](#32-physical-eligibility-nadlers-formula)
+   - [3.2 Physical Eligibility (Predicted Blood Volume)](#32-physical-eligibility-predicted-blood-volume)
    - [3.3 Donation Volume Resolution](#33-donation-volume-resolution)
    - [3.4 Next-Eligible-Date Algorithm](#34-next-eligible-date-algorithm)
    - [3.5 Medication Restriction Logic](#35-medication-restriction-logic)
-   - [3.6 Integration of Both Histories](#36-integration-of-both-histories)
+   - [3.6 Integration of All Restrictions](#36-integration-of-all-restrictions)
    - [3.7 Derived Display Values](#37-derived-display-values)
    - [3.8 Worked Examples](#38-worked-examples)
    - [3.9 Known Limitations](#39-known-limitations)
@@ -51,17 +51,18 @@
 
 ## 1. Overview
 
-헌혈 가능일 계산기 is an offline-first Android application that tells a blood donor **when they are next allowed to donate**. It reaches that answer by combining three independent constraint sources:
+헌혈 가능일 계산기 is an offline-first Android application that tells a blood donor **when they are next allowed to donate**. It reaches that answer by combining four independent constraint sources:
 
 | Source | Question it answers |
 |---|---|
 | Donation history | Has enough time passed since the last donation? Are annual count / volume limits exhausted? |
 | Medication history | Is the donor inside a drug-imposed restriction window? |
+| Health history | Do a past 감염병, 질환, 시술·수술 or 예방접종, or a stay in a 말라리아·vCJD risk area or abroad, still defer donation — and which types? |
 | Donor profile | Does the donor meet the age / weight / blood-volume criteria at all? |
 
-A donor can enter donation records by hand, or **scan a 헌혈증서 (donation certificate)** with the device camera — on-device OCR extracts the donation type, date, certificate number, and blood center, and pre-fills the entry form.
+A donor can enter donation records by hand, or **scan a 헌혈증서 (donation certificate)** with the device camera — on-device OCR extracts the donation type, date, certificate number, and blood center, and pre-fills the entry form. Stays in risk areas can be found in a **Google Maps Timeline export**, matched against bundled region boundaries on the device.
 
-All criteria are modeled on 대한적십자사 (Korean Red Cross) reference rules. Everything runs **entirely on-device**: there is no network permission, no backend, and no analytics.
+All criteria are modeled on 대한적십자사 (Korean Red Cross) reference rules and 「헌혈기록카드 문진항목 판정기준」 (see [3.10](#310-판정기준-7차-개정판-반영)). Everything the donor enters stays **on the device**: there is no backend, no account and no analytics of the app's own, and its features work offline. The one thing that leaves the phone is Google ML Kit's own diagnostics (device model, OS and app version), sent by the OCR library — see [4.8](#48-permissions--file-access).
 
 ---
 
@@ -72,7 +73,7 @@ All criteria are modeled on 대한적십자사 (Korean Red Cross) reference rule
 | Concern | Choice | Version |
 |---|---|---|
 | Language | Kotlin | 2.2.10 |
-| Build | Gradle (Kotlin DSL) + AGP | 9.4.0 |
+| Build | Gradle (Kotlin DSL) + AGP | 9.4.1 |
 | UI | Jetpack Compose + Material 3 | BOM 2026.02.01 |
 | Architecture | MVVM (`AndroidViewModel` + `StateFlow`) | lifecycle 2.6.1 |
 | Async | Kotlin Coroutines / Flow | (bundled) |
@@ -82,6 +83,7 @@ All criteria are modeled on 대한적십자사 (Korean Red Cross) reference rule
 | OCR | ML Kit Text Recognition v2 (Korean) | 16.0.1 |
 | Camera | CameraX (core / camera2 / lifecycle / view) | 1.4.1 |
 | Date/time | `java.time` via core library desugaring | desugar_jdk_libs 2.1.4 |
+| Notifications | `AlarmManager` (`setWindow`) + `NotificationCompat` | platform / androidx.core |
 | Testing | JUnit 4, Compose UI Test, Espresso | — |
 
 **Notable architectural decisions**
@@ -102,16 +104,23 @@ com.example.myapplication
 │   ├── PlannedDonation.kt           One donation planned on 헌혈 계획
 │   ├── DonorProfile.kt              Physical profile, 자주 헌혈하는 지역 + Sex enum
 │   ├── MedicationRecord.kt          Room @Entity: one drug intake
+│   ├── HealthHistory.kt             Room @Entities: DiseaseRecord (질환·감염병·시술·접종 by name) and StayRecord
+│   ├── InfectionRules.kt            Parsed blood_donation_rules.xml: DiseaseRule, DeferralPeriod, 말라리아·vCJD·해외 방문 rules
 │   ├── RestrictedDrug.kt            Catalog entry
 │   ├── DrugProduct.kt               Product dictionary entry + DrugRoute (먹는 약/주사/외용)
 │   ├── BloodCenter.kt               One 헌혈의 집 or 헌혈카페 and its 성분헌혈 machines; DonationPlaceKind
 │   └── ThemeMode.kt                 SYSTEM / LIGHT / DARK
 ├── domain/                          Pure calculation — the rules engine
 │   ├── DonationCalculatorEngine.kt  Interval / annual count / annual volume rules
-│   ├── PhysicalEligibilityCalculator.kt  Age / weight / Nadler blood volume
+│   ├── PhysicalEligibilityCalculator.kt  Age / weight / blood-volume screening
+│   ├── PredictedBloodVolume.kt      성인예측 혈량표 (수혈의학 2014), interpolated
 │   ├── DrugRestrictionCalculator.kt Drug catalog fallback + restriction math
 │   ├── DrugProductSearch.kt         상품명 search + product → catalog entry matching
-│   ├── IntegratedEligibility.kt     Merges donation + medication constraints
+│   ├── IntegratedEligibility.kt     Merges donation, medication and health constraints
+│   ├── InfectionRestrictionCalculator.kt  Health history + rules → HealthRestriction (dates, blocked types)
+│   ├── TimelineStayExtractor.kt     Timeline visits → stays in restricted regions
+│   ├── RegionLocator.kt             Point-in-region test against bundled boundaries
+│   ├── DateDigits.kt                YYYY/MM/DD typed-digit parsing and formatting
 │   ├── CertificateParser.kt         OCR text → structured certificate fields
 │   ├── BloodCenterSearch.kt         Province, search and map-app query for 헌혈 장소
 │   ├── BloodCenterMachines.kt       Machine chips, machine filter and row text for 헌혈 장소
@@ -122,6 +131,11 @@ com.example.myapplication
 │   ├── AppDatabase.kt               Room database singleton
 │   ├── MedicationHistoryDao.kt      Room DAO
 │   ├── MedicationHistoryRepository.kt
+│   ├── HealthHistoryDao.kt          Room DAO: disease_history, stay_history
+│   ├── HealthHistoryRepository.kt
+│   ├── InfectionRuleRepository.kt   blood_donation_rules.xml parser
+│   ├── RegionShapeRepository.kt     restricted_region_shapes.json loader
+│   ├── TimelineParser.kt            Google Maps Timeline export → visits
 │   ├── LocalDateConverters.kt       Room TypeConverter (ISO-8601 text)
 │   ├── ProhibitedDrugRepository.kt  Bundled JSON asset loader
 │   ├── DrugProductRepository.kt     Bundled product dictionary loader
@@ -143,6 +157,9 @@ com.example.myapplication
     ├── BackupCard.kt                마이페이지's 백업·복원 card and restore confirmation
     ├── DonationPlannerScreen.kt     헌혈 계획 page, opened from 현황's calendar
     ├── MedicationHistoryCard.kt
+    ├── HealthHistoryCard.kt         의료 정보's 질환·시술·접종·체류 이력 and their restrictions
+    ├── TimelineImportCard.kt / TimelineImportViewModel.kt  Google 타임라인 가져오기
+    ├── DateInputField.kt            YYYY/MM/DD date field with an optional calendar
     └── theme/                       Theme.kt, Color.kt, Type.kt
 ```
 
@@ -199,20 +216,26 @@ graph TD
 Enables edge-to-edge, reads the persisted `ThemeMode` from `ThemeViewModel`, resolves it against `isSystemInDarkTheme()`, and re-applies `enableEdgeToEdge` whenever the resolved theme flips so system bar icons stay legible. Hosts exactly one composable: `BloodDonationCalculatorScreen`.
 
 #### `DonationViewModel`
-The application's primary state owner. It holds three `MutableStateFlow`s (profile, records, loading) and `combine`s them with the Room-backed medication `Flow` into a single `DonationUiState`. On every emission it recomputes `nextByType` — the integrated next-eligible date for all three donation types.
+The application's primary state owner. It holds the profile, records, plan and loading flags as `MutableStateFlow`s, folds the Room-backed 질환·체류 이력 and the parsed rules into a `HealthHistoryState` (whose `restrictions` come from `healthRestrictions`), and `combine`s everything with the Room-backed medication `Flow` into a single `DonationUiState`. On every emission it recomputes `nextByType` — the integrated next-eligible date for 전혈·혈장·혈소판 — and checks the 헌혈 계획.
 
 ```kotlin
+private val health = combine(rules, rulesWarning, healthRepository.diseases, healthRepository.stays) { rules, warning, diseases, stays ->
+    HealthHistoryState(rules, warning, diseases, stays,
+        restrictions = rules?.let { healthRestrictions(diseases, stays, it) }.orEmpty())
+}
+
 val uiState: StateFlow<DonationUiState> = combine(
-    profile, records, medicationRepository.medications, isLoading
-) { profile, records, medications, loading ->
+    profile, recordsAndPlan, medicationRepository.medications, health, isLoading
+) { profile, (records, plan), medications, health, loading ->
     DonationUiState(
         /* ... */
-        nextByType = DonationType.entries.associateWith { type ->
-            integratedNextEligible(type, records, medications, today, profile.currentAge(today))
-        }
+        nextByType = nextEligibleByType(records, medications, today, health.restrictions),
+        plan = checkPlan(plan, records, medications, health.restrictions)
     )
 }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DonationUiState(today = today))
 ```
+
+If the rules fail to load, `rulesWarning` says so and the health restrictions are left out rather than the whole calculation.
 
 `today` is captured **once** at construction and reused, so D-day labels and the calendar do not shift mid-session.
 
@@ -222,7 +245,7 @@ Loads the drug catalog (asset JSON, falling back to the compiled-in `PROHIBITED_
 #### `BloodDonationCalculatorScreen`
 The root composable. Holds two pieces of navigation state:
 
-- `selectedScreen: Screen` — `STATUS` (현황) / `INPUT` (헌혈 입력) / `MYPAGE` (마이페이지), rendered through a bottom nav bar.
+- `selectedScreen: Screen` — `STATUS` (현황) / `INPUT` (헌혈 입력) / `MEDICAL` (의료 정보) / `CENTERS` (헌혈 장소) / `MYPAGE` (마이페이지), rendered through a bottom nav bar. The 헌혈 계획 page opens from 현황's calendar.
 - `formMode: RecordFormMode?` — `Add` or `Edit(record)`, which drives the `RecordFormDialog`.
 
 #### `CertificateTextRecognizer`
@@ -366,6 +389,10 @@ All logic in this section lives in `domain/` and is pure: same inputs → same o
 | `WHOLE_BLOOD` (전혈) | 430 | 56 | 5 |
 | `PLASMA` (혈장성분) | 45 | 14 | none |
 | `PLATELET` (혈소판성분) | 90 | 14 | 24, counting every 성분헌혈 |
+| `WHITE_BLOOD_CELL` (백혈구성분) | 90 | 14 | none (counts toward 혈소판's 24) |
+| `STEM_CELL` (조혈모세포 기증) | 30 (volume unknown, minimum counted) | 6 months | none |
+
+> 백혈구성분헌혈 and 조혈모세포 기증 are recorded on the 기타 card (`OTHER_DONATION_TYPES`). They aren't planned and get no next-date row on 현황, but their intervals and volumes still bind the next 전혈·혈장·혈소판 donation.
 
 > `defaultVolumeMl` for the apheresis types is the volume counted toward the **annual cumulative-volume limit**, not the total fluid processed during the procedure.
 
@@ -380,7 +407,7 @@ All logic in this section lives in `domain/` and is pure: same inputs → same o
 | `MIN_BLOOD_VOLUME_FOR_APHERESIS_ML` | 4000.0 | Minimum estimated blood volume for 성분헌혈 |
 | Record expiry window | 366 days | Days after which a record releases its annual capacity |
 
-### 3.2 Physical Eligibility (Nadler's Formula)
+### 3.2 Physical Eligibility (Predicted Blood Volume)
 
 `checkPhysicalEligibility(profile, type)` screens the self-reported profile. It returns `PhysicalEligibility(isEligible, reasons)` — eligible only when `reasons` is empty.
 
@@ -396,51 +423,25 @@ All logic in this section lives in `domain/` and is pure: same inputs → same o
 
 **Senior rule:** a donor aged ≥ 65 must have `donatedAge60To64 == true`. This check is an `else if` on the age-range branch, so an out-of-range age is reported once rather than double-counted (a 66-year-old requesting 혈소판성분, whose range tops out at 59, gets only the range message).
 
-**Blood volume — Nadler's formula.** Applied only to apheresis types (`type != WHOLE_BLOOD`), with height `h` in **meters** and weight `w` in **kilograms**:
+**Blood volume — 성인예측 혈량표.** Applied only to apheresis types (`type != WHOLE_BLOOD`). `predictedBloodVolume(heightCm, weightKg, sex)` (`domain/PredictedBloodVolume.kt`) reads the predicted total blood volume from the 성인예측 혈량표 in 수혈의학 2014 (부록 1-A 남성, 1-B 여성): rows are weights in 10 lb steps (45.4–140.6 kg), columns heights in 2 inch steps (152–188 cm), values in mL. Between grid points it interpolates bilinearly; outside the table it extrapolates linearly from the nearest edge (exact for weight, along which the table is linear, approximate for height) and flags the result with `withinTable = false`, which the profile card mentions. Two values that are evident typos in the source are corrected in the code and noted there.
 
-$$
-\text{BV}_{\text{male}}(\text{L}) = 0.3669 \cdot h^{3} + 0.03219 \cdot w + 0.6041
-$$
+The result is compared against `MIN_BLOOD_VOLUME_FOR_APHERESIS_ML` (4000 mL).
 
-$$
-\text{BV}_{\text{female}}(\text{L}) = 0.3561 \cdot h^{3} + 0.03308 \cdot w + 0.1833
-$$
+*Example:* 175 cm / 70 kg male → between 68.0 and 72.5 kg and 173 and 178 cm of the 남성 table (4,689 / 4,860 and 4,835 / 5,007 mL) → **4,822 mL** → passes.
 
-The result is multiplied by 1000 to get millilitres and compared against `MIN_BLOOD_VOLUME_FOR_APHERESIS_ML` (4000 mL).
-
-```kotlin
-private fun estimatedBloodVolumeMl(heightCm: Double, weightKg: Double, sex: Sex): Double {
-    val heightM = heightCm / 100.0
-    val liters = when (sex) {
-        Sex.MALE   -> 0.3669 * heightM.pow(3) + 0.03219 * weightKg + 0.6041
-        Sex.FEMALE -> 0.3561 * heightM.pow(3) + 0.03308 * weightKg + 0.1833
-    }
-    return liters * 1000.0
-}
-```
-
-*Example:* 175 cm / 70 kg male → `0.3669 × 1.75³ + 0.03219 × 70 + 0.6041` = `1.9665 + 2.2533 + 0.6041` ≈ **4.824 L = 4824 mL** → passes.
-
-> **Scope note.** This screens only the physical intake fields. Hemoglobin, blood pressure, recent illness, travel history and similar criteria are *not* modeled and must still be assessed at the donation center.
+> **Scope note.** This screens only the physical intake fields. Illness, procedures, vaccinations and travel are handled by the health history ([3.6](#36-integration-of-all-restrictions)); hemoglobin, blood pressure and the other on-site checks are *not* modeled and must still be assessed at the donation center.
 
 ### 3.3 Donation Volume Resolution
 
-The volume attributed to a record is resolved in priority order:
+The volume a record counts toward the annual 2,160 mL limit:
 
 ```kotlin
-fun DonationRecord.volumeMl(): Int = donatedVolumeMl ?: actualVolumeMl(type, ageAtDonation())
+fun DonationRecord.volumeMl(): Int =
+    if (type == DonationType.WHOLE_BLOOD) type.defaultVolumeMl else donatedVolumeMl ?: type.defaultVolumeMl
 ```
 
-1. **`donatedVolumeMl`** — the volume read off a scanned certificate (already including the +30 mL diagnostic draw). Authoritative when present.
-2. **`actualVolumeMl(type, age)`** — the age-based default:
-
-```kotlin
-fun actualVolumeMl(type: DonationType, age: Int?): Int =
-    if (type == DonationType.WHOLE_BLOOD && age != null && age in 16..17) 350
-    else type.defaultVolumeMl
-```
-
-Donors aged 16–17 have 350 mL drawn for whole blood instead of 430 mL. `ageAtDonation()` uses `Period.between(birthDate, date).years` — the age **at the time of that donation**, not the current age.
+1. **Whole blood** always counts the standard **430 mL** — a 320 mL donation the same as a 400 mL one (400 mL + the 30 mL diagnostic draw). The stated amount (`wholeBloodStatedVolumeMl`, 320 or 400) is kept for the record list and the form's volume picker only.
+2. **Other types** use `donatedVolumeMl`, the volume read off a scanned certificate, when it's known, and otherwise their standard volume (`defaultVolumeMl`).
 
 **Diagnostic draw (certificate path only).** A certificate states the nominal volume; whole-blood donations draw 30 mL more for testing:
 
@@ -450,11 +451,11 @@ fun BloodDonationInfo.drawnVolumeMl(): Int? = statedVolumeMl()?.let { stated ->
 }
 ```
 
-So a certificate reading `전혈 400mL` yields `donatedVolumeMl = 430`.
+So a certificate reading `전혈 400mL` yields `donatedVolumeMl = 430`, the same as the standard count.
 
 ### 3.4 Next-Eligible-Date Algorithm
 
-`calcNext(type, records, today, donorAge, asOfDate)` returns `NextResult(nextDate, dday, reasons)`.
+`calcNext(type, records, today, asOfDate = today)` returns `NextResult(nextDate, dday, reasons)`.
 
 It starts at `nextDate = today` and pushes that date later through **three independent rules**, keeping the maximum. Each rule that is still in force also appends a human-readable `Reason`.
 
@@ -513,24 +514,25 @@ if (totalVol + nextVolumeMl > ANNUAL_LIMIT_ML) {
 }
 ```
 
-`nextVolumeMl` is `actualVolumeMl(type, donorAge)` — the volume the *upcoming* donation would draw.
+`nextVolumeMl` is the type's standard volume (`TYPE_INFO[type].volumeMl`) — what the *upcoming* donation would count.
 
 #### `asOfDate` and back-dated entry
 
-`earliestEligibleDate(type, records, ageAtDate, asOfDate)` reuses `calcNext` with `today = LocalDate.of(1, 1, 1)`:
+`earliestEligibleDate(type, records, asOfDate)` reuses `calcNext` with `today = LocalDate.of(1, 1, 1)`:
 
 ```kotlin
 private val DISTANT_PAST: LocalDate = LocalDate.of(1, 1, 1)
 
-fun earliestEligibleDate(type, records, ageAtDate, asOfDate): LocalDate =
-    calcNext(type, records, DISTANT_PAST, ageAtDate, asOfDate).nextDate
+fun earliestEligibleDate(type: DonationType, records: List<DonationRecord>, asOfDate: LocalDate): LocalDate =
+    if (type == DonationType.STEM_CELL) DISTANT_PAST
+    else calcNext(type, records, DISTANT_PAST, asOfDate).nextDate
 ```
 
 Passing a distant past as `today` removes the "at least today" floor, leaving only the constraint dates. This is what the record-entry form calls to validate a back-dated donation:
 
 ```kotlin
 val otherRecords = records.filterNot { it.id == initial?.id }   // exclude the record being edited
-val eligibleDate = earliestEligibleDate(t, otherRecords, null, dd)
+val eligibleDate = earliestEligibleDate(t, otherRecords, dd)
 if (dd.isBefore(eligibleDate)) restrictionError = "헌혈 제한기간이에요 (가능일: ${fmt(eligibleDate)})"
 ```
 
@@ -579,27 +581,30 @@ The binding entry is the one whose window *ends* last, deliberately **not** the 
 
 A restricted product shows its rule and opens the same 복용일 flow as its catalog entry. A combination product can fall under several entries (플라빅스에이정: 아스피린 3일 and 클로피도그렐 1주); `ProductMatch.strictestRestriction` — a lifetime ban, else the longest wait — is the one shown and recorded. Search returns at most `PRODUCT_RESULT_LIMIT` (50) products and says so when it hits that limit. An unlisted one only says it isn't on the list, under a note that the reason for taking it (infection, illness) can still defer donation and should be mentioned at 문진. To widen coverage, drop a fuller product list with the same columns (for example 식약처 의약품 허가정보) into `tools/data/` and re-run the script.
 
-### 3.6 Integration of Both Histories
+### 3.6 Integration of All Restrictions
 
-`integratedNextEligible(type, records, medications, today, donorAge)` computes "Date A" from the donation history and "Date B" from the medication history and returns the later:
+`integratedNextEligible(type, records, medications, today, healthRestrictions)` computes "Date A" from the donation history, "Date B" from the medication history and a date for every health restriction that blocks `type`, and returns the latest:
 
 $$
-\text{nextDate} = \max(\text{Date}_A,\ \text{Date}_B)
+\text{nextDate} = \max(\text{Date}_A,\ \text{Date}_B,\ \text{Date}_{\text{health}})
 $$
 
 ```mermaid
 flowchart TD
     A[integratedNextEligible] --> B[calcNext → Date A]
     A --> C[medicationConstraint → Date B]
-    C --> D{Permanent?}
+    A --> H[healthRestrictions that block this type]
+    C --> D{Permanent drug or health ban?}
+    H --> D
     D -->|Yes| E[PermanentlyProhibited<br/>no date exists]
-    D -->|None| F[Eligible = Date A]
-    D -->|EligibleFrom| G[Eligible = max Date A, Date B]
+    D -->|No| G[Eligible = latest of Date A, Date B, health dates]
 ```
+
+A health restriction that leaves a type open doesn't move that type's date — a 말라리아 위험지역 stay blocks 전혈·혈소판 but not 혈장. `nextEligibleByType` runs this for 전혈·혈장·혈소판; 현황, the 헌혈 계획 check and the morning reminder all use it.
 
 A lifetime ban returns `IntegratedNextResult.PermanentlyProhibited` regardless of what the donation history says — no amount of waiting restores eligibility.
 
-Reason chips follow `calcNext`'s convention: a medication window is listed **only while still in force** (`constraint.date.isAfter(today)`), so the UI shows active constraints rather than every drug ever recorded. Because `calcNext` already floors its answer at `today`, `maxOf` naturally discards an elapsed medication window.
+Reason chips follow `calcNext`'s convention: a medication or health window is listed **only while still in force** (`constraint.date.isAfter(today)`), so the UI shows active constraints rather than every drug ever recorded. Because `calcNext` already floors its answer at `today`, `maxOf` naturally discards an elapsed medication window.
 
 ### 3.7 Derived Display Values
 
@@ -620,7 +625,7 @@ Reason chips follow `calcNext`'s convention: a medication window is listed **onl
 | < 100 | 임박 | orange `#EA580C` |
 | ≥ 100 | 초과 | red `#E11D48` |
 
-**Type subtitle** (`typeSubtitle`) renders as `1회 {volume}mL · 간격 {weeks}주 · {연 N회 | 횟수제한 없음}`, with weeks computed as `gapDays / 7` (integer division).
+**Type subtitle** (`typeSubtitle`) renders as `1회 {volume}mL · 간격 {weeks}주 · {연 N회 | 성분헌혈 합산 연 24회 | 횟수제한 없음}`, with weeks computed as `gapDays / 7` (integer division).
 
 **Date formats:** `fmt` → `yyyy'년' M'월' d'일'`, `fmtShort` → `M'월' d'일'`.
 
@@ -639,7 +644,7 @@ Given a whole-blood donation on 2026-09-01 and today = 2026-09-21, asking for **
 Five whole-blood donations at 430 mL each (total 2150 mL), most recent 2026-08-01, oldest 2026-01-10. Requesting whole blood, today = 2026-09-21:
 
 - Rule 1: `2026-08-01 + 56` = 2026-09-26.
-- Rule 2: `ofType.size (5) >= 5` → oldest is 2026-01-10 → `+366` = **2027-01-11**.
+- Rule 2: five 전혈 in the past year (`counted.size (5) >= 5`) → the 5th back from the latest is 2026-01-10 → `+366` = **2027-01-11**.
 - Rule 3: `2150 + 430 = 2580 > 2160`. Subtract oldest (430) → `1720 + 430 = 2150 ≤ 2160` → break at 2026-01-10 → `+366` = **2027-01-11**.
 - Result: **2027-01-11** (the maximum), with three reason chips.
 
@@ -651,9 +656,13 @@ Donation history allows donating from 2026-09-26. 두타스테라이드 (180 day
 - Date B = `2026-06-01 + 180` = 2026-11-28.
 - Result: **2026-11-28**, with a violet reason chip `두타스테라이드 복용 후 180일 제한 (6월 1일)`.
 
-**Example 4 — 16-year-old donor**
+**Example 4 — 혈소판 after mixed 성분헌혈**
 
-Born 2010-03-01, donating whole blood on 2026-09-01 → age at donation 16 → `actualVolumeMl` returns **350 mL**, not 430. A scanned certificate stating `전혈 350mL` would set `donatedVolumeMl = 380` (350 + 30 diagnostic draw), which takes priority.
+24 성분헌혈 in the past year, alternating 혈장 and 혈소판 every 14 days from 2025-06-02, the last on 2026-04-20; requesting 혈소판 on 2026-05-01:
+
+- Rule 1: `2026-04-20 + 14` = 2026-05-04.
+- Rule 2: 혈소판 counts every 성분헌혈 → 24 ≥ 24 → the 24th back is 2025-06-02 → `+366` = **2026-06-03**.
+- Result: **2026-06-03**, reason `연간 성분헌혈 24회 한도`. The same history leaves 혈장 open on 2026-05-04: 혈장 has no count limit.
 
 ### 3.9 Known Limitations
 
@@ -663,8 +672,7 @@ These are current, verified behaviors of the implementation — documented so th
 
 2. ~~**The cumulative-volume gauge shows a lifetime total.**~~ Fixed: `CumulativeVolumeGauge` sums `withinAnnualWindow(today)`, the past 366 days only.
 
-3. **Manually entered records carry no birth date.**
-   `RecordFormDialog` does not collect one and passes `null` for age, so the 16–17-year-old reduced-volume rule cannot apply to hand-entered records. Scanned certificates are unaffected — `donatedVolumeMl` overrides the age path entirely.
+3. **Whole blood counts 430 mL whatever was given.** A 320 mL donation counts the same 430 mL as a 400 mL one toward the 2,160 mL limit. This is deliberately conservative: the true draw (350 mL) is smaller, so the volume limit can bind a little earlier than strictly needed.
 
 4. **Expiry uses 366 days, not a calendar year.** This is intentionally conservative (one extra day) and consistent across rules 2 and 3.
 
@@ -824,7 +832,7 @@ return suspendCancellableCoroutine { continuation ->
 ```
 
 - **Library:** `com.google.mlkit:text-recognition-korean:16.0.1` (ML Kit Text Recognition v2). The Korean model also recognizes Latin script, which the certificate needs for digits and `mL`.
-- **Execution:** fully **on-device**. No network permission is declared; certificate images never leave the phone.
+- **Execution:** fully **on-device**. Certificate images and the recognized text never leave the phone; ML Kit sends only its own diagnostics (see 4.8).
 - **Bridging:** ML Kit's `Task` API is wrapped in `suspendCancellableCoroutine`, giving callers a plain `suspend` function.
 - **Rotation:** `0` is passed to `InputImage.fromBitmap` because EXIF rotation was already baked into the bitmap.
 - **Output consumed:** only `Text.text` — the flattened string. Block/line/element bounding boxes are available from ML Kit but are not currently used.
@@ -939,7 +947,7 @@ Camera permission is requested at the point of use via `ActivityResultContracts.
 </paths>
 ```
 
-**No `INTERNET` permission is declared** — the app cannot transmit certificate images or extracted data.
+The app's own manifest declares no `INTERNET` permission. ML Kit's library manifest merges in `INTERNET` and `ACCESS_NETWORK_STATE`, which it uses to send diagnostics (device model, OS version, the app's package name and version) — declared in the Play Data safety form (`docs/play-store/README.md`). The app's code never uses the network, and certificate images and extracted data are not sent anywhere.
 
 ### 4.9 Known Issues
 
@@ -1008,7 +1016,7 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 - **Release build.** `optimization { enable = true }`: R8 shrinks code and resources. Gson fills the `*Json` classes in `data/` by reflection — including the backup file's in `AppBackup.kt`, whose field names are its format — so `app/src/main/keepRules/rules.keep` keeps their field names and no-argument constructors. A new Gson-parsed class must follow that naming or get its own rule; otherwise its fields come back null in release builds only, while debug builds and tests keep passing. Room, ML Kit, CameraX and lifecycle ship their own rules.
 - **App ID and signing.** `applicationId` is `io.github.wkd1570.bdcalculator`, the Play Store ID, which can't change after the first upload. The Kotlin `namespace` stays `com.example.myapplication`. Release signing reads the upload key from the gitignored `keystore.properties` (see `keystore.properties.example`); without it, release builds come out unsigned. Publishing steps are in `docs/play-store/README.md`.
 - **Launcher icon.** The adaptive icon is vector (`res/drawable/ic_launcher_*.xml`), and its foreground doubles as the monochrome layer. `tools/render_icons.py` (needs Pillow) draws the API 24–25 bitmaps and the 512px Play icon from the same shapes.
-- **`exportSchema = false`** on the Room database. Schema export should be enabled before shipping a version 2 migration.
+- **Room version 2.** `MIGRATION_1_2` added `disease_history` and `stay_history` beside `medication_history`, keeping existing medication records. `exportSchema = false`; enable schema export before the next migration so it can be tested against the exported schemas.
 
 ---
 
@@ -1024,9 +1032,16 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `model/RestrictedDrug.kt` | Drug catalog entry |
 | `model/ThemeMode.kt` | Theme preference resolution |
 | `domain/DonationCalculatorEngine.kt` | Interval / annual count / annual volume rules, `earliestEligibleDate` |
-| `domain/PhysicalEligibilityCalculator.kt` | Age/weight ranges, Nadler's formula |
+| `domain/PhysicalEligibilityCalculator.kt` | Age/weight ranges, blood-volume check |
+| `domain/PredictedBloodVolume.kt` | 성인예측 혈량표 lookup and interpolation |
 | `domain/DrugRestrictionCalculator.kt` | Fallback catalog, restriction date math, search |
-| `domain/IntegratedEligibility.kt` | Merges donation + medication constraints |
+| `domain/IntegratedEligibility.kt` | Merges donation, medication and health constraints |
+| `domain/InfectionRestrictionCalculator.kt` | 질환·감염병·시술·접종·체류 → restrictions |
+| `domain/TimelineStayExtractor.kt` / `domain/RegionLocator.kt` | Timeline visits → stays in restricted regions |
+| `model/HealthHistory.kt` / `model/InfectionRules.kt` | Health history entities; parsed rules |
+| `data/HealthHistoryDao.kt` / `data/HealthHistoryRepository.kt` | Room access to 질환·체류 이력 |
+| `data/InfectionRuleRepository.kt` | `blood_donation_rules.xml` parsing |
+| `data/RegionShapeRepository.kt` / `data/TimelineParser.kt` | Region boundaries; Timeline export parsing |
 | `domain/CertificateParser.kt` | OCR text → `BloodDonationInfo` |
 | `data/DonationStateStore.kt` | SharedPreferences persistence + legacy migration |
 | `data/AppDatabase.kt` | Room singleton |
@@ -1045,7 +1060,11 @@ Notably, `ProhibitedDrugRepositoryTest` asserts that **the bundled `prohibited_d
 | `ui/DonationViewModel.kt` | Primary state owner |
 | `ui/ProhibitedDrugSearchScreen.kt` / `...ViewModel.kt` | Drug search + intake recording |
 | `ui/MedicationHistoryCard.kt` | Saved medication list |
+| `ui/HealthHistoryCard.kt` | 질환·시술·접종·체류 이력 and restrictions |
+| `ui/TimelineImportCard.kt` / `...ViewModel.kt` | Google 타임라인 가져오기 |
 | `ui/theme/` | `LocalDarkTheme`, Material color schemes, typography |
 | `assets/prohibited_drugs.json` | 50-entry drug catalog |
 | `assets/drug_products.json` | Product → ingredient dictionary for search |
+| `assets/blood_donation_rules.xml` | 감염병·질환·시술·접종·말라리아·vCJD·해외 방문 rules |
+| `assets/restricted_region_shapes.json` | Risk-area boundaries for the timeline import |
 | `res/xml/file_paths.xml` | FileProvider scope for certificate photos |
